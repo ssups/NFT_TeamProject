@@ -2,7 +2,7 @@
 
 <br>
 
-## back 폴더
+## ⭕ back 폴더
 
 - config 폴더
   - index.js (dotenv)
@@ -12,24 +12,18 @@
   - index.js (sequelize, mysql2)
 
 <br>
-
----
-
 <br>
 
-## blockChain 폴더
+## ⭕ blockChain 폴더
 
 - contracts 폴더
 - migrations 폴더
 - test 폴더
 
 <br>
-
----
-
 <br>
 
-## front 폴더
+## ⭕ front 폴더
 
 - public 폴더
   - index.html
@@ -44,8 +38,5 @@
     - reducer 폴더
       - index.js
     - store.js
-      //
 
 <br>
-
----
