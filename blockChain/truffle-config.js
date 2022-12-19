@@ -6,10 +6,10 @@ module.exports = {
       network_id: "7722",
     },
   },
-
   compilers: {
     solc: {
       version: "0.8.17",
     },
   },
+  contracts_build_directory: "../front/src/contracts",
 };
