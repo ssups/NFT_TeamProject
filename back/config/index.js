@@ -1,3 +1,5 @@
+const env = require("dotenv").config();
+
 const config = {
   dev: {
     password: process.env.DATABASE_PASSWORD,
@@ -8,3 +10,5 @@ const config = {
     logging: false,
   },
 };
+
+module.exports = config;
