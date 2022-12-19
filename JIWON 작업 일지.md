@@ -31,3 +31,11 @@
     - store.js
 
 <br>
+
+---
+
+18 01 문서 작성 완료
+
+Q. ERC721 vs ERC721Enumerable
+
+---
