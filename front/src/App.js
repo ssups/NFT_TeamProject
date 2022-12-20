@@ -18,8 +18,8 @@ const App = () => {
           element={
             <>
               <Header />
-              <TopFold />
               <Brand />
+              <TopFold />             
               <TrendingNft />
               <Info />
               <Footer />
