@@ -195,4 +195,46 @@ A6. 어차피 각 토큰의 이미지 경로를 최대한 간단하게 tokenId�
 A2. SYMBOL, 토큰의 단위이자 토큰 종류의 약자
 
 16 31 tokenURI() 함수와 _baseURI() 함수는 모두 super 키워드 없이 오버라이딩 해야 하는 것!
-그러나 추후에 변경할 가능성을 고려하여 _baseURI 상태 변수 사용
+그러나 추후에 변경할 가능성을 고려하여 _defaultPath 상태 변수 사용
+
+18 40 remix에서 MintingNft 컨트랙트의 mintToken() 함수 테스트
+- CA : 0x59Da9A2C0D0A3dcB91dd01CaD335f4c99D3Aa5E5
+- ownerOf() 함수의 값은 정상적으로 1이 증가된 값을 반환하나, totalSupply() 함수의 값은 2가 증가된 값을 반환하는 문제 발생
+- 원인 : _beforeTokenTransfer() 함수 내 조건문으로 인하여 RC721Enumerable 컨트랙트의 상태 변수 값이 두 번 업데이트..
+
+---
+
+## ⭕ MintingNft 컨트랙트의 함수 목록
+
+<br>
+
+- view 함수
+- balanceOf(_owner)
+- defaultPath()
+- getApproved(_tokenId)
+- isApprovedForAll(_owner, _operator)
+- mintingPrice()
+- name()
+- owner()
+- ownerOf(_tokenId)
+- supportsInterface(_interfaceId)
+- symbol()
+- tokenByIndex(_index)
+- tokenOfOwnerByIndex(_owner, _index)
+- tokenURI(_tokenId)
+- totalSupply()
+
+<br>
+
+- approve(_to, _tokenId)
+- mintToken(_owner, _tokenId)
+- renounceOwnership()
+- safeTransferFrom(_from, _to, _tokenId)
+- safeTransferFrom(_from, _to, _tokenId, _data)
+- setApprovalForAll(_operator, _approved)
+- setDefaultPath(_defaultPath)
+- setMintingPrice(_price)
+- transferForm(_from, _to, _tokenId)
+- transferOwnership(_newOwner)
+
+---

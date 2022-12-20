@@ -19,8 +19,18 @@
 					},
 					{
 						"internalType": "uint256",
+						"name": "mintingLimit_",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
 						"name": "mintingPrice_",
 						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "defaultPath_",
+						"type": "string"
 					}
 				],
 				"stateMutability": "nonpayable",
@@ -177,6 +187,19 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "defaultPath",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "uint256",
@@ -227,14 +250,27 @@
 						"type": "address"
 					},
 					{
-						"internalType": "string",
-						"name": "_tokenName",
-						"type": "string"
+						"internalType": "uint256",
+						"name": "_tokenId",
+						"type": "uint256"
 					}
 				],
 				"name": "mintToken",
 				"outputs": [],
 				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "mintingPrice",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -361,6 +397,19 @@
 			{
 				"inputs": [
 					{
+						"internalType": "string",
+						"name": "defaultPath_",
+						"type": "string"
+					}
+				],
+				"name": "setDefaultPath",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "uint256",
 						"name": "_price",
 						"type": "uint256"
@@ -450,7 +499,7 @@
 				"inputs": [
 					{
 						"internalType": "uint256",
-						"name": "tokenId",
+						"name": "_tokenId",
 						"type": "uint256"
 					}
 				],
@@ -563,9 +612,6 @@
 				"tokenOfOwnerByIndex(address,uint256)": {
 					"details": "See {IERC721Enumerable-tokenOfOwnerByIndex}."
 				},
-				"tokenURI(uint256)": {
-					"details": "See {IERC721Metadata-tokenURI}."
-				},
 				"totalSupply()": {
 					"details": "See {IERC721Enumerable-totalSupply}."
 				},
@@ -601,11 +647,11 @@
 	},
 	"sources": {
 		"MintingNft.sol": {
-			"keccak256": "0xc07eac6b85c6ab0e09d8472bb923ac00313e560d5c6335298c58989eb4ab934a",
+			"keccak256": "0xb5f2cbcec97bca0561d8ef492eebd9ab03fa7567ee20fed632bcf2d53ce3eee8",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://8f3a77f11426416cf7d674066879ba9c1c0cdbef934a296e8e401e4feb649727",
-				"dweb:/ipfs/QmS1BsREQTq8jyFUx3WYj6XuRCn5w2Sw5muqctK5tdXwpb"
+				"bzz-raw://8667dfc528fc0f8ece2819f75d07c11e40be67acddd7cd4f87f827b82ca2f735",
+				"dweb:/ipfs/QmP8ogNnsxLAp4RC7Ji8oVrAe9d5s1yrUTu8aWxiS8krqx"
 			]
 		},
 		"openzeppelin-solidity/contracts/access/Ownable.sol": {

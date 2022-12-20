@@ -1,10 +1,13 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.17;
 
-import "../node_modules/openzeppelin-solidity/contracts/access/Ownable.sol";
-
 // 확장성 고려
 import "../node_modules/openzeppelin-solidity/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
+import "../node_modules/openzeppelin-solidity/contracts/access/Ownable.sol";
+
+// remix 경로 수정
+// import "openzeppelin-solidity/contracts/access/Ownable.sol";
+// import "openzeppelin-solidity/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 
 // NFT 발행에 대한 컨트랙트
 contract MintingNft is ERC721Enumerable, Ownable {
@@ -16,11 +19,12 @@ contract MintingNft is ERC721Enumerable, Ownable {
     uint private _mintingPrice;
 
     // 백 서버 주소
-    string private _baseURI;
+    string private _defaultPath;
 
-    constructor(string memory name_, string memory symbol_, uint mintingLimit_, uint mintingPrice_) ERC721(name_, symbol_) {
+    constructor(string memory name_, string memory symbol_, uint mintingLimit_, uint mintingPrice_, string memory defaultPath_) ERC721(name_, symbol_) {
         _mintingLimit = mintingLimit_;
         _mintingPrice = mintingPrice_;
+        _defaultPath = defaultPath_;
     }
 
     // 배포자 EOA 계정 접근
@@ -34,11 +38,11 @@ contract MintingNft is ERC721Enumerable, Ownable {
     // 토큰 민팅 이벤트, 검색을 위해 indexed 사용
     event MintingToken(address indexed owner, uint indexed tokenId);
 
-    // uint 형태의 _tokenId = json 파일 이름
+    // json 파일 이름을 tokenId로 활용 예정
     function mintToken(address _owner, uint _tokenId) external payable {
 
         // wei 단위인지 확인 필요..
-        require(msg.value >= _mintingPrice, "insufficient money to mint");
+        require(_mintingPrice <= msg.value, "insufficient money to mint");
 
         // 현재 발행량 확인 후 토큰 발행
         require(totalSupply() < _mintingLimit, "exceeding the maximum issuance");
@@ -48,9 +52,10 @@ contract MintingNft is ERC721Enumerable, Ownable {
         payable(owner()).transfer(_mintingPrice);
 
         // ERC721Enumerable 상태 변수 업데이트
+        // 해당 함수 안의 조건문 때문에 값을 두 번 추가..
         _beforeTokenTransfer(address(0), _owner, _tokenId);
 
-        // ERC721 상태 변수 업데이트
+        // ERC721 상태 변수 업데이트 (토큰 id 중복 확인 기능 포함)
         _mint(_owner, _tokenId);
     }
 
@@ -63,25 +68,26 @@ contract MintingNft is ERC721Enumerable, Ownable {
         _mintingPrice = _price;
     }
 
-    // 사용할 이미지 경로 : _baseURI()/tokenId
-    function baseURI() public view returns (string memory) {
-        return _baseURI;
+    // 사용할 이미지 경로 : defaultPath()/tokenId
+    function defaultPath() public view returns (string memory) {
+        return _defaultPath;
     }
 
-    function setBaseURI(string memory baseURI_) external onlyOwner {
-        _baseURI = baseURI_;
+    function setDefaultPath(string memory defaultPath_) external onlyOwner {
+        _defaultPath = defaultPath_;
     }
 
     function tokenURI(uint _tokenId) public view override returns (string memory) {
-        return string(abi.encodePacked(baseURI(), _tokenId));
+        return string(abi.encodePacked(_defaultPath, _tokenId));
     }
 
     // totalSupply() 모든 토큰의 개수
     // tokenByIndex(_index) 모든 토큰의 해당 인덱스의 토큰 id 조회 함수
-}
+    
     // onwerOf(_tokenId) 해당 토큰의 소유자 조회 함수
     // blanceOf(_owner) 계정별 보유 토큰 수량 조회 함수
     // tokenOfOwnerByIndex(_owner, _index) 해당 계정의 보유 토큰의 해당 인덱스의 토큰 id 조회 함수
+}
 
 // npx truffle init
 // npm i openzeppelin-solidity
