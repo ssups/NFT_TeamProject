@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+
+
+.header{
+    font-family: 'Jua', sans-serif;
+    font-size: 40px;
+    font-weight: 700;
+    padding: 50px 0px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.head_style{
+    background: -webkit-linear-gradient( rgba(76,100,195,1) 14%, rgba(99,124,226,1) 23%, rgba(62,222,207,1) 49%, rgba(37,26,85,1) 82%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

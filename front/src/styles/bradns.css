@@ -1,0 +1,29 @@
+.NFT{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+}
+
+.NFT{
+    display: flex;
+    flex: 1;
+    position: relative;
+}
+
+.tf-dia{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.nft_item{
+    height: 280px;
+    width: 280px;
+    overflow: hidden;
+}
+
+.nft_item img{
+    height: 400px;
+    object-fit: contain;
+    display: block;
+}
