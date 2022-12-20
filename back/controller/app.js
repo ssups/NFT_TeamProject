@@ -13,10 +13,13 @@ app.use(express.json());
 
 app.use(cors({ origin: address }));
 
-sequelize.sync({ force: true }).then(() => {
-  console.log("시퀄라이즈");
-  isSequelizeDone = true;
-});
+sequelize
+  .sync({ force: true })
+  .then(() => {
+    console.log("디비 연결 완료");
+    isSequelizeDone = true;
+  })
+  .catch(err => console.log("디비연결 오류", err));
 
 app.listen(PORT, () => {
   console.log(PORT, "번 포트에 백서버 열림");
