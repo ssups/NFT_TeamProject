@@ -14,7 +14,7 @@ contract TestToken is  ERC721A, Ownable, ReentrancyGuard {
     uint256 public immutable maxAmountPerMint;
     uint256 public mintPrice;
 
-    event MintTestToken(address minter, uint256 quantity);
+    event MintTestToken(address minter, uint256 quantity, uint256 totalSupply);
 
     constructor(uint256 maxBatchSize_, uint256 collectionSize_) ERC721A("Azuki", "AZUKI", maxBatchSize_, collectionSize_) {
      maxAmountPerMint = maxBatchSize_;
@@ -40,11 +40,12 @@ contract TestToken is  ERC721A, Ownable, ReentrancyGuard {
       require(isMintOn(),"sale has not begun yet");
       require(quantity <= maxAmountPerMint, "can not mint this amount at once"); // 한번에 민팅할수있는 최대량 초과하는지검사
       require(ERC721A.totalSupply() + quantity <= ERC721A.collectionSize, "not enough remainig amounts"); // 총공급량 초과하는지 검사
+      require(msg.value == quantity * mintPrice, "pay dosen't match!");
       ERC721A._safeMint(msg.sender, quantity);
-      emit MintTestToken(msg.sender, quantity);
+      emit MintTestToken(msg.sender, quantity, ERC721A.totalSupply());
     }
 
-    string private _baseTokenURI = "https://localhost:4000";
+    string private _baseTokenURI = "https://localhost:4000/";
 
   //   function tokenURI(uint256 tokenId)
   //   public
@@ -68,7 +69,7 @@ contract TestToken is  ERC721A, Ownable, ReentrancyGuard {
       return _baseTokenURI;
     }
   
-    function sertBaseURI(string memory baseURI) external onlyOwner {
+    function setBaseURI(string memory baseURI) external onlyOwner {
       _baseTokenURI = baseURI;
     }
     // tokenURI는 ERC721A에 있는거 그대로 사용할꺼
@@ -76,11 +77,15 @@ contract TestToken is  ERC721A, Ownable, ReentrancyGuard {
     // tokenURI 함수내에서 _baseURI 호출해서 리턴값 바탕으로 tokenURI 만들어서 return해준다.
 
     function withdrawAll() external onlyOwner nonReentrant {
+      // nonReentrant modifier는 함수의 중복호출? 을 방지해주는 기능을 하는거 같다.
       // payable(msg.sender).transfer(address(this).balance);
       (bool success, ) = msg.sender.call{value:address(this).balance}("");
       require(success, "Withdrawl Faild");
     }
 
+    function maxSupply() view external returns(uint256){
+      return ERC721A.collectionSize;
+    }
     
 
 }
