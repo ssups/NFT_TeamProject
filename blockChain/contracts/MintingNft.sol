@@ -9,20 +9,24 @@ import "../node_modules/openzeppelin-solidity/contracts/token/ERC721/extensions/
 // NFT 발행에 대한 컨트랙트
 contract MintingNft is ERC721Enumerable, Ownable {
 
-    // 토큰 발행량 제한 (상수)
-    uint constant private MAX_TOKEN_COUNT = 100;
+    // 토큰 발행량 제한
+    uint immutable private _mintingLimit;
 
-    // 토큰 발행 비용 (단위 확인 필요..)
+    // 랜덤의 토큰을 발행 받기 위한 고정 비용 (단위 확인 필요..)
     uint private _mintingPrice;
 
-    constructor(string memory name_, string memory symbol_, uint mintingPrice_) ERC721(name_, symbol_) {
+    // 백 서버 주소
+    string private _baseURI;
+
+    constructor(string memory name_, string memory symbol_, uint mintingLimit_, uint mintingPrice_) ERC721(name_, symbol_) {
+        _mintingLimit = mintingLimit_;
         _mintingPrice = mintingPrice_;
     }
 
     // 배포자 EOA 계정 접근
     // owner() public
 
-    // _allTokens 토큰 id 배열
+    // _allTokens 모든 토큰 id 배열
     // _allTokensIndex 토큰 id => 모든 토큰 배열의 인덱스
     // _ownedTokens 소유자 주소 => (보유 토큰 인덱스 => 토큰 id)
     // _ownedTokensIndex 토큰 id => 소유자 기준 보유 토큰 인덱스
@@ -30,31 +34,54 @@ contract MintingNft is ERC721Enumerable, Ownable {
     // 토큰 민팅 이벤트, 검색을 위해 indexed 사용
     event MintingToken(address indexed owner, uint indexed tokenId);
 
-    // 이미지 경로에 대한 데이터는 백엔드에 저장할 예정
-    function mintToken(address _owner, string memory _tokenName) external payable {
+    // uint 형태의 _tokenId = json 파일 이름
+    function mintToken(address _owner, uint _tokenId) external payable {
 
         // wei 단위인지 확인 필요..
         require(msg.value >= _mintingPrice, "insufficient money to mint");
 
         // 현재 발행량 확인 후 토큰 발행
-        require(totalSupply() < MAX_TOKEN_COUNT, "exceeding the maximum issuance");
+        require(totalSupply() < _mintingLimit, "exceeding the maximum issuance");
 
-        // 토큰 이름을 통해 tokenId 생성
-        uint tokenId = uint(keccak256(abi.encodePacked(_tokenName)));
-        emit MintingToken(_owner, tokenId);
+        emit MintingToken(_owner, _tokenId);
+
+        payable(owner()).transfer(_mintingPrice);
 
         // ERC721Enumerable 상태 변수 업데이트
-        _beforeTokenTransfer(address(0), _owner, tokenId);
+        _beforeTokenTransfer(address(0), _owner, _tokenId);
 
         // ERC721 상태 변수 업데이트
-        _mint(_owner, tokenId);
+        _mint(_owner, _tokenId);
+    }
+
+    function mintingPrice() external view returns (uint) {
+        return _mintingPrice;
     }
 
     // 단위 확인 필요..
-    function setMintingPrice(uint _price) external {
+    function setMintingPrice(uint _price) external onlyOwner {
         _mintingPrice = _price;
     }
+
+    // 사용할 이미지 경로 : _baseURI()/tokenId
+    function baseURI() public view returns (string memory) {
+        return _baseURI;
+    }
+
+    function setBaseURI(string memory baseURI_) external onlyOwner {
+        _baseURI = baseURI_;
+    }
+
+    function tokenURI(uint _tokenId) public view override returns (string memory) {
+        return string(abi.encodePacked(baseURI(), _tokenId));
+    }
+
+    // totalSupply() 모든 토큰의 개수
+    // tokenByIndex(_index) 모든 토큰의 해당 인덱스의 토큰 id 조회 함수
 }
+    // onwerOf(_tokenId) 해당 토큰의 소유자 조회 함수
+    // blanceOf(_owner) 계정별 보유 토큰 수량 조회 함수
+    // tokenOfOwnerByIndex(_owner, _index) 해당 계정의 보유 토큰의 해당 인덱스의 토큰 id 조회 함수
 
 // npx truffle init
 // npm i openzeppelin-solidity
