@@ -143,6 +143,41 @@ A1. ERC721Enumerable : 확장성 => supportsInterface(interfaceId), tokenOfOwner
 
 ---
 
-Q2. NTF에 토큰 단위? SYMBOL..
+Q2. NTF의 토큰 단위? SYMBOL..
 
 10 48 MintingNFT 컨트랙트의 상태 변수 작성 중
+
+---
+
+Q3. A3. ERC721Enumerable 컨트랙트에 내장된 이벤트 함수
+
+## ⭕ IERC721
+
+<br>
+
+- 토큰 전송 이벤트
+- Transfer(from, to, tokenId)
+
+<br>
+
+- 토큰 위임 이벤트
+- Approval(owner, approved, tokenId)
+
+
+<br>
+
+- owner의 승인된 operator에 대한 활성화 이벤트
+- ApprovalForAll(owner, operator, approved)
+
+<br>
+
+---
+
+Q4. _beforeTokenTransfer() 함수 역할
+
+A4. 실행 전에 체크할 사항 설정
+
+- 토큰 발행 시 RC721Enumerable 상태 변수를 업데이트 하는 함수와 ERC721 상태 변수를 업데이트 하는 함수 모두 호출 필요
+- super의 역할 : 부모 함수 + @
+
+---
