@@ -15,8 +15,9 @@ contract TestToken is  ERC721A, Ownable, ReentrancyGuard {
     uint256 public mintPrice;
 
     event MintTestToken(address minter, uint256 quantity, uint256 totalSupply);
+    event SetMintOn(uint256 mintPrice, bool isMintOn);
 
-    constructor(uint256 maxBatchSize_, uint256 collectionSize_) ERC721A("Azuki", "AZUKI", maxBatchSize_, collectionSize_) {
+    constructor(uint256 maxBatchSize_, uint256 collectionSize_) ERC721A("Seop", "SEP", maxBatchSize_, collectionSize_) {
      maxAmountPerMint = maxBatchSize_;
     }
 
@@ -30,6 +31,7 @@ contract TestToken is  ERC721A, Ownable, ReentrancyGuard {
       // wei 단위
       require(price > 0,"sale price must greater than 0");
       mintPrice = price;
+      emit SetMintOn(mintPrice, isMintOn());
     }
 
     function isMintOn() public view returns(bool) {

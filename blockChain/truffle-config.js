@@ -11,5 +11,6 @@ module.exports = {
       version: "0.8.17",
     },
   },
-  contracts_build_directory: "../front/src/contracts",
+  // contracts_build_directory: "../front/src/contracts",
+  contracts_build_directory: "../front/src/contracts_seop",
 };

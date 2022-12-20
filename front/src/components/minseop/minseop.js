@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import useWeb3 from "../../hooks/useWeb3";
-import TestTokenContract from "../../contracts/TestToken.json";
+import TestTokenContract from "../../contracts_seop/TestToken.json";
 
 const Minseop = () => {
   const [account, web3, balance] = useWeb3();
@@ -46,16 +46,23 @@ const Minseop = () => {
   // 컨트렉트랑 연결되면 실행시킬것들
   useEffect(() => {
     if (!deployed) return;
-    // 누군가 민팅할때마다 현재공급량 고쳐주기
+    // 누군가 민팅할때마다 현재공급량 고쳐주기(이벤트)
     deployed.events.MintTestToken((err, data) => {
       setCurrentSupply(data.returnValues.totalSupply);
+    });
+    // 민팅시작되거나 가격바뀌면 실행(이벤트)
+    deployed.events.SetMintOn((err, data) => {
+      const price = data.returnValues.mintPrice;
+      const priceToEth = web3.utils.fromWei(price, "ether");
+      setMintPrice(priceToEth);
+      setIsMintOn(data.returnValues.isMintOn);
     });
   }, [deployed]);
 
   // 민팅 시작되면 가져올 값들
   useEffect(() => {
     (async () => {
-      if (!isMintOn) return;
+      if (!(isMintOn && deployed)) return;
       // 민팅가격
       const price = await deployed.methods.mintPrice().call();
       const priceToEth = web3.utils.fromWei(price, "ether");
@@ -83,6 +90,8 @@ const Minseop = () => {
 
   // 민팅하기
   async function mint(quantity) {
+    const remainingAmount = maxSupply - currentSupply;
+    const totalPayment = quantity * web3.utils.toWei(mintPrice, "ether");
     if (!quantity > 0) {
       alert("수량 0개이상");
       return;
@@ -91,7 +100,10 @@ const Minseop = () => {
       alert("민트한번당 최대갯수 3개입니다");
       return;
     }
-    const totalPayment = quantity * web3.utils.toWei(mintPrice, "ether");
+    if (remainingAmount < quantity) {
+      alert("남은수량이 부족합니다");
+      return;
+    }
     if (totalPayment > balance) {
       alert("잔액부족");
       return;
@@ -100,9 +112,15 @@ const Minseop = () => {
     try {
       await deployed.methods.mintTestToken(quantity).send({ from: account, value: totalPayment });
     } catch (err) {
-      const error = new Error(err.message);
-      alert(error);
+      alert(err.message);
     }
+    // await deployed.methods
+    //   .mintTestToken(quantity)
+    //   .send({ from: account, value: totalPayment })
+    //   .then(res => {
+    //     console.log(res);
+    //   })
+    //   .catch(err => console.log(err.message));
   }
 
   if (!account) return <h1>메타마스크 연결하세요</h1>;
@@ -116,15 +134,20 @@ const Minseop = () => {
           </button>
         </div>
       )}
-      <div>{isMintOn ? "민팅진행중 가격: " + mintPrice : "민팅시작전"}</div>
+      <div>{isMintOn ? "민팅진행중 가격: " + mintPrice + "Eth" : "민팅시작전"}</div>
       <div>
         {isMintOn ? currentSupply : 0} / {maxSupply}{" "}
       </div>
       {isMintOn && (
         <div>
-          <input type="text" ref={mintQuantityRef} />
+          <input type="text" ref={mintQuantityRef} disabled={currentSupply == maxSupply} />
           <span></span>
-          <button onClick={() => mint(mintQuantityRef.current.value)}>Mint</button>
+          <button
+            onClick={() => mint(mintQuantityRef.current.value)}
+            disabled={currentSupply == maxSupply}
+          >
+            Mint
+          </button>
         </div>
       )}
     </div>

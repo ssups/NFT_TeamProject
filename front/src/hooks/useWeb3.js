@@ -30,12 +30,13 @@ const useWeb3 = () => {
       });
       setAccount(switchedAddress);
 
-      const balance = await web3.utils.getBalance(account);
+      const balance = await web3?.utils.getBalance(account);
       setBalance(balance);
     });
     return () => {
       // 컴포넌트 언마운트때 이벤트 날리기
       delete window.ethereum._events["accountsChanged"];
+      // window.ethereum.removeListener("accountsChanged");
     };
   }, []);
   return [account, web3, balance];
