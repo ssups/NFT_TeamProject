@@ -204,6 +204,8 @@ A2. SYMBOL, 토큰의 단위이자 토큰 종류의 약자
 
 ---
 
+<br>
+
 ## ⭕ MintingNft 컨트랙트의 함수 목록
 
 <br>
@@ -236,5 +238,7 @@ A2. SYMBOL, 토큰의 단위이자 토큰 종류의 약자
 - setMintingPrice(_price)
 - transferForm(_from, _to, _tokenId)
 - transferOwnership(_newOwner)
+
+<br>
 
 ---
