@@ -36,6 +36,6 @@
 
 18 01 문서 작성 완료
 
-Q. ERC721 vs ERC721Enumerable
+Q1. ERC721 vs ERC721Enumerable
 
 ---
