@@ -58,6 +58,14 @@ contract TestTrade is Ownable{
         return tokensOnSale;
     }
 
+
+    // 일반판매 가격 확인
+    function onSalePrice(uint256 tokenId) external view  returns(uint256)  {
+        return _tokensOnSale[tokenId];
+    }
+
+  
+
     // 일반판매등록  
     function registerForSale(uint256 tokenId, uint256 price) external {
         // require(_callerIsOwner(tokenId), "caller is not owner");
