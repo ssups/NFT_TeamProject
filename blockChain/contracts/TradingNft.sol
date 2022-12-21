@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.17;
-<<<<<<< HEAD
 
 import "./MintingNft.sol";
 
@@ -111,5 +110,3 @@ contract TradingNft is Ownable {
         return _auctionTokenIdToData[_tokenId];
     }
 }
-=======
->>>>>>> seop
