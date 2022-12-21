@@ -3,9 +3,12 @@ pragma solidity ^0.8.17;
 
 import "./MintingNft.sol";
 
-import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
-
 // onlyOwner 접근 제어자 사용을 위해 상속
+// import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
+
+// remix 경로 수정
+import "@openzeppelin/contracts/access/Ownable.sol";
+
 contract TradingNft is Ownable {
 
     MintingNft private _MintingNft;
@@ -20,8 +23,8 @@ contract TradingNft is Ownable {
         uint price;
     }
 
-    mapping (uint => TokenData) private saleTokenIdToData;
-    mapping (uint => TokenData) private auctionTokenIdToData;
+    mapping (uint => TokenData) private _saleTokenIdToData;
+    mapping (uint => TokenData) private _auctionTokenIdToData;
 
     constructor(address _ca, uint _feeRate, uint _feeDigits) {
 
@@ -43,29 +46,36 @@ contract TradingNft is Ownable {
     // 토큰 판매 등록 함수
     function registerSaleToken(uint _tokenId, uint _price) external {
 
-        require(_isTokenOwner(_tokenId));
+        _checkTokenOwner(_tokenId);
 
         // 판매 가격은 0원 이상으로 설정 가능
         require(_price >= 0);
 
-        saleTokenIdToData[_tokenId] = TokenData(_MintingNft.ownerOf(_tokenId), _price);
+        _saleTokenIdToData[_tokenId] = TokenData(_MintingNft.ownerOf(_tokenId), _price);
     }
 
     // 토큰 판매 등록 취소 함수
     function deregisterSaleToken(uint _tokenId) external {
 
-        require(_isTokenOwner(_tokenId));
-        
         // 판매 상품으로 등록 되어 있는지 확인 필요..
-        require(saleTokenIdToData[_tokenId].owner != address(0));
+        require(_checkOnSale(_tokenId));
+        
+        _checkTokenOwner(_tokenId);
 
         // 값이 초기 값으로 변경되는지 확인 필요..
-        delete saleTokenIdToData[_tokenId];
+        delete _saleTokenIdToData[_tokenId];
     }
 
     // msg.sender 값을 사용할 예정이기 때문에 private 설정
-    function _isTokenOwner(uint _tokenId) private view returns (bool) {
-        return msg.sender == _MintingNft.ownerOf(_tokenId);
+    function _checkTokenOwner(uint _tokenId) private view {
+
+        // tokenId 유효성 검사 포함
+        require(msg.sender == _MintingNft.ownerOf(_tokenId), "not the owner");
+    }
+
+    // test
+    function _checkOnSale(uint _tokenId) private view returns (bool) {
+        return _saleTokenIdToData[_tokenId].owner != address(0);
     }
 
     function setMintingNft(address _ca) external onlyOwner {
@@ -80,7 +90,7 @@ contract TradingNft is Ownable {
         _tokenTransactionFeeRate = _feeDigits;
     }
 
-    // test
+    // address CA 값 반환 함수
     function getMintingNft() external view returns (MintingNft) {
         return _MintingNft;
     }
@@ -90,14 +100,14 @@ contract TradingNft is Ownable {
     }
 
     function getTokenTransactionFeeDigits() external view returns (uint) {
-        return _tokenTransactionFeeRate;
+        return _tokenTransactionFeeDigits;
     }
 
     function getSaleTokenData(uint _tokenId) external view returns (TokenData memory) {
-        return saleTokenIdToData[_tokenId];
+        return _saleTokenIdToData[_tokenId];
     }
 
     function getAuctionTokenData(uint _tokenId) external view returns (TokenData memory) {
-        return auctionTokenIdToData[_tokenId];
+        return _auctionTokenIdToData[_tokenId];
     }
 }

@@ -222,6 +222,25 @@
 				"inputs": [
 					{
 						"internalType": "address",
+						"name": "_owner",
+						"type": "address"
+					}
+				],
+				"name": "getMyTokenIds",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
 						"name": "owner",
 						"type": "address"
 					},
@@ -751,11 +770,11 @@
 			]
 		},
 		"MintingNft.sol": {
-			"keccak256": "0x60fbd58dcd9a9da94044d141140202915afcded835281675beb812fec033e9df",
+			"keccak256": "0x35edc72fa2520d7b5a0ad5047d6463a27709373b6345ff7301d96121919b03a2",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://399de4b5fe6fba51aa294dc249f4b1e8b07f6ba8e73e30881fdc4e21d1adefee",
-				"dweb:/ipfs/QmdgUrQ5UY6tTCVGfr2EisYv6MK5t1WFj9cYg3TupJ8dgP"
+				"bzz-raw://70408506715dc2330ab4839bdeccde6b597010e8e032b94c803fde3aad1a0a67",
+				"dweb:/ipfs/QmPwvH3GU4bn5B79t9UvoJGrj6Cxy1zEvRQX5jKdjEoj8f"
 			]
 		}
 	},
