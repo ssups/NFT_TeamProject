@@ -1,11 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import useWeb3 from "../../hooks/useWeb3";
-import useTestTokenContract from "../../hooks/useTestTokenContract";
+import TestTokenContract from "../../contracts_seop/TestToken.json";
+import useContract from "../../hooks/useContract";
 
 const Minseop = () => {
   // hooks
   const [account, web3, balance] = useWeb3();
-  const [testTokenInstance] = useTestTokenContract();
+  const netWorkId = 7722;
+  const testTokenInstance = useContract(
+    TestTokenContract.abi,
+    TestTokenContract.networks[netWorkId].address
+  );
   // states
   const [owner, setOwner] = useState();
   const [isMintOn, setIsMintOn] = useState();
