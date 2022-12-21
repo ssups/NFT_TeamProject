@@ -59,6 +59,7 @@ contract TradingNft is Ownable {
 
         // 판매 상품으로 등록 되어 있는지 확인 필요..
         require(_checkOnSale(_tokenId));
+        
         _checkTokenOwner(_tokenId);
 
         // 값이 초기 값으로 변경되는지 확인 필요..

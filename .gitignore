@@ -1,3 +1,5 @@
 node_modules/
 .env
+
+contracts/
 contracts_seop/
