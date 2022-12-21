@@ -41,6 +41,14 @@ const SeopMy = () => {
             return <Nft key={tokenId} tokenId={tokenId} nftURI={myNftsURI[tokenId]} />;
           })}
       </div>
+      <div style={{ marginTop: "100px" }}>
+        <input type="number" placeholder="토큰ID" />
+        <button>구매하기</button>
+      </div>
+      <div>
+        <input type="number" placeholder="토큰ID" />
+        <button>판매하기</button>
+      </div>
     </div>
   );
 };
