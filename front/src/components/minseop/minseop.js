@@ -31,18 +31,16 @@ const Minseop = () => {
 
       // owner계정 가져오기
       const ownerAccount = await TestTokenInstance.methods.owner().call();
-      // console.log(ownerAccount);
       setOwner(ownerAccount);
       // 민팅 진행중인지 확인
       const mintState = await TestTokenInstance.methods.isMintOn().call();
       setIsMintOn(mintState);
       // 민트 한번에 최대갯수 가져오기
       const maxAmount = await TestTokenInstance.methods.maxAmountPerMint().call();
-      setMaxAmountPerMint(maxAmount);
+      setMaxAmountPerMint(maxAmount * 1);
       // 총 발행량 가져오기
       const collectionSize = await TestTokenInstance.methods.maxSupply().call();
       setMaxSupply(collectionSize);
-      console.log(collectionSize);
     })();
   }, [web3]);
 
@@ -105,7 +103,7 @@ const Minseop = () => {
       alert("수량 0개이상");
       return;
     }
-    if (quantity * 1 > maxAmountPerMint * 1) {
+    if (quantity > maxAmountPerMint) {
       alert("민트한번당 최대갯수 3개입니다");
       return;
     }
@@ -151,15 +149,15 @@ const Minseop = () => {
       )}
       <div>{isMintOn ? "민팅진행중 가격: " + mintPrice + "Eth" : "민팅시작전"}</div>
       <div>
-        {isMintOn ? currentSupply : 0} / {maxSupply}{" "}
+        {isMintOn ? currentSupply : 0} / {maxSupply}
       </div>
       {isMintOn && (
         <div>
-          <input type="text" ref={mintQuantityRef} disabled={currentSupply == maxSupply} />
+          <input type="text" ref={mintQuantityRef} disabled={currentSupply === maxSupply} />
           <span></span>
           <button
-            onClick={() => mint(mintQuantityRef.current.value)}
-            disabled={currentSupply == maxSupply}
+            onClick={() => mint(mintQuantityRef.current.value * 1)}
+            disabled={currentSupply === maxSupply}
           >
             Mint
           </button>

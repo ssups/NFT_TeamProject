@@ -18,7 +18,6 @@ const useWeb3 = () => {
 
       const web3 = new Web3(window.ethereum);
       const balance = await web3.eth.getBalance(address);
-      console.log(balance);
       setWeb3(web3);
       setBalance(balance);
     })();
