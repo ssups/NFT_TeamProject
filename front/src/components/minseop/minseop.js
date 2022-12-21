@@ -58,6 +58,12 @@ const Minseop = () => {
       setMintPrice(priceToEth);
       setIsMintOn(data.returnValues.isMintOn);
     });
+
+    // 가지고있는토큰 확인하는거 테스트
+    (async () => {
+      const tokensOfOwner = await deployed.methods.tokensOfOwner(account).call();
+      console.log(tokensOfOwner);
+    })();
   }, [deployed]);
 
   // 민팅 시작되면 가져올 값들

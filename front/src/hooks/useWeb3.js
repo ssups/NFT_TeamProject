@@ -20,18 +20,18 @@ const useWeb3 = () => {
       const balance = await web3.eth.getBalance(address);
       setWeb3(web3);
       setBalance(balance);
-    })();
 
-    // 메타마스크 지갑바꿨을때 이벤트
-    window.ethereum.on("accountsChanged", async () => {
-      const [switchedAddress] = await window.ethereum.request({
-        method: "eth_requestAccounts",
+      // 메타마스크 지갑바꿨을때 이벤트
+      window.ethereum.on("accountsChanged", async () => {
+        const [switchedAddress] = await window.ethereum.request({
+          method: "eth_requestAccounts",
+        });
+        setAccount(switchedAddress);
+
+        const balance = await web3?.utils.getBalance(account);
+        setBalance(balance);
       });
-      setAccount(switchedAddress);
-
-      const balance = await web3?.utils.getBalance(account);
-      setBalance(balance);
-    });
+    })();
     return () => {
       // 컴포넌트 언마운트때 이벤트 날리기
       delete window.ethereum._events["accountsChanged"];
