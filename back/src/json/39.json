@@ -1,0 +1,27 @@
+{
+  "name": "ggugi #39",
+  "description": "hello hello",
+  "image": "ipfs://NewUriToReplace/39.png",
+  "dna": "24bd9097533a1e75c0b727e5f57a9973e81c74fb",
+  "edition": 39,
+  "date": 1671607902018,
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "New Piskel (1)"
+    },
+    {
+      "trait_type": "Bottom lid",
+      "value": "New Piskel (11)"
+    },
+    {
+      "trait_type": "Eye color",
+      "value": "New Piskel (5)"
+    },
+    {
+      "trait_type": "Eyeball",
+      "value": "New Piskel (8)"
+    }
+  ],
+  "compiler": "HashLips Art Engine"
+}
