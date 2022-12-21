@@ -41,7 +41,9 @@ contract ERC721A is
     uint128 numberMinted;
   }
 
-  uint256 private currentIndex = 0;
+  uint256 private currentIndex = 1;
+  // 내가 토큰ID 1부터 시작할려고 수정함
+  
 
   uint256 internal immutable collectionSize;
   uint256 internal immutable maxBatchSize;
@@ -91,7 +93,7 @@ contract ERC721A is
    * @dev See {IERC721Enumerable-totalSupply}.
    */
   function totalSupply() public view override returns (uint256) {
-    return currentIndex;
+    return currentIndex - 1; //내가 -1로 수정
   }
 
   /**
@@ -117,7 +119,7 @@ contract ERC721A is
     uint256 numMintedSoFar = totalSupply();
     uint256 tokenIdsIdx = 0;
     address currOwnershipAddr = address(0);
-    for (uint256 i = 0; i < numMintedSoFar; i++) {
+    for (uint256 i = 1; i <= numMintedSoFar; i++) { // 내가 수정
       TokenOwnership memory ownership = _ownerships[i];
       if (ownership.addr != address(0)) {
         currOwnershipAddr = ownership.addr;
@@ -355,7 +357,7 @@ contract ERC721A is
     uint256 quantity,
     bytes memory _data
   ) internal {
-    uint256 startTokenId = currentIndex;
+    uint256 startTokenId = currentIndex ; // 내가 +1로 수정함
     require(to != address(0), "ERC721A: mint to the zero address");
     // We know if the first token in the batch doesn't exist, the other ones don't as well, because of serial ordering.
     require(!_exists(startTokenId), "ERC721A: token already minted");

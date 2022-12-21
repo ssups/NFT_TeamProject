@@ -47,7 +47,7 @@ contract TestToken is  ERC721A, Ownable, ReentrancyGuard {
       emit MintTestToken(msg.sender, quantity, ERC721A.totalSupply());
     }
 
-    string private _baseTokenURI = "https://localhost:4000/";
+    string private _baseTokenURI = "http://localhost:4000/";
 
   //   function tokenURI(uint256 tokenId)
   //   public
