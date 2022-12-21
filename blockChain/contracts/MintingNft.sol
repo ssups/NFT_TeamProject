@@ -30,11 +30,6 @@ contract MintingNft is ERC721Enumerable, Ownable {
     // 배포자 EOA 계정 접근
     // owner() public
 
-    // _allTokens 모든 토큰 id 배열
-    // _allTokensIndex 토큰 id => 모든 토큰 배열의 인덱스
-    // _ownedTokens 소유자 주소 => (보유 토큰 인덱스 => 토큰 id)
-    // _ownedTokensIndex 토큰 id => 소유자 기준 보유 토큰 인덱스
-
     // 토큰 민팅 이벤트, 검색을 위해 indexed 사용
     event MintingToken(address indexed owner, uint indexed tokenId);
 
@@ -59,6 +54,30 @@ contract MintingNft is ERC721Enumerable, Ownable {
         _mint(_owner, _tokenId);
     }
 
+    // _allTokens 모든 토큰 id 배열
+    // _allTokensIndex 토큰 id => 모든 토큰 배열의 인덱스
+    // _ownedTokens 소유자 주소 => (보유 토큰 인덱스 => 토큰 id)
+    // _ownedTokensIndex 토큰 id => 소유자 기준 보유 토큰 인덱스
+
+    // 보유 토큰 조회 함수
+    function getMyTokenIds(address _owner) external view returns (uint[] memory) {
+        
+        // 보유 토큰 수
+        uint count = balanceOf(_owner);
+        
+        require(count > 0);
+
+        uint[] memory tokenIds = new uint[](count);
+        
+        // for문 대신 가스비를 절약할 방법..
+        for (uint index = 0; index < count; index++)
+
+            // push 사용 불가
+            tokenIds[index] = tokenOfOwnerByIndex(_owner, index);
+
+        return tokenIds;
+    }
+
     // 단위 확인 필요..
     function setMintingPrice(uint _price) external onlyOwner {
         _mintingPrice = _price;
@@ -77,6 +96,7 @@ contract MintingNft is ERC721Enumerable, Ownable {
         return _defaultPath;
     }
 
+    // 토큰에 대한 정보가 담긴 JSON 파일에 접근할 수 있도록 파일 경로 반환
     function tokenURI(uint _tokenId) public view override returns (string memory) {
         return string(abi.encodePacked(_defaultPath, _tokenId));
     }
