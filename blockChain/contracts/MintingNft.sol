@@ -96,7 +96,7 @@ contract MintingNft is ERC721Enumerable, Ownable {
         return _defaultPath;
     }
 
-    // 토큰에 대한 정보가 담긴 JSON 파일에 접근할 수 있도록 파일 경로 반환
+    // 토큰에 대한 정보가 담긴 JSON 파일에 접근할 수 있도록 파일 경로를 반환하는 함수
     function tokenURI(uint _tokenId) public view override returns (string memory) {
         return string(abi.encodePacked(_defaultPath, _tokenId));
     }

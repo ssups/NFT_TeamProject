@@ -10,10 +10,18 @@ contract TradingNft is Ownable {
 
     MintingNft private _MintingNft;
 
-    // 일반 판매 및 경매 성사 시 수수료율 (상수 : 할인할 예정 없음)
+    // 일반 판매 및 경매 성사 시 판매자에 대한 수수료율 (상수 : 할인할 예정 없음)
     // 1 / 1000 = 0.1% 계산할 예정
     uint private _tokenTransactionFeeRate;
     uint private _tokenTransactionFeeDigits;
+
+    struct TokenData {
+        address owner;
+        uint price;
+    }
+
+    mapping (uint => TokenData) private saleTokenIdToData;
+    mapping (uint => TokenData) private auctionTokenIdToData;
 
     constructor(address _ca, uint _feeRate, uint _feeDigits) {
 
@@ -22,6 +30,42 @@ contract TradingNft is Ownable {
 
         _tokenTransactionFeeRate = _feeRate;
         _tokenTransactionFeeDigits = _feeDigits;
+    }
+
+    // - 토큰 판매 등록 : registerSaleToken()
+    // - 토큰 판매 등록 취소 : deregisterSaleToken()
+    // - 토큰 구매 : buyToken()
+    // - 토큰 경매 등록 : registerAuctionToken()
+    // - 토큰 입찰 : bidTokenAtAuction()
+    // - 토큰 낙찰 (기간 종료 및 최소 가격 이상 시 최고 가격으로 낙찰) : winTokenAtAuction()
+    // - 경매 종료 시 환불 : refundTokenAtAuction()
+
+    // 토큰 판매 등록 함수
+    function registerSaleToken(uint _tokenId, uint _price) external {
+
+        require(_isTokenOwner(_tokenId));
+
+        // 판매 가격은 0원 이상으로 설정 가능
+        require(_price >= 0);
+
+        saleTokenIdToData[_tokenId] = TokenData(_MintingNft.ownerOf(_tokenId), _price);
+    }
+
+    // 토큰 판매 등록 취소 함수
+    function deregisterSaleToken(uint _tokenId) external {
+
+        require(_isTokenOwner(_tokenId));
+        
+        // 판매 상품으로 등록 되어 있는지 확인 필요..
+        require(saleTokenIdToData[_tokenId].owner != address(0));
+
+        // 값이 초기 값으로 변경되는지 확인 필요..
+        delete saleTokenIdToData[_tokenId];
+    }
+
+    // msg.sender 값을 사용할 예정이기 때문에 private 설정
+    function _isTokenOwner(uint _tokenId) private view returns (bool) {
+        return msg.sender == _MintingNft.ownerOf(_tokenId);
     }
 
     function setMintingNft(address _ca) external onlyOwner {
@@ -47,5 +91,13 @@ contract TradingNft is Ownable {
 
     function getTokenTransactionFeeDigits() external view returns (uint) {
         return _tokenTransactionFeeRate;
+    }
+
+    function getSaleTokenData(uint _tokenId) external view returns (TokenData memory) {
+        return saleTokenIdToData[_tokenId];
+    }
+
+    function getAuctionTokenData(uint _tokenId) external view returns (TokenData memory) {
+        return auctionTokenIdToData[_tokenId];
     }
 }
