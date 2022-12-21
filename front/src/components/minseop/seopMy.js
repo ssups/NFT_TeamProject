@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
 import Nft from "./nft";
 import useWeb3 from "../../hooks/useWeb3";
-import useTestTokenContract from "../../hooks/useTestTokenContract";
+import useContract from "../../hooks/useContract";
+import TestTokenContract from "../../contracts_seop/TestToken.json";
 
 const SeopMy = () => {
   // hooks
   const [account, web3, balance] = useWeb3();
-  const [testTokenContract] = useTestTokenContract();
+  const netWorkId = 7722;
+  const testTokenInstance = useContract(
+    TestTokenContract.abi,
+    TestTokenContract.networks[netWorkId].address
+  );
   //  states
   const [myNftsURI, setMyNftsURI] = useState({});
 
@@ -16,16 +21,16 @@ const SeopMy = () => {
   // testToken 컨트렉트 연동됐을때
   useEffect(() => {
     (async () => {
-      if (!testTokenContract) return;
+      if (!testTokenInstance) return;
       // 가지고있는토큰 uri 들고오기
-      const tokensIdOfOwner = await testTokenContract.methods.tokensOfOwner(account).call();
+      const tokensIdOfOwner = await testTokenInstance.methods.tokensOfOwner(account).call();
       const tokensURI = {};
       for (const tokenId of tokensIdOfOwner) {
-        tokensURI[tokenId] = await testTokenContract.methods.tokenURI(tokenId).call();
+        tokensURI[tokenId] = await testTokenInstance.methods.tokenURI(tokenId).call();
       }
       setMyNftsURI(tokensURI);
     })();
-  }, [testTokenContract, account]); // 지갑바꿀떄 자동으로 바뀌게 account도 넣어놈
+  }, [testTokenInstance, account]); // 지갑바꿀떄 자동으로 바뀌게 account도 넣어놈
 
   return (
     <div>
