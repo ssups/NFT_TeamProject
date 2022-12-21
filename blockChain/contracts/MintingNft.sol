@@ -2,12 +2,12 @@
 pragma solidity ^0.8.17;
 
 // 확장성 고려
-import "../node_modules/openzeppelin-solidity/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
-import "../node_modules/openzeppelin-solidity/contracts/access/Ownable.sol";
+import "../node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
+import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
 
 // remix 경로 수정
-// import "openzeppelin-solidity/contracts/access/Ownable.sol";
-// import "openzeppelin-solidity/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
+// import "@openzeppelin/contracts/access/Ownable.sol";
+// import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 
 // NFT 발행에 대한 컨트랙트
 contract MintingNft is ERC721Enumerable, Ownable {
@@ -53,14 +53,10 @@ contract MintingNft is ERC721Enumerable, Ownable {
 
         // ERC721Enumerable 상태 변수 업데이트
         // 해당 함수 안의 조건문 때문에 값을 두 번 추가..
-        _beforeTokenTransfer(address(0), _owner, _tokenId);
+        _beforeTokenTransfer(address(0), _owner, _tokenId, 1);
 
         // ERC721 상태 변수 업데이트 (토큰 id 중복 확인 기능 포함)
         _mint(_owner, _tokenId);
-    }
-
-    function mintingPrice() external view returns (uint) {
-        return _mintingPrice;
     }
 
     // 단위 확인 필요..
@@ -68,13 +64,17 @@ contract MintingNft is ERC721Enumerable, Ownable {
         _mintingPrice = _price;
     }
 
+    function setDefaultPath(string memory defaultPath_) external onlyOwner {
+        _defaultPath = defaultPath_;
+    }
+
+    function mintingPrice() external view returns (uint) {
+        return _mintingPrice;
+    }
+
     // 사용할 이미지 경로 : defaultPath()/tokenId
     function defaultPath() public view returns (string memory) {
         return _defaultPath;
-    }
-
-    function setDefaultPath(string memory defaultPath_) external onlyOwner {
-        _defaultPath = defaultPath_;
     }
 
     function tokenURI(uint _tokenId) public view override returns (string memory) {
@@ -91,3 +91,5 @@ contract MintingNft is ERC721Enumerable, Ownable {
 
 // npx truffle init
 // npm i openzeppelin-solidity
+// openzeppelin-solidity vs @openzeppelin/contracts
+// remixd -s . --remix-ide https://remix.ethereum.org
