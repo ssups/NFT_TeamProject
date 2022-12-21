@@ -245,8 +245,54 @@ A2. SYMBOL, 토큰의 단위이자 토큰 종류의 약자
 
 # 2022 12 21 수
 
+<br>
+
 Q7. useEffect() 함수의 리턴 원리..
+
 A7. useEffect() 함수의 기능..
 
 Q8. 여러 컨트랙트에서의 onlyOwner 접근 제어자 사용
+
 A8. 어쩔 수 없이 상속 필요
+
+Q9. back cors 설정의 위치..
+
+Q10. _safeMint() vs _mint()
+
+<br>
+
+---
+
+<br>
+
+## ⭕ TradingNft 컨트랙트의 buyToken() 함수 실행 시 MintingNft 컨트랙트에 대한 토큰 소유주의 권한 위임 여부 확인
+
+<br>
+
+    MintingNft.transferFrom();
+
+    function MintingNft.transferFrom() {
+
+        // msg.sender 값은 해당 함수를 호출한 TradingNft CA 값
+        require(_isApprovedOrOwner(_msgSender(), tokenId)
+    };
+
+    function ERC721._isApprovedOrOwner() {
+
+        // spender 값은 TradingNft CA 값
+        return (spender == owner || isApprovedForAll(owner, spender) || getApproved(tokenId) == spender);
+    }
+
+    function ERC721.isApprovedForAll() {
+        return _operatorApprovals[owner][operator];
+    }
+
+    function ERC721.getApproved() {
+        return _tokenApprovals[tokenId];
+    }
+
+---
+
+<br>
+
+Q11. 토큰의 소유주가 해당 거래에 대한 컨트랙트에 위임한다는 것...

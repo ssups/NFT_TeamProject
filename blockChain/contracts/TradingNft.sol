@@ -19,7 +19,10 @@ contract TradingNft is Ownable {
     uint private _tokenTransactionFeeDigits;
 
     struct TokenData {
-        address owner;
+
+        address seller;
+        
+        // wei 단위
         uint price;
     }
 
@@ -46,10 +49,16 @@ contract TradingNft is Ownable {
     // 토큰 판매 등록 함수
     function registerSaleToken(uint _tokenId, uint _price) external {
 
-        _checkTokenOwner(_tokenId);
+        _requireTokenOwner(_tokenId);
+
+        // 등록 후 가격을 변경하려는 경우
+        require(!_isOnSale(_tokenId) || _price != _saleTokenIdToData[_tokenId].price, "register already at the same price");
+
+        // operator 확인..
+        _MintingNft.setApprovalForAll(address(this), true);
 
         // 판매 가격은 0원 이상으로 설정 가능
-        require(_price >= 0);
+        require(_price >= 0, "invalid price");
 
         _saleTokenIdToData[_tokenId] = TokenData(_MintingNft.ownerOf(_tokenId), _price);
     }
@@ -57,25 +66,33 @@ contract TradingNft is Ownable {
     // 토큰 판매 등록 취소 함수
     function deregisterSaleToken(uint _tokenId) external {
 
-        // 판매 상품으로 등록 되어 있는지 확인 필요..
-        require(_checkOnSale(_tokenId));
-        
-        _checkTokenOwner(_tokenId);
+        _requireOnSale(_tokenId);
+        _requireTokenOwner(_tokenId);
 
         // 값이 초기 값으로 변경되는지 확인 필요..
         delete _saleTokenIdToData[_tokenId];
     }
 
-    // msg.sender 값을 사용할 예정이기 때문에 private 설정
-    function _checkTokenOwner(uint _tokenId) private view {
+    // 토큰 구매 함수 test
+    function buyToken(uint _tokenId) external payable returns (TokenData memory) {
+        
+        _requireOnSale(_tokenId);
+        
+        // 판매자는 구매 불가
+        require(!_isTokenOwner(_tokenId), "seller can not buy");
 
-        // tokenId 유효성 검사 포함
-        require(msg.sender == _MintingNft.ownerOf(_tokenId), "not the owner");
-    }
+        uint price = _saleTokenIdToData[_tokenId].price;
+        require(price <= msg.value, "insufficient money to buy token");
 
-    // test
-    function _checkOnSale(uint _tokenId) private view returns (bool) {
-        return _saleTokenIdToData[_tokenId].owner != address(0);
+        // wei 단위
+        address seller = _saleTokenIdToData[_tokenId].seller;
+        payable(seller).transfer(price - _getTokenTransactionFee(price));
+
+        // 토큰 소유자 변경
+        _MintingNft.transferToken(seller, msg.sender, _tokenId);
+
+        delete _saleTokenIdToData[_tokenId];
+        return getSaleTokenData(_tokenId);
     }
 
     function setMintingNft(address _ca) external onlyOwner {
@@ -90,10 +107,20 @@ contract TradingNft is Ownable {
         _tokenTransactionFeeRate = _feeDigits;
     }
 
-    // address CA 값 반환 함수
-    function getMintingNft() external view returns (MintingNft) {
-        return _MintingNft;
+    // 수수료 계산 함수 (0원 상품도 계산 가능)
+    function _getTokenTransactionFee(uint _price) public view returns (uint) {
+        return _price * _tokenTransactionFeeRate / _tokenTransactionFeeDigits;
     }
+
+    // MintingNft 컨트랙트의 CA 값 반환
+    // function getMintingNft() external view returns (MintingNft) {
+    //     return _MintingNft;
+    // }
+
+    // 상호작용 하는 컨트랙트에서 호출할 경우 호출한 컨트랙트의 CA 값 반환
+    // function msgSender() external view returns (address) {
+    //     return _MintingNft.msgSender();
+    // }
 
     function getTokenTransactionFeeRate() external view returns (uint) {
         return _tokenTransactionFeeRate;
@@ -103,11 +130,36 @@ contract TradingNft is Ownable {
         return _tokenTransactionFeeDigits;
     }
 
-    function getSaleTokenData(uint _tokenId) external view returns (TokenData memory) {
+    // test
+    function getSaleTokenData(uint _tokenId) public view returns (TokenData memory) {
         return _saleTokenIdToData[_tokenId];
     }
 
     function getAuctionTokenData(uint _tokenId) external view returns (TokenData memory) {
         return _auctionTokenIdToData[_tokenId];
     }
+
+    // 토큰의 소유주인지 확인하는 함수
+    // msg.sender 값을 사용할 예정이기 때문에 private 설정
+    function _requireTokenOwner(uint _tokenId) private view {
+
+        // tokenId 유효성 검사 포함
+        require(_isTokenOwner(_tokenId), "not the owner");
+    }
+
+    function _isTokenOwner(uint _tokenId) private view returns (bool) {
+        return msg.sender == _MintingNft.ownerOf(_tokenId);
+    }
+
+    // 판매 중인 상품인지 확인하는 함수
+    function _requireOnSale(uint _tokenId) private view {
+        require(_isOnSale(_tokenId), "not on sale");
+    }
+
+    function _isOnSale(uint _tokenId) private view returns (bool) {
+        return _saleTokenIdToData[_tokenId].seller != address(0);
+    }
 }
+
+// 함수 코드 순서
+// set => view => external => private
