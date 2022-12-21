@@ -6,6 +6,7 @@ import Header from "./components/header/Header";
 import TopFold from "./components/TopFold/TopFold";
 import TrendingNft from "./components/TrendingNft/TrendingNft";
 import Minseop from "./components/minseop/minseop";
+import SeopMy from "./components/minseop/seopMy";
 
 
 
@@ -28,6 +29,7 @@ const App = () => {
         />
        
         <Route path="/minseop" element={<Minseop />} />
+        <Route path="/seopmy" element={<SeopMy />} />
       </Routes>
     </div>
   );
