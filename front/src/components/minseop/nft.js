@@ -4,6 +4,7 @@ import axios from "axios";
 const Nft = ({ tokenId, nftURI }) => {
   const [jsonData, setJsonData] = useState();
   const [attributes, setAttributes] = useState();
+
   useEffect(() => {
     (async () => {
       const jsonData = await axios.get(`${nftURI}.json`);
