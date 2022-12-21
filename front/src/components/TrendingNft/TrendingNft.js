@@ -8,20 +8,16 @@ import "../../styles/trending.css"
 // marqueen 함수 이용하기
 const TrendingNft = () => {
   return (
-    <div className='www'>
-      <div className='mask'>
-        <img src={Mm}/>
-      </div>
-      <div className='mask'>
-        <img src={openS}/>
-      </div>
-      <div className='mask'>
-        <img src={pinata}/>
-      </div>
-      <div className='mask'>
-        <img src={openZ}/>
-      </div>
+   <div className='box'>
+    <div className='inner'>
+    <span><img src={openS}/></span>
+    
     </div>
+    <div className='inner'>
+     <span><img src={openS}/></span>
+    
+    </div>
+   </div>
   )
 }
 

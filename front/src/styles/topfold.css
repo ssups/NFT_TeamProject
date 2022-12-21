@@ -59,3 +59,19 @@
     position: relative;
     margin-left: -50px;
 }
+
+
+.tf-r-bg-blob{
+    z-index: -999;
+    margin-top: -200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 550px;
+    width: 550px;
+    background-color: rgba(143,0,255,0.35);
+    filter: blur(160.58px);
+    position: absolute;
+
+    
+}

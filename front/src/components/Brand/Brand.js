@@ -8,7 +8,7 @@ const Brand = () => {
   return (
     <ScrollContainer snap='madnatory'>
       <ScrollPage page={0}>
-      <Animator animation={batch(Fade(), Sticky(), MoveOut(200, 500))}>
+      <Animator animation={batch(Fade(), Sticky(), MoveOut(0, 300))}>
     <section id="slideshow">
     <div className="slideImg">
       <div className="moveImg">
