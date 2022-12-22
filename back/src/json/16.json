@@ -1,27 +1,14 @@
 {
   "name": "ggugi #16",
   "description": "hello hello",
-<<<<<<< HEAD
-<<<<<<< HEAD
-  "image": "https://localhost:4000/images/16.png",
-  "dna": "742617e227319b3c43a160229b09b72d713a5709",
+  "image": "http://localhost:4000/images/16.png",
+  "dna": "17a27e30c8aeff696d309d0e321504518e8a04b8",
   "edition": 16,
-  "date": 1671668138811,
-=======
-=======
->>>>>>> main
-  "image": "localhost:4000/images/16.png",
-  "dna": "742617e227319b3c43a160229b09b72d713a5709",
-  "edition": 16,
-  "date": 1671610442298,
-<<<<<<< HEAD
->>>>>>> origin/main
-=======
->>>>>>> main
+  "date": 1671676196367,
   "attributes": [
     {
       "trait_type": "Background",
-      "value": "Red"
+      "value": "Purple"
     },
     {
       "trait_type": "Bottom lid",
@@ -29,7 +16,7 @@
     },
     {
       "trait_type": "Eye color",
-      "value": "Yellow"
+      "value": "Green"
     },
     {
       "trait_type": "Eyeball",

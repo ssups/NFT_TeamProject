@@ -1,29 +1,10 @@
 {
   "name": "ggugi #2",
   "description": "hello hello",
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-  "image": "https://localhost:4000/images/2.png",
+  "image": "http://localhost:4000/images/2.png",
   "dna": "cfdf058c9e1b9c34eb083de64b8e55c061a62aca",
   "edition": 2,
-  "date": 1671668138541,
-=======
-=======
->>>>>>> main
-=======
->>>>>>> main
-  "image": "localhost:4000/images/2.png",
-  "dna": "61f542917daf3e7b4a23fdac6a1f6d05483f27f6",
-  "edition": 2,
-  "date": 1671610442055,
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> origin/main
-=======
->>>>>>> main
-=======
->>>>>>> main
+  "date": 1671676196121,
   "attributes": [
     {
       "trait_type": "Background",
@@ -35,19 +16,7 @@
     },
     {
       "trait_type": "Eye color",
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
       "value": "Red"
-=======
-      "value": "Green"
->>>>>>> origin/main
-=======
-      "value": "Green"
->>>>>>> main
-=======
-      "value": "Green"
->>>>>>> main
     },
     {
       "trait_type": "Eyeball",

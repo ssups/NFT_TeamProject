@@ -1,38 +1,14 @@
 {
   "name": "ggugi #3",
   "description": "hello hello",
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-  "image": "https://localhost:4000/images/3.png",
-  "dna": "977cb88d02beeca41c8b19c65e5b0e216001c682",
+  "image": "http://localhost:4000/images/3.png",
+  "dna": "103f77b9030643d79a15c4e8066b911f11cf710a",
   "edition": 3,
-  "date": 1671668138560,
+  "date": 1671676196140,
   "attributes": [
     {
       "trait_type": "Background",
-      "value": "Lightgreen"
-    },
-    {
-      "trait_type": "Bottom lid",
-      "value": "Yellow"
-    },
-    {
-      "trait_type": "Eye color",
-      "value": "Yellow"
-=======
-=======
->>>>>>> main
-=======
->>>>>>> main
-  "image": "localhost:4000/images/3.png",
-  "dna": "cfdf058c9e1b9c34eb083de64b8e55c061a62aca",
-  "edition": 3,
-  "date": 1671610442072,
-  "attributes": [
-    {
-      "trait_type": "Background",
-      "value": "Purple"
+      "value": "Red"
     },
     {
       "trait_type": "Bottom lid",
@@ -41,17 +17,10 @@
     {
       "trait_type": "Eye color",
       "value": "Red"
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> origin/main
-=======
->>>>>>> main
-=======
->>>>>>> main
     },
     {
       "trait_type": "Eyeball",
-      "value": "Hmm"
+      "value": "HaHa"
     }
   ],
   "compiler": "HashLips Art Engine"

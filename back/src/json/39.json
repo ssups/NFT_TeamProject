@@ -1,57 +1,22 @@
 {
   "name": "ggugi #39",
   "description": "hello hello",
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-  "image": "https://localhost:4000/images/39.png",
-  "dna": "6cdfc1edc177511d899a9418a6f48415bc1964a1",
+  "image": "http://localhost:4000/images/39.png",
+  "dna": "d8467251e73c0508d4b69d062a9b345dd5498634",
   "edition": 39,
-  "date": 1671668139239,
-  "attributes": [
-    {
-      "trait_type": "Background",
-      "value": "Purple"
-=======
-=======
->>>>>>> main
-=======
->>>>>>> main
-  "image": "localhost:4000/images/39.png",
-  "dna": "e2d5a8326cb9d61a49c9a193ece7d55394170c0d",
-  "edition": 39,
-  "date": 1671610442727,
+  "date": 1671676196844,
   "attributes": [
     {
       "trait_type": "Background",
       "value": "Blue"
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> origin/main
-=======
->>>>>>> main
-=======
->>>>>>> main
     },
     {
       "trait_type": "Bottom lid",
-      "value": "Yellow"
+      "value": "Blue"
     },
     {
       "trait_type": "Eye color",
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
       "value": "Yellow"
-=======
-      "value": "Green"
->>>>>>> origin/main
-=======
-      "value": "Green"
->>>>>>> main
-=======
-      "value": "Green"
->>>>>>> main
     },
     {
       "trait_type": "Eyeball",
