@@ -9,7 +9,7 @@ import TrendingNft from "./components/TrendingNft/TrendingNft";
 import Minseop from "./components/minseop/minseop";
 import SeopMy from "./components/minseop/seopMy";
 
-import MyNft from "./components/minseop/MyNft_j";
+import MyNfts from "./components/minseop/MyNfts_j";
 import NftInfo from "./components/minseop/NftInfo_j";
 import Minting from "./components/minseop/Minting_j";
 
@@ -32,7 +32,7 @@ const App = () => {
         <Route path="/minseop" element={<Minseop />} />
         <Route path="/seopmy" element={<SeopMy />} />
 
-        <Route path="/1" element={<MyNft />} />
+        <Route path="/1" element={<MyNfts />} />
         <Route path="/2" element={<NftInfo />} />
         <Route path="/3" element={<Minting />} />
       </Routes>

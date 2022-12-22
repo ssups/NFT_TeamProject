@@ -146,7 +146,7 @@ const Minting = () => {
       {account?.toLowerCase() === owner?.toLowerCase() && (
         <div>
           {/* ref.. */}
-          <input id="price" type="number" ref={priceRef} placeholder="ether 단위" />
+          <input className="minting-price" type="number" ref={priceRef} placeholder="ether 단위" />
           <button onClick={() => setMintOn(priceRef.current.value)}>민팅 가격 설정</button>
         </div>
       )}
@@ -159,7 +159,7 @@ const Minting = () => {
 
       {isMintOn && (
         <div>
-          <input id="quantity" type="text" ref={mintQuantityRef} disabled={currentSupply === maxSupply} />
+          <input className="minting-quantity" type="text" ref={mintQuantityRef} disabled={currentSupply === maxSupply} />
           <button onClick={() => mintTestToken(mintQuantityRef.current.value * 1)} disabled={currentSupply === maxSupply}>
             Mint
           </button>
