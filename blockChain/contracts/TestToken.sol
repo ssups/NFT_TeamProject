@@ -89,7 +89,7 @@ contract TestToken is  ERC721A, Ownable, ReentrancyGuard {
       // nonReentrant modifier는 함수의 중복호출? 을 방지해주는 기능을 하는거 같다.
       // payable(msg.sender).transfer(address(this).balance);
       (bool success, ) = msg.sender.call{value:address(this).balance}("");
-      require(success, "Withdrawl Faild");
+      require(success, "Withdrawal Failed");
     }
 
     function maxSupply() view external returns(uint256) {
