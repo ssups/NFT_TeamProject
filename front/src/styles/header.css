@@ -2,8 +2,9 @@
 
 
 .header{
+    margin-top: 130px;
     font-family: 'Jua', sans-serif;
-    font-size: 40px;
+    font-size: 80px;
     font-weight: 700;
     padding: 50px 0px 0px;
     display: flex;

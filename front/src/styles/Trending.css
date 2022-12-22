@@ -1,0 +1,58 @@
+.box{
+    margin-top: -60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: -50px;
+    
+}
+
+.inner{
+    margin-top: 100px;
+    /* margin-left: 50px; */
+    width: 1000px;
+    height: 350px;
+    white-space: nowrap;
+    overflow: hidden;
+    box-shadow: 0 1em 2.5em 0.35em rgba(17, 17, 17, 0.25),
+    0 0.25em 0.5em rgba(51, 192, 176, 0.65), 0 0.1em 0.35em
+     rgba(46, 113, 105, 0.85), inset -0.025em 0.3em 0.4em 
+     rgba(255, 255, 255, 0.68), inset 0 0.05em 0.05em
+      rgba(255, 255, 255, 0.95);
+      
+}
+
+.inner img{
+    display: flex;
+    padding: 50px;
+}
+
+.inner:first-child{
+    background: rgb(65, 67, 65);
+   transform-origin: right;
+   transform: perspective(100px)rotateY(-5deg);
+}
+.inner:last-child{
+    background: rgb(25, 35, 29);
+   transform-origin: left;
+   transform: perspective(100px)rotateY(5deg);
+}
+
+.inner span{
+    position: absolute;
+    animation: marquee 5s linear  infinite;
+}
+
+.inner:first-child span{
+    animation-delay: 2.5s;
+    left: -100%;
+}
+
+@keyframes marquee{
+    from{
+        left: 100%;
+    }
+    to{
+        left: -100%;
+    }
+}

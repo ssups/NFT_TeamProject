@@ -12,6 +12,7 @@ const TopFold = () => {
         <div className='tf-des'>
           졸려배고파밥줘
         </div>
+        <div className='tf-r-bg-blob'></div>
       </div>
       <div className='tf-btns'>
        <button className='bbtn1'>둘러보기</button>
