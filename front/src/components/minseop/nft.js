@@ -19,11 +19,7 @@ const Nft = ({ tokenId, nftURI }) => {
       {jsonData && (
         <>
           <div>name:{jsonData.name}</div>
-          <img
-            style={{ width: "200px", height: "200px" }}
-            src={"http://" + jsonData.image}
-            alt=""
-          />
+          <img style={{ width: "200px", height: "200px" }} src={jsonData.image} alt="" />
           {attributes.map(attribute => {
             return (
               <div key={attribute.trait_type}>{attribute.trait_type + ":" + attribute.value}</div>
