@@ -3,6 +3,7 @@
   "description": "hello hello",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   "image": "https://localhost:4000/images/27.png",
   "dna": "6321e4183c72cdaed3b0cd6dbea07313986655f5",
   "edition": 27,
@@ -18,6 +19,8 @@
 =======
 =======
 >>>>>>> main
+=======
+>>>>>>> main
   "image": "localhost:4000/images/27.png",
   "dna": "9f19c83b4557945d79c3141607764e433021a9d3",
   "edition": 27,
@@ -31,7 +34,10 @@
       "trait_type": "Bottom lid",
       "value": "Blue"
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> main
 =======
 >>>>>>> main
     },
@@ -43,10 +49,14 @@
       "trait_type": "Eyeball",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       "value": "Hmm"
 =======
       "value": "HaHa"
 >>>>>>> origin/main
+=======
+      "value": "HaHa"
+>>>>>>> main
 =======
       "value": "HaHa"
 >>>>>>> main

@@ -3,6 +3,7 @@
   "description": "hello hello",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   "image": "https://localhost:4000/images/29.png",
   "dna": "1982c0789d964cb9560c6268428b29707357c51e",
   "edition": 29,
@@ -26,6 +27,8 @@
 =======
 =======
 >>>>>>> main
+=======
+>>>>>>> main
   "image": "localhost:4000/images/29.png",
   "dna": "f5562ad39e8a9e4f8bf20ddcd9c747de29fd3e97",
   "edition": 29,
@@ -47,7 +50,10 @@
       "trait_type": "Eyeball",
       "value": "Hmm"
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> main
 =======
 >>>>>>> main
     }

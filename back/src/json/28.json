@@ -3,6 +3,7 @@
   "description": "hello hello",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   "image": "https://localhost:4000/images/28.png",
   "dna": "2cba5e0489a1ba64721edb21b63d4af2baed77d6",
   "edition": 28,
@@ -14,6 +15,8 @@
 =======
 =======
 >>>>>>> main
+=======
+>>>>>>> main
   "image": "localhost:4000/images/28.png",
   "dna": "2b21d93909aaed14198042da4fe02a10c7d429f6",
   "edition": 28,
@@ -23,7 +26,10 @@
       "trait_type": "Background",
       "value": "Purple"
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> main
 =======
 >>>>>>> main
     },
@@ -35,10 +41,14 @@
       "trait_type": "Eye color",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       "value": "Green"
 =======
       "value": "Red"
 >>>>>>> origin/main
+=======
+      "value": "Red"
+>>>>>>> main
 =======
       "value": "Red"
 >>>>>>> main

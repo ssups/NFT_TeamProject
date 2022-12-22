@@ -3,6 +3,7 @@
   "description": "hello hello",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   "image": "https://localhost:4000/images/1.png",
   "dna": "f5562ad39e8a9e4f8bf20ddcd9c747de29fd3e97",
   "edition": 1,
@@ -14,6 +15,8 @@
 =======
 =======
 >>>>>>> main
+=======
+>>>>>>> main
   "image": "localhost:4000/images/1.png",
   "dna": "28b72c33124dc240ab5fad12b5af4077f7f05e51",
   "edition": 1,
@@ -23,7 +26,10 @@
       "trait_type": "Background",
       "value": "Red"
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> main
 =======
 >>>>>>> main
     },

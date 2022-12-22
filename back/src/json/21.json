@@ -3,6 +3,7 @@
   "description": "hello hello",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   "image": "https://localhost:4000/images/21.png",
   "dna": "17a27e30c8aeff696d309d0e321504518e8a04b8",
   "edition": 21,
@@ -10,12 +11,17 @@
 =======
 =======
 >>>>>>> main
+=======
+>>>>>>> main
   "image": "localhost:4000/images/21.png",
   "dna": "17a27e30c8aeff696d309d0e321504518e8a04b8",
   "edition": 21,
   "date": 1671610442387,
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> main
 =======
 >>>>>>> main
   "attributes": [

@@ -3,6 +3,7 @@
   "description": "hello hello",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   "image": "https://localhost:4000/images/34.png",
   "dna": "18c70fe703b674fef0ca1904f044c18e86447379",
   "edition": 34,
@@ -14,6 +15,8 @@
 =======
 =======
 >>>>>>> main
+=======
+>>>>>>> main
   "image": "localhost:4000/images/34.png",
   "dna": "baa1cc60e074cc6de917cc6220c251551903bb03",
   "edition": 34,
@@ -23,7 +26,10 @@
       "trait_type": "Background",
       "value": "Red"
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> main
 =======
 >>>>>>> main
     },
@@ -35,6 +41,7 @@
       "trait_type": "Eye color",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       "value": "Red"
     },
     {
@@ -43,13 +50,18 @@
 =======
 =======
 >>>>>>> main
+=======
+>>>>>>> main
       "value": "Yellow"
     },
     {
       "trait_type": "Eyeball",
       "value": "HaHa"
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> main
 =======
 >>>>>>> main
     }

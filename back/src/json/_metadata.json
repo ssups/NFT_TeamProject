@@ -4,6 +4,7 @@
     "description": "hello hello",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "image": "https://localhost:4000/images/1.png",
     "dna": "f5562ad39e8a9e4f8bf20ddcd9c747de29fd3e97",
     "edition": 1,
@@ -15,6 +16,8 @@
 =======
 =======
 >>>>>>> main
+=======
+>>>>>>> main
     "image": "localhost:4000/images/1.png",
     "dna": "28b72c33124dc240ab5fad12b5af4077f7f05e51",
     "edition": 1,
@@ -24,7 +27,10 @@
         "trait_type": "Background",
         "value": "Red"
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> main
 =======
 >>>>>>> main
       },
@@ -48,11 +54,14 @@
     "description": "hello hello",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "image": "https://localhost:4000/images/2.png",
     "dna": "cfdf058c9e1b9c34eb083de64b8e55c061a62aca",
     "edition": 2,
     "date": 1671668138541,
 =======
+=======
+>>>>>>> main
 =======
 >>>>>>> main
     "image": "localhost:4000/images/2.png",
@@ -87,7 +96,10 @@
     "edition": 3,
     "date": 1671610442072,
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> main
 =======
 >>>>>>> main
     "attributes": [
@@ -113,6 +125,7 @@
   {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "name": "ggugi #3",
     "description": "hello hello",
     "image": "https://localhost:4000/images/3.png",
@@ -126,6 +139,8 @@
 =======
 =======
 >>>>>>> main
+=======
+>>>>>>> main
     "name": "ggugi #4",
     "description": "hello hello",
     "image": "localhost:4000/images/4.png",
@@ -137,7 +152,10 @@
         "trait_type": "Background",
         "value": "Blue"
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> main
 =======
 >>>>>>> main
       },
@@ -159,6 +177,7 @@
   {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "name": "ggugi #4",
     "description": "hello hello",
     "image": "https://localhost:4000/images/4.png",
@@ -168,6 +187,8 @@
 =======
 =======
 >>>>>>> main
+=======
+>>>>>>> main
     "name": "ggugi #5",
     "description": "hello hello",
     "image": "localhost:4000/images/5.png",
@@ -175,7 +196,10 @@
     "edition": 5,
     "date": 1671610442110,
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> main
 =======
 >>>>>>> main
     "attributes": [
@@ -187,10 +211,14 @@
         "trait_type": "Bottom lid",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         "value": "Blue"
 =======
         "value": "Yellow"
 >>>>>>> origin/main
+=======
+        "value": "Yellow"
+>>>>>>> main
 =======
         "value": "Yellow"
 >>>>>>> main
@@ -207,6 +235,7 @@
     "compiler": "HashLips Art Engine"
   },
   {
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     "name": "ggugi #5",
@@ -245,6 +274,8 @@
 =======
 =======
 >>>>>>> main
+=======
+>>>>>>> main
     "name": "ggugi #6",
     "description": "hello hello",
     "image": "localhost:4000/images/6.png",
@@ -252,7 +283,10 @@
     "edition": 6,
     "date": 1671610442127,
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> main
 =======
 >>>>>>> main
     "attributes": [
@@ -280,6 +314,7 @@
     "description": "hello hello",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "image": "https://localhost:4000/images/7.png",
     "dna": "b8ce60e2b97aa738531a7eaa2d001072e9163a39",
     "edition": 7,
@@ -287,12 +322,17 @@
 =======
 =======
 >>>>>>> main
+=======
+>>>>>>> main
     "image": "localhost:4000/images/7.png",
     "dna": "b8ce60e2b97aa738531a7eaa2d001072e9163a39",
     "edition": 7,
     "date": 1671610442144,
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> main
 =======
 >>>>>>> main
     "attributes": [
@@ -320,6 +360,7 @@
     "description": "hello hello",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "image": "https://localhost:4000/images/8.png",
     "dna": "6284140f5373d47b1c3ddf1c954ef16541344ef5",
     "edition": 8,
@@ -331,6 +372,8 @@
 =======
 =======
 >>>>>>> main
+=======
+>>>>>>> main
     "image": "localhost:4000/images/8.png",
     "dna": "0786aaacaad74060dd881fa463aad2bdba1633f2",
     "edition": 8,
@@ -340,7 +383,10 @@
         "trait_type": "Background",
         "value": "Blue"
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> main
 =======
 >>>>>>> main
       },
@@ -352,6 +398,7 @@
         "trait_type": "Eye color",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         "value": "Red"
       },
       {
@@ -360,13 +407,18 @@
 =======
 =======
 >>>>>>> main
+=======
+>>>>>>> main
         "value": "Green"
       },
       {
         "trait_type": "Eyeball",
         "value": "Hmm"
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> main
 =======
 >>>>>>> main
       }
@@ -376,6 +428,7 @@
   {
     "name": "ggugi #9",
     "description": "hello hello",
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     "image": "https://localhost:4000/images/9.png",
@@ -389,6 +442,8 @@
 =======
 =======
 >>>>>>> main
+=======
+>>>>>>> main
     "image": "localhost:4000/images/9.png",
     "dna": "1982c0789d964cb9560c6268428b29707357c51e",
     "edition": 9,
@@ -398,7 +453,10 @@
         "trait_type": "Background",
         "value": "Purple"
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> main
 =======
 >>>>>>> main
       },
@@ -422,6 +480,7 @@
     "description": "hello hello",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "image": "https://localhost:4000/images/10.png",
     "dna": "103f77b9030643d79a15c4e8066b911f11cf710a",
     "edition": 10,
@@ -433,6 +492,8 @@
 =======
 =======
 >>>>>>> main
+=======
+>>>>>>> main
     "image": "localhost:4000/images/10.png",
     "dna": "3a227035e7f830104ebeb6c4ca4dbe93018d4397",
     "edition": 10,
@@ -442,7 +503,10 @@
         "trait_type": "Background",
         "value": "Purple"
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> main
 =======
 >>>>>>> main
       },
@@ -466,6 +530,7 @@
     "description": "hello hello",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "image": "https://localhost:4000/images/11.png",
     "dna": "d3a6a7ed00831fc752defd29e49c8070e5870c69",
     "edition": 11,
@@ -473,12 +538,17 @@
 =======
 =======
 >>>>>>> main
+=======
+>>>>>>> main
     "image": "localhost:4000/images/11.png",
     "dna": "6284140f5373d47b1c3ddf1c954ef16541344ef5",
     "edition": 11,
     "date": 1671610442215,
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> main
 =======
 >>>>>>> main
     "attributes": [
@@ -490,7 +560,10 @@
         "trait_type": "Bottom lid",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> main
 =======
 >>>>>>> main
         "value": "Yellow"
@@ -575,7 +648,10 @@
       {
         "trait_type": "Bottom lid",
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> main
 =======
 >>>>>>> main
         "value": "Blue"
@@ -592,6 +668,7 @@
     "compiler": "HashLips Art Engine"
   },
   {
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     "name": "ggugi #12",
@@ -688,6 +765,8 @@
 =======
 =======
 >>>>>>> main
+=======
+>>>>>>> main
     "name": "ggugi #15",
     "description": "hello hello",
     "image": "localhost:4000/images/15.png",
@@ -699,7 +778,10 @@
         "trait_type": "Background",
         "value": "Lightgreen"
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> main
 =======
 >>>>>>> main
       },
@@ -711,10 +793,14 @@
         "trait_type": "Eye color",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         "value": "Red"
 =======
         "value": "Green"
 >>>>>>> origin/main
+=======
+        "value": "Green"
+>>>>>>> main
 =======
         "value": "Green"
 >>>>>>> main
@@ -731,6 +817,7 @@
     "description": "hello hello",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "image": "https://localhost:4000/images/16.png",
     "dna": "742617e227319b3c43a160229b09b72d713a5709",
     "edition": 16,
@@ -738,12 +825,17 @@
 =======
 =======
 >>>>>>> main
+=======
+>>>>>>> main
     "image": "localhost:4000/images/16.png",
     "dna": "742617e227319b3c43a160229b09b72d713a5709",
     "edition": 16,
     "date": 1671610442298,
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> main
 =======
 >>>>>>> main
     "attributes": [
@@ -771,6 +863,7 @@
     "description": "hello hello",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "image": "https://localhost:4000/images/17.png",
     "dna": "d7fc5fbb54e56bcf72e9fe635617b4acf020055a",
     "edition": 17,
@@ -792,6 +885,8 @@
 =======
 =======
 >>>>>>> main
+=======
+>>>>>>> main
     "image": "localhost:4000/images/17.png",
     "dna": "7ac99295d8c5966aa6c25506103a8588d9904d44",
     "edition": 17,
@@ -811,7 +906,10 @@
       },
       {
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> main
 =======
 >>>>>>> main
         "trait_type": "Eyeball",
@@ -825,6 +923,7 @@
     "description": "hello hello",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "image": "https://localhost:4000/images/18.png",
     "dna": "ecafa4ebee28ffe1c7a0692b9d9be35665904441",
     "edition": 18,
@@ -832,12 +931,17 @@
 =======
 =======
 >>>>>>> main
+=======
+>>>>>>> main
     "image": "localhost:4000/images/18.png",
     "dna": "5ec78574959eeea9723d502395f50e43977be0dc",
     "edition": 18,
     "date": 1671610442336,
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> main
 =======
 >>>>>>> main
     "attributes": [
@@ -847,6 +951,7 @@
       },
       {
         "trait_type": "Bottom lid",
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         "value": "Yellow"
@@ -883,6 +988,9 @@
 =======
         "value": "Blue"
 >>>>>>> main
+=======
+        "value": "Blue"
+>>>>>>> main
       },
       {
         "trait_type": "Eye color",
@@ -898,6 +1006,7 @@
   {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "name": "ggugi #20",
     "description": "hello hello",
     "image": "https://localhost:4000/images/20.png",
@@ -905,6 +1014,8 @@
     "edition": 20,
     "date": 1671668138882,
 =======
+=======
+>>>>>>> main
 =======
 >>>>>>> main
     "name": "ggugi #19",
@@ -941,7 +1052,10 @@
     "edition": 20,
     "date": 1671610442369,
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> main
 =======
 >>>>>>> main
     "attributes": [
@@ -957,6 +1071,7 @@
         "trait_type": "Eye color",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         "value": "Green"
       },
       {
@@ -965,13 +1080,18 @@
 =======
 =======
 >>>>>>> main
+=======
+>>>>>>> main
         "value": "Red"
       },
       {
         "trait_type": "Eyeball",
         "value": "Hmm"
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> main
 =======
 >>>>>>> main
       }
@@ -983,6 +1103,7 @@
     "description": "hello hello",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "image": "https://localhost:4000/images/21.png",
     "dna": "17a27e30c8aeff696d309d0e321504518e8a04b8",
     "edition": 21,
@@ -990,12 +1111,17 @@
 =======
 =======
 >>>>>>> main
+=======
+>>>>>>> main
     "image": "localhost:4000/images/21.png",
     "dna": "17a27e30c8aeff696d309d0e321504518e8a04b8",
     "edition": 21,
     "date": 1671610442387,
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> main
 =======
 >>>>>>> main
     "attributes": [
@@ -1023,6 +1149,7 @@
     "description": "hello hello",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "image": "https://localhost:4000/images/22.png",
     "dna": "7ac99295d8c5966aa6c25506103a8588d9904d44",
     "edition": 22,
@@ -1042,6 +1169,8 @@
 =======
 =======
 >>>>>>> main
+=======
+>>>>>>> main
     "image": "localhost:4000/images/22.png",
     "dna": "bb16cf31b3fe6e8aef5182ad1f8cf65c1f51183e",
     "edition": 22,
@@ -1059,7 +1188,10 @@
         "trait_type": "Eye color",
         "value": "Yellow"
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> main
 =======
 >>>>>>> main
       },
@@ -1075,6 +1207,7 @@
     "description": "hello hello",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "image": "https://localhost:4000/images/23.png",
     "dna": "3a227035e7f830104ebeb6c4ca4dbe93018d4397",
     "edition": 23,
@@ -1086,6 +1219,8 @@
 =======
 =======
 >>>>>>> main
+=======
+>>>>>>> main
     "image": "localhost:4000/images/23.png",
     "dna": "d1860d74ca213bc11785bd1338be31294f4d7e89",
     "edition": 23,
@@ -1095,7 +1230,10 @@
         "trait_type": "Background",
         "value": "Red"
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> main
 =======
 >>>>>>> main
       },
@@ -1107,6 +1245,7 @@
         "trait_type": "Eye color",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         "value": "Red"
       },
       {
@@ -1115,13 +1254,18 @@
 =======
 =======
 >>>>>>> main
+=======
+>>>>>>> main
         "value": "Yellow"
       },
       {
         "trait_type": "Eyeball",
         "value": "Hmm"
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> main
 =======
 >>>>>>> main
       }
@@ -1131,6 +1275,7 @@
   {
     "name": "ggugi #24",
     "description": "hello hello",
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     "image": "https://localhost:4000/images/24.png",
@@ -1173,6 +1318,8 @@
 =======
 =======
 >>>>>>> main
+=======
+>>>>>>> main
     "image": "localhost:4000/images/24.png",
     "dna": "66670eb54320c61cdf8dab082f1cfc26b97fb6a9",
     "edition": 24,
@@ -1184,7 +1331,10 @@
       },
       {
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> main
 =======
 >>>>>>> main
         "trait_type": "Bottom lid",
@@ -1204,6 +1354,7 @@
   {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "name": "ggugi #26",
     "description": "hello hello",
     "image": "https://localhost:4000/images/26.png",
@@ -1211,6 +1362,8 @@
     "edition": 26,
     "date": 1671668138986,
 =======
+=======
+>>>>>>> main
 =======
 >>>>>>> main
     "name": "ggugi #25",
@@ -1247,7 +1400,10 @@
     "edition": 26,
     "date": 1671610442482,
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> main
 =======
 >>>>>>> main
     "attributes": [
@@ -1275,6 +1431,7 @@
     "description": "hello hello",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "image": "https://localhost:4000/images/27.png",
     "dna": "6321e4183c72cdaed3b0cd6dbea07313986655f5",
     "edition": 27,
@@ -1290,6 +1447,8 @@
 =======
 =======
 >>>>>>> main
+=======
+>>>>>>> main
     "image": "localhost:4000/images/27.png",
     "dna": "9f19c83b4557945d79c3141607764e433021a9d3",
     "edition": 27,
@@ -1303,7 +1462,10 @@
         "trait_type": "Bottom lid",
         "value": "Blue"
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> main
 =======
 >>>>>>> main
       },
@@ -1315,10 +1477,14 @@
         "trait_type": "Eyeball",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         "value": "Hmm"
 =======
         "value": "HaHa"
 >>>>>>> origin/main
+=======
+        "value": "HaHa"
+>>>>>>> main
 =======
         "value": "HaHa"
 >>>>>>> main
@@ -1329,6 +1495,7 @@
   {
     "name": "ggugi #28",
     "description": "hello hello",
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     "image": "https://localhost:4000/images/28.png",
@@ -1342,6 +1509,8 @@
 =======
 =======
 >>>>>>> main
+=======
+>>>>>>> main
     "image": "localhost:4000/images/28.png",
     "dna": "2b21d93909aaed14198042da4fe02a10c7d429f6",
     "edition": 28,
@@ -1351,7 +1520,10 @@
         "trait_type": "Background",
         "value": "Purple"
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> main
 =======
 >>>>>>> main
       },
@@ -1363,10 +1535,14 @@
         "trait_type": "Eye color",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         "value": "Green"
 =======
         "value": "Red"
 >>>>>>> origin/main
+=======
+        "value": "Red"
+>>>>>>> main
 =======
         "value": "Red"
 >>>>>>> main
@@ -1381,6 +1557,7 @@
   {
     "name": "ggugi #29",
     "description": "hello hello",
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     "image": "https://localhost:4000/images/29.png",
@@ -1406,6 +1583,8 @@
 =======
 =======
 >>>>>>> main
+=======
+>>>>>>> main
     "image": "localhost:4000/images/29.png",
     "dna": "f5562ad39e8a9e4f8bf20ddcd9c747de29fd3e97",
     "edition": 29,
@@ -1427,7 +1606,10 @@
         "trait_type": "Eyeball",
         "value": "Hmm"
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> main
 =======
 >>>>>>> main
       }
@@ -1437,6 +1619,7 @@
   {
     "name": "ggugi #30",
     "description": "hello hello",
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     "image": "https://localhost:4000/images/30.png",
@@ -1450,6 +1633,8 @@
 =======
 =======
 >>>>>>> main
+=======
+>>>>>>> main
     "image": "localhost:4000/images/30.png",
     "dna": "18c70fe703b674fef0ca1904f044c18e86447379",
     "edition": 30,
@@ -1459,7 +1644,10 @@
         "trait_type": "Background",
         "value": "Blue"
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> main
 =======
 >>>>>>> main
       },
@@ -1471,6 +1659,7 @@
         "trait_type": "Eye color",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         "value": "Yellow"
       },
       {
@@ -1479,13 +1668,18 @@
 =======
 =======
 >>>>>>> main
+=======
+>>>>>>> main
         "value": "Red"
       },
       {
         "trait_type": "Eyeball",
         "value": "Hmm"
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> main
 =======
 >>>>>>> main
       }
@@ -1497,6 +1691,7 @@
     "description": "hello hello",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "image": "https://localhost:4000/images/31.png",
     "dna": "bb16cf31b3fe6e8aef5182ad1f8cf65c1f51183e",
     "edition": 31,
@@ -1504,12 +1699,17 @@
 =======
 =======
 >>>>>>> main
+=======
+>>>>>>> main
     "image": "localhost:4000/images/31.png",
     "dna": "977cb88d02beeca41c8b19c65e5b0e216001c682",
     "edition": 31,
     "date": 1671610442570,
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> main
 =======
 >>>>>>> main
     "attributes": [
@@ -1521,10 +1721,14 @@
         "trait_type": "Bottom lid",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         "value": "Blue"
 =======
         "value": "Yellow"
 >>>>>>> origin/main
+=======
+        "value": "Yellow"
+>>>>>>> main
 =======
         "value": "Yellow"
 >>>>>>> main
@@ -1545,6 +1749,7 @@
     "description": "hello hello",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "image": "https://localhost:4000/images/32.png",
     "dna": "32c1122c594448589f3852b56cc01ec57d0a8f5d",
     "edition": 32,
@@ -1556,6 +1761,8 @@
 =======
 =======
 >>>>>>> main
+=======
+>>>>>>> main
     "image": "localhost:4000/images/32.png",
     "dna": "06f8ac3c135bf3040432e7d9856cb1f7e948ac3e",
     "edition": 32,
@@ -1565,7 +1772,10 @@
         "trait_type": "Background",
         "value": "Purple"
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> main
 =======
 >>>>>>> main
       },
@@ -1577,6 +1787,7 @@
         "trait_type": "Eye color",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         "value": "Green"
       },
       {
@@ -1585,13 +1796,18 @@
 =======
 =======
 >>>>>>> main
+=======
+>>>>>>> main
         "value": "Yellow"
       },
       {
         "trait_type": "Eyeball",
         "value": "Hmm"
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> main
 =======
 >>>>>>> main
       }
@@ -1601,6 +1817,7 @@
   {
     "name": "ggugi #33",
     "description": "hello hello",
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     "image": "https://localhost:4000/images/33.png",
@@ -1622,6 +1839,8 @@
 =======
 =======
 >>>>>>> main
+=======
+>>>>>>> main
     "image": "localhost:4000/images/33.png",
     "dna": "8b396cb6ff8a387b1c9ec056dd145e6b56dbe935",
     "edition": 33,
@@ -1639,7 +1858,10 @@
         "trait_type": "Eye color",
         "value": "Yellow"
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> main
 =======
 >>>>>>> main
       },
@@ -1655,6 +1877,7 @@
     "description": "hello hello",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "image": "https://localhost:4000/images/34.png",
     "dna": "18c70fe703b674fef0ca1904f044c18e86447379",
     "edition": 34,
@@ -1666,6 +1889,8 @@
 =======
 =======
 >>>>>>> main
+=======
+>>>>>>> main
     "image": "localhost:4000/images/34.png",
     "dna": "baa1cc60e074cc6de917cc6220c251551903bb03",
     "edition": 34,
@@ -1675,7 +1900,10 @@
         "trait_type": "Background",
         "value": "Red"
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> main
 =======
 >>>>>>> main
       },
@@ -1687,6 +1915,7 @@
         "trait_type": "Eye color",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         "value": "Red"
       },
       {
@@ -1695,13 +1924,18 @@
 =======
 =======
 >>>>>>> main
+=======
+>>>>>>> main
         "value": "Yellow"
       },
       {
         "trait_type": "Eyeball",
         "value": "HaHa"
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> main
 =======
 >>>>>>> main
       }
@@ -1711,6 +1945,7 @@
   {
     "name": "ggugi #35",
     "description": "hello hello",
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     "image": "https://localhost:4000/images/35.png",
@@ -1747,12 +1982,17 @@
 =======
 =======
 >>>>>>> main
+=======
+>>>>>>> main
     "image": "localhost:4000/images/35.png",
     "dna": "c45855fc76638b35ecd96840e5af294cc087165b",
     "edition": 35,
     "date": 1671610442643,
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> main
 =======
 >>>>>>> main
     "attributes": [
@@ -1776,6 +2016,7 @@
     "compiler": "HashLips Art Engine"
   },
   {
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     "name": "ggugi #37",
@@ -1818,6 +2059,8 @@
 =======
 =======
 >>>>>>> main
+=======
+>>>>>>> main
     "name": "ggugi #36",
     "description": "hello hello",
     "image": "localhost:4000/images/36.png",
@@ -1856,7 +2099,10 @@
         "trait_type": "Background",
         "value": "Lightgreen"
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> main
 =======
 >>>>>>> main
       },
@@ -1878,6 +2124,7 @@
   {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "name": "ggugi #39",
     "description": "hello hello",
     "image": "https://localhost:4000/images/39.png",
@@ -1887,6 +2134,8 @@
 =======
 =======
 >>>>>>> main
+=======
+>>>>>>> main
     "name": "ggugi #38",
     "description": "hello hello",
     "image": "localhost:4000/images/38.png",
@@ -1894,7 +2143,10 @@
     "edition": 38,
     "date": 1671610442707,
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> main
 =======
 >>>>>>> main
     "attributes": [
@@ -1904,6 +2156,7 @@
       },
       {
         "trait_type": "Bottom lid",
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         "value": "Yellow"
@@ -1940,6 +2193,9 @@
 =======
         "value": "Blue"
 >>>>>>> main
+=======
+        "value": "Blue"
+>>>>>>> main
       },
       {
         "trait_type": "Eye color",
@@ -1953,7 +2209,10 @@
     "compiler": "HashLips Art Engine"
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> main
 =======
 >>>>>>> main
   },
@@ -2011,7 +2270,10 @@
     ],
     "compiler": "HashLips Art Engine"
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> main
 =======
 >>>>>>> main
   }
