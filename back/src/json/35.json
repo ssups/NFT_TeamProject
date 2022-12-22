@@ -1,14 +1,14 @@
 {
   "name": "ggugi #35",
   "description": "hello hello",
-  "image": "localhost:4000/images/35.png",
-  "dna": "c45855fc76638b35ecd96840e5af294cc087165b",
+  "image": "https://localhost:4000/images/35.png",
+  "dna": "0a8b70ca4d699c01cffbdf306ccb1bddf1048221",
   "edition": 35,
-  "date": 1671610442643,
+  "date": 1671668139157,
   "attributes": [
     {
       "trait_type": "Background",
-      "value": "Purple"
+      "value": "Blue"
     },
     {
       "trait_type": "Bottom lid",
@@ -16,11 +16,11 @@
     },
     {
       "trait_type": "Eye color",
-      "value": "Green"
+      "value": "Yellow"
     },
     {
       "trait_type": "Eyeball",
-      "value": "HaHa"
+      "value": "Hmm"
     }
   ],
   "compiler": "HashLips Art Engine"

@@ -2,16 +2,21 @@
 pragma solidity ^0.8.17;
 
 // import "../node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "../standards/ERC721A.sol";
-import "../node_modules/@openzeppelin/contracts/utils/Strings.sol";
-import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
-import "../node_modules/@openzeppelin/contracts/security/ReentrancyGuard.sol";
+// import "./standards/ERC721A.sol";
+// import "../node_modules/@openzeppelin/contracts/utils/Strings.sol";
+// import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
+// import "../node_modules/@openzeppelin/contracts/security/ReentrancyGuard.sol";
 // import "../node_modules/@openzeppelin/contracts/utils/Context.sol";
+
+import "./standards/ERC721A.sol";
+import "openzeppelin-solidity/contracts/utils/Strings.sol";
+import "openzeppelin-solidity/contracts/access/Ownable.sol";
+import "openzeppelin-solidity/contracts/security/ReentrancyGuard.sol";
 
 
 contract TestToken is  ERC721A, Ownable, ReentrancyGuard {
     using Strings for uint256; // Strings라이브러리 사용
-    uint256 public immutable maxAmountPerMint;
+    uint256 public immutable maxAmountPerMint; 
     uint256 public mintPrice;
 
     event MintTestToken(address minter, uint256 quantity, uint256 totalSupply);
@@ -47,7 +52,7 @@ contract TestToken is  ERC721A, Ownable, ReentrancyGuard {
       emit MintTestToken(msg.sender, quantity, ERC721A.totalSupply());
     }
 
-    string private _baseTokenURI = "https://localhost:4000/";
+    string private _baseTokenURI = "http://localhost:4000/";
 
   //   function tokenURI(uint256 tokenId)
   //   public
@@ -79,6 +84,7 @@ contract TestToken is  ERC721A, Ownable, ReentrancyGuard {
     // tokenURI 함수내에서 _baseURI 호출해서 리턴값 바탕으로 tokenURI 만들어서 return해준다.
 
     function withdrawAll() external onlyOwner nonReentrant {
+      require(address(this).balance > 0, "balance is zero");
       // nonReentrant modifier는 함수의 중복호출? 을 방지해주는 기능을 하는거 같다.
       // payable(msg.sender).transfer(address(this).balance);
       (bool success, ) = msg.sender.call{value:address(this).balance}("");
@@ -93,7 +99,7 @@ contract TestToken is  ERC721A, Ownable, ReentrancyGuard {
       uint256 ownerBalance = ERC721A.balanceOf(owner);
       uint256[] memory tokens = new uint256[](ownerBalance); // 배열크기 미리배정
       for (uint256 ind = 0; ind < ownerBalance; ind++) {
-        uint256 tokenId = tokenOfOwnerByIndex(owner, ind); // IERC721Enumerable에 있는거
+        uint256 tokenId = tokenOfOwnerByIndex(owner, ind); // ERC721A에 있는거
         tokens[ind] = tokenId;
       }
       return tokens;

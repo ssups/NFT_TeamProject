@@ -9,6 +9,7 @@ const { sequelize } = require("../models");
 let isSequelizeDone = false;
 
 // axios 데이터 통신 시 필요
+app.use(cors({ origin: address }));
 app.use(express.json());
 
 // 정적폴더 경로 설정
@@ -18,15 +19,13 @@ app.use(express.static("src"));
 // https://locahost:4000/images/1.png
 // 이런식으로 가져옴
 
-app.use(cors({ origin: address }));
-
-sequelize
-  .sync({ force: true })
-  .then(() => {
-    console.log("디비 연결 완료");
-    isSequelizeDone = true;
-  })
-  .catch(err => console.log("디비연결 오류", err));
+// sequelize
+//   .sync({ force: true })
+//   .then(() => {
+//     console.log("디비 연결 완료");
+//     isSequelizeDone = true;
+//   })
+//   .catch(err => console.log("디비연결 오류", err));
 
 app.listen(PORT, () => {
   console.log(PORT, "번 포트에 백서버 열림");

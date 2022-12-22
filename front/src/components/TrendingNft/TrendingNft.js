@@ -15,7 +15,7 @@ const TrendingNft = () => {
     </div>
     <div className='inner'>
      <span><img src={openS}/></span>
-    
+     
     </div>
    </div>
   )

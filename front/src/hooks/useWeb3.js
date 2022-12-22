@@ -27,8 +27,7 @@ const useWeb3 = () => {
           method: "eth_requestAccounts",
         });
         setAccount(switchedAddress);
-
-        const balance = await web3?.utils.getBalance(account);
+        const balance = await web3.eth.getBalance(address);
         setBalance(balance);
       });
     })();
