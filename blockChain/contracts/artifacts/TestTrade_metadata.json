@@ -20,6 +20,31 @@
 				"anonymous": false,
 				"inputs": [
 					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "bidPrice",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "bider",
+						"type": "address"
+					}
+				],
+				"name": "BidOnAuction",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
 						"indexed": true,
 						"internalType": "address",
 						"name": "previousOwner",
@@ -36,6 +61,25 @@
 				"type": "event"
 			},
 			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "failedBider",
+						"type": "address"
+					}
+				],
+				"name": "RefundBid",
+				"type": "event"
+			},
+			{
 				"inputs": [],
 				"name": "Token",
 				"outputs": [
@@ -49,14 +93,26 @@
 				"type": "function"
 			},
 			{
-				"inputs": [],
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
 				"name": "bidOnAcution",
 				"outputs": [],
 				"stateMutability": "payable",
 				"type": "function"
 			},
 			{
-				"inputs": [],
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
 				"name": "cancleFailedAuction",
 				"outputs": [],
 				"stateMutability": "nonpayable",
@@ -76,7 +132,13 @@
 				"type": "function"
 			},
 			{
-				"inputs": [],
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
 				"name": "claimTokenForWinner",
 				"outputs": [],
 				"stateMutability": "nonpayable",
@@ -85,6 +147,25 @@
 			{
 				"inputs": [],
 				"name": "onAuctionList",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					}
+				],
+				"name": "onBidList",
 				"outputs": [
 					{
 						"internalType": "uint256[]",
@@ -151,13 +232,6 @@
 				"name": "purchase",
 				"outputs": [],
 				"stateMutability": "payable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "refundBid",
-				"outputs": [],
-				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -246,6 +320,13 @@
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "withdrawFees",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
 			}
 		],
 		"devdoc": {
@@ -294,11 +375,11 @@
 			]
 		},
 		"TestTrade.sol": {
-			"keccak256": "0x3c5ff117257a92d6683c8beea45f7372411d8e30a774ba8b1fc13d39bb172973",
+			"keccak256": "0x0a5e0dd781eebff6969a35bec4bac3fa57fb12fc57ca958bf39b1df2a5483b4d",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://975789cc67dbdc0796aaeb07990e3bd2430a004e1757ef541bd270a9795f8969",
-				"dweb:/ipfs/QmZ5QKsnGnZLXAPLuXWtdsAg2hwg8xZxtNgTvFCvomXrRL"
+				"bzz-raw://f9260780c95341453115505e2e8b7912931729d38a0d63b0779dee0150665ad1",
+				"dweb:/ipfs/QmPRtRNU6xWTcmDrqL9NSYZ3PYsvwKBY2p5UgVTrJt24mV"
 			]
 		},
 		"openzeppelin-solidity/contracts/access/Ownable.sol": {
