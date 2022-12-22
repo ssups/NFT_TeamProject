@@ -145,6 +145,42 @@
 				"type": "function"
 			},
 			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "dataOfOnAuction",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "lastBidPrice",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "endTime",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "bider",
+								"type": "address"
+							}
+						],
+						"internalType": "struct TestTrade.AuctionInfo",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [],
 				"name": "onAuctionList",
 				"outputs": [
@@ -190,25 +226,6 @@
 				"type": "function"
 			},
 			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "tokenId",
-						"type": "uint256"
-					}
-				],
-				"name": "onSalePrice",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
 				"inputs": [],
 				"name": "owner",
 				"outputs": [
@@ -216,6 +233,25 @@
 						"internalType": "address",
 						"name": "",
 						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "priceOfOnSale",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
@@ -367,19 +403,19 @@
 	},
 	"sources": {
 		"TestToken.sol": {
-			"keccak256": "0x3307f5aa60bd4403ad0b4fb5971c4c17460cea21e3fe620919edc34ebb4e737f",
+			"keccak256": "0xd20756c5d1def76f1150b09a94ddcd5f6274088dd88abebcbb6c2e6469efe784",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://b9595fea4a61705497e9de5e13c2f13df3381b11827ec8ac722711b703a3e41d",
-				"dweb:/ipfs/QmVqNuXDwffz33VRPFjv8qmS81siFSJcd9c66Lhi1d73CA"
+				"bzz-raw://50fbcf718e8d308fd964304b958b18caacd26c4beef87ca70801ded545e79219",
+				"dweb:/ipfs/QmP6j2Q1EdUuXTtJVfR29aZZkW3GaFLkeLC5aQyrUhF18k"
 			]
 		},
 		"TestTrade.sol": {
-			"keccak256": "0x0a5e0dd781eebff6969a35bec4bac3fa57fb12fc57ca958bf39b1df2a5483b4d",
+			"keccak256": "0xbb1a2d9fded0d079e5d1c3ecc09acdd3848f6123e1c7762b9e78ea35cf1c4ed0",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://f9260780c95341453115505e2e8b7912931729d38a0d63b0779dee0150665ad1",
-				"dweb:/ipfs/QmPRtRNU6xWTcmDrqL9NSYZ3PYsvwKBY2p5UgVTrJt24mV"
+				"bzz-raw://d9b5fb2cee03d1a20126b3c8599aff4f1d04e8a589f93fb31a47b61966d4bdcf",
+				"dweb:/ipfs/QmVi9h8PJroH73SadWuWTupctn3q115SDgJomttBYV3o19"
 			]
 		},
 		"openzeppelin-solidity/contracts/access/Ownable.sol": {
@@ -471,11 +507,11 @@
 			]
 		},
 		"standards/ERC721A.sol": {
-			"keccak256": "0x7c90290c1f57c2c6223cc8aa0a078359bfb4dbf212d61d057ac1eb3244ac6178",
+			"keccak256": "0xf5d50906d90363a82229cee52ae1e3962ab1be11f9725dde9d11f515b467a13f",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://c7dbf3c0118af13ef51d93f49ff168d2883b17f878f89ce44b55808435be4322",
-				"dweb:/ipfs/QmYMkzBnn8FmJkgZioW1UM9e4HSjrzZiv66b3pg5cRLVWf"
+				"bzz-raw://f8ae106beacbd6a38f6e7475c34c16b367bcc062927fd3de73de64a43125dfd1",
+				"dweb:/ipfs/QmcbE5i54YoBadGWpJG2FKFaca8QHqLEtiADPXNXsgrLN6"
 			]
 		}
 	},
