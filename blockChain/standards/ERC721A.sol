@@ -91,7 +91,7 @@ contract ERC721A is
    * @dev See {IERC721Enumerable-totalSupply}.
    */
   function totalSupply() public view override returns (uint256) {
-    return currentIndex - 1; //내가 -1로 수정
+    return currentIndex - 1; 
   }
 
   /**

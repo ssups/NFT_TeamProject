@@ -50,6 +50,85 @@
 			},
 			{
 				"inputs": [],
+				"name": "bidOnAcution",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "cancleFailedAuction",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "cancleSale",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "claimTokenForWinner",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "onAuctionList",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "onSaleList",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "onSalePrice",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "owner",
 				"outputs": [
 					{
@@ -59,6 +138,49 @@
 					}
 				],
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "purchase",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "refundBid",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "minimumPrice",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "lastingMinutes",
+						"type": "uint256"
+					}
+				],
+				"name": "registerForAuction",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -164,19 +286,19 @@
 	},
 	"sources": {
 		"TestToken.sol": {
-			"keccak256": "0x5b7aefbe246f2a93cd098ba59c2c1757404a1c250a50b775d3adb3ff05dba38e",
+			"keccak256": "0x3307f5aa60bd4403ad0b4fb5971c4c17460cea21e3fe620919edc34ebb4e737f",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://2d40db0e5fca032f4d409794b902f65a10c5b3709547076ffec41a2792ac82a5",
-				"dweb:/ipfs/QmWyiD8e7t8LtdcQHg4BUcYiz25dAtJg6jPBUJjc7Hr9cF"
+				"bzz-raw://b9595fea4a61705497e9de5e13c2f13df3381b11827ec8ac722711b703a3e41d",
+				"dweb:/ipfs/QmVqNuXDwffz33VRPFjv8qmS81siFSJcd9c66Lhi1d73CA"
 			]
 		},
 		"TestTrade.sol": {
-			"keccak256": "0x41b48954d70e55319737b625a16a88f51a03f0f8f8af8490ee5dc233f8040319",
+			"keccak256": "0x3c5ff117257a92d6683c8beea45f7372411d8e30a774ba8b1fc13d39bb172973",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://e0dee9682602088e948637bb15586dde1bd4df3e2891e2b74d822bdc571c3871",
-				"dweb:/ipfs/QmYBbzmwZoYzh4YWwwa9cw3ptSGM12thfnaNTLen57ZZfB"
+				"bzz-raw://975789cc67dbdc0796aaeb07990e3bd2430a004e1757ef541bd270a9795f8969",
+				"dweb:/ipfs/QmZ5QKsnGnZLXAPLuXWtdsAg2hwg8xZxtNgTvFCvomXrRL"
 			]
 		},
 		"openzeppelin-solidity/contracts/access/Ownable.sol": {
@@ -268,11 +390,11 @@
 			]
 		},
 		"standards/ERC721A.sol": {
-			"keccak256": "0x95a49630fb5bce0b49a8d13317d2a42eb421f9b8147b7a3efec8a6f53f2d186c",
+			"keccak256": "0x7c90290c1f57c2c6223cc8aa0a078359bfb4dbf212d61d057ac1eb3244ac6178",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://1ed125e000a539e002f0ffdd4660b722d50f3c81c95f7b253a28ae3081ad9c59",
-				"dweb:/ipfs/Qmef9mR7Jyfuv743MfW3Wtvcn7Ebjsc4k6cqx5PZ7zi388"
+				"bzz-raw://c7dbf3c0118af13ef51d93f49ff168d2883b17f878f89ce44b55808435be4322",
+				"dweb:/ipfs/QmYMkzBnn8FmJkgZioW1UM9e4HSjrzZiv66b3pg5cRLVWf"
 			]
 		}
 	},

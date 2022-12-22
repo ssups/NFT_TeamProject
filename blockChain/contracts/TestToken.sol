@@ -99,7 +99,7 @@ contract TestToken is  ERC721A, Ownable, ReentrancyGuard {
       uint256 ownerBalance = ERC721A.balanceOf(owner);
       uint256[] memory tokens = new uint256[](ownerBalance); // 배열크기 미리배정
       for (uint256 ind = 0; ind < ownerBalance; ind++) {
-        uint256 tokenId = tokenOfOwnerByIndex(owner, ind); // IERC721Enumerable에 있는거
+        uint256 tokenId = tokenOfOwnerByIndex(owner, ind); // ERC721A에 있는거
         tokens[ind] = tokenId;
       }
       return tokens;
