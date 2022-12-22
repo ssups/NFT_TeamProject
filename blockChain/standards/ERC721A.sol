@@ -2,22 +2,14 @@
 
 pragma solidity ^0.8.0;
 
-import "openzeppelin-solidity/contracts/token/ERC721/IERC721.sol";
-import "openzeppelin-solidity/contracts/token/ERC721/IERC721Receiver.sol";
-import "openzeppelin-solidity/contracts/token/ERC721/extensions/IERC721Metadata.sol";
-import "openzeppelin-solidity/contracts/token/ERC721/extensions/IERC721Enumerable.sol";
-import "openzeppelin-solidity/contracts/utils/Address.sol";
-import "openzeppelin-solidity/contracts/utils/Context.sol";
-import "openzeppelin-solidity/contracts/utils/Strings.sol";
-import "openzeppelin-solidity/contracts/utils/introspection/ERC165.sol";
-// import "../node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol";
-// import "../node_modules/@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol";
-// import "../node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol";
-// import "../node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Enumerable.sol";
-// import "../node_modules/@openzeppelin/contracts/utils/Address.sol";
-// import "../node_modules/@openzeppelin/contracts/utils/Context.sol";
-// import "../node_modules/@openzeppelin/contracts/utils/Strings.sol";
-// import "../node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol";
+import "../node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol";
+import "../node_modules/@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol";
+import "../node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol";
+import "../node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Enumerable.sol";
+import "../node_modules/@openzeppelin/contracts/utils/Address.sol";
+import "../node_modules/@openzeppelin/contracts/utils/Context.sol";
+import "../node_modules/@openzeppelin/contracts/utils/Strings.sol";
+import "../node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol";
 
 /**
  * @dev Implementation of https://eips.ethereum.org/EIPS/eip-721[ERC721] Non-Fungible Token Standard, including
@@ -49,9 +41,7 @@ contract ERC721A is
     uint128 numberMinted;
   }
 
-  uint256 private currentIndex = 1;
-  // 내가 토큰ID 1부터 시작할려고 수정함
-  
+  uint256 private currentIndex = 1;  
 
   uint256 internal immutable collectionSize;
   uint256 internal immutable maxBatchSize;
@@ -127,8 +117,7 @@ contract ERC721A is
     uint256 numMintedSoFar = totalSupply();
     uint256 tokenIdsIdx = 0;
     address currOwnershipAddr = address(0);
-    for (uint256 i = 1; i <= numMintedSoFar; i++) { // 내가 수정
-    // i = 0 에서 i = 1로 i < 에서 i <= 로 수정
+    for (uint256 i = 1; i <= numMintedSoFar; i++) { 
       TokenOwnership memory ownership = _ownerships[i];
       if (ownership.addr != address(0)) {
         currOwnershipAddr = ownership.addr;
@@ -366,7 +355,7 @@ contract ERC721A is
     uint256 quantity,
     bytes memory _data
   ) internal {
-    uint256 startTokenId = currentIndex ; // 내가 +1로 수정함
+    uint256 startTokenId = currentIndex ;
     require(to != address(0), "ERC721A: mint to the zero address");
     // We know if the first token in the batch doesn't exist, the other ones don't as well, because of serial ordering.
     require(!_exists(startTokenId), "ERC721A: token already minted");
