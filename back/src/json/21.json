@@ -1,10 +1,17 @@
 {
   "name": "ggugi #21",
   "description": "hello hello",
+<<<<<<< HEAD
   "image": "https://localhost:4000/images/21.png",
   "dna": "17a27e30c8aeff696d309d0e321504518e8a04b8",
   "edition": 21,
   "date": 1671668138898,
+=======
+  "image": "localhost:4000/images/21.png",
+  "dna": "17a27e30c8aeff696d309d0e321504518e8a04b8",
+  "edition": 21,
+  "date": 1671610442387,
+>>>>>>> origin/main
   "attributes": [
     {
       "trait_type": "Background",

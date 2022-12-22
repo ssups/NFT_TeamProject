@@ -1,10 +1,17 @@
 {
   "name": "ggugi #5",
   "description": "hello hello",
+<<<<<<< HEAD
   "image": "https://localhost:4000/images/5.png",
   "dna": "5ec78574959eeea9723d502395f50e43977be0dc",
   "edition": 5,
   "date": 1671668138597,
+=======
+  "image": "localhost:4000/images/5.png",
+  "dna": "6321e4183c72cdaed3b0cd6dbea07313986655f5",
+  "edition": 5,
+  "date": 1671610442110,
+>>>>>>> origin/main
   "attributes": [
     {
       "trait_type": "Background",
@@ -12,11 +19,19 @@
     },
     {
       "trait_type": "Bottom lid",
+<<<<<<< HEAD
       "value": "Blue"
     },
     {
       "trait_type": "Eye color",
       "value": "Red"
+=======
+      "value": "Yellow"
+    },
+    {
+      "trait_type": "Eye color",
+      "value": "Green"
+>>>>>>> origin/main
     },
     {
       "trait_type": "Eyeball",

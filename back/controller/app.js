@@ -11,6 +11,13 @@ let isSequelizeDone = false;
 // axios 데이터 통신 시 필요
 app.use(express.json());
 
+// 정적폴더 경로 설정
+app.use(express.static("src/json"));
+app.use(express.static("src"));
+// https://loclhost:4000/1.json
+// https://locahost:4000/images/1.png
+// 이런식으로 가져옴
+
 app.use(cors({ origin: address }));
 
 sequelize
