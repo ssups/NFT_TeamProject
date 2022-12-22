@@ -5,10 +5,13 @@ import Brand from "./components/Brand/Brand";
 import Header from "./components/header/Header";
 import TopFold from "./components/TopFold/TopFold";
 import TrendingNft from "./components/TrendingNft/TrendingNft";
+
 import Minseop from "./components/minseop/minseop";
 import SeopMy from "./components/minseop/seopMy";
 
-
+import MyNft from "./components/minseop/MyNft_j";
+import NftInfo from "./components/minseop/NftInfo_j";
+import Minting from "./components/minseop/Minting_j";
 
 const App = () => {
   return (
@@ -18,18 +21,20 @@ const App = () => {
           path="/"
           element={
             <>
-            <TrendingNft />
+              <TrendingNft />
               <Header />
               <Brand />
-              <TopFold />             
-              
-              
+              <TopFold />
             </>
           }
         />
-       
+
         <Route path="/minseop" element={<Minseop />} />
         <Route path="/seopmy" element={<SeopMy />} />
+
+        <Route path="/1" element={<MyNft />} />
+        <Route path="/2" element={<NftInfo />} />
+        <Route path="/3" element={<Minting />} />
       </Routes>
     </div>
   );
