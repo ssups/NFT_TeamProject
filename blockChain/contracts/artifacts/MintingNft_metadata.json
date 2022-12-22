@@ -774,11 +774,11 @@
 			]
 		},
 		"MintingNft.sol": {
-			"keccak256": "0x8717da3ac76ba7205fbfa1e3b9dd5909e6e719606bb6092da72dadf5c49f6e08",
+			"keccak256": "0x87ecc78494456adfd1e37e33423db1b363d1c14ed8d7eaca7cdfa22090b8774f",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://aff076d43eabb38a254821be5e8f5a674a95d5ba124c1b601cc0001f0171e300",
-				"dweb:/ipfs/QmYWXaetFEnuB6afNkyUNLkMM67ttsmV14ecegdixE5c8D"
+				"bzz-raw://c1f21ed1bf32aa2ef3d7e0b23cb74cdd89471998250e92be149bbd48c2eff577",
+				"dweb:/ipfs/QmZYDUPc9yN4nWrPEQfu1BhRn6GNVNjBukZo45P7gEgb6s"
 			]
 		}
 	},

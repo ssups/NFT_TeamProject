@@ -2,12 +2,12 @@
 pragma solidity ^0.8.17;
 
 // 확장성 고려
-// import "../node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
-// import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
+import "../node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
+import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
 
 // remix 경로 수정
-import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
+// import "@openzeppelin/contracts/access/Ownable.sol";
+// import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 
 // NFT 발행에 대한 컨트랙트
 contract MintingNft is ERC721Enumerable, Ownable {
@@ -84,6 +84,7 @@ contract MintingNft is ERC721Enumerable, Ownable {
     }
 
     // 보유 토큰 조회 함수
+    // 마이페이지에서 판매 허용 미설정 시 최초 1회 setApprovalForAll(address TrandingNft, true) 함수 실행 예정
     function getMyTokenIds(address _owner) external view returns (uint[] memory) {
         
         // 보유 토큰 수

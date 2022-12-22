@@ -13,10 +13,12 @@ contract TradingNft is Ownable {
 
     MintingNft private _MintingNft;
 
-    // 일반 판매 및 경매 성사 시 판매자에 대한 수수료율 (상수 : 할인할 예정 없음)
+    // 일반 판매 및 경매 성사 시 판매자에 대한 수수료율
     // 1 / 1000 = 0.1% 계산할 예정
-    uint private _tokenTransactionFeeRate;
-    uint private _tokenTransactionFeeDigits;
+    uint private _saleFeeRate;
+    uint private _saleFeeDigits;
+    uint private _auctionFeeRate;
+    uint private _auctionFeeDigits;
 
     struct TokenData {
 
@@ -29,13 +31,15 @@ contract TradingNft is Ownable {
     mapping (uint => TokenData) private _saleTokenIdToData;
     mapping (uint => TokenData) private _auctionTokenIdToData;
 
-    constructor(address _ca, uint _feeRate, uint _feeDigits) {
+    constructor(address _ca, uint saleFeeRate_, uint saleFeeDigits_, uint auctionFeeRate_, uint auctionFeeDigits_) {
 
         // 상호 작용을 통해 해당 컨트랙트의 함수 모두 사용 가능
         _MintingNft = MintingNft(_ca);
 
-        _tokenTransactionFeeRate = _feeRate;
-        _tokenTransactionFeeDigits = _feeDigits;
+        _saleFeeRate = saleFeeRate_;
+        _saleFeeDigits = saleFeeDigits_;
+        _auctionFeeRate = auctionFeeRate_;
+        _auctionFeeDigits = auctionFeeDigits_;
     }
 
     // - 토큰 판매 등록 : registerSaleToken()
@@ -54,13 +58,16 @@ contract TradingNft is Ownable {
         // 등록 후 가격을 변경하려는 경우
         require(!_isOnSale(_tokenId) || _price != _saleTokenIdToData[_tokenId].price, "register already at the same price");
 
-        // operator 확인..
-        _MintingNft.setApprovalForAll(address(this), true);
+        // setApprovalForAll() 내장 함수의 msg.sender 값과 address(this) 값이 동일하기 때문에 여기서는 호출 불가
+        // _MintingNft.setApprovalForAll(address(this), true);
+
+        address seller = _MintingNft.ownerOf(_tokenId);
+        require(_MintingNft.isApprovedForAll(seller, address(this)), "did not approve");
 
         // 판매 가격은 0원 이상으로 설정 가능
         require(_price >= 0, "invalid price");
 
-        _saleTokenIdToData[_tokenId] = TokenData(_MintingNft.ownerOf(_tokenId), _price);
+        _saleTokenIdToData[_tokenId] = TokenData(seller, _price);
     }
 
     // 토큰 판매 등록 취소 함수
@@ -74,7 +81,7 @@ contract TradingNft is Ownable {
     }
 
     // 토큰 구매 함수 test
-    function buyToken(uint _tokenId) external payable returns (TokenData memory) {
+    function buyToken(uint _tokenId) external payable {
         
         _requireOnSale(_tokenId);
         
@@ -86,30 +93,38 @@ contract TradingNft is Ownable {
 
         // wei 단위
         address seller = _saleTokenIdToData[_tokenId].seller;
-        payable(seller).transfer(price - _getTokenTransactionFee(price));
+        payable(seller).transfer(price - _getSaleFee(price));
 
         // 토큰 소유자 변경
         _MintingNft.transferToken(seller, msg.sender, _tokenId);
 
+        // 초기 값으로 변경
         delete _saleTokenIdToData[_tokenId];
-        return getSaleTokenData(_tokenId);
     }
 
     function setMintingNft(address _ca) external onlyOwner {
         _MintingNft = MintingNft(_ca);
     }
 
-    function setTokenTransactionFeeRate(uint _feeRate) external onlyOwner {
-        _tokenTransactionFeeRate = _feeRate;
+    function setSaleFeeRate(uint saleFeeRate_) external onlyOwner {
+        _saleFeeRate = saleFeeRate_;
     }
 
-    function setTokenTransactionFeeDigits(uint _feeDigits) external onlyOwner {
-        _tokenTransactionFeeRate = _feeDigits;
+    function setSaleFeeDigits(uint saleFeeDigits_) external onlyOwner {
+        _saleFeeDigits = saleFeeDigits_;
+    }
+
+    function setAuctionFeeRate(uint auctionFeeRate_) external onlyOwner {
+        _auctionFeeRate = auctionFeeRate_;
+    }
+
+    function setAuctionFeeDigits(uint auctionFeeDigits_) external onlyOwner {
+        _auctionFeeDigits = auctionFeeDigits_;
     }
 
     // 수수료 계산 함수 (0원 상품도 계산 가능)
-    function _getTokenTransactionFee(uint _price) public view returns (uint) {
-        return _price * _tokenTransactionFeeRate / _tokenTransactionFeeDigits;
+    function _getSaleFee(uint _price) public view returns (uint) {
+        return _price * _saleFeeRate / _saleFeeDigits;
     }
 
     // MintingNft 컨트랙트의 CA 값 반환
@@ -122,12 +137,20 @@ contract TradingNft is Ownable {
     //     return _MintingNft.msgSender();
     // }
 
-    function getTokenTransactionFeeRate() external view returns (uint) {
-        return _tokenTransactionFeeRate;
+    function getSaleFeeRate() external view returns (uint) {
+        return _saleFeeRate;
     }
 
-    function getTokenTransactionFeeDigits() external view returns (uint) {
-        return _tokenTransactionFeeDigits;
+    function getSaleFeeDigits() external view returns (uint) {
+        return _saleFeeDigits;
+    }
+
+    function getAuctionFeeRate() external view returns (uint) {
+        return _auctionFeeRate;
+    }
+
+    function getAuctionFeeDigits() external view returns (uint) {
+        return _auctionFeeDigits;
     }
 
     // test
