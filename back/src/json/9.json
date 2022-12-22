@@ -1,6 +1,22 @@
 {
   "name": "ggugi #9",
   "description": "hello hello",
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+  "image": "https://localhost:4000/images/9.png",
+  "dna": "9795b9cd991857beff236da30fe350d447206808",
+  "edition": 9,
+  "date": 1671668138675,
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "Lightgreen"
+=======
+=======
+>>>>>>> main
+=======
+>>>>>>> main
   "image": "localhost:4000/images/9.png",
   "dna": "1982c0789d964cb9560c6268428b29707357c51e",
   "edition": 9,
@@ -9,6 +25,13 @@
     {
       "trait_type": "Background",
       "value": "Purple"
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> origin/main
+=======
+>>>>>>> main
+=======
+>>>>>>> main
     },
     {
       "trait_type": "Bottom lid",

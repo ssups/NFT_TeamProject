@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Nft from "./nft";
 import useWeb3 from "../../hooks/useWeb3";
+<<<<<<< HEAD
 import useContract from "../../hooks/useContract";
 import TestTokenContract from "../../contracts_seop/TestToken.json";
+=======
+// import TestTokenContract from "../../contracts_seop/TestToken.json";
+>>>>>>> main
 
 const SeopMy = () => {
   // hooks

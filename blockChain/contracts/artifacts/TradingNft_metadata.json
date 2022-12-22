@@ -14,12 +14,22 @@
 					},
 					{
 						"internalType": "uint256",
-						"name": "_feeRate",
+						"name": "saleFeeRate_",
 						"type": "uint256"
 					},
 					{
 						"internalType": "uint256",
-						"name": "_feeDigits",
+						"name": "saleFeeDigits_",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "auctionFeeRate_",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "auctionFeeDigits_",
 						"type": "uint256"
 					}
 				],
@@ -49,6 +59,38 @@
 				"inputs": [
 					{
 						"internalType": "uint256",
+						"name": "_price",
+						"type": "uint256"
+					}
+				],
+				"name": "_getSaleFee",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "buyToken",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
 						"name": "_tokenId",
 						"type": "uint256"
 					}
@@ -56,6 +98,32 @@
 				"name": "deregisterSaleToken",
 				"outputs": [],
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getAuctionFeeDigits",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getAuctionFeeRate",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -72,7 +140,7 @@
 						"components": [
 							{
 								"internalType": "address",
-								"name": "owner",
+								"name": "seller",
 								"type": "address"
 							},
 							{
@@ -91,12 +159,25 @@
 			},
 			{
 				"inputs": [],
-				"name": "getMintingNft",
+				"name": "getSaleFeeDigits",
 				"outputs": [
 					{
-						"internalType": "contract MintingNft",
+						"internalType": "uint256",
 						"name": "",
-						"type": "address"
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getSaleFeeRate",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
@@ -116,7 +197,7 @@
 						"components": [
 							{
 								"internalType": "address",
-								"name": "owner",
+								"name": "seller",
 								"type": "address"
 							},
 							{
@@ -128,32 +209,6 @@
 						"internalType": "struct TradingNft.TokenData",
 						"name": "",
 						"type": "tuple"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "getTokenTransactionFeeDigits",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "getTokenTransactionFeeRate",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
@@ -200,6 +255,32 @@
 			{
 				"inputs": [
 					{
+						"internalType": "uint256",
+						"name": "auctionFeeDigits_",
+						"type": "uint256"
+					}
+				],
+				"name": "setAuctionFeeDigits",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "auctionFeeRate_",
+						"type": "uint256"
+					}
+				],
+				"name": "setAuctionFeeRate",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "address",
 						"name": "_ca",
 						"type": "address"
@@ -214,11 +295,11 @@
 				"inputs": [
 					{
 						"internalType": "uint256",
-						"name": "_feeDigits",
+						"name": "saleFeeDigits_",
 						"type": "uint256"
 					}
 				],
-				"name": "setTokenTransactionFeeDigits",
+				"name": "setSaleFeeDigits",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -227,11 +308,11 @@
 				"inputs": [
 					{
 						"internalType": "uint256",
-						"name": "_feeRate",
+						"name": "saleFeeRate_",
 						"type": "uint256"
 					}
 				],
-				"name": "setTokenTransactionFeeRate",
+				"name": "setSaleFeeRate",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -392,19 +473,19 @@
 			]
 		},
 		"MintingNft.sol": {
-			"keccak256": "0x35edc72fa2520d7b5a0ad5047d6463a27709373b6345ff7301d96121919b03a2",
+			"keccak256": "0x87ecc78494456adfd1e37e33423db1b363d1c14ed8d7eaca7cdfa22090b8774f",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://70408506715dc2330ab4839bdeccde6b597010e8e032b94c803fde3aad1a0a67",
-				"dweb:/ipfs/QmPwvH3GU4bn5B79t9UvoJGrj6Cxy1zEvRQX5jKdjEoj8f"
+				"bzz-raw://c1f21ed1bf32aa2ef3d7e0b23cb74cdd89471998250e92be149bbd48c2eff577",
+				"dweb:/ipfs/QmZYDUPc9yN4nWrPEQfu1BhRn6GNVNjBukZo45P7gEgb6s"
 			]
 		},
 		"TradingNft.sol": {
-			"keccak256": "0x95b0c13b3982673be0b8e88e1bc3cc80b8343bc6da0840da2b547ebc4b3c3b81",
+			"keccak256": "0x6be2b31d4ee9138148290b48038bdbbcff8da465f98ce0df8125ed95a4210386",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://2ef6d5df3f2c87865eb94cd66dff9cdf8793ae559fbd8b487fc1b43d3c6471ca",
-				"dweb:/ipfs/QmU292RhaZi24724CAEpTbnefTkDMWfWWfd4GovT1bRts8"
+				"bzz-raw://6efdbb6c866df7bf652a08e16044b28f839a3bb519b9db675931f228d6aaa8dc",
+				"dweb:/ipfs/QmTZ63WwVEeDXpUJjaQS9risvgPgU481kR8Gj7CFrRohdG"
 			]
 		}
 	},

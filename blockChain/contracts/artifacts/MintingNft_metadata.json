@@ -92,25 +92,6 @@
 					{
 						"indexed": true,
 						"internalType": "address",
-						"name": "owner",
-						"type": "address"
-					},
-					{
-						"indexed": true,
-						"internalType": "uint256",
-						"name": "tokenId",
-						"type": "uint256"
-					}
-				],
-				"name": "MintingToken",
-				"type": "event"
-			},
-			{
-				"anonymous": false,
-				"inputs": [
-					{
-						"indexed": true,
-						"internalType": "address",
 						"name": "previousOwner",
 						"type": "address"
 					},
@@ -265,7 +246,7 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "_owner",
+						"name": "_tokenOwner",
 						"type": "address"
 					},
 					{
@@ -581,6 +562,29 @@
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_from",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "transferToken",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
 			}
 		],
 		"devdoc": {
@@ -770,11 +774,11 @@
 			]
 		},
 		"MintingNft.sol": {
-			"keccak256": "0x35edc72fa2520d7b5a0ad5047d6463a27709373b6345ff7301d96121919b03a2",
+			"keccak256": "0x87ecc78494456adfd1e37e33423db1b363d1c14ed8d7eaca7cdfa22090b8774f",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://70408506715dc2330ab4839bdeccde6b597010e8e032b94c803fde3aad1a0a67",
-				"dweb:/ipfs/QmPwvH3GU4bn5B79t9UvoJGrj6Cxy1zEvRQX5jKdjEoj8f"
+				"bzz-raw://c1f21ed1bf32aa2ef3d7e0b23cb74cdd89471998250e92be149bbd48c2eff577",
+				"dweb:/ipfs/QmZYDUPc9yN4nWrPEQfu1BhRn6GNVNjBukZo45P7gEgb6s"
 			]
 		}
 	},

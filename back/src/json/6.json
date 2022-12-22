@@ -1,10 +1,29 @@
 {
   "name": "ggugi #6",
   "description": "hello hello",
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+  "image": "https://localhost:4000/images/6.png",
+  "dna": "bca9d3f5781243697078f6050dd8716f22b8619a",
+  "edition": 6,
+  "date": 1671668138616,
+=======
+=======
+>>>>>>> main
+=======
+>>>>>>> main
   "image": "localhost:4000/images/6.png",
   "dna": "bca9d3f5781243697078f6050dd8716f22b8619a",
   "edition": 6,
   "date": 1671610442127,
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> origin/main
+=======
+>>>>>>> main
+=======
+>>>>>>> main
   "attributes": [
     {
       "trait_type": "Background",
