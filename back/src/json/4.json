@@ -2,6 +2,7 @@
   "name": "ggugi #4",
   "description": "hello hello",
 <<<<<<< HEAD
+<<<<<<< HEAD
   "image": "https://localhost:4000/images/4.png",
   "dna": "813856c748eb12550d1f46af610ca80950ccf043",
   "edition": 4,
@@ -19,6 +20,8 @@
       "trait_type": "Eye color",
       "value": "Green"
 =======
+=======
+>>>>>>> main
   "image": "localhost:4000/images/4.png",
   "dna": "0a8b70ca4d699c01cffbdf306ccb1bddf1048221",
   "edition": 4,
@@ -35,7 +38,10 @@
     {
       "trait_type": "Eye color",
       "value": "Yellow"
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> main
     },
     {
       "trait_type": "Eyeball",

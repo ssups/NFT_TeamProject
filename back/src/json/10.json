@@ -2,6 +2,7 @@
   "name": "ggugi #10",
   "description": "hello hello",
 <<<<<<< HEAD
+<<<<<<< HEAD
   "image": "https://localhost:4000/images/10.png",
   "dna": "103f77b9030643d79a15c4e8066b911f11cf710a",
   "edition": 10,
@@ -11,6 +12,8 @@
       "trait_type": "Background",
       "value": "Red"
 =======
+=======
+>>>>>>> main
   "image": "localhost:4000/images/10.png",
   "dna": "3a227035e7f830104ebeb6c4ca4dbe93018d4397",
   "edition": 10,
@@ -19,7 +22,10 @@
     {
       "trait_type": "Background",
       "value": "Purple"
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> main
     },
     {
       "trait_type": "Bottom lid",

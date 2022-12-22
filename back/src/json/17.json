@@ -2,6 +2,7 @@
   "name": "ggugi #17",
   "description": "hello hello",
 <<<<<<< HEAD
+<<<<<<< HEAD
   "image": "https://localhost:4000/images/17.png",
   "dna": "d7fc5fbb54e56bcf72e9fe635617b4acf020055a",
   "edition": 17,
@@ -21,6 +22,8 @@
     },
     {
 =======
+=======
+>>>>>>> main
   "image": "localhost:4000/images/17.png",
   "dna": "7ac99295d8c5966aa6c25506103a8588d9904d44",
   "edition": 17,
@@ -39,7 +42,10 @@
       "value": "Red"
     },
     {
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> main
       "trait_type": "Eyeball",
       "value": "Hmm"
     }
