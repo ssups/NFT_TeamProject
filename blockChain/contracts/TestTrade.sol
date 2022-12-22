@@ -2,8 +2,10 @@
 pragma solidity ^0.8.17;
 
 import "./TestToken.sol";
-// import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
-import "openzeppelin-solidity/contracts/access/Ownable.sol";
+import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
+
+// remix 전용 경로
+// import "openzeppelin-solidity/contracts/access/Ownable.sol";
 
 contract TestTrade is Ownable{
     TestToken public Token;
@@ -151,8 +153,8 @@ contract TestTrade is Ownable{
 
         require(Token.ownerOf(tokenId) != msg.sender, "owner cannot bid on owns"); // 자기 경매에 입찰불가
         require(lastBidPrice > 0 , "this token is not on auction"); // 옥션등록안된 토큰
-        require(lastBidPrice, "bid must be greater than last bid"); // 입찰가는 해당토큰의 마지막 입찰가보다 높아야함
-        require(msg.value - lastBidPrice % 0.001 ether);
+        require(msg.value > lastBidPrice, "bid must be greater than last bid"); // 입찰가는 해당토큰의 마지막 입찰가보다 높아야함
+        require((msg.value - lastBidPrice) % 0.001 ether == 0, "");
 
     }
 
