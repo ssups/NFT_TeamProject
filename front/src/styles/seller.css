@@ -1,0 +1,49 @@
+.single-img{
+    border-radius: 8px;
+}
+
+.single-seen span i {
+    color: white;
+    padding: 5px;
+    background: black;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+.single-seen span{
+    color: white;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+section{
+    margin-top: 100px;
+}
+
+.bid_btn1 {
+    padding: 8px 25px;
+    background: #5142fc;
+    border: none;
+    outline: none;
+    border-radius: 50px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.bid_btn1 a{
+    text-decoration: none;
+    color: white;
+    font-size: 1rem;
+}
+
+.bid_btn1:hover{
+    background: white;
+}
+
+.bid_btn1:hover a{
+    color: #5142fc;
+}
+
+.bid_btn1:hover i{
+    color: #5142fc;
+}

@@ -13,7 +13,10 @@
 }
 
 .head_style{
-    background: -webkit-linear-gradient( rgba(76,100,195,1) 14%, rgba(99,124,226,1) 23%, rgba(62,222,207,1) 49%, rgba(37,26,85,1) 82%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    background: linear-gradient(-45deg, #e250e5,#4b50e6,
+       #e250e5, #4b50e6);
+       background-size: 100% 100%;
+       background-clip: text;
+       -webkit-text-stroke: 3px transparent;
+       -webkit-text-fill-color: #14141f;
 }
