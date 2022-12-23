@@ -3,9 +3,9 @@ pragma solidity ^0.8.17;
 
 import "./TestToken.sol";
 
-// import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
+import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
 // remix 전용 경로
-import "openzeppelin-solidity/contracts/access/Ownable.sol";
+// import "openzeppelin-solidity/contracts/access/Ownable.sol";
 
 contract TestTrade is Ownable{
     TestToken public Token;
