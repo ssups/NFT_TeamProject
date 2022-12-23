@@ -45,6 +45,25 @@
 				"anonymous": false,
 				"inputs": [
 					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "caller",
+						"type": "address"
+					}
+				],
+				"name": "ClaimMatchedAuction",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
 						"indexed": true,
 						"internalType": "address",
 						"name": "previousOwner",
@@ -139,7 +158,7 @@
 						"type": "uint256"
 					}
 				],
-				"name": "claimTokenForWinner",
+				"name": "claimMatchedAuction",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -175,6 +194,19 @@
 						"internalType": "struct TestTrade.AuctionInfo",
 						"name": "",
 						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "notClaimedAuctionList",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
 					}
 				],
 				"stateMutability": "view",
@@ -411,11 +443,11 @@
 			]
 		},
 		"TestTrade.sol": {
-			"keccak256": "0xbb1a2d9fded0d079e5d1c3ecc09acdd3848f6123e1c7762b9e78ea35cf1c4ed0",
+			"keccak256": "0x2203ac919f3a3b324d9ff562c412516fb7cb88e78d6ae346d2fe11c160972042",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://d9b5fb2cee03d1a20126b3c8599aff4f1d04e8a589f93fb31a47b61966d4bdcf",
-				"dweb:/ipfs/QmVi9h8PJroH73SadWuWTupctn3q115SDgJomttBYV3o19"
+				"bzz-raw://91a2610971fc563effff20d6e518448c63ab6794e2dfd73895d75f8290867ad4",
+				"dweb:/ipfs/QmasrPJwumyQzy7jr6xEaoFbZRQ8tp3bQgePuAAsEXAM6q"
 			]
 		},
 		"openzeppelin-solidity/contracts/access/Ownable.sol": {
@@ -507,11 +539,11 @@
 			]
 		},
 		"standards/ERC721A.sol": {
-			"keccak256": "0xf5d50906d90363a82229cee52ae1e3962ab1be11f9725dde9d11f515b467a13f",
+			"keccak256": "0x31b3c1face1ed33e4f744a08e30c53227ab5a0a295124bdac2a19b51341fc6be",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://f8ae106beacbd6a38f6e7475c34c16b367bcc062927fd3de73de64a43125dfd1",
-				"dweb:/ipfs/QmcbE5i54YoBadGWpJG2FKFaca8QHqLEtiADPXNXsgrLN6"
+				"bzz-raw://c5a13f28292ced0637977235b780c373148291870aeba4103e91f53924e3d7ea",
+				"dweb:/ipfs/QmaGpbhxFm3b9fQiH1xQZrHMbPecVMf7eTGSZb195WUYiZ"
 			]
 		}
 	},
