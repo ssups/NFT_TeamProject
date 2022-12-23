@@ -7,6 +7,7 @@ import useSsandeContracts from "./hooks/useSsandeContracts";
 const App = () => {
   // hooks
   const [web3] = useWeb3();
+  const [tokenContract, tradeContract] = useSsandeContracts();
 
   // states
   const netWorkId = 7722; // 컨트렉트 배포할 네트워크에 따라 다르게 설정 나중에 goerli에 배포하고나면 5로 바꾸면됨
@@ -61,7 +62,7 @@ const App = () => {
 
   if (!isNetWorkCorrect) return <h1>네트워크를 맞게 설정하세요</h1>;
   return (
-    <Context.Provider value={{ web3, account, balance }}>
+    <Context.Provider value={{ web3, account, balance, tokenContract, tradeContract }}>
       <Layout />
     </Context.Provider>
   );

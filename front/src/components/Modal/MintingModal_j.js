@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 
 // createContext 경로
-import { Context } from "../Layout/Layout";
+import { Context } from "../../App";
 import "../../styles/modal.css";
 
 // 민팅 하기 버튼 클릭시 발생하는 모달 창으로
@@ -134,7 +134,6 @@ const MintingModal = ({ setModal }) => {
 
     }, [account])
 
-    console.log(account, "test")
     //
     useEffect(() => {
         //
