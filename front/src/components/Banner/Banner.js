@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import "../../styles/banner.css"
 import banner from "../../asset/images/banner.jpg"
 

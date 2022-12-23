@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import Routers from "../../routes/Routers"
 import Header2 from '../Header2/Header2'
 

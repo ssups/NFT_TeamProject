@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react';
 import "../../styles/topfold.css"
+import Modal from '../Modal/Modal'
 
 
 const TopFold = () => {
+
+  const [moDal, setModal] =  useState(false)
+
   return (
     <div className='topfold'>
       <div className='tf-left'>
@@ -16,7 +20,10 @@ const TopFold = () => {
       </div>
       <div className='tf-btns'>
        <button className='bbtn1'>둘러보기</button>
-       <button className='bbtn2'>민팅하기</button>
+       <button onClick={()=> setModal(true)} className='bbtn2'>민팅하기</button>
+       
+        {moDal && <Modal setModal={setModal}/>} 
+       
       </div>
     </div>
   )

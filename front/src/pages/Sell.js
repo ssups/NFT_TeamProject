@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import toast ,{ Toaster } from 'react-hot-toast'
 import { Link, useParams } from 'react-router-dom'
 import { Col, Container, Row } from 'reactstrap'

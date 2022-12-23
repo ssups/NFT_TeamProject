@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import "../../styles/modal.css"
 
 //NftCard.js에 전달

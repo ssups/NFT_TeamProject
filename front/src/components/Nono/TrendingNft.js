@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import Mm from "../../asset/img/1.png"
 import openS from "../../asset/img/2.png"
 import pinata from "../../asset/img/3.png"
