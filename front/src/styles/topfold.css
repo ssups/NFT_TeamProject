@@ -15,6 +15,14 @@
     
 }
 
+.tf__title{
+    color: white;
+    background: black;
+       background-size: 100% 100%;
+       background-clip: text;
+       -webkit-text-stroke: 6px transparent;
+}
+
 .tf-heading {
     font-size: 70px;
     font-weight: 600;
@@ -24,6 +32,11 @@
 .tf-des{
     font-size: 20px;
     margin: 24px 0px;
+    color: white;
+    background: black;
+       background-size: 100% 100%;
+       background-clip: text;
+       -webkit-text-stroke: 6px transparent;
 }
 
 .bbtn1{

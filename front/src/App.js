@@ -1,4 +1,13 @@
 import React from "react";
+<<<<<<< HEAD
+import Layout from "./components/Layout/Layout"
+import "./app.css";
+
+
+const App = () => {
+  return (
+   <Layout/>
+=======
 import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import "./App.css";
 import Brand from "./components/Brand/Brand";
@@ -37,6 +46,7 @@ const App = () => {
         <Route path="/3" element={<Minting />} />
       </Routes>
     </div>
+>>>>>>> cea9723b357ed391a78fb4ab29455cf2bd9eeb41
   );
 };
 
