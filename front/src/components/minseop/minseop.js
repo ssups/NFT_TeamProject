@@ -11,6 +11,8 @@ const Minseop = () => {
     TestTokenContract.abi,
     TestTokenContract.networks[netWorkId].address
   );
+
+  // console.log(account);
   // states
   const [owner, setOwner] = useState();
   const [isMintOn, setIsMintOn] = useState();

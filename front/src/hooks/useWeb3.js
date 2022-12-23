@@ -22,14 +22,14 @@ const useWeb3 = () => {
       setBalance(balance);
 
       // 메타마스크 지갑바꿨을때 이벤트
-      window.ethereum.on("accountsChanged", async () => {
-        const [switchedAddress] = await window.ethereum.request({
-          method: "eth_requestAccounts",
+      if (!window.ethereum._events["accountsChanged"])
+        // 이벤트쌓이는거 방지
+        window.ethereum.on("accountsChanged", async switchedAddress => {
+          console.log(switchedAddress[0]);
+          setAccount(switchedAddress[0]);
+          const balance = await web3.eth.getBalance(switchedAddress[0]);
+          setBalance(balance);
         });
-        setAccount(switchedAddress);
-        const balance = await web3.eth.getBalance(address);
-        setBalance(balance);
-      });
     })();
     return () => {
       // 컴포넌트 언마운트때 이벤트 날리기

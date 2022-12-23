@@ -2,17 +2,15 @@
 pragma solidity ^0.8.17;
 
 import "./TestToken.sol";
-import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
 
+// import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
 // remix 전용 경로
-// import "openzeppelin-solidity/contracts/access/Ownable.sol";
+import "openzeppelin-solidity/contracts/access/Ownable.sol";
 
 contract TestTrade is Ownable{
     TestToken public Token;
 
     uint256 public saleFeeRate = 5; //퍼센트
-    // uint256 private _onSaleIndex = 0; // onSale토큰 갯수 파악용
-    // uint256 private _onAuctionIndex = 0; // onACUTION토큰 갯수 파악용
 
     struct AuctionInfo {
         uint256 lastBidPrice; // 마지막 비딩가격은 무조건 최고가
@@ -37,7 +35,7 @@ contract TestTrade is Ownable{
         saleFeeRate = rate;
     } 
 
-    // 일반판매중인 토큰 갯수
+    // 일반판매중인 토큰 갯수(테스트완료)
     function _countOnSale() private view returns(uint256) {
         uint256 count;
 
@@ -48,7 +46,7 @@ contract TestTrade is Ownable{
         return count;
     }
 
-    // 일반판매중인 토큰 리스트
+    // 일반판매중인 토큰 리스트(테스트 완료)
     function onSaleList() external view returns(uint256[] memory){
         uint256[] memory tokensOnSale = new uint256[](_countOnSale()); // 배열크기 미리배정
         uint256 index = 0;
@@ -63,26 +61,39 @@ contract TestTrade is Ownable{
         return tokensOnSale;
     }
 
-    // 일반판매 가격 확인
-    function onSalePrice(uint256 tokenId) external view  returns(uint256)  {
+    // 일반판매중인 토큰 가격 확인(테스트 완료)
+    function priceOfOnSale(uint256 tokenId) public view  returns(uint256)  {
+        require(_tokensOnSale[tokenId] > 0, "this token is not on sale");
         return _tokensOnSale[tokenId];
+        // 이값이 0보다크면 일반판매중인 토큰(토큰 판매중인지 확인할때도 사용가능)
     }  
 
-    // 일반판매등록  
+    // 일반판매등록(테스트 완료)
     function registerForSale(uint256 tokenId, uint256 price) external {
         // require(_callerIsOwner(tokenId), "caller is not owner");
         require(Token.ownerOf(tokenId) == msg.sender, "caller is not owner");
-        require(price > 0);
+        require(price > 0, "price must be greater than zero");
+        require(dataOfOnAuction(tokenId).endTime < block.timestamp, "this token is on auction"); // 경매등록한건 일반판매등록안되게 하기
         // 프론트에서 Nft 컨트렉트에 setApprovalForAll(address operator, bool approved)
         // 이거 operator에 컨트렉트 CA로넣어서 프론트에서 먼저 실행시켜줘야함.
         require(Token.isApprovedForAll(msg.sender, address(this)));
 
         _tokensOnSale[tokenId] = price;
-        // _onSaleIndex += 1;
-
     }
 
-    // 일반구매
+    // 일반판매 취소(테스트 완료)
+    function cancleSale(uint256 tokenId) public {
+        require(Token.ownerOf(tokenId) == msg.sender, "caller is not owner");
+        require(_tokensOnSale[tokenId] > 0, "this token is not on sale");
+        _tokensOnSale[tokenId] = 0; // 판매가격 0으로만들면 알아서 판매등록 안된걸로 인식
+        // Token.setApprovalForAll(address(this), false); // approve 승인한거 다시 취소하기
+        // 위에꺼 실행안되는데 저함수 require에 operater != msg.sender 가 통과가 안된다
+        // 둘다 이 컨트렉트 CA로 인식되기 때문에...
+        // 그래서 아마 프론트에서 직접 토큰 컨트렉트 setApprovalForAll(이 컨트렉트 CA, false)로 실행시켜줘야할거 같다.
+        // 근데 어차피 컨트렉트어드레스에 권한을 준거라서 악용되기 힘들거같은데 안해줘도 괜찮을듯 하다,
+    }
+
+    // 일반구매(테스트 완료)
     function purchase(uint256 tokenId) external payable {
         uint256 price = _tokensOnSale[tokenId];
         address tokenOwner = Token.ownerOf(tokenId);
@@ -98,16 +109,11 @@ contract TestTrade is Ownable{
         require(success, "payment failed");
 
         Token.safeTransferFrom(tokenOwner, msg.sender, tokenId);
-        _tokensOnSale[tokenId] = 0; // 판매가격 0으로만들면 알아서 판매등록 안된걸로 인식
-        // _onSaleIndex -= 0;
+        cancleSale(tokenId);
     }
 
-    // 일반판매 취소
-    function cancleSale(uint256 tokenId) external {
-        _tokensOnSale[tokenId] = 0; // 판매가격 0으로만들면 알아서 판매등록 안된걸로 인식
-    }
 
-    // 경매중인 토큰 갯수 (테스트 필요)
+    // 경매중인 토큰 갯수 (테스트 완료)
     function _countOnAuction() private view returns(uint256) {
         uint256 count;
 
@@ -115,16 +121,16 @@ contract TestTrade is Ownable{
             uint256 lastBidPrice = _tokensOnAuction[tokenId].lastBidPrice;
             uint256 endTime = _tokensOnAuction[tokenId].endTime;
 
-            if(lastBidPrice != 0 && endTime < block.timestamp) {
+            if(lastBidPrice != 0 && endTime > block.timestamp) {
                 count ++;
             } // lastBidPrice가 0이면 경매등록 안된걸로 인식
-              // endTime 이 block.timestamp 보다 크면은 경매가 만료된거다.
+              // endTime 이 block.timestamp 보다 작으면은 경매가 만료된거다.
         }
 
         return count;
     }
 
-    // 경매중인 토큰 리스트 (테스트 필요)
+    // 경매중인 토큰 리스트 (테스트 완료)
     function onAuctionList() public view returns(uint256[] memory){
         uint256[] memory tokensOnAuction = new uint256[](_countOnAuction()); // 배열크기 미리배정
         uint256 index = 0;
@@ -133,32 +139,37 @@ contract TestTrade is Ownable{
             uint256 lastBidPrice = _tokensOnAuction[tokenId].lastBidPrice;
             uint256 endTime = _tokensOnAuction[tokenId].endTime;
 
-            if(lastBidPrice != 0 && endTime < block.timestamp) {
+            if(lastBidPrice != 0 && endTime > block.timestamp) {
                 tokensOnAuction[index] = tokenId;
                 index ++;
             } // lastBidPrice가 0이면 경매등록 안된걸로 인식
-              // endTime 이 block.timestamp 보다 크면은 경매가 만료된거다.
+              // endTime 이 block.timestamp 보다 작으면은 경매가 만료된거다.
         }
 
         return tokensOnAuction;
     }
 
-    // 경매판매등록
+    // 경매중인 토큰 정보 조회(테스트완료)
+    function dataOfOnAuction(uint256 tokenId) public view returns(AuctionInfo memory){
+        return _tokensOnAuction[tokenId];
+    }
+
+    // 경매판매등록(테스트완료)
     function registerForAuction(uint256 tokenId, uint256 minimumPrice, uint256 lastingMinutes) external {
-        // require(_callerIsOwner(tokenId), "caller is not owner");
         require(Token.ownerOf(tokenId) == msg.sender, "caller is not owner");
-        require(minimumPrice > 0);
+        require(minimumPrice >= 0.001 ether, "minimumPrice must be greater thans 0.001 ether"); // 이거 경매입찰할떄 최소단위 통과조건때문에 필요함
+        require(priceOfOnSale(tokenId) <= 0, "this token is already on Sale"); // 일반판매중인 토큰은 경매등록 불가
+        require(dataOfOnAuction(tokenId).endTime < block.timestamp, "this token is already on auction"); // 경매 중복등록 불가
         // 프론트에서 Nft 컨트렉트에 있는 setApprovalForAll(address operator, bool approved)
         // 이거 operator에 이 컨트렉트 CA 넣어서 프론트에서 먼저 실행시켜줘야함.
-        require(Token.isApprovedForAll(msg.sender, address(this)));
+        require(Token.isApprovedForAll(msg.sender, address(this)), "not approved");
 
         uint256 endTime = block.timestamp + lastingMinutes * 60;
 
         _tokensOnAuction[tokenId] = AuctionInfo(minimumPrice, endTime, address(0)); // 최초에 입찰한사람 없음으로 입찰한 계정은 address(0) 
-        // _onAuctionIndex += 1;
     }
 
-    // 경매에 입찰하기
+    // 경매에 입찰하기(테스트완료)
     function bidOnAcution(uint256 tokenId) external payable {
         uint256 lastBidPrice = _tokensOnAuction[tokenId].lastBidPrice;
         uint256 endTime = _tokensOnAuction[tokenId].endTime;
@@ -181,9 +192,11 @@ contract TestTrade is Ownable{
         emit BidOnAuction(tokenId, msg.value , bider);
     }
 
-    // 입찰경쟁 밀린사람 환불해주기
+    // 입찰경쟁 밀린사람 환불해주기(테스트완료)
     function _refundBid(uint256 tokenId ,address to, uint256 bidPrice) private {
-        payable(to).transfer(bidPrice);
+        // payable(to).transfer(bidPrice);
+        (bool success, ) = to.call{value: bidPrice}("");
+        require(success, "refund failed");
 
         emit RefundBid(tokenId, to);
     }   
@@ -194,6 +207,8 @@ contract TestTrade is Ownable{
         // 따로 처리 안해줘도 될듯한데 혹시 모르니
         // 경매 입찰없이 마감된 경매 다시 경매등록하거나 판매등록하는거 한번 테스트해보기
 
+        // 컨트렉트한테 준 approve 취소하는거 해야할까?
+
         // uint256 lastBidPrice = _tokensOnAuction[tokenId].lastBidPrice;
         // uint256 endTime = _tokensOnAuction[tokenId].endTime;
         // address bider = _tokensOnAuction[tokenId].bider;
@@ -202,7 +217,74 @@ contract TestTrade is Ownable{
         // require(lastBidPrice > 0, "acution already ended"); // 이미 경매기간 
     }
 
-    // 내가 입찰중인(내 입찰가가 최고입찰가인) 토큰갯수
+    // 입찰성공한사람 토큰(NFT) 클레임할수있게 해주기(경매기간끝났을때)
+    // 경매판매성공한사람 판매금액 클레임할수있게 해주기
+    // 둘중 한사람만 실행하면 된다.
+    event ClaimMatchedAuction(uint256 tokenId, address caller);
+    function claimMatchedAuction(uint256 tokenId) external {
+        uint256 endTime = _tokensOnAuction[tokenId].endTime;
+        uint256 lastBidPrice = _tokensOnAuction[tokenId].lastBidPrice;
+        address bider = _tokensOnAuction[tokenId].bider;
+        address tokenOwner = Token.ownerOf(tokenId);
+
+        require(endTime < block.timestamp, "auction not ended");
+        require(lastBidPrice != 0, "this token did not registered on auction");
+        require(msg.sender == bider || msg.sender == tokenOwner , "caller is not highest bider nor seller");
+
+        // 경매 등록자 판매금 주기
+        uint256 incomeAfterFee = lastBidPrice * (100 - saleFeeRate) / 100;
+        (bool success, ) = tokenOwner.call{value: incomeAfterFee}("");
+        require(success, "payment failed");
+
+        // 입찰자 토큰 주기
+        Token.safeTransferFrom(tokenOwner, msg.sender, tokenId); // 이거하면 토큰 오너 바뀌고
+        _tokensOnAuction[tokenId].bider = address(0); 
+        _tokensOnAuction[tokenId].lastBidPrice = 0;
+        // _tokensOnAuction[tokenId].endTime = 0; // 이건 endTime이 경매끝나면 알아서 block.timestamp 보다 작아지니깐 수정안해줘도되고
+
+        emit ClaimMatchedAuction(tokenId, msg.sender); // 경매등록자 입찰자 둘중에 누가 클레임했는지 알려주기
+    }
+
+    // 경매종료됐지만 정산되지않은 토큰 갯수
+    function _countNotClaimedAuction() private view returns(uint256) {
+        uint256 count;
+
+        for(uint tokenId = 1; tokenId <= Token.totalSupply(); tokenId++) {
+            uint256 lastBidPrice = _tokensOnAuction[tokenId].lastBidPrice;
+            uint256 endTime = _tokensOnAuction[tokenId].endTime;
+            address bider = _tokensOnAuction[tokenId].bider;
+
+            if(lastBidPrice != 0 && bider != address(0) && endTime < block.timestamp) {
+                count ++;
+            } 
+            // 경매시간은 지났지만 bider랑 lastBidPrice 값이 default가 아니기때문에 정산이 안된거다.
+        }
+
+        return count;
+    }
+
+    // 경매종료됐지만 정산되지않은 토큰 리스트
+    function notClaimedAuctionList() public view returns(uint256[] memory){
+        uint256[] memory tokensNotClaimedOnAuction = new uint256[](_countNotClaimedAuction()); // 배열크기 미리배정
+        uint256 index = 0;
+
+        for(uint tokenId = 1; tokenId <= Token.totalSupply(); tokenId++) {
+            uint256 lastBidPrice = _tokensOnAuction[tokenId].lastBidPrice;
+            uint256 endTime = _tokensOnAuction[tokenId].endTime;
+            address bider = _tokensOnAuction[tokenId].bider;
+
+            if(lastBidPrice != 0 && bider != address(0) && endTime < block.timestamp) {
+                tokensNotClaimedOnAuction[index] = tokenId;
+                index ++;
+            } 
+            // 경매시간은 지났지만 bider랑 lastBidPrice 값이 default가 아니기때문에 정산이 안된거다.
+        }
+
+        return tokensNotClaimedOnAuction;
+    }
+
+
+    // 내가 입찰중인(내 입찰가가 최고입찰가인) 토큰갯수(테스트 완료)
     function _countOnBid(address owner) private view returns(uint256) {
         uint256 count = 0;
         uint256 countOnAuction = _countOnAuction();
@@ -217,7 +299,7 @@ contract TestTrade is Ownable{
         return count;
     }
 
-    // 내가 입찰중인(내 입찰가가 최고입찰가인) 토큰 조회
+    // 내가 입찰중인(내 입찰가가 최고입찰가인) 토큰 조회(테스트 완료)
     function onBidList(address owner) external view returns(uint256[] memory){
         uint256[] memory tokensOnBid = new uint256[](_countOnBid(owner)); // 배열크기 미리배정
         uint256 countOnAuction = _countOnAuction();
@@ -231,53 +313,34 @@ contract TestTrade is Ownable{
                 index ++;
             }
         }
-
-        // for(uint tokenId = 1; tokenId <= Token.totalSupply(); tokenId++) {
-        //     if(_tokensOnBid[tokenId].bider == owner) {
-        //         tokensOnBid[index] = tokenId;
-        //         index ++;
-        //     } 
-        // }
-
         return tokensOnBid;
     }
 
-    // 입찰성공한사람 토큰(NFT) 클레임할수있게 해주기(경매기간끝났을때)
-    function claimTokenForWinner(uint256 tokenId) external {
-        uint256 endTime = _tokensOnAuction[tokenId].endTime;
-        uint256 lastBidPrice = _tokensOnAuction[tokenId].lastBidPrice;
-        address bider = _tokensOnAuction[tokenId].bider;
-        address tokenOwner = Token.ownerOf(tokenId);
+    // 경매는종료됐지만 정산되지않은 금액들 합
+    function _notClaimedMoney() private view returns(uint256) {
+        uint256[] memory tokensNotClaimedOnAuction = notClaimedAuctionList();
+        uint256 notClaimedMoney;
 
-        require(endTime < block.timestamp, "auction not ended");
-        require(lastBidPrice != 0, "this token is not on auction");
-        require(bider == msg.sender, "caller is not highest bider");
+        for (uint i = 0; i < tokensNotClaimedOnAuction.length; i++ ) {
+            uint256 tokenId = tokensNotClaimedOnAuction[i];
+            uint256 lastBidPrice = _tokensOnAuction[tokenId].lastBidPrice;
+            uint256 afterFee = lastBidPrice * (100 - saleFeeRate) / 100;
+            notClaimedMoney += afterFee;
+        }
 
-         uint256 incomeAfterFee = lastBidPrice * (100 - saleFeeRate) / 100;
-        (bool success, ) = tokenOwner.call{value: incomeAfterFee}("");
-        require(success, "payment failed");
-
-        Token.safeTransferFrom(tokenOwner, msg.sender, tokenId);
-        // _tokensOnAuction[tokenId].endTime = 0; 
-        // _tokensOnAuction[tokenId].lastBidPrice = 0;
-        // _tokensOnAuction[tokenId].bider = addres(0); // 이거세개 안해줘도 될지도?
+        return notClaimedMoney;
     }
 
-// struct AuctionInfo {
-//         uint256 lastBidPrice; // 마지막 비딩가격은 무조건 최고가
-//         uint256 endTime;
-//         address bider; // 입찰한사람 아무도 없으면 address(0)
-//     }
+    // 수수료 출금
     function withdrawFees() external onlyOwner {
-        // 입찰때문에 받아놓은 입찰가금액들 제외하고 출금하게 하기
+        // 입찰때문에 받아놓은 입찰가금액들 제외하고 출금하게 하기        
+        uint256 notClaimedMoney = _notClaimedMoney();
+        uint256 balanceExceptNotClaimedMoney = address(this).balance - notClaimedMoney;
+
+        require(balanceExceptNotClaimedMoney > 0, "balance without notClaimedMoney is zero");
+
+        (bool success, ) = msg.sender.call{value: balanceExceptNotClaimedMoney}("");
+        require(success, "withdraw failed");
     }
-
-
-
-
-    // function _callerIsOwner(uint256 tokenId) private view returns(bool) {
-    //     return Token.ownerOf(tokenId) == msg.sender;
-    // }
-
 
 }
