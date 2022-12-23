@@ -3,7 +3,6 @@ import { NavLink, Link } from "react-router-dom";
 import "../../styles/header2.css";
 
 import { Container } from "reactstrap";
-import { Context } from "../Layout/Layout";
 
 //헤더 링크
 const Nav_Link = [

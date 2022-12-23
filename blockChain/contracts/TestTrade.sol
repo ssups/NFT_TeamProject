@@ -70,10 +70,9 @@ contract TestTrade is Ownable{
 
     // 일반판매등록(테스트 완료)
     function registerForSale(uint256 tokenId, uint256 price) external {
-        // require(_callerIsOwner(tokenId), "caller is not owner");
         require(Token.ownerOf(tokenId) == msg.sender, "caller is not owner");
         require(price > 0, "price must be greater than zero");
-        require(dataOfOnAuction(tokenId).endTime < block.timestamp, "this token is on auction"); // 경매등록한건 일반판매등록안되게 하기
+        require(!_isOnAuction(tokenId), "this token is on auction"); // 경매등록한건 일반판매등록안되게 하기
         // 프론트에서 Nft 컨트렉트에 setApprovalForAll(address operator, bool approved)
         // 이거 operator에 컨트렉트 CA로넣어서 프론트에서 먼저 실행시켜줘야함.
         require(Token.isApprovedForAll(msg.sender, address(this)));
@@ -109,6 +108,8 @@ contract TestTrade is Ownable{
         require(success, "payment failed");
 
         Token.safeTransferFrom(tokenOwner, msg.sender, tokenId);
+        // 여기서 토큰 소유권이 구매자에게 넘어가기때문에 cancleSale 함수에서
+        // require(Token.ownerOf(tokenId) == msg.sender, "caller is not owner"); 이게 통과가 된다.
         cancleSale(tokenId);
     }
 
@@ -151,7 +152,14 @@ contract TestTrade is Ownable{
 
     // 경매중인 토큰 정보 조회(테스트완료)
     function dataOfOnAuction(uint256 tokenId) public view returns(AuctionInfo memory){
+        require(_tokensOnAuction[tokenId].endTime > block.timestamp, "this token is not on Auction");
         return _tokensOnAuction[tokenId];
+    }
+
+    // 해당토큰 경매중인지 확인
+    function _isOnAuction(uint256 tokenId) private view returns(bool) {
+        return (_tokensOnAuction[tokenId].endTime > block.timestamp);
+        // 경매마감시간이 현재시간보다 크면 경매진행중 true
     }
 
     // 경매판매등록(테스트완료)
@@ -239,25 +247,31 @@ contract TestTrade is Ownable{
         // 입찰자 토큰 주기
         Token.safeTransferFrom(tokenOwner, msg.sender, tokenId); // 이거하면 토큰 오너 바뀌고
         _tokensOnAuction[tokenId].bider = address(0); 
-        _tokensOnAuction[tokenId].lastBidPrice = 0;
+        // _tokensOnAuction[tokenId].lastBidPrice = 0; // 이것도 수정안해줘도됨
         // _tokensOnAuction[tokenId].endTime = 0; // 이건 endTime이 경매끝나면 알아서 block.timestamp 보다 작아지니깐 수정안해줘도되고
 
         emit ClaimMatchedAuction(tokenId, msg.sender); // 경매등록자 입찰자 둘중에 누가 클레임했는지 알려주기
     }
 
-    // 경매종료됐지만 정산되지않은 토큰 갯수
+    // 경매성공했지만 정산되지않은 토큰 갯수
     function _countNotClaimedAuction() private view returns(uint256) {
         uint256 count;
 
         for(uint tokenId = 1; tokenId <= Token.totalSupply(); tokenId++) {
-            uint256 lastBidPrice = _tokensOnAuction[tokenId].lastBidPrice;
+            // uint256 lastBidPrice = _tokensOnAuction[tokenId].lastBidPrice;
             uint256 endTime = _tokensOnAuction[tokenId].endTime;
             address bider = _tokensOnAuction[tokenId].bider;
 
-            if(lastBidPrice != 0 && bider != address(0) && endTime < block.timestamp) {
+            // if(lastBidPrice != 0 && bider != address(0) && endTime < block.timestamp) {
+            //     count ++;
+            // } 
+            if(bider != address(0) && endTime < block.timestamp) {
                 count ++;
             } 
-            // 경매시간은 지났지만 bider랑 lastBidPrice 값이 default가 아니기때문에 정산이 안된거다.
+            // 정산때 bider값을 address(0)로 바꿔준다
+            // 경매시간은 지났지만 bider값이 address(0)이 아니기때문에 정산이 안된 토큰이다.
+            // 따라서 경매시간이 지나고 bider 값이 address(0)인거는 
+            // 경매가 실패한 토큰 혹은 경매에 한번도 등록되지 않은 토큰 혹은 정산이 완료된 토큰이다.
         }
 
         return count;
@@ -269,11 +283,10 @@ contract TestTrade is Ownable{
         uint256 index = 0;
 
         for(uint tokenId = 1; tokenId <= Token.totalSupply(); tokenId++) {
-            uint256 lastBidPrice = _tokensOnAuction[tokenId].lastBidPrice;
             uint256 endTime = _tokensOnAuction[tokenId].endTime;
             address bider = _tokensOnAuction[tokenId].bider;
 
-            if(lastBidPrice != 0 && bider != address(0) && endTime < block.timestamp) {
+            if(bider != address(0) && endTime < block.timestamp) {
                 tokensNotClaimedOnAuction[index] = tokenId;
                 index ++;
             } 
@@ -344,3 +357,4 @@ contract TestTrade is Ownable{
     }
 
 }
+
