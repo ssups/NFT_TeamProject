@@ -3,7 +3,7 @@ import useWeb3 from "./useWeb3";
 
 const useContract = (abi, CA) => {
   // abi CA
-  const [account, web3, balance] = useWeb3();
+  const [web3, ,] = useWeb3();
   const [deployed, setDeployed] = useState();
   useEffect(() => {
     (async () => {

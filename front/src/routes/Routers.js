@@ -14,6 +14,9 @@ import MyNfts from "../components/minseop/MyNfts_j";
 import NftInfo from "../components/minseop/NftInfo_j";
 import Minting from "../components/minseop/Minting_j";
 
+import Minseop from "../components/minseop/minseop";
+import SeopMy from "../components/minseop/seopMy";
+
 const Routers = () => {
   return (
     <Routes>
@@ -39,8 +42,8 @@ const Routers = () => {
         }
       />
 
-      {/* <Route path="/minseop" element={<Minseop />} />
-        <Route path="/seopmy" element={<SeopMy />} /> */}
+      <Route path="/minseop" element={<Minseop />} />
+      <Route path="/seopmy" element={<SeopMy />} />
 
       <Route path="/1" element={<MyNfts />} />
       <Route path="/2" element={<NftInfo />} />
