@@ -4,10 +4,10 @@ pragma solidity ^0.8.17;
 import "./MintingNft.sol";
 
 // onlyOwner 접근 제어자 사용을 위해 상속
-// import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
+import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
 
 // remix 경로 수정
-import "@openzeppelin/contracts/access/Ownable.sol";
+// import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract TradingNft is Ownable {
 

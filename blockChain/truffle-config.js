@@ -11,6 +11,6 @@ module.exports = {
       version: "0.8.17",
     },
   },
-  // contracts_build_directory: "../front/src/contracts", // 메인버전
-  contracts_build_directory: "../front/src/contracts_seop", // 민섭용
+  contracts_build_directory: "../front/src/contracts", // 메인버전
+  // contracts_build_directory: "../front/src/contracts_seop", // 민섭용
 };
