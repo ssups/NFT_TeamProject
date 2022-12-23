@@ -7,7 +7,7 @@ const TopFold = () => {
     <div className='topfold'>
       <div className='tf-left'>
         <div className='tf-heading'>
-        <div>Hello<span className='head_style'>안녕</span>NFT</div>
+        <div className='tf__title'>Hello<span className='head_style'>안녕</span>NFT</div>
         </div>
         <div className='tf-des'>
           졸려배고파밥줘
@@ -16,7 +16,7 @@ const TopFold = () => {
       </div>
       <div className='tf-btns'>
        <button className='bbtn1'>둘러보기</button>
-       <button className='bbtn2'>NFT만들기</button>
+       <button className='bbtn2'>민팅하기</button>
       </div>
     </div>
   )

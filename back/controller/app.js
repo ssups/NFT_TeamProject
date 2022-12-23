@@ -12,12 +12,12 @@ let isSequelizeDone = false;
 app.use(cors({ origin: address }));
 app.use(express.json());
 
-// 정적폴더 경로 설정
-app.use(express.static("src/json"));
-app.use(express.static("src"));
+// 해당 경로로 접근(통신)하면 파일 접근 가능 (static 미들웨어를 사용하여 정적 파일 제공)
 // https://loclhost:4000/1.json
+app.use(express.static("src/json"));
+
 // https://locahost:4000/images/1.png
-// 이런식으로 가져옴
+app.use(express.static("src"));
 
 // sequelize
 //   .sync({ force: true })
@@ -28,5 +28,5 @@ app.use(express.static("src"));
 //   .catch(err => console.log("디비연결 오류", err));
 
 app.listen(PORT, () => {
-  console.log(PORT, "번 포트에 백서버 열림");
+  console.log(PORT, "번 포트에 백 서버 열림");
 });

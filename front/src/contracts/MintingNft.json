@@ -25432,46 +25432,46 @@
     "absolutePath": "project:/contracts/MintingNft.sol",
     "exportedSymbols": {
       "Address": [
-        9869
+        10206
       ],
       "Context": [
-        9891
+        10228
       ],
       "ERC165": [
-        10090
+        10427
       ],
       "ERC721": [
-        8993
+        9330
       ],
       "ERC721Enumerable": [
-        9481
+        9818
       ],
       "IERC165": [
-        10102
+        10439
       ],
       "IERC721": [
-        9109
+        9446
       ],
       "IERC721Enumerable": [
-        9512
+        9849
       ],
       "IERC721Metadata": [
-        9539
+        9876
       ],
       "IERC721Receiver": [
-        9127
+        9464
       ],
       "Math": [
-        10967
+        11304
       ],
       "MintingNft": [
         5437
       ],
       "Ownable": [
-        7994
+        8331
       ],
       "Strings": [
-        10066
+        10403
       ]
     },
     "id": 5438,
@@ -25496,7 +25496,7 @@
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
         "scope": 5438,
-        "sourceUnit": 9482,
+        "sourceUnit": 9819,
         "src": "82:94:27",
         "symbolAliases": [],
         "unitAlias": ""
@@ -25508,7 +25508,7 @@
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
         "scope": 5438,
-        "sourceUnit": 7995,
+        "sourceUnit": 8332,
         "src": "178:68:27",
         "symbolAliases": [],
         "unitAlias": ""
@@ -25524,7 +25524,7 @@
                 "477:16:27"
               ],
               "nodeType": "IdentifierPath",
-              "referencedDeclaration": 9481,
+              "referencedDeclaration": 9818,
               "src": "477:16:27"
             },
             "id": 5188,
@@ -25539,7 +25539,7 @@
                 "495:7:27"
               ],
               "nodeType": "IdentifierPath",
-              "referencedDeclaration": 7994,
+              "referencedDeclaration": 8331,
               "src": "495:7:27"
             },
             "id": 5190,
@@ -25554,15 +25554,15 @@
         "id": 5437,
         "linearizedBaseContracts": [
           5437,
-          7994,
-          9481,
-          9512,
-          8993,
-          9539,
-          9109,
-          10090,
-          10102,
-          9891
+          8331,
+          9818,
+          9849,
+          9330,
+          9876,
+          9446,
+          10427,
+          10439,
+          10228
         ],
         "name": "MintingNft",
         "nameLocation": "463:10:27",
@@ -25826,7 +25826,7 @@
                     "886:6:27"
                   ],
                   "nodeType": "IdentifierPath",
-                  "referencedDeclaration": 8993,
+                  "referencedDeclaration": 9330,
                   "src": "886:6:27"
                 },
                 "nodeType": "ModifierInvocation",
@@ -26139,7 +26139,7 @@
                             "name": "totalSupply",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 9216,
+                            "referencedDeclaration": 9553,
                             "src": "1407:11:27",
                             "typeDescriptions": {
                               "typeIdentifier": "t_function_internal_view$__$returns$_t_uint256_$",
@@ -26277,7 +26277,7 @@
                               "name": "owner",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 7922,
+                              "referencedDeclaration": 8259,
                               "src": "1492:5:27",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_function_internal_view$__$returns$_t_address_$",
@@ -26506,9 +26506,9 @@
                       "name": "_beforeTokenTransfer",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        9319
+                        9656
                       ],
-                      "referencedDeclaration": 9319,
+                      "referencedDeclaration": 9656,
                       "src": "1682:20:27",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_address_$_t_address_$_t_uint256_$_t_uint256_$returns$__$",
@@ -26578,7 +26578,7 @@
                       "name": "_mint",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 8649,
+                      "referencedDeclaration": 8986,
                       "src": "1894:5:27",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_address_$_t_uint256_$returns$__$",
@@ -26754,7 +26754,7 @@
                       "name": "Transfer",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 9008,
+                      "referencedDeclaration": 9345,
                       "src": "2078:8:27",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_address_$_t_address_$_t_uint256_$returns$__$",
@@ -26840,7 +26840,7 @@
                       "name": "transferFrom",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 8385,
+                      "referencedDeclaration": 8722,
                       "src": "2121:12:27",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_address_$_t_address_$_t_uint256_$returns$__$",
@@ -26995,9 +26995,9 @@
                       "name": "_beforeTokenTransfer",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        9319
+                        9656
                       ],
-                      "referencedDeclaration": 9319,
+                      "referencedDeclaration": 9656,
                       "src": "2168:20:27",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_address_$_t_address_$_t_uint256_$_t_uint256_$returns$__$",
@@ -27152,9 +27152,9 @@
                       "name": "_beforeTokenTransfer",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        9319
+                        9656
                       ],
-                      "referencedDeclaration": 9319,
+                      "referencedDeclaration": 9656,
                       "src": "2231:20:27",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_address_$_t_address_$_t_uint256_$_t_uint256_$returns$__$",
@@ -27466,7 +27466,7 @@
                     "2639:9:27"
                   ],
                   "nodeType": "IdentifierPath",
-                  "referencedDeclaration": 7913,
+                  "referencedDeclaration": 8250,
                   "src": "2639:9:27"
                 },
                 "nodeType": "ModifierInvocation",
@@ -27588,7 +27588,7 @@
                     "2832:9:27"
                   ],
                   "nodeType": "IdentifierPath",
-                  "referencedDeclaration": 7913,
+                  "referencedDeclaration": 8250,
                   "src": "2832:9:27"
                 },
                 "nodeType": "ModifierInvocation",
@@ -27646,7 +27646,7 @@
           },
           {
             "baseFunctions": [
-              8253
+              8590
             ],
             "body": {
               "id": 5364,
@@ -27940,7 +27940,7 @@
                       "name": "balanceOf",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 8166,
+                      "referencedDeclaration": 8503,
                       "src": "3491:9:27",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_view$_t_address_$returns$_t_uint256_$",
@@ -28281,7 +28281,7 @@
                           "name": "tokenOfOwnerByIndex",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 9205,
+                          "referencedDeclaration": 9542,
                           "src": "3806:19:27",
                           "typeDescriptions": {
                             "typeIdentifier": "t_function_internal_view$_t_address_$_t_uint256_$returns$_t_uint256_$",
@@ -28731,7 +28731,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.11",
-  "updatedAt": "2022-12-22T07:16:24.891Z",
+  "updatedAt": "2022-12-23T04:11:27.867Z",
   "devdoc": {
     "kind": "dev",
     "methods": {

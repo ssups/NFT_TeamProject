@@ -8,9 +8,25 @@ import TestTokenContract from "../../contracts/TestToken.json";
 const MyNfts = () => {
   //
   const [, account] = useWeb3();
+  const [myNftsURI, setMyNftsURI] = useState({});
   const testTokenInstance = useContract(TestTokenContract);
 
-  const [myNftsURI, setMyNftsURI] = useState({});
+  // ==========================================functions==========================================
+  // =============================================================================================
+
+  async function getMyTokenURI(testTokenInstance) {
+    //
+    if (!testTokenInstance) return;
+
+    // 보유 토큰 조회 및 토큰의 JSON 객체가 담긴 파일 경로 가져오기
+    const tokenURI = {};
+    const tokenIds = await testTokenInstance.methods.tokensOfOwner(account).call();
+
+    for (const tokenId of tokenIds) {
+      tokenURI[tokenId] = await testTokenInstance.methods.tokenURI(tokenId).call();
+    }
+    return tokenURI;
+  }
 
   // ==========================================useEffect==========================================
   // =============================================================================================
@@ -18,22 +34,19 @@ const MyNfts = () => {
   // 컨트랙트 인스턴스
   useEffect(() => {
     //
+    // useEffect async..
     (async () => {
       //
-      if (!testTokenInstance) return;
-
-      // 보유 토큰 조회 및 토큰의 JSON 객체가 담긴 파일 경로 가져오기
-      const tokenURI = {};
-      const tokenIds = await testTokenInstance.methods.tokensOfOwner(account).call();
-
-      for (const tokenId of tokenIds) {
-        tokenURI[tokenId] = await testTokenInstance.methods.tokenURI(tokenId).call();
-      }
+      const tokenURI = await getMyTokenURI(testTokenInstance);
       setMyNftsURI(tokenURI);
+      console.log(tokenURI);
     })();
 
     // 메타마스크의 접속 계정 변경 시 고려
   }, [testTokenInstance, account]);
+
+  // ===========================================returns===========================================
+  // =============================================================================================
 
   return (
     <div>
