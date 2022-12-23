@@ -39,8 +39,8 @@ const Routers = () => {
           path="/Create"
           element={
             <>
-              <TrendingNft />
-              <Header />
+              {/* <TrendingNft /> */}
+              {/* <Header /> */}
               <Brand />
               <TopFold />
             </>
