@@ -1,7 +1,7 @@
-import useContract from "./useContract_j";
+import useContract from "./useContract";
 import React from "react";
-import testTokenJson from "../contracts_seop/TestToken.json";
-import testTradeJson from "../contracts_seop/TestTrade.json";
+import testTokenJson from "../contracts/TestToken.json";
+import testTradeJson from "../contracts/TestTrade.json";
 
 const useSsandeContracts = () => {
   const netWorkId = 7722;
