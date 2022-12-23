@@ -2,12 +2,12 @@
 pragma solidity ^0.8.17;
 
 // 확장성 고려
-// import "../node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
-// import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
+import "../node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
+import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
 
 // remix 경로 수정
-import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
+// import "@openzeppelin/contracts/access/Ownable.sol";
+// import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 
 // NFT 발행에 대한 컨트랙트
 contract MintingNft is ERC721Enumerable, Ownable {
