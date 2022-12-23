@@ -1,19 +1,17 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useContext } from "react";
 import useWeb3 from "../../hooks/useWeb3";
-import TestTokenContract from "../../contracts/TestToken.json";
-import useContract from "../../hooks/useContract";
+// import TestTokenContract from "../../contracts/TestToken.json";
+// import useContract from "../../hooks/useContract";
+import useSsandeContracts from "../../hooks/useSsandeContracts";
+import { Context } from "../../App";
 
 const Minseop = () => {
-  // hooks
-  const [web3, account, balance] = useWeb3();
-
   const netWorkId = 7722;
-  const testTokenInstance = useContract(
-    TestTokenContract.abi,
-    TestTokenContract.networks[netWorkId].address
-  );
 
-  // console.log(account);
+  //context
+  const { account, web3, balance } = useContext(Context);
+  // hooks
+  const [testTokenInstance, testTradeInstance] = useSsandeContracts();
   // states
   const [owner, setOwner] = useState();
   const [isMintOn, setIsMintOn] = useState();
@@ -81,6 +79,10 @@ const Minseop = () => {
     })();
   }, [isMintOn, testTokenInstance]);
 
+  useEffect(() => {
+    console.log(owner);
+  }, [owner]);
+
   //   // =============================================================================================
   //   // =============================================================================================
 
@@ -140,12 +142,21 @@ const Minseop = () => {
   //   // ===========================================returns===========================================
   //   // =============================================================================================
 
-  // console.log(account);
   if (!account) return <h1>지갑 연결하세요</h1>;
   return (
-    <div>
+    <div
+      style={{
+        color: "white",
+        width: "100vw",
+        height: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       {account?.toLowerCase() === owner?.toLowerCase() && (
-        <div>
+        <div style={{}}>
           <input type="number" ref={priceRef} />
           <button onClick={() => startMint(priceRef.current.value)}>
             민팅시작하기 , 민팅가격 바꾸기

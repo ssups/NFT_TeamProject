@@ -9,7 +9,6 @@ const useContract = (abi, CA) => {
     (async () => {
       if (!web3) return;
       const deployed = await new web3.eth.Contract(abi, CA);
-      console.log(deployed);
       setDeployed(deployed);
     })();
   }, [web3]);

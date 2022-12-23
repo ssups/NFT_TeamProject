@@ -459,6 +459,19 @@
 						"type": "uint256"
 					}
 				],
+				"name": "setMintOff",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "price",
+						"type": "uint256"
+					}
+				],
 				"name": "setMintOn",
 				"outputs": [],
 				"stateMutability": "nonpayable",
@@ -720,11 +733,11 @@
 	},
 	"sources": {
 		"TestToken.sol": {
-			"keccak256": "0xd20756c5d1def76f1150b09a94ddcd5f6274088dd88abebcbb6c2e6469efe784",
+			"keccak256": "0x79e662b494d97575a204d2370096f0cc0ff8a7bd5aef7990a0df8404b7a70adf",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://50fbcf718e8d308fd964304b958b18caacd26c4beef87ca70801ded545e79219",
-				"dweb:/ipfs/QmP6j2Q1EdUuXTtJVfR29aZZkW3GaFLkeLC5aQyrUhF18k"
+				"bzz-raw://8fc0f2b5708b6074535c82b3b044046e237bd5ffc95ad29c36bcb47aad52ea05",
+				"dweb:/ipfs/QmTZK96iv5tZX816WJiCu7BiyrwXqaF5DJknS1BS6vuTNP"
 			]
 		},
 		"openzeppelin-solidity/contracts/access/Ownable.sol": {
@@ -816,11 +829,11 @@
 			]
 		},
 		"standards/ERC721A.sol": {
-			"keccak256": "0xf5d50906d90363a82229cee52ae1e3962ab1be11f9725dde9d11f515b467a13f",
+			"keccak256": "0x31b3c1face1ed33e4f744a08e30c53227ab5a0a295124bdac2a19b51341fc6be",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://f8ae106beacbd6a38f6e7475c34c16b367bcc062927fd3de73de64a43125dfd1",
-				"dweb:/ipfs/QmcbE5i54YoBadGWpJG2FKFaca8QHqLEtiADPXNXsgrLN6"
+				"bzz-raw://c5a13f28292ced0637977235b780c373148291870aeba4103e91f53924e3d7ea",
+				"dweb:/ipfs/QmaGpbhxFm3b9fQiH1xQZrHMbPecVMf7eTGSZb195WUYiZ"
 			]
 		}
 	},
