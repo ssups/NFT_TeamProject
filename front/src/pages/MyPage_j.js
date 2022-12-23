@@ -1,11 +1,13 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 
 import { Context } from "../components/Layout/Layout";
 import { Col, Container, Row } from "reactstrap";
 import NftCard from "../components/Nft/NftCard";
 
-// JSON 데이터 가져오기
-import { NFT__DATA } from "../asset/data/data";
+// 1. 배포한 컨트랙트 인스턴스 확인
+// 2. 메타마스크 계정 연결 확인
+// 3. 연결된 계정의 보유 토큰 조회
+// 4. 보유 토큰에 대한 리렌더링
 
 // 1. 보유 토큰
 // 2. 판매 중인 보유 토큰
@@ -14,6 +16,7 @@ import { NFT__DATA } from "../asset/data/data";
 
 const MyPage = () => {
   //
+  const [tokenURI, setTokenURI] = useState();
   const { account, tokenContract, tradeContract } = useContext(Context);
 
   // ==========================================functions==========================================
@@ -25,6 +28,7 @@ const MyPage = () => {
     // 보유 토큰 조회 및 토큰의 JSON 객체가 담긴 파일 경로 가져오기
     const tokenURI = {};
     const tokenIds = await tokenContract.methods.tokensOfOwner(account).call();
+    console.log(tokenIds);
 
     for (const tokenId of tokenIds) {
       tokenURI[tokenId] = await tokenContract.methods.tokenURI(tokenId).call();
@@ -34,27 +38,39 @@ const MyPage = () => {
 
   // 조회 후 토큰의 종류를 분류할 예정
 
+  function getMessageJsx(message) {
+    return <p style={{ color: "white", textAlign: "center", marginTop: "20%", fontSize: "5vw", fontWeight: "900" }}>{message}</p>;
+  }
+
   // ==========================================useEffect==========================================
   // =============================================================================================
 
   useEffect(() => {
     //
+    // context 데이터를 가져오기까지 시간 소요 (undefined 거치는)
+    // console.log(tokenContract, account);
+    
+    if (!tokenContract || !account) return;
+
+    (async() => {
+      //
+      const tokenURI = await getMyTokenURI();
+      setTokenURI(tokenURI);
+      console.log(tokenURI);
+    })();
+
   }, [tokenContract, account]);
 
   // ===========================================returns===========================================
   // =============================================================================================
 
-  // context 데이터를 가져오기까지
-  console.log(tokenContract, account);
-
+  // JSX 반환을 위해 바깥에
   if (!tokenContract) {
-    console.log("no contract");
-    return <p style={{ color: "white", textAlign: "center", marginTop: "20%", fontSize: "5vw", fontWeight: "900" }}>no contract</p>;
+    return getMessageJsx("no cotract");
   }
 
   if (!account) {
-    console.log("no account");
-    return <p style={{ color: "white", textAlign: "center", marginTop: "20%", fontSize: "5vw", fontWeight: "900" }}>no account</p>;
+    return getMessageJsx("no account");
   }
 
   return (
@@ -67,11 +83,11 @@ const MyPage = () => {
             </div>
           </Col>
 
-          {NFT__DATA.map((item) => (
+          {/* {tokenURI && Object.keys(tokenURI).map((item) => (
             <Col lg="3" md="4" sm="6" className="mb-4">
               <NftCard item={item} />
             </Col>
-          ))}
+          ))} */}
         </Row>
       </Container>
     </section>

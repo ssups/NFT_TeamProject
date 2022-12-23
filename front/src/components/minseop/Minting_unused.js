@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import useWeb3 from "../../hooks/useWeb3_j";
-import useContract from "../../hooks/useContract_j";
+import useWeb3 from "../../hooks/useWeb3_unused";
+import useContract from "../../hooks/useContract_unused";
 import TestTokenContract from "../../contracts/TestToken.json";
 
 const Minting = () => {

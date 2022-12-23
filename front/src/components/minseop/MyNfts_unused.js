@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 
-import NftInfo from "./NftInfo_j";
-import useWeb3 from "../../hooks/useWeb3_j";
-import useContract from "../../hooks/useContract_j";
+import NftInfo from "./NftInfo_unused";
+import useWeb3 from "../../hooks/useWeb3_unused";
+import useContract from "../../hooks/useContract_unused";
 import TestTokenContract from "../../contracts/TestToken.json";
 
 const MyNfts = () => {

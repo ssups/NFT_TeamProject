@@ -21,8 +21,8 @@ const Nav_Link = [
 ];
 
 const Header2 = () => {
-  const { web3 } = useContext(Context);
-  // 지갑연결 함수
+  //
+  // 메타마스크 지갑 연결에 대한 함수 (지갑 연동 버튼 클릭 시)
   async function connectWallet() {
     await window.ethereum.request({
       method: "eth_requestAccounts",

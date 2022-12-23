@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import useWeb3 from "./useWeb3_j";
+import useWeb3 from "./useWeb3_unused";
 
 const useContract = (contractJson) => {
   //
