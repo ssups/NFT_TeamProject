@@ -13,6 +13,7 @@ import TopFold from "../components/TopFold/TopFold";
 import MyNfts from "../components/minseop/MyNfts_j";
 import NftInfo from "../components/minseop/NftInfo_j";
 import Minting from "../components/minseop/Minting_j";
+import MyPage from "../pages/MyPage_j";
 
 const Routers = () => {
   return (
@@ -45,6 +46,7 @@ const Routers = () => {
       <Route path="/1" element={<MyNfts />} />
       <Route path="/2" element={<NftInfo />} />
       <Route path="/3" element={<Minting />} />
+      <Route path="/4" element={<MyPage />} />
     </Routes>
   );
 };
