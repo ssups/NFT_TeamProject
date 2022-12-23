@@ -13,12 +13,15 @@ const Layout = () => {
 
   return (
     <>
-      {/* 전체페이지에 헤더 적용 */}
       <Context.Provider value={{ web3, account, balance, tokenContract, tradeContract }}>
+
+        {/* 전체페이지에 헤더 적용 */}
         <Header2 />
+
         <div>
           <Routers />
         </div>
+
       </Context.Provider>
     </>
   );

@@ -1,5 +1,6 @@
 import React, { useEffect, useContext, useState } from "react";
 
+// createContext 경로
 import { Context } from "../components/Layout/Layout";
 import { Col, Container, Row } from "reactstrap";
 import NftCard from "../components/Nft/NftCard";
