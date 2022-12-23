@@ -4,8 +4,8 @@ import Header2 from "../Header2/Header2";
 import useWeb3 from "../../hooks/useWeb3";
 import useSsandeContracts from "../../hooks/useSsandeContracts";
 const Layout = () => {
-  const [web3, account, balance] = useWeb3();
   const [tokenContract, tradeContract] = useSsandeContracts();
+  const [web3, account, balance] = useWeb3();
 
   return (
     <>

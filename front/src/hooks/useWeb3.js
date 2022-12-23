@@ -15,6 +15,14 @@ const useWeb3 = () => {
       const web3 = new Web3(window.ethereum);
       setWeb3(web3);
 
+      // 이미 지갑이 연결되어있는경우
+      const [account] = await window.ethereum.request({ method: "eth_accounts" });
+      if (account) {
+        setAccount(account);
+        const balance = await web3.eth.getBalance(account);
+        setBalance(balance);
+      }
+
       // 메타마스크 지갑바꿨을때 이벤트
       if (!window.ethereum._events["accountsChanged"])
         // 이벤트쌓이는거 방지
@@ -30,7 +38,6 @@ const useWeb3 = () => {
       delete window.ethereum._events["accountsChanged"];
     };
   }, []);
-
   return [web3, account, balance];
 };
 

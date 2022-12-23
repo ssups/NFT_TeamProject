@@ -1,4 +1,3 @@
-import React from "react";
 import useContract from "./useContract";
 import testTokenJson from "../contracts/TestToken.json";
 import testTradeJson from "../contracts/TestTrade.json";
