@@ -6,9 +6,9 @@ import TestTokenContract from "../../contracts/TestToken.json";
 
 const Minting = () => {
   //
+  // await 체크..
   const [web3, account, balance] = useWeb3();
 
-  // await 체크..
   const [owner, setOwner] = useState();
   const [mintPrice, setMintPrice] = useState();
   const [maxSupply, setMaxSupply] = useState();
