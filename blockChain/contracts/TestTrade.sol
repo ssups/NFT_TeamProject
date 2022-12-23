@@ -161,9 +161,10 @@ contract TestTrade is Ownable{
 
     // 경매판매등록(테스트완료)
     function registerForAuction(uint256 tokenId, uint256 minimumPrice, uint256 lastingMinutes) external {
-        // require(_callerIsOwner(tokenId), "caller is not owner");
         require(Token.ownerOf(tokenId) == msg.sender, "caller is not owner");
         require(minimumPrice >= 0.001 ether, "minimumPrice must be greater thans 0.001 ether"); // 이거 경매입찰할떄 최소단위 통과조건때문에 필요함
+        require(!priceOfOnSale(tokenId) > 0, "this token is on Sale"); // 일반판매중인 토큰은 경매등록 불가
+        require(dataOfOnAuction(tokenId).endTime < block.timestamp, "this token is already on auction"); // 경매 중복등록 불가
         // 프론트에서 Nft 컨트렉트에 있는 setApprovalForAll(address operator, bool approved)
         // 이거 operator에 이 컨트렉트 CA 넣어서 프론트에서 먼저 실행시켜줘야함.
         require(Token.isApprovedForAll(msg.sender, address(this)), "not approved");
@@ -236,10 +237,7 @@ contract TestTrade is Ownable{
         require(success, "payment failed");
 
         Token.safeTransferFrom(tokenOwner, msg.sender, tokenId);
-        // Token.setApprovalForAll(address(this), false); // approve 승인한거 다시 취소하기
-        // 위에꺼 실행안되는데 저함수 require에 operater != msg.sender 가 통과가 안된다
-        // 둘다 이 컨트렉트 CA로 인식되기 때문에...
-        // 그래서 아마 프론트에서 직접 토큰 컨트렉트 setApprovalForAll(이 컨트렉트 CA, false)로 실행시켜줘야할거 같다.
+        // 그래서 프론트에서 토큰 컨트렉트 setApprovalForAll(이 컨트렉트 CA, false)실행시켜서 권한 다시 없애기.
         // 근데 어차피 컨트렉트어드레스에 권한을 준거라서 악용되기 힘들거같은데 안해줘도 괜찮을듯 하다,
         
         // _tokensOnAuction[tokenId].endTime = 0; 
