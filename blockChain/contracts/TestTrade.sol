@@ -11,8 +11,6 @@ contract TestTrade is Ownable{
     TestToken public Token;
 
     uint256 public saleFeeRate = 5; //퍼센트
-    // uint256 private _onSaleIndex = 0; // onSale토큰 갯수 파악용
-    // uint256 private _onAuctionIndex = 0; // onACUTION토큰 갯수 파악용
 
     struct AuctionInfo {
         uint256 lastBidPrice; // 마지막 비딩가격은 무조건 최고가
@@ -81,8 +79,6 @@ contract TestTrade is Ownable{
         require(Token.isApprovedForAll(msg.sender, address(this)));
 
         _tokensOnSale[tokenId] = price;
-        // _onSaleIndex += 1;
-
     }
 
     // 일반판매 취소(테스트 완료)
@@ -114,7 +110,6 @@ contract TestTrade is Ownable{
 
         Token.safeTransferFrom(tokenOwner, msg.sender, tokenId);
         cancleSale(tokenId);
-        // _onSaleIndex -= 0;
     }
 
 
@@ -172,7 +167,6 @@ contract TestTrade is Ownable{
         uint256 endTime = block.timestamp + lastingMinutes * 60;
 
         _tokensOnAuction[tokenId] = AuctionInfo(minimumPrice, endTime, address(0)); // 최초에 입찰한사람 없음으로 입찰한 계정은 address(0) 
-        // _onAuctionIndex += 1;
     }
 
     // 경매에 입찰하기(테스트완료)
@@ -200,7 +194,9 @@ contract TestTrade is Ownable{
 
     // 입찰경쟁 밀린사람 환불해주기(테스트완료)
     function _refundBid(uint256 tokenId ,address to, uint256 bidPrice) private {
-        payable(to).transfer(bidPrice);
+        // payable(to).transfer(bidPrice);
+        (bool success, ) = to.call{value: bidPrice}("");
+        require(success, "refund failed");
 
         emit RefundBid(tokenId, to);
     }   
@@ -244,9 +240,9 @@ contract TestTrade is Ownable{
         Token.safeTransferFrom(tokenOwner, msg.sender, tokenId); // 이거하면 토큰 오너 바뀌고
         _tokensOnAuction[tokenId].bider = address(0); 
         _tokensOnAuction[tokenId].lastBidPrice = 0;
+        // _tokensOnAuction[tokenId].endTime = 0; // 이건 endTime이 경매끝나면 알아서 block.timestamp 보다 작아지니깐 수정안해줘도되고
 
         emit ClaimMatchedAuction(tokenId, msg.sender); // 경매등록자 입찰자 둘중에 누가 클레임했는지 알려주기
-        // _tokensOnAuction[tokenId].endTime = 0; // 이건 endTime이 경매끝나면 알아서 block.timestamp 보다 작아지니깐 수정안해줘도되고
     }
 
     // 경매종료됐지만 정산되지않은 토큰 갯수

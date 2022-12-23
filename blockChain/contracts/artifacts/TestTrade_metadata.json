@@ -443,11 +443,11 @@
 			]
 		},
 		"TestTrade.sol": {
-			"keccak256": "0x2203ac919f3a3b324d9ff562c412516fb7cb88e78d6ae346d2fe11c160972042",
+			"keccak256": "0x9ddfa85ceacde94104920348006d9b3ab4ca913215efaa9ef3e04a998f20ca0f",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://91a2610971fc563effff20d6e518448c63ab6794e2dfd73895d75f8290867ad4",
-				"dweb:/ipfs/QmasrPJwumyQzy7jr6xEaoFbZRQ8tp3bQgePuAAsEXAM6q"
+				"bzz-raw://3c4f055b55c1ee175f9f83677980c0099af387cfd02fe35853a5e10319486c17",
+				"dweb:/ipfs/QmbB3AyiqGV8dbV2XM1vaAZEX1N2Qamr7Gy3vrrajyMHyS"
 			]
 		},
 		"openzeppelin-solidity/contracts/access/Ownable.sol": {
