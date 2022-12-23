@@ -11,6 +11,8 @@ const Layout = () => {
   const [tokenContract, tradeContract] = useSsandeContracts();
   const [web3, account, balance] = useWeb3();
 
+  console.log(account, "test")
+
   return (
     <>
       <Context.Provider value={{ web3, account, balance, tokenContract, tradeContract }}>

@@ -39,8 +39,9 @@ const MintingModal = ({ setModal }) => {
 
     // 배포자인지 확인하는 함수
     async function isOwnerFn() {
-        const owner = await tokenContract.methods.onwer().call();
+        const owner = await tokenContract.methods.owner().call();
         // 대소문자 확인..
+        console.log(owner, account)
         return owner === account;
     }
 
@@ -123,7 +124,6 @@ const MintingModal = ({ setModal }) => {
     //
     useEffect(() => {
         //
-        // undefined
         console.log(account);
 
         if (!account) return;
@@ -134,9 +134,13 @@ const MintingModal = ({ setModal }) => {
 
     }, [account])
 
+    console.log(account, "test")
     //
     useEffect(() => {
         //
+        // 초기값 undefined
+        // console.log(tokenContract);
+
         if (!tokenContract) return;
 
         (async () => {
@@ -147,7 +151,7 @@ const MintingModal = ({ setModal }) => {
             setTotalSupply(await getTotalSupplyFn());
         })();
 
-        console.log(window.ethereum._events)
+        console.log(window.ethereum);
         //
         if (!window.ethereum._events[""]) {
             //
@@ -173,7 +177,7 @@ const MintingModal = ({ setModal }) => {
     //
     useEffect(() => {
         //
-        // undefined
+        // 초기값 false
         console.log(isMintOn)
 
         if (!isMintOn) return;
