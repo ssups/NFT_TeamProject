@@ -6,6 +6,7 @@ import useContract from "../../hooks/useContract";
 const Minseop = () => {
   // hooks
   const [account, web3, balance] = useWeb3();
+
   const netWorkId = 7722;
   const testTokenInstance = useContract(
     TestTokenContract.abi,
