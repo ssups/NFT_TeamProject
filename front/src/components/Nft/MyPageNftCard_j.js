@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
 
 import axios from "axios";
+import Context from "../../App";
 import MyPageModal from "../Modal/MyPageModal_j";
 
-const MyPageNftCard = ({ tokenURI, classificationName, setApprovalForAllFn }) => {
+const MyPageNftCard = ({ tokenId, tokenURI, classificationName, setApprovalForAllFn }) => {
   //
+  const { web3, account, tradeContract } = useContext(Context);
+
   const [tokenName, setTokenName] = useState();
   const [tokenImgUrl, setTokenImgUrl] = useState();
   const [registerSaleModal, setRegisterSaleModal] = useState(false);
@@ -14,10 +16,41 @@ const MyPageNftCard = ({ tokenURI, classificationName, setApprovalForAllFn }) =>
   // ==========================================functions==========================================
   // =============================================================================================
 
-  function getNftCardJsxFn(title, modal, setModal) {
+  // 판매 등록 취소하기 버튼에 대한 함수
+  async function deregisterSaleToken() {
+    //
+    await tradeContract.methods.cancleSale(tokenId).send({ from: account });
+    alert("판매 등록이 취소되었습니다.");
+  }
+
+  // 경매 낙찰 상품 정산 받기 버튼에 대한 함수
+  async function claimMatchedToken() {
+    //
+    let saleFee = await tradeContract.methods.getSaleFee(tokenId).call();
+    let incomeAfterFee = await tradeContract.methods.getIncomeAfterFee(tokenId).call();
+
+    saleFee = web3.utils.fromWei(saleFee, "ether");
+    incomeAfterFee = web3.utils.fromWei(incomeAfterFee, "ether");
+
+    const claimMessage = `경매 낙찰로 인해 발생한 수수료는 ${saleFee}이며 정산금은 ${incomeAfterFee}입니다. 정산 받으시겠습니까?`;
+    if (!window.confirm(claimMessage)) return;
+
+    await tradeContract.methods.claimMatchedAuction(tokenId).send({ from: account });
+
+    alert("정산이 완료되었습니다.");
+  }
+
+  // 보유 토큰의 분류명에 따라 버튼에 대한 JSX를 반환하는 함수
+  function getNftCardJsxFn(title, modal, setModal, buttonFn) {
     return (
       <div className=" mt-3 d-flex align-items-center justify-content-between">
-        <button className="bid_btn d-flex align-items-center gap-1" onClick={() => setModal(true)}>
+        <button className="bid_btn d-flex align-items-center gap-1"
+
+          onClick={
+            setApprovalForAllFn &&
+              title !== "판매 등록 취소하기" ?
+              setApprovalForAllFn : modal ? () => setModal(true) : buttonFn}>
+
           💎 {title}
         </button>
         {modal && <MyPageModal title={title} setModal={setModal} />}
@@ -73,11 +106,11 @@ const MyPageNftCard = ({ tokenURI, classificationName, setApprovalForAllFn }) =>
         }
 
         {classificationName === "mySaleToken" &&
-          getNftCardJsxFn("판매 등록 취소하기")
+          getNftCardJsxFn("판매 등록 취소하기", "", "", deregisterSaleToken)
         }
 
         {classificationName === "myNotClaimedAuctionToken" &&
-          getNftCardJsxFn("경매 낙찰 상품 정산 받기")
+          getNftCardJsxFn("경매 낙찰 상품 정산 받기", "", "", claimMatchedToken)
         }
 
       </div>

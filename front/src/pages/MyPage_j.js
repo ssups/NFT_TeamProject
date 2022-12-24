@@ -111,14 +111,14 @@ const MyPage = () => {
       //
       return (
         <Col lg="3" md="4" sm="6" className="mb-4">
-          <MyPageNftCard key={tokenId} tokenURI={tokenURI} classificationName={classificationName} setApprovalForAllFn={setApprovalForAllFn} />
+          <MyPageNftCard key={tokenId} tokenId={tokenId} tokenURI={tokenURI} classificationName={classificationName} setApprovalForAllFn={setApprovalForAllFn} />
         </Col>
       );
     }
 
     return (
       <Col lg="3" md="4" sm="6" className="mb-4">
-        <MyPageNftCard key={tokenId} tokenURI={tokenURI} classificationName={classificationName} />
+        <MyPageNftCard key={tokenId} tokenId={tokenId} tokenURI={tokenURI} classificationName={classificationName} />
       </Col>
     );
   }
