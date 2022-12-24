@@ -1,6 +1,5 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useRef } from "react";
 import Nft from "./nft";
-import useWeb3 from "../../hooks/useWeb3";
 import useSsandeContracts from "../../hooks/useSsandeContracts";
 
 import { Context } from "../../App";
@@ -8,10 +7,11 @@ import { Context } from "../../App";
 const SeopMy = () => {
   // hooks
   const { account, web3, balance } = useContext(Context);
-  const netWorkId = 7722;
   const [testTokenInstance, testTradeInstance] = useSsandeContracts();
-  //  states
+  // states
   const [myNftsURI, setMyNftsURI] = useState({});
+  // refs
+  const registerRef = useRef();
 
   // ==========================================useEffect==========================================
   // =============================================================================================
@@ -37,13 +37,52 @@ const SeopMy = () => {
     (async () => {
       if (!testTradeInstance) return;
       console.log(testTradeInstance.methods);
-      console.log(testTradeInstance.events);
+      // console.log(testTradeInstance.events);
     })();
   }, [testTradeInstance]);
 
   useEffect(() => {
+    (async () => {
+      if (!testTokenInstance) return;
+      console.log(testTokenInstance.methods);
+      // console.log(testTradeInstance.events);
+    })();
+  }, [testTokenInstance]);
+
+  useEffect(() => {
     // console.log(account);
   }, [account]);
+
+  // functions
+  async function registerAuction() {
+    const tokenId = registerRef.tokenId.value;
+    const bidTime = registerRef.time.value;
+    const price = registerRef.price.value;
+    const adjustedPice = web3.utils.toWei(price, "ether");
+    const CAofTestTrade = await testTradeInstance.methods.getCA().call();
+    let isApproved = await testTokenInstance.methods
+      .isApprovedForAll(account, CAofTestTrade)
+      .call();
+    // CA에 권한없으면 권한 넘기기
+    if (!isApproved) {
+      await testTokenInstance.methods
+        .setApprovalForAll(CAofTestTrade, true)
+        .send({ from: account })
+        .then(success => (isApproved = true))
+        .catch(err => {
+          alert("권한을 주세요");
+          isApproved = false;
+        });
+    }
+    // 사용자가 거부하면 빠져나가기
+    if (!isApproved) return;
+    // 경매등록 (토큰아이디, 가격, 시간(분단위))
+    await testTradeInstance.methods
+      .registerForAuction(tokenId, adjustedPice, bidTime)
+      .send({ from: account })
+      .then(success => alert("등록성공"))
+      .catch(err => alert("등록실패"));
+  }
 
   if (!account) return <h1>지갑 연결하세요</h1>;
   return (
@@ -65,7 +104,7 @@ const SeopMy = () => {
             return <Nft key={tokenId} tokenId={tokenId} nftURI={myNftsURI[tokenId]} />;
           })}
       </div>
-      <div style={{ marginTop: "100px" }}>
+      {/* <div style={{ marginTop: "100px" }}>
         <input type="number" placeholder="토큰ID" />
         <button>구매하기</button>
       </div>
@@ -73,16 +112,35 @@ const SeopMy = () => {
         <input type="number" placeholder="토큰ID" />
         <input type="number" placeholder="가격" />
         <button>판매하기</button>
-      </div>
+      </div> */}
       <div>
         <input type="number" placeholder="토큰ID" />
         <input type="number" placeholder="입찰가격" />
         <button>경매입찰하기</button>
       </div>
       <div>
-        <input type="number" placeholder="토큰ID" />
-        <input type="number" placeholder="최소가격" />
-        <button>경매등록하기</button>
+        <input
+          type="number"
+          placeholder="토큰ID"
+          ref={ref => {
+            registerRef["tokenId"] = ref;
+          }}
+        />
+        <input
+          type="number"
+          placeholder="최소가격"
+          ref={ref => {
+            registerRef["price"] = ref;
+          }}
+        />
+        <input
+          type="number"
+          placeholder="경매시간"
+          ref={ref => {
+            registerRef["time"] = ref;
+          }}
+        />
+        <button onClick={registerAuction}>경매등록하기</button>
       </div>
     </div>
   );

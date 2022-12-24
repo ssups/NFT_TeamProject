@@ -2,17 +2,16 @@ import React, { useEffect, useState, createContext } from "react";
 import Layout from "./components/Layout/Layout";
 import "./App.css";
 import useWeb3 from "./hooks/useWeb3";
-import useSsandeContracts from "./hooks/useSsandeContracts";
 
 const App = () => {
   // hooks
-  const [web3] = useWeb3();
+  const [web3, account, balance] = useWeb3();
 
   // states
   const netWorkId = 7722; // 컨트렉트 배포할 네트워크에 따라 다르게 설정 나중에 goerli에 배포하고나면 5로 바꾸면됨
   const [isNetWorkCorrect, setIsNetWorkCorrect] = useState();
-  const [account, setAccount] = useState();
-  const [balance, setBalance] = useState();
+  // const [account, setAccount] = useState();
+  // const [balance, setBalance] = useState();
 
   //useEffect
   useEffect(() => {
@@ -22,42 +21,51 @@ const App = () => {
       setIsNetWorkCorrect(netWorkId === chainId || 1337 === chainId);
 
       // 이미 지갑이 연결되어있는경우
-      const [account] = await window.ethereum.request({ method: "eth_accounts" });
-      if (account) {
-        setAccount(account);
-      }
+      // const [account] = await window.ethereum.request({ method: "eth_accounts" });
+      // if (account) {
+      //   setAccount(account);
+      // }
     })();
 
     // 메타마스크 지갑바꿨을때 이벤트
-    if (!window.ethereum._events["accountsChanged"])
-      // 이벤트쌓이는거 방지
-      window.ethereum.on("accountsChanged", async switchedAddress => {
-        // console.log(switchedAddress[0]);
-        setAccount(switchedAddress[0]);
-      });
+    // if (!window.ethereum._events["accountsChanged"])
+    //   // 이벤트쌓이는거 방지
+    //   window.ethereum.on("accountsChanged", async switchedAddress => {
+    //     console.log("hi");
+    //     console.log(switchedAddress[0]);
+    //     setAccount(switchedAddress[0]);
+    //   });
 
     // 네트워크 바꼈을때 이벤트
     if (!window.ethereum._events["chainChanged"])
       window.ethereum.on("chainChanged", async switchedChain => {
         switchedChain = parseInt(switchedChain, 16);
         setIsNetWorkCorrect(netWorkId === switchedChain || 1337 === switchedChain);
-        console.log(switchedChain);
+        // console.log(switchedChain);
       });
 
     return () => {
       delete window.ethereum._events["chainChanged"];
-      delete window.ethereum._events["accountsChanged"];
+      // delete window.ethereum._events["accountsChanged"];
     };
   }, []);
 
   // account바뀌면 잔액 다시 업데이트
+  // useEffect(() => {
+  //   (async () => {
+  //     if (!web3 || !account) return;
+  //     const balance = await web3.eth.getBalance(account);
+  //     setBalance(balance);
+  //   })();
+  // }, [web3, account]);
+
   useEffect(() => {
-    (async () => {
-      if (!web3 || !account) return;
-      const balance = await web3.eth.getBalance(account);
-      setBalance(balance);
-    })();
-  }, [web3, account]);
+    console.log(web3);
+  }, [web3]);
+
+  useEffect(() => {
+    console.log(account);
+  }, [account]);
 
   if (!isNetWorkCorrect) return <h1>네트워크를 맞게 설정하세요</h1>;
   return (
