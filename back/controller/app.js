@@ -8,7 +8,7 @@ const { sequelize } = require("../models");
 // 시퀄라이즈 테이블 생성 후에 DB 작업을 요청할 예정
 let isSequelizeDone = false;
 
-// axios 데이터 통신 시 필요
+// axios 데이터 통신 시 필요 (상단부 위치 중요..)
 app.use(cors({ origin: address }));
 app.use(express.json());
 

@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 import axios from "axios";
-import Modal from '../Modal/Modal';
+import Modal from "../Modal/Modal";
 
-const NftCard = ({ tokenId, tokenURI }) => {
+const NftCard = ({ tokenURI }) => {
   //
   const [moDal, setModal] = useState(false);
   const [tokenName, setTokenName] = useState();
@@ -28,10 +28,8 @@ const NftCard = ({ tokenId, tokenURI }) => {
   // ===========================================returns===========================================
   // =============================================================================================
 
-
   return (
     <div className="single_nft">
-
       <div className="nft_img">
         <img src={tokenImgUrl} className="w-100" />
       </div>
@@ -41,8 +39,7 @@ const NftCard = ({ tokenId, tokenURI }) => {
         {/* <h5 className="nft_title"><Link to={`/shop/${"여기에 상세 페이지 경로 입력해주세용"}`}>{name}</Link></h5> */}
         <h5 className="nft_title">{tokenName}</h5>
         <div className="creator_info d-flex align-items-center justify-content-between">
-          <div className="w-50">
-          </div>
+          <div className="w-50"></div>
         </div>
 
         {/* 
@@ -54,19 +51,17 @@ const NftCard = ({ tokenId, tokenURI }) => {
 */}
 
         <div className=" mt-3 d-flex align-items-center justify-content-between">
-          <button className="bid_btn d-flex align-items-center gap-1"
-            onClick={() => setModal(true)}>
+          <button className="bid_btn d-flex align-items-center gap-1" onClick={() => setModal(true)}>
             <i className="ri-shopping-bag-fill"></i>
-            버튼명</button>
+            버튼명
+          </button>
 
           {/* 버튼 클릭 시 모달창 */}
-          {moDal &&
-            <Modal setModal={setModal} />}
-
+          {moDal && <Modal setModal={setModal} />}
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default NftCard;
