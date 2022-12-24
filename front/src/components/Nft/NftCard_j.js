@@ -31,7 +31,7 @@ const NftCard = ({ tokenURI }) => {
   return (
     <div className="single_nft">
       <div className="nft_img">
-        <img src={tokenImgUrl} className="w-100" />
+        <img src={tokenImgUrl} className="w-100" alt=""/>
       </div>
 
       {/* 카드 정보 */}

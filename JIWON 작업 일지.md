@@ -324,13 +324,41 @@ Q11. 토큰의 소유주가 해당 거래에 대한 컨트랙트에 위임한다
 ## ⭕ 민팅 페이지 구현
 
 - 민팅 컴포넌트 생성
+
 - useWeb3() 및 useContext() 값은 리렌더링 되어도 변경되지 않음..
 
 - redux 구성
 
 - 민팅 컴포넌트 기능 구현 완료
+
+<br>
+
+---
+
+<br>
+
+## ⭕ 마이 페이지 구현
+
 - 마이 페이지 컴포넌트의 모든 보유 토큰 조회 기능 구현 완료
 
-- 보유 토큰에서 판매 및 경매 중인 토큰의 구별
+- 모든 보유 토큰에서 판매 중, 경매 중, 경매 정산 대상 토큰의 구분
+
 - 토큰의 전송 권한 위임 여부 확인 기능 구현 완료
 - 토큰의 전송 권한 위임 함수 작성
+
+<br>
+
+### ⭕ 마이 페이지의 토큰 분류 - classificationName
+
+<br>
+
+- 모든 보유 토큰 - myTokenURIs : tokensOfOwner() 함수 사용
+
+- 순수 보유 토큰 - myOwnToken
+- 판매 중인 토큰 - mySaleToken : isOnAuction() 함수 사용
+- 경매 중인 토큰 - myAuctionToken : isOnAuction() 함수 사용
+- 경매 정산 대상 토큰 - myNotClaimedAuctionToken : isNotClaimMatchedToken() 함수 사용
+
+<br>
+
+---
