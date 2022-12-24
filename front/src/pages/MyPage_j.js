@@ -3,14 +3,14 @@ import React, { useEffect, useContext, useState } from "react";
 // createContext 경로
 import { Context } from "../App";
 import { Col, Container, Row } from "reactstrap";
-import NftCard from "../components/Nft/NftCard_j";
+import MyPageNftCard from "../components/Nft/MyPageNftCard_j";
 
 // 1. 배포한 컨트랙트 인스턴스 확인
 // 2. 메타마스크 계정 연결 확인
 // 3. 연결된 계정의 보유 토큰 조회
 // 4. 보유 토큰에 대한 리렌더링
 
-// 1. 순수 보유 토큰 : 상품 등록 버튼, 경매 등록 버튼
+// 1. 순수 보유 토큰 : 판매 등록 버튼, 경매 등록 버튼
 // 2. 판매 중인 보유 토큰 : 판매 취소 버튼
 // 3. 경매 진행 중인 보유 토큰 (낙찰 취소 기능 없음)
 // 4. 경매 종료 후 정산 하기 전 보유 토큰 : 정산 받기 버튼
@@ -111,14 +111,14 @@ const MyPage = () => {
       //
       return (
         <Col lg="3" md="4" sm="6" className="mb-4">
-          <NftCard key={tokenId} tokenURI={tokenURI} classificationName={classificationName} setApprovalForAllFn={setApprovalForAllFn} />
+          <MyPageNftCard key={tokenId} tokenURI={tokenURI} classificationName={classificationName} setApprovalForAllFn={setApprovalForAllFn} />
         </Col>
       );
     }
 
     return (
       <Col lg="3" md="4" sm="6" className="mb-4">
-        <NftCard key={tokenId} tokenURI={tokenURI} classificationName={classificationName} />
+        <MyPageNftCard key={tokenId} tokenURI={tokenURI} classificationName={classificationName} />
       </Col>
     );
   }

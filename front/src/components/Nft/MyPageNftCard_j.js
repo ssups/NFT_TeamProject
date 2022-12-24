@@ -2,13 +2,28 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import axios from "axios";
-import Modal from "../Modal/Modal";
+import MyPageModal from "../Modal/MyPageModal_j";
 
-const NftCard = ({ tokenURI }) => {
+const MyPageNftCard = ({ tokenURI, classificationName, setApprovalForAllFn }) => {
   //
-  const [moDal, setModal] = useState(false);
   const [tokenName, setTokenName] = useState();
   const [tokenImgUrl, setTokenImgUrl] = useState();
+  const [registerSaleModal, setRegisterSaleModal] = useState(false);
+  const [registerAuctionModal, setRegisterAuctionModal] = useState(false);
+
+  // ==========================================functions==========================================
+  // =============================================================================================
+
+  function getNftCardJsxFn(title, modal, setModal) {
+    return (
+      <div className=" mt-3 d-flex align-items-center justify-content-between">
+        <button className="bid_btn d-flex align-items-center gap-1" onClick={() => setModal(true)}>
+          💎 {title}
+        </button>
+        {modal && <MyPageModal title={title} setModal={setModal} />}
+      </div>
+    )
+  }
 
   // ==========================================useEffect==========================================
   // =============================================================================================
@@ -31,7 +46,7 @@ const NftCard = ({ tokenURI }) => {
   return (
     <div className="single_nft">
       <div className="nft_img">
-        <img src={tokenImgUrl} className="w-100" alt=""/>
+        <img src={tokenImgUrl} className="w-100" alt="" />
       </div>
 
       {/* 카드 정보 */}
@@ -44,24 +59,30 @@ const NftCard = ({ tokenURI }) => {
 
         {/* 
 필요한 버튼
-1. 순수 보유 토큰 : 상품 등록 버튼, 경매 등록 버튼
+1. 순수 보유 토큰 : 판매 등록 버튼, 경매 등록 버튼
 2. 판매 중인 보유 토큰 : 판매 취소 버튼
 3. 경매 진행 중인 보유 토큰 (낙찰 취소 기능 없음)
 4. 경매 종료 후 정산 하기 전 보유 토큰 : 정산 받기 버튼
 */}
 
-        <div className=" mt-3 d-flex align-items-center justify-content-between">
-          <button className="bid_btn d-flex align-items-center gap-1" onClick={() => setModal(true)}>
-            <i className="ri-shopping-bag-fill"></i>
-            버튼명
-          </button>
+        {classificationName === "myOwnToken" &&
+          <>
+            {getNftCardJsxFn("판매 상품으로 등록하기", registerSaleModal, setRegisterSaleModal)}
+            {getNftCardJsxFn("경매 상품으로 등록하기", registerAuctionModal, setRegisterAuctionModal)}
+          </>
+        }
 
-          {/* 버튼 클릭 시 모달창 */}
-          {moDal && <Modal setModal={setModal} />}
-        </div>
+        {classificationName === "mySaleToken" &&
+          getNftCardJsxFn("판매 등록 취소하기")
+        }
+
+        {classificationName === "myNotClaimedAuctionToken" &&
+          getNftCardJsxFn("경매 낙찰 상품 정산 받기")
+        }
+
       </div>
     </div>
   );
 };
 
-export default NftCard;
+export default MyPageNftCard;
