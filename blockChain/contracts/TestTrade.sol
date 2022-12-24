@@ -27,6 +27,7 @@ contract TestTrade is Ownable{
         Token = TestToken(tokenAddress_);
     }
 
+    event RegisterForAuction(uint256 tokenId);
     event BidOnAuction(uint256 tokenId, uint256 bidPrice , address bider);
     event RefundBid(uint256 tokenId, address failedBider);
 
@@ -180,6 +181,8 @@ contract TestTrade is Ownable{
         uint256 endTime = block.timestamp + lastingMinutes * 60;
 
         _tokensOnAuction[tokenId] = AuctionInfo(minimumPrice, endTime, address(0)); // 최초에 입찰한사람 없음으로 입찰한 계정은 address(0) 
+
+        emit RegisterForAuction(tokenId);
     }
 
     // 경매에 입찰하기(테스트완료)
