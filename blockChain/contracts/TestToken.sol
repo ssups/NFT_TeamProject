@@ -30,14 +30,20 @@ contract TestToken is  ERC721A, Ownable, ReentrancyGuard {
       _;
     }
 
+    function getCA() external view returns(address){
+      return(address(this));
+    }
+
     function setMintOn(uint256 price) external onlyOwner {
       // wei 단위
       require(price > 0,"sale price must greater than 0");
+      require(price != mintPrice,"set different price");
       mintPrice = price;
       emit SetMintOn(mintPrice, isMintOn());
     }
 
     function setMintOff(uint256 price) external onlyOwner {
+      require (mintPrice != 0, "mint has not started yet");
       require (price == 0, "set price 0");
       mintPrice = 0;
     }

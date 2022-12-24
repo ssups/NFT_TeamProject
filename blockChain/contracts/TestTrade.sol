@@ -30,6 +30,11 @@ contract TestTrade is Ownable{
     event BidOnAuction(uint256 tokenId, uint256 bidPrice , address bider);
     event RefundBid(uint256 tokenId, address failedBider);
 
+    // CA값 받기
+    function getCA() external view returns(address){
+      return(address(this));
+    }
+
     // 판매수수료 재설정
     function setSaleFeeRate(uint256 rate) external onlyOwner {
         saleFeeRate = rate;
@@ -166,8 +171,8 @@ contract TestTrade is Ownable{
     function registerForAuction(uint256 tokenId, uint256 minimumPrice, uint256 lastingMinutes) external {
         require(Token.ownerOf(tokenId) == msg.sender, "caller is not owner");
         require(minimumPrice >= 0.001 ether, "minimumPrice must be greater thans 0.001 ether"); // 이거 경매입찰할떄 최소단위 통과조건때문에 필요함
-        require(priceOfOnSale(tokenId) <= 0, "this token is already on Sale"); // 일반판매중인 토큰은 경매등록 불가
-        require(dataOfOnAuction(tokenId).endTime < block.timestamp, "this token is already on auction"); // 경매 중복등록 불가
+        require(_tokensOnSale[tokenId] <= 0, "this token is already on Sale"); // 일반판매중인 토큰은 경매등록 불가
+        require(_tokensOnAuction[tokenId].endTime < block.timestamp, "this token is already on auction"); // 경매 중복등록 불가
         // 프론트에서 Nft 컨트렉트에 있는 setApprovalForAll(address operator, bool approved)
         // 이거 operator에 이 컨트렉트 CA 넣어서 프론트에서 먼저 실행시켜줘야함.
         require(Token.isApprovedForAll(msg.sender, address(this)), "not approved");
