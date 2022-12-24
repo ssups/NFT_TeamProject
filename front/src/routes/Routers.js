@@ -10,9 +10,13 @@ import NftDetail from "../pages/NftDetail";
 import Brand from "../components/Brand/Brand";
 import TopFold from "../components/TopFold/TopFold";
 
-import MyNfts from "../components/minseop/MyNfts_j";
-import NftInfo from "../components/minseop/NftInfo_j";
-import Minting from "../components/minseop/Minting_j";
+import MyNfts from "../components/minseop/MyNfts_unused";
+import NftInfo from "../components/minseop/NftInfo_unused";
+import Minting from "../components/minseop/Minting_unused";
+import MyPage from "../pages/MyPage_j";
+
+import Minseop from "../components/minseop/minseop";
+import SeopMy from "../components/minseop/seopMy";
 
 import Minseop from "../components/minseop/minseop";
 import SeopMy from "../components/minseop/seopMy";
@@ -48,6 +52,7 @@ const Routers = () => {
       <Route path="/1" element={<MyNfts />} />
       <Route path="/2" element={<NftInfo />} />
       <Route path="/3" element={<Minting />} />
+      <Route path="/4" element={<MyPage />} />
     </Routes>
   );
 };

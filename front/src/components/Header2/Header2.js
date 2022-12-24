@@ -3,7 +3,7 @@ import { NavLink, Link } from "react-router-dom";
 import "../../styles/header2.css";
 
 import { Container } from "reactstrap";
-import { Context } from "../Layout/Layout";
+
 //헤더 링크
 const Nav_Link = [
   {
@@ -21,8 +21,8 @@ const Nav_Link = [
 ];
 
 const Header2 = () => {
-  const { web3 } = useContext(Context);
-  // 지갑연결 함수
+  //
+  // 메타마스크 지갑 연결에 대한 함수 (지갑 연동 버튼 클릭 시)
   async function connectWallet() {
     await window.ethereum.request({
       method: "eth_requestAccounts",

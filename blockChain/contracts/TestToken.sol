@@ -37,6 +37,11 @@ contract TestToken is  ERC721A, Ownable, ReentrancyGuard {
       emit SetMintOn(mintPrice, isMintOn());
     }
 
+    function setMintOff(uint256 price) external onlyOwner {
+      require (price == 0, "set price 0");
+      mintPrice = 0;
+    }
+
     function isMintOn() public view returns(bool) {
       return mintPrice != 0; 
     }
