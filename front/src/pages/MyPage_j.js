@@ -70,10 +70,10 @@ const MyPage = () => {
   // 마이 페이지의 토큰 분류 - classificationName
   // 모든 보유 토큰 - myTokenURIs : tokensOfOwner() 함수 사용
 
-  // 순수 보유 토큰 - myOwnToken
-  // 판매 중인 토큰 - mySaleToken : onSaleList() 함수 사용
-  // 경매 중인 토큰 - myAuctionToken : onAuctionList() 함수 사용
-  // 경매 정산 대상 토큰 - myNotClaimedAuctionToken : notClaimedAuctionList() 함수 사용
+  // 순수 보유 토큰 - myOwnTokenIds
+  // 판매 중인 토큰 - mySaleTokenIds : onSaleList() 함수 사용
+  // 경매 중인 토큰 - myAuctionTokenIds : onAuctionList() 함수 사용
+  // 경매 정산 대상 토큰 - myNotClaimedAuctionTokenIds : notClaimedAuctionList() 함수 사용
 
   async function classifyMyTokensFn() {
     // myTokenURIs
