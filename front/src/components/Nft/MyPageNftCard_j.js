@@ -7,7 +7,7 @@ import MyPageModal from "../Modal/MyPageModal_j";
 const MyPageNftCard = ({ tokenId, tokenURI, classificationName, setApprovalForAllFn }) => {
   //
   const { web3, account, tradeContract } = useContext(Context);
-
+  
   const [tokenName, setTokenName] = useState();
   const [tokenImgUrl, setTokenImgUrl] = useState();
   const [registerSaleModal, setRegisterSaleModal] = useState(false);
@@ -41,7 +41,7 @@ const MyPageNftCard = ({ tokenId, tokenURI, classificationName, setApprovalForAl
   }
 
   // 보유 토큰의 분류명에 따라 버튼에 대한 JSX를 반환하는 함수
-  function getNftCardJsxFn(title, modal, setModal, buttonFn) {
+  function getNftCardJsxFn(title, modal, setModal, tokenId, buttonFn) {
     return (
       <div className=" mt-3 d-flex align-items-center justify-content-between">
         <button className="bid_btn d-flex align-items-center gap-1"
@@ -53,7 +53,7 @@ const MyPageNftCard = ({ tokenId, tokenURI, classificationName, setApprovalForAl
 
           💎 {title}
         </button>
-        {modal && <MyPageModal title={title} setModal={setModal} />}
+        {modal && <MyPageModal title={title} setModal={setModal} tokenId={tokenId}/>}
       </div>
     )
   }
@@ -100,17 +100,17 @@ const MyPageNftCard = ({ tokenId, tokenURI, classificationName, setApprovalForAl
 
         {classificationName === "myOwnToken" &&
           <>
-            {getNftCardJsxFn("판매 상품으로 등록하기", registerSaleModal, setRegisterSaleModal)}
-            {getNftCardJsxFn("경매 상품으로 등록하기", registerAuctionModal, setRegisterAuctionModal)}
+            {getNftCardJsxFn("판매 상품으로 등록하기", registerSaleModal, setRegisterSaleModal, tokenId)}
+            {getNftCardJsxFn("경매 상품으로 등록하기", registerAuctionModal, setRegisterAuctionModal, tokenId)}
           </>
         }
 
         {classificationName === "mySaleToken" &&
-          getNftCardJsxFn("판매 등록 취소하기", "", "", deregisterSaleToken)
+          getNftCardJsxFn("판매 등록 취소하기", "", "", "", deregisterSaleToken)
         }
 
         {classificationName === "myNotClaimedAuctionToken" &&
-          getNftCardJsxFn("경매 낙찰 상품 정산 받기", "", "", claimMatchedToken)
+          getNftCardJsxFn("경매 낙찰 상품 정산 받기", "", "", "", claimMatchedToken)
         }
 
       </div>

@@ -55,7 +55,7 @@ const MintingModal = ({ setModal }) => {
         const _price = _mintingPrice.current.value;
 
         if (_price <= 0) {
-            alert("0 ether 이상의 금액을 설정해야 합니다.");
+            alert("0 이더 이하의 금액은 설정할 수 없습니다.");
             return;
         }
 
@@ -68,7 +68,7 @@ const MintingModal = ({ setModal }) => {
         }
 
         await tokenContract.methods.setMintOn(price).send({ from: account });
-        alert("가격 설정 완료이 완료되었습니다.");
+        alert("가격 설정이 완료되었습니다.");
     }
 
     // 블록체인 상에 설정된 민팅 가격 조회 함수
