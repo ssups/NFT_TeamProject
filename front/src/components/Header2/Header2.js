@@ -33,7 +33,6 @@ const Header2 = () => {
   const headerRef = useRef(null);
 
   useEffect(() => {
-    console.log("hihihi");
     window.addEventListener("scroll", () => {
       if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
         headerRef.current.classList.add("header2_stick");

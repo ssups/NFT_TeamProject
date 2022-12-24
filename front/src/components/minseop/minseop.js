@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import useWeb3 from "../../hooks/useWeb3";
-import TestTokenContract from "../../contracts_seop/TestToken.json";
+import TestTokenContract from "../../contracts/TestToken.json";
 import useContract from "../../hooks/useContract";
 
 const Minseop = () => {
   // hooks
-  const [account, web3, balance] = useWeb3();
+  const [web3, account, balance] = useWeb3();
 
   const netWorkId = 7722;
   const testTokenInstance = useContract(
@@ -140,7 +140,8 @@ const Minseop = () => {
   //   // ===========================================returns===========================================
   //   // =============================================================================================
 
-  if (!account) return <h1>메타마스크 연결하세요</h1>;
+  // console.log(account);
+  if (!account) return <h1>지갑 연결하세요</h1>;
   return (
     <div>
       {account?.toLowerCase() === owner?.toLowerCase() && (

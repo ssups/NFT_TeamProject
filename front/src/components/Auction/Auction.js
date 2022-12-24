@@ -15,7 +15,7 @@ const Auction = () => {
                 <div className="auction_top d-flex align-items-center
                 justify-content-between">
                     <h3>NFT</h3>
-                    <span><Link to='shop'>Explore</Link></span>
+                    <span><Link to='/shop'>Explore</Link></span>
                 </div>
             </Col>
 

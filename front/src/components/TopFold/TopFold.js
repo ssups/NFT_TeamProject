@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import "../../styles/topfold.css"
 import Modal from '../Modal/Modal'
+import {Link} from "react-router-dom"
+
 
 
 const TopFold = () => {
@@ -19,7 +21,7 @@ const TopFold = () => {
         <div className='tf-r-bg-blob'></div>
       </div>
       <div className='tf-btns'>
-       <button className='bbtn1'>둘러보기</button>
+      <Link to='/shop'> <button className='bbtn1'>Explore</button></Link>
        <button onClick={()=> setModal(true)} className='bbtn2'>민팅하기</button>
        
         {moDal && <Modal setModal={setModal}/>} 

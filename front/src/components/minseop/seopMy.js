@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Nft from "./nft";
 import useWeb3 from "../../hooks/useWeb3";
 import useContract from "../../hooks/useContract";
-import TestTokenContract from "../../contracts_seop/TestToken.json";
+import TestTokenContract from "../../contracts/TestToken.json";
+
+import { Context } from "../Layout/Layout";
 
 const SeopMy = () => {
   // hooks
-  const [account, web3, balance] = useWeb3();
+  const { account, web3, balance } = useContext(Context);
   const netWorkId = 7722;
   const testTokenInstance = useContract(
     TestTokenContract.abi,
