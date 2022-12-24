@@ -212,7 +212,8 @@ const MintingModal = ({ setModal }) => {
                     <p className="text-center text-light">민팅 가격이 설정되지 않아 민팅을 진행할 수 없습니다.</p>
                 }
 
-                {isOwner && totalSupply !== maxSupply &&
+                {isOwner &&
+                    totalSupply !== maxSupply &&
                     <>
                         <p className="text-center text-light">배포자님, 민팅 가격을 설정하시겠습니까?</p>
 
@@ -226,7 +227,8 @@ const MintingModal = ({ setModal }) => {
                     </>
                 }
 
-                {isMintOn && totalSupply !== maxSupply &&
+                {isMintOn &&
+                    totalSupply !== maxSupply &&
                     <>
                         <p className="text-center text-light">한 번에 '{maxMinting}개'까지 민팅 가능합니다.<br />1개를 민팅하는 데 발생하는 가스비만으로,<br />무려 {maxMinting}개를 민팅할 수 있다는 게 사실? 사실!</p>
                         <p className="text-center text-light">민팅 1개당 가격 : {mintingPrice && web3.utils.fromWei(mintingPrice, "ether")} ether</p>
@@ -243,7 +245,8 @@ const MintingModal = ({ setModal }) => {
                     </>
                 }
 
-                {isMintOn && totalSupply === maxSupply &&
+                {isMintOn &&
+                    totalSupply === maxSupply &&
                     <p className="text-center text-light">최대 발행 수량을 초과하여 더 이상의 민팅이 불가합니다.</p>
                 }
 
