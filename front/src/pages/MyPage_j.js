@@ -17,8 +17,6 @@ import NftCard from "../components/Nft/NftCard_j";
 
 const MyPage = () => {
   //
-  // 토큰 전송의 권한 위임 여부 확인 및 설정 기능
-
   const [myTokenURIs, setMyTokenURIs] = useState();
   const [isApprovedForAll, setIsApprovedForAll] = useState(false);
   const { account, tokenContract, tradeContract } = useContext(Context);
@@ -26,6 +24,7 @@ const MyPage = () => {
   // ==========================================functions==========================================
   // =============================================================================================
 
+  // 토큰의 전송 권한 위임 여부에 대한 함수
   async function getIsApprovedForAllFn() {
     //
     const ca = await tradeContract.methods.getCA().call();
@@ -34,6 +33,7 @@ const MyPage = () => {
     return isApprovedForAll;
   }
 
+  // 토큰의 전송 권한 위임 설정에 대한 함수
   async function setApprovalForAllFn() {
     //
     if (isApprovedForAll) return;
@@ -70,15 +70,31 @@ const MyPage = () => {
   // 마이 페이지의 토큰 분류 - classificationName
   // 모든 보유 토큰 - myTokenURIs : tokensOfOwner() 함수 사용
 
-  // 순수 보유 토큰 - myOwnTokenIds
-  // 판매 중인 토큰 - mySaleTokenIds : onSaleList() 함수 사용
-  // 경매 중인 토큰 - myAuctionTokenIds : onAuctionList() 함수 사용
-  // 경매 정산 대상 토큰 - myNotClaimedAuctionTokenIds : notClaimedAuctionList() 함수 사용
+  // 순수 보유 토큰 - myOwnToken
+  // 판매 중인 토큰 - mySaleToken : onSaleList() 함수 사용
+  // 경매 중인 토큰 - myAuctionToken : onAuctionList() 함수 사용
+  // 경매 정산 대상 토큰 - myNotClaimedAuctionToken : notClaimedAuctionList() 함수 사용
 
+  // 마이페이지의 보유 토큰을 분류하는 함수
   async function classifyMyTokensFn(tokenId) {
     //
-    // myTokenURIs
-    const isSaleToken = await tradeContract.methods.isOnAuction(tokenId).call();
+    // 블록체인 상에서 판매와 경매는 중복으로 등록 불가
+    const isSaleToken = await tradeContract.methods.isOnSale(tokenId).call();
+    if (isSaleToken) {
+      return getMyTokenJSXFn(tokenId, "mySaleToken");
+    }
+
+    const isAuctionToken = await tradeContract.methods.isOnAuction(tokenId).call();
+    if (isAuctionToken) {
+      return getMyTokenJSXFn(tokenId, "myAuctionToken");
+    }
+
+    const isNotClaimMatchedToken = await tradeContract.methods.isNotClaimMatchedToken(tokenId).call();
+    if (isNotClaimMatchedToken) {
+      return getMyTokenJSXFn(tokenId, "myNotClaimedAuctionToken");
+    }
+
+    return getMyTokenJSXFn(tokenId, "myOwnToken");
   }
 
   // 토큰의 전송 권한 위임 여부 확인이 필요한 지 여부에 따라 분류하여 JSX를 반환하는 함수
@@ -154,7 +170,7 @@ const MyPage = () => {
             </div>
           </Col>
           {/*  */}
-          {myTokenURIs && Object.keys(myTokenURIs).map((tokenId) => getMyTokenJSXFn(tokenId, "토큰 분류명"))}
+          {myTokenURIs && Object.keys(myTokenURIs).map((tokenId) => classifyMyTokensFn(tokenId))}
           {/*  */}
         </Row>
       </Container>
