@@ -30,6 +30,7 @@ contract TestTrade is Ownable{
     event RegisterForAuction(uint256 tokenId);
     event BidOnAuction(uint256 tokenId, uint256 bidPrice , address bider);
     event RefundBid(uint256 tokenId, address failedBider);
+    event ClaimMatchedAuction(uint256 tokenId, address caller);
 
     // CA값 받기
     function getCA() external view returns(address){
@@ -41,12 +42,18 @@ contract TestTrade is Ownable{
         saleFeeRate = rate;
     } 
 
+    // 일반판매중인지 확인하는 함수
+    function isOnSale(uint256 tokenId) public view returns(bool) {
+        return (_tokensOnSale[tokenId] != 0);
+        // 판매중이면 true 아니면 false
+    }
+
     // 일반판매중인 토큰 갯수(테스트완료)
     function _countOnSale() private view returns(uint256) {
         uint256 count;
 
         for(uint tokenId = 1; tokenId <= Token.totalSupply(); tokenId++) {
-            if(_tokensOnSale[tokenId] != 0) count ++;
+            if(isOnSale(tokenId)) count ++;
         }
 
         return count;
@@ -58,7 +65,7 @@ contract TestTrade is Ownable{
         uint256 index = 0;
 
         for(uint tokenId = 1; tokenId <= Token.totalSupply(); tokenId++) {
-            if(_tokensOnSale[tokenId] != 0) {
+            if(isOnSale(tokenId)) {
                 tokensOnSale[index] = tokenId;
                 index ++;
             }
@@ -125,13 +132,10 @@ contract TestTrade is Ownable{
         uint256 count;
 
         for(uint tokenId = 1; tokenId <= Token.totalSupply(); tokenId++) {
-            uint256 lastBidPrice = _tokensOnAuction[tokenId].lastBidPrice;
-            uint256 endTime = _tokensOnAuction[tokenId].endTime;
-
-            if(lastBidPrice != 0 && endTime > block.timestamp) {
+            if(_isOnAuction(tokenId)) {
                 count ++;
-            } // lastBidPrice가 0이면 경매등록 안된걸로 인식
-              // endTime 이 block.timestamp 보다 작으면은 경매가 만료된거다.
+            }
+            // endTime 이 block.timestamp 보다 작으면은 경매가 만료된거다.
         }
 
         return count;
@@ -143,14 +147,11 @@ contract TestTrade is Ownable{
         uint256 index = 0;
 
         for(uint tokenId = 1; tokenId <= Token.totalSupply(); tokenId++) {
-            uint256 lastBidPrice = _tokensOnAuction[tokenId].lastBidPrice;
-            uint256 endTime = _tokensOnAuction[tokenId].endTime;
-
-            if(lastBidPrice != 0 && endTime > block.timestamp) {
+            if(_isOnAuction(tokenId)) {
                 tokensOnAuction[index] = tokenId;
                 index ++;
-            } // lastBidPrice가 0이면 경매등록 안된걸로 인식
-              // endTime 이 block.timestamp 보다 작으면은 경매가 만료된거다.
+            } 
+            // endTime 이 block.timestamp 보다 작으면은 경매가 만료된거다.
         }
 
         return tokensOnAuction;
@@ -172,7 +173,7 @@ contract TestTrade is Ownable{
     function registerForAuction(uint256 tokenId, uint256 minimumPrice, uint256 lastingMinutes) external {
         require(Token.ownerOf(tokenId) == msg.sender, "caller is not owner");
         require(minimumPrice >= 0.001 ether, "minimumPrice must be greater thans 0.001 ether"); // 이거 경매입찰할떄 최소단위 통과조건때문에 필요함
-        require(_tokensOnSale[tokenId] <= 0, "this token is already on Sale"); // 일반판매중인 토큰은 경매등록 불가
+        require(!isOnSale(tokenId), "this token is already on Sale"); // 일반판매중인 토큰은 경매등록 불가
         require(_tokensOnAuction[tokenId].endTime < block.timestamp, "this token is already on auction"); // 경매 중복등록 불가
         // 프론트에서 Nft 컨트렉트에 있는 setApprovalForAll(address operator, bool approved)
         // 이거 operator에 이 컨트렉트 CA 넣어서 프론트에서 먼저 실행시켜줘야함.
@@ -233,10 +234,18 @@ contract TestTrade is Ownable{
         // require(lastBidPrice > 0, "acution already ended"); // 이미 경매기간 
     }
 
+    // 정산대상인지 확인하는 함수
+    function isNeedToClaim(uint256 tokenId) external view returns(bool){
+        uint256 endTime = _tokensOnAuction[tokenId].endTime;
+        address bider = _tokensOnAuction[tokenId].bider;
+
+        return(bider != address(0) && endTime < block.timestamp);
+        // 정산대상이면 true 아니면 false
+    }
+
     // 입찰성공한사람 토큰(NFT) 클레임할수있게 해주기(경매기간끝났을때)
     // 경매판매성공한사람 판매금액 클레임할수있게 해주기
     // 둘중 한사람만 실행하면 된다.
-    event ClaimMatchedAuction(uint256 tokenId, address caller);
     function claimMatchedAuction(uint256 tokenId) external {
         uint256 endTime = _tokensOnAuction[tokenId].endTime;
         uint256 lastBidPrice = _tokensOnAuction[tokenId].lastBidPrice;
@@ -245,7 +254,7 @@ contract TestTrade is Ownable{
 
         require(endTime < block.timestamp, "auction not ended");
         require(lastBidPrice != 0, "this token did not registered on auction");
-        require(bider != address(0), "this token auction has failed");
+        require(bider != address(0), "already claimed or failed auction");
         require(msg.sender == bider || msg.sender == tokenOwner , "caller is not highest bider nor seller");
 
         // 경매 등록자 판매금 주기
