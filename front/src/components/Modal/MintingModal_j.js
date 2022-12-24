@@ -28,6 +28,7 @@ const MintingModal = ({ setModal }) => {
     const _mintingPrice = useRef();
     const _mintingQuantity = useRef();
 
+    // 초기값 undefined
     const [maxSupply, setMaxSupply] = useState();
     const [maxMinting, setMaxMinting] = useState();
     const [isMintOn, setIsMintOn] = useState(false);
@@ -40,9 +41,7 @@ const MintingModal = ({ setModal }) => {
     // 배포자인지 확인하는 함수
     async function isOwnerFn() {
         const owner = await tokenContract.methods.owner().call();
-        // 대소문자 확인..
-        console.log(owner, account)
-        return owner === account;
+        return owner.toLowerCase() === account.toLowerCase();
     }
 
     // 민팅의 가격 설정 여부 확인 함수
@@ -53,13 +52,22 @@ const MintingModal = ({ setModal }) => {
     // 민팅의 가격을 설정하는 함수
     async function setMintOnFn() {
 
-        if (_mintingPrice <= 0) {
+        const _price = _mintingPrice.current.value;
+
+        if (_price <= 0) {
             alert("0 ether 이상의 금액을 설정해야 합니다.");
             return;
         }
 
-        const price = web3.utils.toWei(_mintingPrice, "ether");
-        await tokenContract.methods.setMintOn(price).send();
+        // wei 단위로 변환
+        const price = web3.utils.toWei(_price, "ether");
+
+        if (price === mintingPrice) {
+            alert("이미 설정된 가격과 동일합니다.");
+            return;
+        }
+
+        await tokenContract.methods.setMintOn(price).send({ from: account });
         alert("가격 설정 완료!");
     }
 
@@ -105,16 +113,15 @@ const MintingModal = ({ setModal }) => {
             return;
         }
 
-        const payment = web3.utils.toWei(mintingPrice, "ether");
-
-        // wei 단위..
+        // wei 단위
+        const payment = mintingPrice * quantity;
         if (balance < payment) {
             alert("잔액이 부족합니다.");
             return;
         }
 
         // require..
-        await tokenContract.methods.mintTestToken().send({ value: payment });
+        await tokenContract.methods.mintTestToken(quantity).send({ from: account, value: payment });
         alert(`민팅 ${quantity}개 성공!`);
     }
 
@@ -124,6 +131,7 @@ const MintingModal = ({ setModal }) => {
     //
     useEffect(() => {
         //
+        // 초기값
         console.log(account);
 
         if (!account) return;
@@ -137,8 +145,8 @@ const MintingModal = ({ setModal }) => {
     //
     useEffect(() => {
         //
-        // 초기값 undefined
-        // console.log(tokenContract);
+        // 초기값
+        console.log(tokenContract);
 
         if (!tokenContract) return;
 
@@ -221,8 +229,9 @@ const MintingModal = ({ setModal }) => {
                 {isMintOn && totalSupply !== maxSupply &&
                     <>
                         <p className="text-center text-light">한 번에 '{maxMinting}개'까지 민팅 가능합니다.<br />1개를 민팅하는 데 발생하는 가스비만으로,<br />무려 {maxMinting}개를 민팅할 수 있다는 게 사실? 사실!</p>
-                        <p className="text-center text-light">민팅 1개당 가격 : {mintingPrice}</p>
-                        <p className="text-center text-light">SSAN DE NFT 현재 발행량 : {totalSupply} / {maxSupply}</p>
+                        <p className="text-center text-light">민팅 1개당 가격 : {mintingPrice && web3.utils.fromWei(mintingPrice, "ether")} ether</p>
+                        <p className="text-center text-light">현재 발행량 : {totalSupply}</p>
+                        <p className="text-center text-light">최대 발행량 : {maxSupply}</p>
 
                         <div className="input_item mb-4">
                             <input type="number" placeholder='한 번에 민팅할 개수를 입력하세요.' min={1} max={maxMinting} ref={_mintingQuantity} />
