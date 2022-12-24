@@ -1,11 +1,15 @@
 import React, { useEffect, useState, createContext } from "react";
-import Layout from "./components/Layout/Layout";
 import "./App.css";
+
 import useWeb3 from "./hooks/useWeb3";
+import Layout from "./components/Layout/Layout";
+import useSsandeContracts from "./hooks/useSsandeContracts";
 
 const App = () => {
+  //
   // hooks
   const [web3, account, balance] = useWeb3();
+  const [tokenContract, tradeContract] = useSsandeContracts();
 
   // states
   const netWorkId = 7722; // 컨트렉트 배포할 네트워크에 따라 다르게 설정 나중에 goerli에 배포하고나면 5로 바꾸면됨
@@ -13,7 +17,7 @@ const App = () => {
   // const [account, setAccount] = useState();
   // const [balance, setBalance] = useState();
 
-  //useEffect
+  // useEffect
   useEffect(() => {
     (async () => {
       // 블록체인 네트워크 우리가 컨트렉트 배포한 네트워크인지 확인
