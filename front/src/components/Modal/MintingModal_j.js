@@ -29,9 +29,9 @@ const MintingModal = ({ setModal }) => {
     const _mintingQuantity = useRef();
 
     // 초기값 undefined
+    const [isMintOn, setIsMintOn] = useState();
     const [maxSupply, setMaxSupply] = useState();
     const [maxMinting, setMaxMinting] = useState();
-    const [isMintOn, setIsMintOn] = useState(false);
     const [totalSupply, setTotalSupply] = useState();
     const [mintingPrice, setMintingPrice] = useState();
 
@@ -184,14 +184,10 @@ const MintingModal = ({ setModal }) => {
     //
     useEffect(() => {
         //
-        // 초기값 false
-        console.log(isMintOn)
-
         if (!isMintOn) return;
 
-        (async () => {
-            setMintingPrice(await getMintingPriceFn());
-        })();
+        (async () => setMintingPrice(await getMintingPriceFn()))();
+        
     }, [isMintOn]);
 
     //

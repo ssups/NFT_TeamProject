@@ -75,8 +75,10 @@ const MyPage = () => {
   // 경매 중인 토큰 - myAuctionTokenIds : onAuctionList() 함수 사용
   // 경매 정산 대상 토큰 - myNotClaimedAuctionTokenIds : notClaimedAuctionList() 함수 사용
 
-  async function classifyMyTokensFn() {
+  async function classifyMyTokensFn(tokenId) {
+    //
     // myTokenURIs
+    const isSaleToken = await tradeContract.methods.isOnAuction(tokenId).call();
   }
 
   // 토큰의 전송 권한 위임 여부 확인이 필요한 지 여부에 따라 분류하여 JSX를 반환하는 함수
@@ -100,24 +102,6 @@ const MyPage = () => {
         <NftCard key={tokenId} tokenURI={myTokenURIs[tokenId]} classificationName={classificationName} />
       </Col>
     );
-  }
-
-  async function getMySaleTokenIdsFn() {
-    const mySaleTokenIds = await tradeContract.methods.onSaleList(account).call();
-    console.log(mySaleTokenIds);
-    return mySaleTokenIds;
-  }
-
-  async function getMyAuctionTokenIdsFn() {
-    const myAuctionTokenIds = await tradeContract.methods.onAuctionList(account).call();
-    console.log(myAuctionTokenIds);
-    return myAuctionTokenIds;
-  }
-
-  async function getMyNotClaimedAuctionTokenIdsFn() {
-    const myNotClaimedAuctionTokenIds = await tradeContract.methods.notClaimedAuctionList(account).call();
-    console.log(myNotClaimedAuctionTokenIds);
-    return myNotClaimedAuctionTokenIds;
   }
 
   // 토큰 컨트랙트나 계정이 없을 경우에 사용할 JSX를 반환하는 함수
