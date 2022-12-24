@@ -71,9 +71,13 @@ const MyPage = () => {
   // 모든 보유 토큰 - myTokenURIs : tokensOfOwner() 함수 사용
 
   // 순수 보유 토큰 - myOwnToken
-  // 판매 중인 토큰 - mySaleToken : onSaleList() 함수 사용
-  // 경매 중인 토큰 - myAuctionToken : onAuctionList() 함수 사용
-  // 경매 정산 대상 토큰 - myNotClaimedAuctionToken : notClaimedAuctionList() 함수 사용
+  // 판매 중인 토큰 - mySaleToken : isOnAuction() 함수 사용
+  // 경매 중인 토큰 - myAuctionToken : isOnAuction() 함수 사용
+  // 경매 정산 대상 토큰 - myNotClaimedAuctionToken : isNotClaimMatchedToken() 함수 사용
+
+  async function getMyTokenFn() {
+    await Promise.all(Object.keys(myTokenURIs).map((tokenId) => classifyMyTokensFn(tokenId)));
+  }
 
   // 마이페이지의 보유 토큰을 분류하는 함수
   async function classifyMyTokensFn(tokenId) {
@@ -130,7 +134,6 @@ const MyPage = () => {
 
   useEffect(() => {
     //
-    // context 데이터를 가져오기까지 시간 소요 (undefined 거치는)
     // 초기값 / undefined
     console.log(tokenContract, account);
 
@@ -170,7 +173,7 @@ const MyPage = () => {
             </div>
           </Col>
           {/*  */}
-          {myTokenURIs && Object.keys(myTokenURIs).map((tokenId) => classifyMyTokensFn(tokenId))}
+          {myTokenURIs && getMyTokenFn()}
           {/*  */}
         </Row>
       </Container>

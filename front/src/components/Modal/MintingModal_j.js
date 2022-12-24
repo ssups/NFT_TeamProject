@@ -68,7 +68,7 @@ const MintingModal = ({ setModal }) => {
         }
 
         await tokenContract.methods.setMintOn(price).send({ from: account });
-        alert("가격 설정 완료!");
+        alert("가격 설정 완료이 완료되었습니다.");
     }
 
     // 블록체인 상에 설정된 민팅 가격 조회 함수
@@ -171,6 +171,9 @@ const MintingModal = ({ setModal }) => {
                 const priceToEth = web3.utils.fromWei(price, "ether");
 
                 setMintingPrice(priceToEth);
+
+                if (isMintOn) return;
+                setIsMintOn(true);
             });
 
             // 민팅 시 현재 발행량 업데이트
