@@ -245,6 +245,7 @@ contract TestTrade is Ownable{
 
         require(endTime < block.timestamp, "auction not ended");
         require(lastBidPrice != 0, "this token did not registered on auction");
+        require(bider != address(0), "this token auction has failed");
         require(msg.sender == bider || msg.sender == tokenOwner , "caller is not highest bider nor seller");
 
         // 경매 등록자 판매금 주기
@@ -253,7 +254,7 @@ contract TestTrade is Ownable{
         require(success, "payment failed");
 
         // 입찰자 토큰 주기
-        Token.safeTransferFrom(tokenOwner, msg.sender, tokenId); // 이거하면 토큰 오너 바뀌고
+        Token.safeTransferFrom(tokenOwner, bider, tokenId); // 이거하면 토큰 오너 바뀌고
         _tokensOnAuction[tokenId].bider = address(0); 
         // _tokensOnAuction[tokenId].lastBidPrice = 0; // 이것도 수정안해줘도됨
         // _tokensOnAuction[tokenId].endTime = 0; // 이건 endTime이 경매끝나면 알아서 block.timestamp 보다 작아지니깐 수정안해줘도되고
