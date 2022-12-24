@@ -3,10 +3,13 @@ import React, { useEffect, useState } from "react";
 import NftInfo from "./NftInfo_unused";
 import useWeb3 from "../../hooks/useWeb3_unused";
 import useContract from "../../hooks/useContract_unused";
-import TestTokenContract from "../../contracts/TestToken.json";
+// import TestTokenContract from "../../contracts/TestToken.json";
 
 const MyNfts = () => {
   //
+  // 에러 방지용
+  const TestTokenContract = "";
+
   const [, account] = useWeb3();
   const [myNftsURI, setMyNftsURI] = useState({});
   const testTokenInstance = useContract(TestTokenContract);

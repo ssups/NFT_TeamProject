@@ -2,10 +2,13 @@ import React, { useEffect, useRef, useState } from "react";
 
 import useWeb3 from "../../hooks/useWeb3_unused";
 import useContract from "../../hooks/useContract_unused";
-import TestTokenContract from "../../contracts/TestToken.json";
+// import TestTokenContract from "../../contracts/TestToken.json";
 
 const Minting = () => {
   //
+  // 에러 방지용
+  const TestTokenContract = "";
+
   // await 체크..
   const [web3, account, balance] = useWeb3();
 
