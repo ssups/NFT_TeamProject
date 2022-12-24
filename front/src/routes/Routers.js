@@ -10,6 +10,7 @@ import NftDetail from "../pages/NftDetail";
 import Brand from "../components/Brand/Brand";
 import TopFold from "../components/TopFold/TopFold";
 
+import ShopJ from "../pages/Shop_j";
 import MyPage from "../pages/MyPage_j";
 
 import Minseop from "../components/minseop/minseop";
@@ -44,6 +45,7 @@ const Routers = () => {
       <Route path="/seopmy" element={<SeopMy />} />
 
       <Route path="/4" element={<MyPage />} />
+      <Route path="/5" element={<ShopJ />} />
     </Routes>
   );
 };
