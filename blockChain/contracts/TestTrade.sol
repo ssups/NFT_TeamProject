@@ -42,6 +42,16 @@ contract TestTrade is Ownable{
         saleFeeRate = rate;
     } 
 
+    // 수수료 얼만지 계산해주는 함수
+    function caculateFee(uint256 price) public view returns(uint256) {
+        return price * saleFeeRate / 100;
+    }
+
+    // 수수료 제외한 판매금 계산해주는 함수
+    function afterFee(uint256 price) public view returns(uint256) {
+        return price - caculateFee(price);
+    }
+
     // 일반판매중인지 확인하는 함수
     function isOnSale(uint256 tokenId) public view returns(bool) {
         return (_tokensOnSale[tokenId] != 0);
@@ -116,7 +126,7 @@ contract TestTrade is Ownable{
         // 판매등록한 토큰 transferFrom 함수로 다른계정으로 보내버릴수도 있는데
         // 그렇게되면 아마 토큰 받은 계정에 판매금액 들어가고 토큰은 구매자한테 전달될꺼기 때문에 괜찮을듯?
 
-        uint256 incomeAfterFee = price * (100 - saleFeeRate) / 100;
+        uint256 incomeAfterFee = afterFee(price);
         (bool success, ) = tokenOwner.call{value: incomeAfterFee}("");
         require(success, "payment failed");
 
@@ -234,15 +244,6 @@ contract TestTrade is Ownable{
         // require(lastBidPrice > 0, "acution already ended"); // 이미 경매기간 
     }
 
-    // 정산대상인지 확인하는 함수
-    function isNeedToClaim(uint256 tokenId) external view returns(bool){
-        uint256 endTime = _tokensOnAuction[tokenId].endTime;
-        address bider = _tokensOnAuction[tokenId].bider;
-
-        return(bider != address(0) && endTime < block.timestamp);
-        // 정산대상이면 true 아니면 false
-    }
-
     // 입찰성공한사람 토큰(NFT) 클레임할수있게 해주기(경매기간끝났을때)
     // 경매판매성공한사람 판매금액 클레임할수있게 해주기
     // 둘중 한사람만 실행하면 된다.
@@ -258,7 +259,7 @@ contract TestTrade is Ownable{
         require(msg.sender == bider || msg.sender == tokenOwner , "caller is not highest bider nor seller");
 
         // 경매 등록자 판매금 주기
-        uint256 incomeAfterFee = lastBidPrice * (100 - saleFeeRate) / 100;
+        uint256 incomeAfterFee = afterFee(lastBidPrice);
         (bool success, ) = tokenOwner.call{value: incomeAfterFee}("");
         require(success, "payment failed");
 
@@ -271,25 +272,27 @@ contract TestTrade is Ownable{
         emit ClaimMatchedAuction(tokenId, msg.sender); // 경매등록자 입찰자 둘중에 누가 클레임했는지 알려주기
     }
 
+    // 정산대상인지 확인하는 함수
+    function isNeedToClaim(uint256 tokenId) public view returns(bool){
+        uint256 endTime = _tokensOnAuction[tokenId].endTime;
+        address bider = _tokensOnAuction[tokenId].bider;
+
+        return(bider != address(0) && endTime < block.timestamp);
+        // 정산대상이면 true 아니면 false
+        // 정산때 bider값을 address(0)로 바꿔준다
+        // 경매시간은 지났지만 bider값이 address(0)이 아니기때문에 정산이 안된 토큰이다.
+        // 따라서 경매시간이 지나고 bider 값이 address(0)인거는 
+        // 경매가 실패한 토큰 혹은 경매에 한번도 등록되지 않은 토큰 혹은 정산이 완료된 토큰이다.
+    }
+
     // 경매성공했지만 정산되지않은 토큰 갯수
     function _countNotClaimedAuction() private view returns(uint256) {
         uint256 count;
 
         for(uint tokenId = 1; tokenId <= Token.totalSupply(); tokenId++) {
-            // uint256 lastBidPrice = _tokensOnAuction[tokenId].lastBidPrice;
-            uint256 endTime = _tokensOnAuction[tokenId].endTime;
-            address bider = _tokensOnAuction[tokenId].bider;
-
-            // if(lastBidPrice != 0 && bider != address(0) && endTime < block.timestamp) {
-            //     count ++;
-            // } 
-            if(bider != address(0) && endTime < block.timestamp) {
+            if(isNeedToClaim(tokenId)) {
                 count ++;
             } 
-            // 정산때 bider값을 address(0)로 바꿔준다
-            // 경매시간은 지났지만 bider값이 address(0)이 아니기때문에 정산이 안된 토큰이다.
-            // 따라서 경매시간이 지나고 bider 값이 address(0)인거는 
-            // 경매가 실패한 토큰 혹은 경매에 한번도 등록되지 않은 토큰 혹은 정산이 완료된 토큰이다.
         }
 
         return count;
@@ -301,14 +304,10 @@ contract TestTrade is Ownable{
         uint256 index = 0;
 
         for(uint tokenId = 1; tokenId <= Token.totalSupply(); tokenId++) {
-            uint256 endTime = _tokensOnAuction[tokenId].endTime;
-            address bider = _tokensOnAuction[tokenId].bider;
-
-            if(bider != address(0) && endTime < block.timestamp) {
+            if(isNeedToClaim(tokenId)) {
                 tokensNotClaimedOnAuction[index] = tokenId;
                 index ++;
             } 
-            // 경매시간은 지났지만 bider랑 lastBidPrice 값이 default가 아니기때문에 정산이 안된거다.
         }
 
         return tokensNotClaimedOnAuction;
@@ -347,7 +346,7 @@ contract TestTrade is Ownable{
         return tokensOnBid;
     }
 
-    // 경매는종료됐지만 정산되지않은 금액들 합
+    // 경매는종료됐지만 정산되지않은 금액들 합(수수료 제외)
     function _notClaimedMoney() private view returns(uint256) {
         uint256[] memory tokensNotClaimedOnAuction = notClaimedAuctionList();
         uint256 notClaimedMoney;
@@ -355,11 +354,21 @@ contract TestTrade is Ownable{
         for (uint i = 0; i < tokensNotClaimedOnAuction.length; i++ ) {
             uint256 tokenId = tokensNotClaimedOnAuction[i];
             uint256 lastBidPrice = _tokensOnAuction[tokenId].lastBidPrice;
-            uint256 afterFee = lastBidPrice * (100 - saleFeeRate) / 100;
-            notClaimedMoney += afterFee;
+            uint256 priceAfterFee = afterFee(lastBidPrice);
+            notClaimedMoney += priceAfterFee;
         }
 
         return notClaimedMoney;
+    }
+
+    function feeOfOnAuctionToken(uint256 tokenId) public view returns(uint256) {
+        uint256 lastBidPrice = _tokensOnAuction[tokenId].lastBidPrice;
+        return caculateFee(lastBidPrice);
+    }
+
+    function afterFeeOfNotClaimedToken(uint256 tokenId) public view returns (uint256) {
+        uint256 lastBidPrice = _tokensOnAuction[tokenId].lastBidPrice;
+        return lastBidPrice - feeOfOnAuctionToken(tokenId);
     }
 
     // 수수료 출금
