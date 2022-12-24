@@ -43,13 +43,13 @@ contract TestTrade is Ownable{
     } 
 
     // 수수료 얼만지 계산해주는 함수
-    function caculateFee(uint256 price) public view returns(uint256) {
+    function calculateFee(uint256 price) public view returns(uint256) {
         return price * saleFeeRate / 100;
     }
 
     // 수수료 제외한 판매금 계산해주는 함수
     function afterFee(uint256 price) public view returns(uint256) {
-        return price - caculateFee(price);
+        return price - calculateFee(price);
     }
 
     // 일반판매중인지 확인하는 함수
@@ -346,6 +346,18 @@ contract TestTrade is Ownable{
         return tokensOnBid;
     }
 
+    // 경매 낙찰된 토큰의 수수료 반환하는 함수
+    function feeOfMatchedAuctionToken(uint256 tokenId) public view returns(uint256) {
+        uint256 lastBidPrice = _tokensOnAuction[tokenId].lastBidPrice;
+        return calculateFee(lastBidPrice);
+    }
+
+    // 낙찰된 토큰의 정산액(수수료제외한)을 반환하는 함수
+    function afterFeeOfNotClaimedToken(uint256 tokenId) public view returns (uint256) {
+        uint256 lastBidPrice = _tokensOnAuction[tokenId].lastBidPrice;
+        return lastBidPrice - feeOfMatchedAuctionToken(tokenId);
+    }
+
     // 경매는종료됐지만 정산되지않은 금액들 합(수수료 제외)
     function _notClaimedMoney() private view returns(uint256) {
         uint256[] memory tokensNotClaimedOnAuction = notClaimedAuctionList();
@@ -361,15 +373,6 @@ contract TestTrade is Ownable{
         return notClaimedMoney;
     }
 
-    function feeOfOnAuctionToken(uint256 tokenId) public view returns(uint256) {
-        uint256 lastBidPrice = _tokensOnAuction[tokenId].lastBidPrice;
-        return caculateFee(lastBidPrice);
-    }
-
-    function afterFeeOfNotClaimedToken(uint256 tokenId) public view returns (uint256) {
-        uint256 lastBidPrice = _tokensOnAuction[tokenId].lastBidPrice;
-        return lastBidPrice - feeOfOnAuctionToken(tokenId);
-    }
 
     // 수수료 출금
     function withdrawFees() external onlyOwner {
