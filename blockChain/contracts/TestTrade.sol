@@ -85,7 +85,7 @@ contract TestTrade is Ownable{
     function registerForSale(uint256 tokenId, uint256 price) external {
         require(Token.ownerOf(tokenId) == msg.sender, "caller is not owner");
         require(price > 0, "price must be greater than zero");
-        require(!_isOnAuction(tokenId), "this token is on auction"); // 경매등록한건 일반판매등록안되게 하기
+        require(!isOnAuction(tokenId), "this token is on auction"); // 경매등록한건 일반판매등록안되게 하기
         // 프론트에서 Nft 컨트렉트에 setApprovalForAll(address operator, bool approved)
         // 이거 operator에 컨트렉트 CA로넣어서 프론트에서 먼저 실행시켜줘야함.
         require(Token.isApprovedForAll(msg.sender, address(this)));
@@ -132,7 +132,7 @@ contract TestTrade is Ownable{
         uint256 count;
 
         for(uint tokenId = 1; tokenId <= Token.totalSupply(); tokenId++) {
-            if(_isOnAuction(tokenId)) {
+            if(isOnAuction(tokenId)) {
                 count ++;
             }
             // endTime 이 block.timestamp 보다 작으면은 경매가 만료된거다.
@@ -147,7 +147,7 @@ contract TestTrade is Ownable{
         uint256 index = 0;
 
         for(uint tokenId = 1; tokenId <= Token.totalSupply(); tokenId++) {
-            if(_isOnAuction(tokenId)) {
+            if(isOnAuction(tokenId)) {
                 tokensOnAuction[index] = tokenId;
                 index ++;
             } 
@@ -164,7 +164,7 @@ contract TestTrade is Ownable{
     }
 
     // 해당토큰 경매중인지 확인
-    function _isOnAuction(uint256 tokenId) private view returns(bool) {
+    function isOnAuction(uint256 tokenId) public view returns(bool) {
         return (_tokensOnAuction[tokenId].endTime > block.timestamp);
         // 경매마감시간이 현재시간보다 크면 경매진행중 true
     }

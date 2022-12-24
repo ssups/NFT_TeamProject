@@ -17,7 +17,7 @@ import NftCard from "../components/Nft/NftCard_j";
 
 const MyPage = () => {
   //
-  const [myTokenURIs, setMyTokenURIs] = useState();
+  const [myTokens, setMyTokens] = useState();
   const [isApprovedForAll, setIsApprovedForAll] = useState(false);
   const { account, tokenContract, tradeContract } = useContext(Context);
 
@@ -58,68 +58,67 @@ const MyPage = () => {
   async function getMyTokenURIsFn() {
     //
     // 보유 토큰 조회 및 토큰의 JSON 객체가 담긴 파일 경로 가져오기
-    const _tokenURIs = {};
+    const myTokenURIs = {};
     const tokenIds = await tokenContract.methods.tokensOfOwner(account).call();
 
     for (const tokenId of tokenIds) {
-      _tokenURIs[tokenId] = await tokenContract.methods.tokenURI(tokenId).call();
+      myTokenURIs[tokenId] = await tokenContract.methods.tokenURI(tokenId).call();
     }
-    return _tokenURIs;
+    return myTokenURIs;
   }
 
   // 마이 페이지의 토큰 분류 - classificationName
-  // 모든 보유 토큰 - myTokenURIs : tokensOfOwner() 함수 사용
+  // 모든 보유 토큰 - myTokens : tokensOfOwner() 함수 사용
 
   // 순수 보유 토큰 - myOwnToken
   // 판매 중인 토큰 - mySaleToken : isOnAuction() 함수 사용
   // 경매 중인 토큰 - myAuctionToken : isOnAuction() 함수 사용
   // 경매 정산 대상 토큰 - myNotClaimedAuctionToken : isNotClaimMatchedToken() 함수 사용
 
-  async function getMyTokenFn() {
-    await Promise.all(Object.keys(myTokenURIs).map((tokenId) => classifyMyTokensFn(tokenId)));
+  // 보유 토큰을 분류하여 JSX를 반환하는 함수
+  async function getMyTokensFn(myTokenURIs) {
+    return await Promise.all(Object.keys(myTokenURIs).map((tokenId) => classifyMyTokensFn(tokenId, myTokenURIs[tokenId])));
   }
 
   // 마이페이지의 보유 토큰을 분류하는 함수
-  async function classifyMyTokensFn(tokenId) {
+  async function classifyMyTokensFn(tokenId, tokenURI) {
     //
     // 블록체인 상에서 판매와 경매는 중복으로 등록 불가
     const isSaleToken = await tradeContract.methods.isOnSale(tokenId).call();
     if (isSaleToken) {
-      return getMyTokenJSXFn(tokenId, "mySaleToken");
+      return getMyTokenJSXFn(tokenId, tokenURI, "mySaleToken");
     }
 
     const isAuctionToken = await tradeContract.methods.isOnAuction(tokenId).call();
     if (isAuctionToken) {
-      return getMyTokenJSXFn(tokenId, "myAuctionToken");
+      return getMyTokenJSXFn(tokenId, tokenURI, "myAuctionToken");
     }
 
-    const isNotClaimMatchedToken = await tradeContract.methods.isNotClaimMatchedToken(tokenId).call();
+    const isNotClaimMatchedToken = await tradeContract.methods.isNeedToClaim(tokenId).call();
     if (isNotClaimMatchedToken) {
-      return getMyTokenJSXFn(tokenId, "myNotClaimedAuctionToken");
+      return getMyTokenJSXFn(tokenId, tokenURI, "myNotClaimedAuctionToken");
     }
 
-    return getMyTokenJSXFn(tokenId, "myOwnToken");
+    return getMyTokenJSXFn(tokenId, tokenURI, "myOwnToken");
   }
 
   // 토큰의 전송 권한 위임 여부 확인이 필요한 지 여부에 따라 분류하여 JSX를 반환하는 함수
-  function getMyTokenJSXFn(tokenId, classificationName) {
+  function getMyTokenJSXFn(tokenId, tokenURI, classificationName) {
     //
-    if (!myTokenURIs) return;
-
     // 토큰에 대한 전송 권한 위임이 필요한 토큰에 위임 동의가 되어 있지 않은 경우
     const isMyOwnToken = classificationName === "myOwnToken";
     if (!isApprovedForAll && !isMyOwnToken) {
       //
       return (
         <Col lg="3" md="4" sm="6" className="mb-4">
-          <NftCard key={tokenId} tokenURI={myTokenURIs[tokenId]} classificationName={classificationName} setApprovalForAllFn={setApprovalForAllFn} />
+          <NftCard key={tokenId} tokenURI={tokenURI} classificationName={classificationName} setApprovalForAllFn={setApprovalForAllFn} />
         </Col>
       );
     }
 
     return (
       <Col lg="3" md="4" sm="6" className="mb-4">
-        <NftCard key={tokenId} tokenURI={myTokenURIs[tokenId]} classificationName={classificationName} />
+        <NftCard key={tokenId} tokenURI={tokenURI} classificationName={classificationName} />
       </Col>
     );
   }
@@ -141,8 +140,9 @@ const MyPage = () => {
 
     (async () => {
       //
-      const myTokenURI = await getMyTokenURIsFn();
-      setMyTokenURIs(myTokenURI);
+      const myTokenURIs = await getMyTokenURIsFn();
+      const myTokens = await getMyTokensFn(myTokenURIs);
+      setMyTokens(myTokens);
 
       const _isApprovedForAll = await getIsApprovedForAllFn();
       if (_isApprovedForAll) {
@@ -173,7 +173,7 @@ const MyPage = () => {
             </div>
           </Col>
           {/*  */}
-          {myTokenURIs && getMyTokenFn()}
+          {myTokens}
           {/*  */}
         </Row>
       </Container>
