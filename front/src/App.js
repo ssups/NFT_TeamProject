@@ -2,10 +2,12 @@ import React, { useEffect, useState, createContext } from "react";
 import Layout from "./components/Layout/Layout";
 import "./App.css";
 import useWeb3 from "./hooks/useWeb3";
+import useSsandeContracts from "./hooks/useSsandeContracts";
 
 const App = () => {
   // hooks
   const [web3, account, balance] = useWeb3();
+  const [tokenContract, tradeContract] = useSsandeContracts();
 
   // states
   const netWorkId = 7722; // 컨트렉트 배포할 네트워크에 따라 다르게 설정 나중에 goerli에 배포하고나면 5로 바꾸면됨
@@ -58,14 +60,6 @@ const App = () => {
   //     setBalance(balance);
   //   })();
   // }, [web3, account]);
-
-  useEffect(() => {
-    console.log(web3);
-  }, [web3]);
-
-  useEffect(() => {
-    console.log(account);
-  }, [account]);
 
   if (!isNetWorkCorrect) return <h1>네트워크를 맞게 설정하세요</h1>;
   return (

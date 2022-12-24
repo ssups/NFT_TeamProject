@@ -6,45 +6,85 @@ import useSsandeContracts from "../hooks/useSsandeContracts";
 import { Context } from "../App";
 
 const Shop = () => {
-  // hoooks
-  const [testTokenInstance, testTradeInstance] = useSsandeContracts();
   // context
-  const { account, web3, balance } = useContext(Context);
+  const { account, web3, balance, tokenContract, tradeContract } = useContext(Context);
   // state
-  const [onAuctionURI, setOnAuctionURI] = useState({});
+  const [tokensOnAuction, setTokensOnAuction] = useState();
+  const [onAuctionURI, setOnAuctionURI] = useState();
+  const [onAuctionInfo, setOnAuctionInfo] = useState();
 
   // useEffect
 
   useEffect(() => {
-    if (!testTradeInstance) return;
-    testTradeInstance.events.RegisterForAuction((err, data) => {
-      getOnAuctions();
-    });
-  }, [testTradeInstance]);
+    if (!tradeContract) return;
+    // 경매등록했을때 자동으로 올라오도록 이벤트설정
+    tradeContract.events.RegisterForAuction(async (err, data) => {
+      const tokenId = data.returnValues.tokenId;
+      const tokenURI = await tokenContract.methods.tokenURI(tokenId).call();
+      const tokensInfo = await tradeContract.methods.dataOfOnAuction(tokenId).call();
 
+      setTokensOnAuction(current => [...new Set([...current, tokenId])]); // 블록생성 지연됐을때 중복값 생길수있어서 방지
+      setOnAuctionURI(current => {
+        return { ...current, [tokenId]: tokenURI };
+      });
+      setOnAuctionInfo(current => {
+        return { ...current, [tokenId]: tokensInfo };
+      });
+    });
+
+    // 경매입찰했을때 자동으로 최고입찰가 바뀌도록
+    tradeContract.events.BidOnAuction(async (err, data) => {
+      const tokenId = data.returnValues.tokenId;
+      const bidPrice = data.returnValues.bidPrice;
+      const bider = data.returnValues.bider;
+      // const previousTokenInfo = onAuctionInfo[tokenId];
+
+      setOnAuctionInfo(current => {
+        return { ...current, [tokenId]: { ...current[tokenId], lastBidPrice: bidPrice, bider } };
+      });
+    });
+  }, [tradeContract]);
+
+  // 토큰정보받아오기
   useEffect(() => {
-    // (async () => {
-    //   if (!testTokenInstance || !testTradeInstance) return;
-    //   // 경매중인 토큰 리스트
-    //   const tokenOnAuction = await testTradeInstance.methods.onAuctionList().call();
-    //   // 경매중이 토큰 uri 들고오기
-    //   const tokensURI = {};
-    //   for (const tokenId of tokenOnAuction) {
-    //     tokensURI[tokenId] = await testTokenInstance.methods.tokenURI(tokenId).call();
-    //   }
-    //   setOnAuctionURI(tokensURI);
-    // })();
-    getOnAuctions();
-  }, [testTokenInstance, testTradeInstance]);
+    if (!tokenContract || !tradeContract) return;
+    (async () => {
+      // 경매중인 토큰 리스트
+      const tokensOnAuction = await tradeContract.methods.onAuctionList().call();
+      setTokensOnAuction(tokensOnAuction);
+
+      // 경매중이 토큰 uri, info 들고오기
+      const tokensURI = {};
+      const tokensInfo = {};
+      for (const tokenId of tokensOnAuction) {
+        tokensURI[tokenId] = await tokenContract.methods.tokenURI(tokenId).call();
+        tokensInfo[tokenId] = await tradeContract.methods.dataOfOnAuction(tokenId).call();
+      }
+      setOnAuctionURI(tokensURI);
+      setOnAuctionInfo(tokensInfo);
+    })();
+  }, [tokenContract, tradeContract]);
+
+  // 경매시간 적게남은 순대로 하도록 sort
+  useEffect(() => {
+    // 이 배열이 frozen in strict mode 상태라 복사한번 해주고 sort해야 솔트가 된다
+    // 뭔지모르겠다...
+    if (!tokensOnAuction || !onAuctionInfo) return;
+    const sortedList = [...tokensOnAuction].sort(
+      (a, b) => onAuctionInfo[a].endTime - onAuctionInfo[b].endTime
+    );
+    setTokensOnAuction(sortedList);
+  }, [onAuctionInfo]); //onAuctionInfo값이 업데이트되고나서 sort작업을해줘야해서 tokensOnAuction이 바꼈을때는 랜더링 안되게
 
   useEffect(() => {
     (async () => {
-      if (!testTradeInstance) return;
-      // console.log(testTradeInstance.methods);
-      // console.log(testTradeInstance.events);
+      if (!tradeContract) return;
+      // console.log(tradeContract.methods);
+      console.log(tradeContract.events);
     })();
-  }, [testTradeInstance]);
+  }, [tradeContract]);
 
+  // 블록타임스탬프확인
   useEffect(() => {
     if (!web3) return;
     (async () => {
@@ -53,17 +93,9 @@ const Shop = () => {
     })();
   }, [web3]);
 
-  async function getOnAuctions() {
-    if (!testTokenInstance || !testTradeInstance) return;
-    // 경매중인 토큰 리스트
-    const tokenOnAuction = await testTradeInstance.methods.onAuctionList().call();
-    // 경매중이 토큰 uri 들고오기
-    const tokensURI = {};
-    for (const tokenId of tokenOnAuction) {
-      tokensURI[tokenId] = await testTokenInstance.methods.tokenURI(tokenId).call();
-    }
-    setOnAuctionURI(tokensURI);
-  }
+  // functions
+
+  // 입찰하기
 
   // return
   return (
@@ -76,12 +108,19 @@ const Shop = () => {
             </div>
           </Col>
 
-          {onAuctionURI &&
-            Object.keys(onAuctionURI).map(tokenId => (
-              <Col key={tokenId} lg="3" md="4" sm="6" className="mb-4">
-                <NftCard tokenId={tokenId} tokenURI={onAuctionURI[tokenId]} />
-              </Col>
-            ))}
+          {onAuctionURI && onAuctionInfo && tokensOnAuction
+            ? tokensOnAuction.map(tokenId =>
+                // 새로고침때 시간지난거 먼저 걸러주기
+                onAuctionInfo[tokenId].endTime - Math.floor(Date.now() / 1000) > 0 ? (
+                  <NftCard
+                    key={tokenId}
+                    tokenId={tokenId}
+                    tokenURI={onAuctionURI[tokenId]}
+                    tokenInfo={onAuctionInfo[tokenId]}
+                  />
+                ) : null
+              )
+            : null}
         </Row>
       </Container>
     </section>

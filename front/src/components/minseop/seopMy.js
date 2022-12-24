@@ -12,6 +12,7 @@ const SeopMy = () => {
   const [myNftsURI, setMyNftsURI] = useState({});
   // refs
   const registerRef = useRef();
+  const claimRef = useRef();
 
   // ==========================================useEffect==========================================
   // =============================================================================================
@@ -54,6 +55,8 @@ const SeopMy = () => {
   }, [account]);
 
   // functions
+
+  // 경매등록
   async function registerAuction() {
     const tokenId = registerRef.tokenId.value;
     const bidTime = registerRef.time.value;
@@ -84,6 +87,16 @@ const SeopMy = () => {
       .catch(err => alert("등록실패"));
   }
 
+  // 정산하기
+  async function claimAuction() {
+    const tokenId = claimRef.current.value;
+    await testTradeInstance.methods
+      .claimMatchedAuction(tokenId)
+      .send({ from: account })
+      .then(success => alert("정산 성공"))
+      .catch(err => alert("정산실패", err));
+  }
+
   if (!account) return <h1>지갑 연결하세요</h1>;
   return (
     <div
@@ -104,20 +117,7 @@ const SeopMy = () => {
             return <Nft key={tokenId} tokenId={tokenId} nftURI={myNftsURI[tokenId]} />;
           })}
       </div>
-      {/* <div style={{ marginTop: "100px" }}>
-        <input type="number" placeholder="토큰ID" />
-        <button>구매하기</button>
-      </div>
-      <div>
-        <input type="number" placeholder="토큰ID" />
-        <input type="number" placeholder="가격" />
-        <button>판매하기</button>
-      </div> */}
-      <div>
-        <input type="number" placeholder="토큰ID" />
-        <input type="number" placeholder="입찰가격" />
-        <button>경매입찰하기</button>
-      </div>
+
       <div>
         <input
           type="number"
@@ -141,6 +141,10 @@ const SeopMy = () => {
           }}
         />
         <button onClick={registerAuction}>경매등록하기</button>
+      </div>
+      <div>
+        <input type="number" placeholder="토큰ID" ref={claimRef} />
+        <button onClick={claimAuction}>정산하기</button>
       </div>
     </div>
   );
