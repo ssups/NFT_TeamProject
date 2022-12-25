@@ -43,7 +43,7 @@ const App = () => {
     if (!window.ethereum._events["chainChanged"])
       window.ethereum.on("chainChanged", async switchedChain => {
         switchedChain = parseInt(switchedChain, 16);
-        setIsNetWorkCorrect(netWorkId === switchedChain || 1337 === switchedChain);
+        setIsNetWorkCorrect(netWorkId === switchedChain);
         // console.log(switchedChain);
       });
 

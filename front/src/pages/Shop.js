@@ -19,7 +19,7 @@ const Shop = () => {
           disabled={!isShop}
           onClick={() => setIsShop(!isShop)}
         >
-          나의 낙찰된 상품 수령
+          나의 낙찰 상품 수령
         </button>
       </div>
       {isShop ? <AuctionShop /> : <BeforeClaim />}
