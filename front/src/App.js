@@ -63,14 +63,6 @@ const App = () => {
   //   })();
   // }, [web3, account]);
 
-  useEffect(() => {
-    console.log(web3);
-  }, [web3]);
-
-  useEffect(() => {
-    console.log(account);
-  }, [account]);
-
   if (!isNetWorkCorrect) return <h1>네트워크를 맞게 설정하세요</h1>;
   return (
     <Context.Provider value={{ web3, account, balance, tokenContract, tradeContract }}>
