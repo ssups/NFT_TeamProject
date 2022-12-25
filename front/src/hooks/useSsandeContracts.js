@@ -15,7 +15,7 @@ const useSsandeContracts = () => {
   // const tradeContractCa = testTradeJson.networks[networkId].address;
 
   const tokenContract = useContract(tokenAbi, "0xa8be286ec172021BcEE0F11aDFE91B0FFdcf6662");
-  const tradeContract = useContract(tradeAbi, "0xa8be286ec172021BcEE0F11aDFE91B0FFdcf6662");
+  const tradeContract = useContract(tradeAbi, "0xDCE5Cd38A2aec22DFe0Beb1e283aEBc6d9194242");
 
   return [tokenContract, tradeContract];
 };

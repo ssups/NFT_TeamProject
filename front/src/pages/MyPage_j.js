@@ -34,15 +34,17 @@ const MyPage = () => {
   // 토큰의 전송 권한 위임 설정에 대한 함수
   async function setApprovalForAllFn() {
     //
-    console.log("why false : true ===", isApprovedForAll)
+    console.log("why false : true ===", isApprovedForAll);
     if (isApprovedForAll) return;
 
-    const delegationMsg = "판매 및 경매 상품으로 등록하기 위해서는 토큰에 대한 전송 권한을 위임하는 것에 동의해야 합니다. 동의하시겠습니까?";
+    const delegationMsg =
+      "판매 및 경매 상품으로 등록하기 위해서는 토큰에 대한 전송 권한을 위임하는 것에 동의해야 합니다. 동의하시겠습니까?";
     if (!window.confirm(delegationMsg)) {
       //
       alert("토큰에 대한 전송 권한을 위임하지 않았습니다.");
       return;
     }
+    console.log(isApprovedForAll);
 
     // 거래 컨트랙트의 CA 값 전송
     const ca = await tradeContract.methods.getCA().call();
@@ -52,7 +54,7 @@ const MyPage = () => {
     alert("토큰에 대한 전송 권한 위임이 완료되었습니다.");
     setIsApprovedForAll(true);
   }
-  console.log("true ===", isApprovedForAll)
+  console.log("true ===", isApprovedForAll);
 
   // 나의 보유 토큰들을 보유하게 된 순서대로 컴포넌트화 하기 위한 JSON 파일 경로 조회 함수
   async function getMyTokenURIsFn() {
@@ -77,7 +79,9 @@ const MyPage = () => {
 
   // 보유 토큰을 분류하여 JSX를 반환하는 함수
   async function getMyTokensFn(myTokenURIs) {
-    return await Promise.all(Object.keys(myTokenURIs).map((tokenId) => classifyMyTokensFn(tokenId, myTokenURIs[tokenId])));
+    return await Promise.all(
+      Object.keys(myTokenURIs).map(tokenId => classifyMyTokensFn(tokenId, myTokenURIs[tokenId]))
+    );
   }
 
   // 마이페이지의 보유 토큰을 분류하는 함수
@@ -112,21 +116,44 @@ const MyPage = () => {
       //
       return (
         <Col key={tokenId} lg="3" md="4" sm="6" className="mb-4">
-          <MyPageNftCard key={tokenId} tokenId={tokenId} tokenURI={tokenURI} classificationName={classificationName} setApprovalForAllFn={setApprovalForAllFn} />
+          <MyPageNftCard
+            key={tokenId}
+            tokenId={tokenId}
+            tokenURI={tokenURI}
+            classificationName={classificationName}
+            setApprovalForAllFn={setApprovalForAllFn}
+          />
         </Col>
       );
     }
 
     return (
       <Col key={tokenId} lg="3" md="4" sm="6" className="mb-4">
-        <MyPageNftCard key={tokenId} tokenId={tokenId} tokenURI={tokenURI} classificationName={classificationName} />
+        <MyPageNftCard
+          key={tokenId}
+          tokenId={tokenId}
+          tokenURI={tokenURI}
+          classificationName={classificationName}
+        />
       </Col>
     );
   }
 
   // 토큰 컨트랙트나 계정이 없을 경우에 사용할 JSX를 반환하는 함수
   function getMessageJsxFn(message) {
-    return <p style={{ color: "white", textAlign: "center", marginTop: "20%", fontSize: "5vw", fontWeight: "900" }}>{message}</p>;
+    return (
+      <p
+        style={{
+          color: "white",
+          textAlign: "center",
+          marginTop: "20%",
+          fontSize: "5vw",
+          fontWeight: "900",
+        }}
+      >
+        {message}
+      </p>
+    );
   }
 
   // ==========================================useEffect==========================================
@@ -143,7 +170,6 @@ const MyPage = () => {
       //
       const _isApprovedForAll = await getIsApprovedForAllFn();
       setIsApprovedForAll(_isApprovedForAll);
-
     })();
   }, [tokenContract, account]);
 
@@ -162,8 +188,7 @@ const MyPage = () => {
       }
       setMyTokens(myTokens);
     })();
-
-  }, [isApprovedForAll])
+  }, [isApprovedForAll]);
 
   // ===========================================returns===========================================
   // =============================================================================================
