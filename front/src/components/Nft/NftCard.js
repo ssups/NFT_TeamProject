@@ -42,14 +42,6 @@ const NftCard = ({ tokenId, tokenURI, tokenInfo }) => {
     setCurrentBid(web3.utils.fromWei(lastBidPrice + "", "ether"));
   }, [tokenInfo, web3]);
 
-  // useEffect(() => {
-  //   if (!tradeContract) return;
-  //   // 경매입찰했을때 자동으로 최고입찰가 수정 기능
-  //   tradeContract.events.BidOnAuction(async (err, data) => {
-
-  //   });
-  // }, [tradeContract]);
-
   // 경매남은시간
   useEffect(() => {
     if (!endTime) return;
