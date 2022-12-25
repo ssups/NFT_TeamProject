@@ -36,6 +36,9 @@ const MyPageModal = ({ title, setModal, tokenId }) => {
             return;
         }
 
+        const registerMsg = `${salePrice} ether로 등록하시겠습니까?`;
+        if (!window.confirm(registerMsg)) return;
+
         salePrice = web3.utils.toWei(salePrice, "ether");
 
         await tradeContract.methods.registerForSale(tokenId, salePrice).send({ from: account });
@@ -47,24 +50,34 @@ const MyPageModal = ({ title, setModal, tokenId }) => {
         //
         const endTime = _endTime.current.value;
         //
-        // 소수점 단위..
         const decimals = 3;
         let bidPrice = _transactionPrice.current.value;
         bidPrice = Math.trunc(bidPrice * 10 ** decimals) / 10 ** decimals;
+
+        if (bidPrice < 1 / 10 ** decimals) {
+            alert("최소 단위인 0.001 ether보다 작은 금액은 설정할 수 없습니다.");
+            return;
+        }
+
+        const registerMsg = `${bidPrice} ether로 등록하시겠습니까?`;
+        if (!window.confirm(registerMsg)) return;
+
         bidPrice = web3.utils.toWei(bidPrice, "ether");
 
-        await tradeContract.methods.registerForAuction(tokenId, bidPrice, endTime).send({ from: account });
+        // await tradeContract.methods.registerForAuction(tokenId, bidPrice * 1, endTime).send({ from: account });
         alert("경매 상품으로 등록이 완료되었습니다.");
     }
 
     // 판매 및 경매 상품으로 등록할 경우의 수수료 조회 함수
     async function getTransactionFeeFn(price) {
+        price = web3.utils.toWei(price, "ether");
         const amount = await tradeContract.methods.calculateFee(price).call();
         return web3.utils.fromWei(amount, "ether");
     }
-
+    
     // 판매 및 경매 상품으로 등록할 경우의 정산금 조회 함수
     async function getIncomeAfterFeeFn(price) {
+        price = web3.utils.toWei(price, "ether");
         const amount = await tradeContract.methods.afterFee(price).call();
         return web3.utils.fromWei(amount, "ether");
     }
@@ -92,7 +105,7 @@ const MyPageModal = ({ title, setModal, tokenId }) => {
                     <>
                         <div className="input_item mb-4">
                             <p className="text-center text-light">판매가를 ether 단위로 입력해주세요.</p>
-                            <input type="number" min={0} ref={_transactionPrice} onChange={changeAmountFn} />
+                            <input type="number" ref={_transactionPrice} onChange={changeAmountFn} />
                         </div>
 
                         <p className="text-center text-light">판매 완료 시 정산금 : {incomeAfterFee ? incomeAfterFee + " ether" : "0 ether"}</p>
@@ -109,7 +122,7 @@ const MyPageModal = ({ title, setModal, tokenId }) => {
                         <div className="input_item mb-4">
 
                             <p className="text-center text-light">최소 입찰가를 ether 단위로 입력해주세요.</p>
-                            <input type="number" placeholder='최소 단위 0.001' min={0} ref={_transactionPrice} onChange={changeAmountFn} />
+                            <input type="number" placeholder='최소 단위 0.001' ref={_transactionPrice} onChange={changeAmountFn} />
                             
                             <p className="text-center text-light">경매 진행 시간을 1 ~ 30 분 중에서 선택해주세요.</p>
                             <select ref={_endTime}>

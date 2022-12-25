@@ -53,21 +53,21 @@ const App = () => {
   }, []);
 
   // 네트워크 다른게 설정되어있으면 우리네트워크 쓰도록 메타마스크 팝업창 띄우기
-  useEffect(() => {
-    if (isNetWorkCorrect) return;
-    if (isNetWorkCorrect === undefined) return;
-    (async () => {
-      try {
-        await window.ethereum.request({
-          method: "wallet_switchEthereumChain",
-          params: [{ chainId: "0x" + netWorkId.toString(16) }],
-        });
-        console.log("성공");
-      } catch (err) {
-        console.log(err);
-      }
-    })();
-  }, [isNetWorkCorrect]);
+  // useEffect(() => {
+  //   if (isNetWorkCorrect) return;
+  //   if (isNetWorkCorrect === undefined) return;
+  //   (async () => {
+  //     try {
+  //       await window.ethereum.request({
+  //         method: "wallet_switchEthereumChain",
+  //         params: [{ chainId: "0x" + netWorkId.toString(16) }],
+  //       });
+  //       console.log("성공");
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   })();
+  // }, [isNetWorkCorrect]);
 
   // account바뀌면 잔액 다시 업데이트
   useEffect(() => {
@@ -80,17 +80,17 @@ const App = () => {
   }, [web3, account]);
 
   // 네트워크 다른게 설정되어있으면 우리네트워크 쓰도록 메타마스크 팝업창 띄우기
-  useEffect(() => {
-    if (isNetWorkCorrect) return;
-    (async () => {
-      await window.ethereum.request({
-        method: "wallet_switchEthereumChain",
-        params: [{ chainId: "0x" + netWorkId.toString(16) }],
-      });
-    })();
-  }, [isNetWorkCorrect]);
+  // useEffect(() => {
+  //   if (isNetWorkCorrect) return;
+  //   (async () => {
+  //     await window.ethereum.request({
+  //       method: "wallet_switchEthereumChain",
+  //       params: [{ chainId: "0x" + netWorkId.toString(16) }],
+  //     });
+  //   })();
+  // }, [isNetWorkCorrect]);
 
-  if (!isNetWorkCorrect) return <h1>네트워크를 맞게 설정하세요</h1>;
+  // if (!isNetWorkCorrect) return <h1>네트워크를 맞게 설정하세요</h1>;
 
   
   return (
