@@ -158,7 +158,7 @@ const MintingModal = ({ setModal }) => {
             setTotalSupply(await getTotalSupplyFn());
         })();
 
-        console.log(window.ethereum);
+        console.log(window.ethereum._events);
         //
         if (!window.ethereum._events[""]) {
             //
@@ -166,7 +166,7 @@ const MintingModal = ({ setModal }) => {
             // 민팅 가격 설정 이벤트
             tokenContract.events.SetMintOn((err, data) => {
                 //
-                console.log(err);
+                // console.log(err);
                 const price = data.returnValues.mintPrice;
                 const priceToEth = web3.utils.fromWei(price, "ether");
 

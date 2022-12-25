@@ -140,14 +140,19 @@ const MyPage = () => {
 
     (async () => {
       //
-      const myTokenURIs = await getMyTokenURIsFn();
-      const myTokens = await getMyTokensFn(myTokenURIs);
-      setMyTokens(myTokens);
-
       const _isApprovedForAll = await getIsApprovedForAllFn();
       if (_isApprovedForAll) {
         setIsApprovedForAll(true);
       }
+
+      const myTokenURIs = await getMyTokenURIsFn();
+      const myTokens = await getMyTokensFn(myTokenURIs);
+      if (myTokens.length === 0) {
+        //
+        return setMyTokens(getMessageJsxFn("보유한 토큰이 없습니다."));
+      }
+      setMyTokens(myTokens);
+
     })();
   }, [tokenContract, account]);
 
@@ -156,11 +161,11 @@ const MyPage = () => {
 
   // JSX 반환을 위해 바깥에
   if (!tokenContract) {
-    return getMessageJsxFn("no cotract");
+    return getMessageJsxFn("배포된 컨트랙트를 찾을 수 없습니다.");
   }
 
   if (!account) {
-    return getMessageJsxFn("no account");
+    return getMessageJsxFn("메타마스크와 연결되어 있는 계정이 없습니다.");
   }
 
   return (

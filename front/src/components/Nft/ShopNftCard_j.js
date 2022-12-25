@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 
 import axios from "axios";
-import Context from "../../App";
+import { Context } from "../../App";
 
 const ShopNftCard = ({ tokenId, tokenURI }) => {
   //
@@ -53,31 +53,31 @@ const ShopNftCard = ({ tokenId, tokenURI }) => {
   // ===========================================returns===========================================
   // =============================================================================================
 
-    return (
-      <div className="single_nft">
+  return (
+    <div className="single_nft">
 
-        <div className="nft_img">
-          <img src={tokenImgUrl} className="w-100" alt="" />
-        </div>
+      <div className="nft_img">
+        <img src={tokenImgUrl} className="w-100" alt="" />
+      </div>
 
-        <div className="nft_content">
-          <h5 className="nft_title">
-            {/* <Link to={`상세 페이지 경로`}></Link> */}
-            {tokenName}
-          </h5>
-          <h5>판매가: {web3.utils.fromWei(salePrice, "ether")} ether</h5>
+      <div className="nft_content">
+        <h5 className="nft_title">
+          {/* <Link to={`상세 페이지 경로`}></Link> */}
+          {tokenName}
+        </h5>
+        <h5>판매가: {web3.utils.fromWei(salePrice, "ether")} ether</h5>
 
-          <div className=" mt-3 d-flex align-items-center justify-content-between">
-            <button
-              className="bid_btn d-flex align-items-center gap-1"
-              onClick={purchaseTokenFn}
-              disabled={account && seller && account.toLowerCase() === seller.toLowerCase()}
-            >
-              💎 구매하기
-            </button>
-          </div>
+        <div className=" mt-3 d-flex align-items-center justify-content-between">
+          <button
+            className="bid_btn d-flex align-items-center gap-1"
+            onClick={purchaseTokenFn}
+            disabled={account && seller && account.toLowerCase() === seller.toLowerCase()}
+          >
+            💎 구매하기
+          </button>
         </div>
       </div>
+    </div>
   );
 };
 

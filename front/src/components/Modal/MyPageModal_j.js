@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import "../../styles/modal.css"
 
-import Context from "../../App";
+import { Context } from "../../App";
 
 const MyPageModal = ({ title, setModal, tokenId }) => {
     //

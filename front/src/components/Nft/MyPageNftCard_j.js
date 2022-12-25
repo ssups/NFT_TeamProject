@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 
 import axios from "axios";
-import Context from "../../App";
+import { Context } from "../../App";
 import MyPageModal from "../Modal/MyPageModal_j";
 
 const MyPageNftCard = ({ tokenId, tokenURI, classificationName, setApprovalForAllFn }) => {
   //
   const { web3, account, tradeContract } = useContext(Context);
-  
+
   const [tokenName, setTokenName] = useState();
   const [tokenImgUrl, setTokenImgUrl] = useState();
   const [registerSaleModal, setRegisterSaleModal] = useState(false);
@@ -53,7 +53,7 @@ const MyPageNftCard = ({ tokenId, tokenURI, classificationName, setApprovalForAl
 
           💎 {title}
         </button>
-        {modal && <MyPageModal title={title} setModal={setModal} tokenId={tokenId}/>}
+        {modal && <MyPageModal title={title} setModal={setModal} tokenId={tokenId} />}
       </div>
     )
   }
