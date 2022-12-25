@@ -54,6 +54,8 @@ const Header2 = () => {
       window.removeEventListener("scroll", () => {});
     };
   }, []);
+
+ 
   return (
     // 헤더
     <header className="header2" ref={headerRef}>
@@ -94,8 +96,11 @@ const Header2 = () => {
                 지갑 연동
               </Link>
             </button>
-            <div className="account_text">
-              Account:{walletAddress}
+             
+            <div className="account_text">            
+              Account:<Link to="/mypage">
+                {walletAddress}
+                </Link>
         </div>
           </div>
         </div>
