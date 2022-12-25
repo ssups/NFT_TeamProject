@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import "../../styles/modal.css"
 
 import { Context } from "../../App";
@@ -62,9 +62,9 @@ const MyPageModal = ({ title, setModal, tokenId }) => {
         const registerMsg = `${bidPrice} ether로 등록하시겠습니까?`;
         if (!window.confirm(registerMsg)) return;
 
-        bidPrice = web3.utils.toWei(bidPrice, "ether");
+        bidPrice = web3.utils.toWei(bidPrice.toString(), "ether");
 
-        // await tradeContract.methods.registerForAuction(tokenId, bidPrice * 1, endTime).send({ from: account });
+        await tradeContract.methods.registerForAuction(tokenId, bidPrice, endTime).send({ from: account });
         alert("경매 상품으로 등록이 완료되었습니다.");
     }
 
@@ -81,12 +81,6 @@ const MyPageModal = ({ title, setModal, tokenId }) => {
         const amount = await tradeContract.methods.afterFee(price).call();
         return web3.utils.fromWei(amount, "ether");
     }
-
-    // ==========================================useEffect==========================================
-    // =============================================================================================
-
-    // 메타마스크 계정이 변경되면
-    // 메인 페이지로 이동해야 함
 
     // ===========================================returns===========================================
     // =============================================================================================
@@ -126,7 +120,7 @@ const MyPageModal = ({ title, setModal, tokenId }) => {
                             
                             <p className="text-center text-light">경매 진행 시간을 1 ~ 30 분 중에서 선택해주세요.</p>
                             <select ref={_endTime}>
-                                {Array.from({ length: 30 }, (value, index) => index + 1).map((minute) => <option value={minute}>{minute}분</option>)}
+                                {Array.from({ length: 30 }, (value, index) => index + 1).map((minute) => <option key={minute}value={minute}>{minute}분</option>)}
                             </select>
 
                         </div>

@@ -29,7 +29,7 @@ const MyPageNftCard = ({ tokenId, tokenURI, classificationName, setApprovalForAl
     const transactionFee = await getAuctionFeeFn();
     const incomeAfterFee = await getIncomeAfterAuctionFeeFn();
 
-    const claimMessage = `경매 낙찰로 인해 발생한 수수료는 ${transactionFee}이며 정산금은 ${incomeAfterFee}입니다. 정산 받으시겠습니까?`;
+    const claimMessage = `경매 낙찰로 인해 발생한 수수료는 ${transactionFee} ether 이며 정산금은 ${incomeAfterFee} ether 입니다. 정산 받으시겠습니까?`;
     if (!window.confirm(claimMessage)) return;
 
     await tradeContract.methods.claimMatchedAuction(tokenId).send({ from: account });
@@ -67,6 +67,22 @@ const MyPageNftCard = ({ tokenId, tokenURI, classificationName, setApprovalForAl
     )
   }
 
+  function getClassificationName() {
+    //
+    switch (classificationName) {
+      case "myOwnToken":
+        return "순수 보유 토큰";
+      case "mySaleToken":
+        return "판매 중인 토큰";
+      case "myAuctionToken":
+        return "경매 중인 토큰";
+      case "myNotClaimedAuctionToken":
+        return "경매 낙찰 토큰";
+      default:
+        return;
+    }
+  }
+
   // ==========================================useEffect==========================================
   // =============================================================================================
 
@@ -95,6 +111,7 @@ const MyPageNftCard = ({ tokenId, tokenURI, classificationName, setApprovalForAl
       <div className="nft_content">
         {/* <h5 className="nft_title"><Link to={`/shop/${"여기에 상세 페이지 경로 입력해주세용"}`}>{name}</Link></h5> */}
         <h5 className="nft_title">{tokenName}</h5>
+        <h5 className="nft_title">{getClassificationName()}</h5>
         <div className="creator_info d-flex align-items-center justify-content-between">
           <div className="w-50"></div>
         </div>
