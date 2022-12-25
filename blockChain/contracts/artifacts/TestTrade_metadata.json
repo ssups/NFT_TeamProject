@@ -99,6 +99,19 @@
 				"type": "event"
 			},
 			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "RegisterForAuction",
+				"type": "event"
+			},
+			{
 				"inputs": [],
 				"name": "Token",
 				"outputs": [
@@ -106,6 +119,63 @@
 						"internalType": "contract TestToken",
 						"name": "",
 						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					}
+				],
+				"name": "_countNotClaimedTokenOfBider",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "price",
+						"type": "uint256"
+					}
+				],
+				"name": "afterFee",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "afterFeeOfNotClaimedToken",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
@@ -122,6 +192,25 @@
 				"name": "bidOnAcution",
 				"outputs": [],
 				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "price",
+						"type": "uint256"
+					}
+				],
+				"name": "calculateFee",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -200,8 +289,116 @@
 				"type": "function"
 			},
 			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "feeOfMatchedAuctionToken",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getCA",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "isNeedToClaim",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "isOnAuction",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "isOnSale",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [],
 				"name": "notClaimedAuctionList",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					}
+				],
+				"name": "notClaimedTokensOfBiderList",
 				"outputs": [
 					{
 						"internalType": "uint256[]",
@@ -435,19 +632,19 @@
 	},
 	"sources": {
 		"TestToken.sol": {
-			"keccak256": "0xd20756c5d1def76f1150b09a94ddcd5f6274088dd88abebcbb6c2e6469efe784",
+			"keccak256": "0x860474ac89c615108caf3a922358d3575cc6cc2bb2af1527dee83bc4e0fc268d",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://50fbcf718e8d308fd964304b958b18caacd26c4beef87ca70801ded545e79219",
-				"dweb:/ipfs/QmP6j2Q1EdUuXTtJVfR29aZZkW3GaFLkeLC5aQyrUhF18k"
+				"bzz-raw://2a9195bc6ae453803d0928ea47e96516b7c050a6c935347a7235e059cdaae15a",
+				"dweb:/ipfs/Qmer7pk43X2VMexp2nk7a4Wida7yMehD4wvDjDgZT6xx6R"
 			]
 		},
 		"TestTrade.sol": {
-			"keccak256": "0x9ddfa85ceacde94104920348006d9b3ab4ca913215efaa9ef3e04a998f20ca0f",
+			"keccak256": "0x7198a7e705280e1ed5ec052ae42f771a37ce83d7f1f5cc552591dc7042dc3f16",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://3c4f055b55c1ee175f9f83677980c0099af387cfd02fe35853a5e10319486c17",
-				"dweb:/ipfs/QmbB3AyiqGV8dbV2XM1vaAZEX1N2Qamr7Gy3vrrajyMHyS"
+				"bzz-raw://7ec693d69c59d989abeb4eba349813c00d9b766f4171f1075ca544515f6b2dd0",
+				"dweb:/ipfs/QmbHXr2CVVGwuTuDhFA4kLqbKVMxWbygumci8meDWGC4Q4"
 			]
 		},
 		"openzeppelin-solidity/contracts/access/Ownable.sol": {

@@ -26,16 +26,25 @@ const Modal = ({ setModal, jsonData, currentBid, bider, timeCount, tokenId }) =>
 
   // function
   async function bidOnAuction() {
-    const price = priceRef.current.value;
+    let price = priceRef.current.value;
+    // price = (price * 1).toFixed(3);
     if (price < minBid) {
       alert("입찰액은 최소입찰액 이상으로 해야합니다.");
       return;
     }
-    console.log(price % bidStep);
-    if (price % bidStep !== 0) {
-      alert("입찰액 단위는 0.001Eth 단위여야 합니다.");
-      return;
-    }
+    console.log(price);
+    // console.log(1.001 % bidStep);
+    console.log(bidStep);
+    // console.log(price + bidStep);
+    // console.log(price % 0.001);
+    // // console.log(Math.floor((price + bidStep) * 10 ** 3) / 10 ** 3);
+    // if (Math.floor((price + bidStep) * 10 ** 3) / 10 ** 3 !== 0) {
+    // console.log(price % bidStep);
+
+    // if (price % bidStep !== 0) {
+    //   alert("입찰액 단위는 0.001Eth 단위여야 합니다.");
+    //   return;
+    // }
     if (timeCount <= 0) {
       alert("경매가 마감되었습니다");
       return;

@@ -216,6 +216,19 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "getCA",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "address",
@@ -733,11 +746,11 @@
 	},
 	"sources": {
 		"TestToken.sol": {
-			"keccak256": "0x79e662b494d97575a204d2370096f0cc0ff8a7bd5aef7990a0df8404b7a70adf",
+			"keccak256": "0x860474ac89c615108caf3a922358d3575cc6cc2bb2af1527dee83bc4e0fc268d",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://8fc0f2b5708b6074535c82b3b044046e237bd5ffc95ad29c36bcb47aad52ea05",
-				"dweb:/ipfs/QmTZK96iv5tZX816WJiCu7BiyrwXqaF5DJknS1BS6vuTNP"
+				"bzz-raw://2a9195bc6ae453803d0928ea47e96516b7c050a6c935347a7235e059cdaae15a",
+				"dweb:/ipfs/Qmer7pk43X2VMexp2nk7a4Wida7yMehD4wvDjDgZT6xx6R"
 			]
 		},
 		"openzeppelin-solidity/contracts/access/Ownable.sol": {

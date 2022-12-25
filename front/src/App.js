@@ -12,7 +12,7 @@ const App = () => {
   const [tokenContract, tradeContract] = useSsandeContracts();
 
   // states
-  const netWorkId = 7722; // 컨트렉트 배포할 네트워크에 따라 다르게 설정 나중에 goerli에 배포하고나면 5로 바꾸면됨
+  const netWorkId = 5; // 컨트렉트 배포할 네트워크에 따라 다르게 설정 나중에 goerli에 배포하고나면 5로 바꾸면됨
   const [isNetWorkCorrect, setIsNetWorkCorrect] = useState();
   const [account, setAccount] = useState();
   const [balance, setBalance] = useState();
@@ -22,7 +22,7 @@ const App = () => {
     (async () => {
       // 블록체인 네트워크 우리가 컨트렉트 배포한 네트워크인지 확인
       const chainId = parseInt(await window.ethereum.request({ method: "eth_chainId" }), 16);
-      setIsNetWorkCorrect(netWorkId === chainId || 1337 === chainId);
+      setIsNetWorkCorrect(netWorkId === chainId);
 
       // 이미 지갑이 연결되어있는경우
       const [account] = await window.ethereum.request({ method: "eth_accounts" });
@@ -36,6 +36,7 @@ const App = () => {
       // 이벤트쌓이는거 방지
       window.ethereum.on("accountsChanged", async switchedAddress => {
         setAccount(switchedAddress[0]);
+        localStorage.setItem("userAccout", JSON.stringify({ account }));
       });
 
     // 네트워크 바꼈을때 이벤트
@@ -71,11 +72,11 @@ const App = () => {
 
   // account바뀌면 잔액 다시 업데이트
   useEffect(() => {
-    
     (async () => {
       if (!web3 || !account) return;
       const balance = await web3.eth.getBalance(account);
       setBalance(balance);
+      localStorage.setItem("userAccout", JSON.stringify({ balance }));
     })();
   }, [web3, account]);
 
@@ -90,9 +91,14 @@ const App = () => {
     })();
   }, [isNetWorkCorrect]);
 
+  useEffect(() => {
+    if (!tradeContract || !tokenContract) return;
+    console.log("트레이드 컨트렉트", tradeContract);
+    console.log("토큰 컨트렉트", tokenContract);
+  }, [tradeContract, tokenContract]);
+
   if (!isNetWorkCorrect) return <h1>네트워크를 맞게 설정하세요</h1>;
 
-  
   return (
     <Context.Provider value={{ web3, account, balance, tokenContract, tradeContract }}>
       <Layout />

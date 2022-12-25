@@ -1,16 +1,16 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.17;
 
-import "./standards/ERC721A.sol";
-import "../node_modules/@openzeppelin/contracts/utils/Strings.sol";
-import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
-import "../node_modules/@openzeppelin/contracts/security/ReentrancyGuard.sol";
+// import "./standards/ERC721A.sol";
+// import "../node_modules/@openzeppelin/contracts/utils/Strings.sol";
+// import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
+// import "../node_modules/@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 // remix 전용 경로
-// import "./standards/ERC721A.sol";
-// import "openzeppelin-solidity/contracts/utils/Strings.sol";
-// import "openzeppelin-solidity/contracts/access/Ownable.sol";
-// import "openzeppelin-solidity/contracts/security/ReentrancyGuard.sol";
+import "./standards/ERC721A.sol";
+import "openzeppelin-solidity/contracts/utils/Strings.sol";
+import "openzeppelin-solidity/contracts/access/Ownable.sol";
+import "openzeppelin-solidity/contracts/security/ReentrancyGuard.sol";
 
 contract TestToken is  ERC721A, Ownable, ReentrancyGuard {
     using Strings for uint256; // Strings라이브러리 사용

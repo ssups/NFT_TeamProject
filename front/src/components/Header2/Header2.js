@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { NavLink, Link } from "react-router-dom";
-import Web3 from 'web3';
+import Web3 from "web3";
 
 import "../../styles/header2.css";
 
 import { Container } from "reactstrap";
+import { Context } from "../../App";
 
 //헤더 링크
 const Nav_Link = [
@@ -24,14 +25,13 @@ const Nav_Link = [
     display: "Auction",
     url: "/create",
   },
-  
 ];
 
 const Header2 = () => {
-
   // const [walletAddress, setWalletAddress] = useState(null)
   const [isConnected, setIsConnected] = useState(false);
   const [userInfo, setUserInfo] = useState({});
+  const { account, balance } = useContext(Context);
   // const [account,setAccount] = useState()
   //
   // 메타마스크 지갑 연결에 대한 함수 (지갑 연동 버튼 클릭 시)
@@ -44,7 +44,7 @@ const Header2 = () => {
 
   useEffect(() => {
     function checkConnectedWallet() {
-      const userData = JSON.parse(localStorage.getItem('userAccount'));
+      const userData = JSON.parse(localStorage.getItem("userAccount"));
       if (userData != null) {
         setUserInfo(userData);
         setIsConnected(true);
@@ -58,10 +58,8 @@ const Header2 = () => {
     if (window.ethereum) {
       provider = window.ethereum;
     } else if (window.web3) {
-     
       provider = window.web3.currentProvider;
     } else {
-      
     }
     return provider;
   };
@@ -71,25 +69,23 @@ const Header2 = () => {
       const currentProvider = detectCurrentProvider();
       if (currentProvider) {
         if (currentProvider !== window.ethereum) {
-          
         }
-        await currentProvider.request({ method: 'eth_requestAccounts' });
+        await currentProvider.request({ method: "eth_requestAccounts" });
         const web3 = new Web3(currentProvider);
         const userAccount = await web3.eth.getAccounts();
         const chainId = await web3.eth.getChainId();
         const account = userAccount[0];
-        let ethBalance = await web3.eth.getBalance(account); 
-        ethBalance = web3.utils.fromWei(ethBalance, 'ether'); 
+        let ethBalance = await web3.eth.getBalance(account);
+        ethBalance = web3.utils.fromWei(ethBalance, "ether");
         saveUserInfo(ethBalance, account, chainId);
         if (userAccount.length === 0) {
         }
       }
-    } catch (err) {
-    }
+    } catch (err) {}
   };
 
   const onDisconnect = () => {
-    window.localStorage.removeItem('userAccount');
+    window.localStorage.removeItem("userAccount");
     setUserInfo({});
     setIsConnected(false);
   };
@@ -100,12 +96,11 @@ const Header2 = () => {
       balance: ethBalance,
       connectionid: chainId,
     };
-    window.localStorage.setItem('userAccount', JSON.stringify(userAccount));
-    const userData = JSON.parse(localStorage.getItem('userAccount'));
+    window.localStorage.setItem("userAccount", JSON.stringify(userAccount));
+    const userData = JSON.parse(localStorage.getItem("userAccount"));
     setUserInfo(userData);
     setIsConnected(true);
   };
-
 
   // 헤더바 고정
   const headerRef = useRef(null);
@@ -124,7 +119,6 @@ const Header2 = () => {
     };
   }, []);
 
- 
   return (
     // 헤더
     <header className="header2" ref={headerRef}>
@@ -157,30 +151,34 @@ const Header2 = () => {
 
           {/* 지갑버튼 */}
           <div className="nav_right d-flex align-items-center gap-5">
-          {!isConnected && (
-          <div>
-            
-            <button className="btn1" onClick={onConnect}>
-              <p>지갑연결</p>
-            </button>
+            {!isConnected && (
+              <div>
+                <button className="btn1" onClick={onConnect}>
+                  <p>지갑연결</p>
+                </button>
+              </div>
+            )}
           </div>
-        )}
-      </div>
-      {isConnected && (
-        <>
-            <div className="account_text">
-              Account:<Link to="/mypage">
-                {userInfo.account}</Link>        
-            </div>           
-          <div>
-            <button className="btn2" onClick={onDisconnect}>
-              <p>해제하기</p>
-            </button>
-          </div>
-       </>
-      )}
+          {isConnected && (
+            <>
+              <div>
+                <div className="account_text" style={{ height: "30px" }}>
+                  {/* Account: <Link to="/mypage">{userInfo.account}</Link> */}
+                  Account: <Link to="/mypage">{account}</Link>
+                </div>
+                <div className="account_text" style={{ height: "30px" }}>
+                  Balance: <span>{((balance * 1) / 10 ** 18).toFixed(3) + "Eth"}</span>
+                  {/* Balance: <span>{(userInfo.balance * 1).toFixed(3) + "Eth"}</span> */}
+                </div>
+              </div>
+              <div>
+                <button className="btn2" onClick={onDisconnect}>
+                  <p>해제하기</p>
+                </button>
+              </div>
+            </>
+          )}
         </div>
-        
       </Container>
     </header>
   );
