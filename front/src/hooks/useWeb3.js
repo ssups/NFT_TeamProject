@@ -29,11 +29,14 @@ const useWeb3 = () => {
       //   });
     })();
 
+    
     return () => {
       // 컴포넌트 언마운트때 이벤트 날리기
       // delete window.ethereum._events["accountsChanged"];
     };
   }, []);
+  
+  
 
   // account바뀌면 잔액 다시 업데이트
   // useEffect(() => {
