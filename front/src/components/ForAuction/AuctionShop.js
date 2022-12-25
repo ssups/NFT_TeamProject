@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { Col, Container, Row } from "reactstrap";
 import { Context } from "../../App";
 import NftCard from "../Nft/NftCard";
+import Loading from "../Loading/Loading";
 
 const AuctionShop = () => {
   // context

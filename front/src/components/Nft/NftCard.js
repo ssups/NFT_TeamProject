@@ -80,9 +80,9 @@ const NftCard = ({ tokenId, tokenURI, tokenInfo }) => {
           </h5>
           <h5>최고입찰가: {parseInt(bider, 16) === 0 ? "입찰자없음" : currentBid + " Eth"}</h5>
           <h5>
-            남은시간: {(Math.floor(timeCount / 60 / 60) + "").padStart(2, "0")} :
-            {(Math.floor((timeCount / 60) % 60) + "").padStart(2, "0")} :{" "}
-            {((timeCount % 60) + "").padStart(2, "0")}
+            남은시간: {timeCount ? (Math.floor(timeCount / 60 / 60) + "").padStart(2, "0") : "00"} :
+            {timeCount ? " " + (Math.floor((timeCount / 60) % 60) + "").padStart(2, "0") : " 00"} :
+            {timeCount ? " " + ((timeCount % 60) + "").padStart(2, "0") : " 00"}
           </h5>
           <div className="creator_info d-flex align-items-center justify-content-between">
             <div className="w-50">
