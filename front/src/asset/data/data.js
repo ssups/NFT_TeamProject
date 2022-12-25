@@ -17,6 +17,10 @@ export const NFT__DATA = [
     imgUrl: img01,
     creator: "Trista Francis",   
     currentBid: 5,
+    background: "purple 3% have",
+    eye: "Yellow 2% have",
+    body: "blue 3% have",
+    mouse: "hmm 20% have",
   },
 
   {
@@ -26,6 +30,10 @@ export const NFT__DATA = [
     imgUrl: img02,
     creator: "Trista Francis",
     currentBid: 5,
+    background: "green 10% have",
+    eye: "Yellow 2% have",
+    body: "green 3% have",
+    mouse: "happy 5% have",
   },
 
   {
@@ -35,6 +43,10 @@ export const NFT__DATA = [
     imgUrl: img03,
     creator: "Trista Francis",
     currentBid: 6,
+    background: "purple 3% have",
+    eye: "green 2% have",
+    body: "yellow 3% have",
+    mouse: "happy 5% have",
   },
 
   {
@@ -44,6 +56,10 @@ export const NFT__DATA = [
     imgUrl: img04,
     creator: "Trista Francis",
     currentBid: 7,
+    background: "blue 5% have",
+    eye: "red 2% have",
+    body: "blue 3% have",
+    mouse: "hmm 20% have",
   },
 
   {
@@ -53,6 +69,10 @@ export const NFT__DATA = [
     imgUrl: img05,
     creator: "Trista Francis",
     currentBid: 4,
+    background: "green 3% have",
+    eye: "Yellow 0.05% have",
+    body: "yellow 3% have",
+    mouse: "hmm 20% have",
   },
 
   {
@@ -62,6 +82,10 @@ export const NFT__DATA = [
     imgUrl: img06,
     creator: "Trista Francis",
     currentBid: 4,
+    background: "blue 3% have",
+    eye: "green 2% have",
+    body: "green 3% have",
+    mouse: "happy 5% have",
   },
 
   {
@@ -71,6 +95,10 @@ export const NFT__DATA = [
     imgUrl: img07,
     creator: "Trista Francis",
     currentBid: 5,
+    background: "rare red 0.001% have",
+    eye: "red 2% have",
+    body: "red 3% have",
+    mouse: "happy 5% have",
   },
 
   {
@@ -80,6 +108,10 @@ export const NFT__DATA = [
     imgUrl: img08,
     creator: "Trista Francis",
     currentBid: 5,
+    background: "purple 3% have",
+    eye: "Green 2% have",
+    body: "blue 3% have",
+    mouse: "happy 5% have",
   },
 
   {
@@ -89,6 +121,10 @@ export const NFT__DATA = [
     imgUrl: img09,
     creator: "Trista Francis",
     currentBid: 5,
+    background: "purple 3% have",
+    eye: "Yellow 2% have",
+    body: "Yellow 3% have",
+    mouse: "happy 5% have",
   },
 ];
 

@@ -25,7 +25,9 @@ const NftDetail = () => {
         <Container>
           <Row>
             <Col lg='6' md='6' sm='6'>
-              <img src={singleNft.imgUrl} className="single-img w-100"/>
+              <div className='N_detail'>
+              <img src={singleNft.imgUrl} className="single-img w-70"/>
+              </div>
             </Col>
 
             <Col lg='6' md='6' sm='6'>
@@ -41,13 +43,36 @@ const NftDetail = () => {
                       <span>
                       <i className="ri-hearts-fill"></i> 333
                       </span>
+                     
                   </div>
 
+
+                 
                  
 
                 </div>
 
                 <p>{singleNft.desc}</p>
+                
+                <div className='attribute'>
+                <span>
+                  <h4>Background &nbsp;</h4>
+                  {singleNft.background}
+                  </span>
+                  <span>
+                  <h4>Eye &nbsp;</h4>
+                  {singleNft.eye}
+                  </span>
+                  <span>
+                 <h4> Body &nbsp; </h4>
+                  {singleNft.body}
+                  </span>
+                  <span>
+                 <h4> Mouse &nbsp; </h4>
+                  {singleNft.mouse}
+                </span>
+                </div>
+
                 <button onClick={notify} className='bid_btn1 d-flex align-items-center gap-2'>
                 <i className="ri-shopping-bag-line"></i>
 

@@ -53,6 +53,9 @@
     position: relative;
     margin-top: 200px;
     margin-left: -180px;
+   
+ 
+    
 }
 .bbtn2{
     background: none;
@@ -87,4 +90,13 @@
     position: absolute;
 
     
+}
+
+.head_style{
+    background: linear-gradient(-45deg, #e250e5,#4b50e6,
+    #e250e5, #4b50e6);
+    background-size: 100% 100%;
+    background-clip: text;
+    -webkit-text-stroke: 3px transparent;
+    -webkit-text-fill-color: #0f0e0b;
 }
