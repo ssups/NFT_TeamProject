@@ -1,5 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { NavLink, Link } from "react-router-dom";
+import Web3 from 'web3';
+
 import "../../styles/header2.css";
 
 import { Container } from "reactstrap";
@@ -27,15 +29,82 @@ const Nav_Link = [
 
 const Header2 = () => {
 
-  const [walletAddress, setWalletAddress] = useState(null)
+  // const [walletAddress, setWalletAddress] = useState(null)
+  const [isConnected, setIsConnected] = useState(false);
+  const [userInfo, setUserInfo] = useState({});
+  // const [account,setAccount] = useState()
   //
   // 메타마스크 지갑 연결에 대한 함수 (지갑 연동 버튼 클릭 시)
-  const connectWallet = async () => {
-    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts'});
+  // const connectWallet = async () => {
+  //   const accounts = await window.ethereum.request({ method: 'eth_requestAccounts'});
 
-    setWalletAddress(accounts[0])
+  //   setWalletAddress(accounts[0])
 
-  }
+  // }
+
+  useEffect(() => {
+    function checkConnectedWallet() {
+      const userData = JSON.parse(localStorage.getItem('userAccount'));
+      if (userData != null) {
+        setUserInfo(userData);
+        setIsConnected(true);
+      }
+    }
+    checkConnectedWallet();
+  }, []);
+
+  const detectCurrentProvider = () => {
+    let provider;
+    if (window.ethereum) {
+      provider = window.ethereum;
+    } else if (window.web3) {
+     
+      provider = window.web3.currentProvider;
+    } else {
+      
+    }
+    return provider;
+  };
+
+  const onConnect = async () => {
+    try {
+      const currentProvider = detectCurrentProvider();
+      if (currentProvider) {
+        if (currentProvider !== window.ethereum) {
+          
+        }
+        await currentProvider.request({ method: 'eth_requestAccounts' });
+        const web3 = new Web3(currentProvider);
+        const userAccount = await web3.eth.getAccounts();
+        const chainId = await web3.eth.getChainId();
+        const account = userAccount[0];
+        let ethBalance = await web3.eth.getBalance(account); 
+        ethBalance = web3.utils.fromWei(ethBalance, 'ether'); 
+        saveUserInfo(ethBalance, account, chainId);
+        if (userAccount.length === 0) {
+        }
+      }
+    } catch (err) {
+    }
+  };
+
+  const onDisconnect = () => {
+    window.localStorage.removeItem('userAccount');
+    setUserInfo({});
+    setIsConnected(false);
+  };
+
+  const saveUserInfo = (ethBalance, account, chainId) => {
+    const userAccount = {
+      account: account,
+      balance: ethBalance,
+      connectionid: chainId,
+    };
+    window.localStorage.setItem('userAccount', JSON.stringify(userAccount));
+    const userData = JSON.parse(localStorage.getItem('userAccount'));
+    setUserInfo(userData);
+    setIsConnected(true);
+  };
 
 
   // 헤더바 고정
@@ -88,21 +157,28 @@ const Header2 = () => {
 
           {/* 지갑버튼 */}
           <div className="nav_right d-flex align-items-center gap-5">
-            <button className="btn1" onClick={connectWallet}>
-              <Link className="d-flex gap-2 align-items-center">
-                <span>
-                  <i className="ri-wallet-3-fill"></i>
-                </span>
-                지갑 연동
-              </Link>
+          {!isConnected && (
+          <div>
+            
+            <button className="btn1" onClick={onConnect}>
+              <p>지갑연결</p>
             </button>
-             
-            <div className="account_text">            
-              Account:<Link to="/mypage">
-                {walletAddress}
-                </Link>
-        </div>
           </div>
+        )}
+      </div>
+      {isConnected && (
+        <>
+            <div className="account_text">
+              Account:<Link to="/mypage">
+                {userInfo.account}</Link>        
+            </div>           
+          <div>
+            <button className="btn2" onClick={onDisconnect}>
+              <p>해제하기</p>
+            </button>
+          </div>
+       </>
+      )}
         </div>
         
       </Container>

@@ -52,10 +52,28 @@
 }
 
 .nav_right .btn1{
-    height: 30px;
+    height: 45px;
     padding: 7px 25px;
     border: 1px solid #5142FC;
     border-radius: 50px;
+    margin-top: 30px;
+}
+
+.btn1 p{
+    color: black;
+}
+
+
+.btn2 {
+    height: 45px;
+    padding: 7px 25px;
+    border: 1px solid #5142FC;
+    border-radius: 50px;
+    margin-top: 30px;
+}
+
+.btn2 p{
+    color: black;
 }
 
 .nav_right .btn1 a{
