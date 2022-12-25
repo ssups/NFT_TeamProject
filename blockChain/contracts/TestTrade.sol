@@ -169,7 +169,7 @@ contract TestTrade is Ownable{
 
     // 경매중인 토큰 정보 조회(테스트완료)
     function dataOfOnAuction(uint256 tokenId) public view returns(AuctionInfo memory){
-        require(_tokensOnAuction[tokenId].endTime > block.timestamp, "this token is not on Auction");
+        // require(_tokensOnAuction[tokenId].endTime > block.timestamp, "this token is not on Auction");
         return _tokensOnAuction[tokenId];
     }
 
@@ -313,8 +313,42 @@ contract TestTrade is Ownable{
         return tokensNotClaimedOnAuction;
     }
 
+    // 내가 입찰한것중에 정산되지 않은 토큰 갯수 - 경매끝
+    function _countNotClaimedTokenOfBider(address owner) public view returns(uint256) {
+        uint256 count = 0;
+        uint256 countNotClaimedAuction = _countNotClaimedAuction();
+        uint256[] memory tokensNotClaimedOnAuction = notClaimedAuctionList();
 
-    // 내가 입찰중인(내 입찰가가 최고입찰가인) 토큰갯수(테스트 완료)
+        for(uint256 i = 0; i < countNotClaimedAuction; i++) {
+            uint256 tokenId = tokensNotClaimedOnAuction[i]; 
+            if(_tokensOnAuction[tokenId].bider == owner) {
+                count++;
+            }
+        }
+
+        return count;
+    }
+    
+    // 내가 입찰한것중에 정산되지 않은 토큰 리스트 - 경매끝
+    function notClaimedTokensOfBiderList(address owner) public view returns(uint256[] memory) {
+        uint256[] memory notClaimedtokensOfBider = new uint256[](_countNotClaimedTokenOfBider(owner)); // 배열크기 미리배정
+        uint256[] memory tokensNotClaimedOnAuction = notClaimedAuctionList();
+        uint256 countNotClaimedAuction = _countNotClaimedAuction();
+        uint256 index = 0;
+
+        for(uint256 i = 0; i < countNotClaimedAuction; i++) {
+            uint256 tokenId = tokensNotClaimedOnAuction[i]; 
+            if(_tokensOnAuction[tokenId].bider == owner) {
+                notClaimedtokensOfBider[index] = tokenId;
+                index ++;
+            }
+        }
+
+        return notClaimedtokensOfBider;
+    }
+
+
+    // 내가 입찰중인(내 입찰가가 최고입찰가인) 토큰갯수(테스트 완료) - 경매중
     function _countOnBid(address owner) private view returns(uint256) {
         uint256 count = 0;
         uint256 countOnAuction = _countOnAuction();
@@ -329,7 +363,7 @@ contract TestTrade is Ownable{
         return count;
     }
 
-    // 내가 입찰중인(내 입찰가가 최고입찰가인) 토큰 조회(테스트 완료)
+    // 내가 입찰중인(내 입찰가가 최고입찰가인) 토큰 조회(테스트 완료) - 경매중
     function onBidList(address owner) external view returns(uint256[] memory){
         uint256[] memory tokensOnBid = new uint256[](_countOnBid(owner)); // 배열크기 미리배정
         uint256 countOnAuction = _countOnAuction();

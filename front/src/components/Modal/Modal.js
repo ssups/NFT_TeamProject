@@ -6,7 +6,9 @@ import { Context } from "../../App";
 //NftCard.js에 전달
 const Modal = ({ setModal, jsonData, currentBid, bider, timeCount, tokenId }) => {
   const bidStep = 0.001;
-  const minBid = Math.floor((currentBid * 1 + bidStep) * 1000) / 1000;
+  const minBid = (currentBid * 1 + bidStep).toFixed(3);
+
+  //   console.log(minBid);
   // context
   const { account, web3, balance, tokenContract, tradeContract } = useContext(Context);
   // states
