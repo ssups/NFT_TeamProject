@@ -9,7 +9,7 @@ import MintingModal from '../Modal/MintingModal_j';
 
 const TopFold = () => {
   //
-  const [modal, setModal] = useState(false);
+  const [moDal, setModal] = useState(false);
 
   return (
     <div className='topfold'>

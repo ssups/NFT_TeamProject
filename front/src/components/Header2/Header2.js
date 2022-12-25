@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 import "../../styles/header2.css";
 
@@ -18,16 +18,25 @@ const Nav_Link = [
     display: "Create",
     url: "/create",
   },
+  {
+    display: "Auction",
+    url: "/create",
+  },
+  
 ];
 
 const Header2 = () => {
+
+  const [walletAddress, setWalletAddress] = useState(null)
   //
   // 메타마스크 지갑 연결에 대한 함수 (지갑 연동 버튼 클릭 시)
-  async function connectWallet() {
-    await window.ethereum.request({
-      method: "eth_requestAccounts",
-    });
+  const connectWallet = async () => {
+    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts'});
+
+    setWalletAddress(accounts[0])
+
   }
+
 
   // 헤더바 고정
   const headerRef = useRef(null);
@@ -85,8 +94,12 @@ const Header2 = () => {
                 지갑 연동
               </Link>
             </button>
+            <div className="account_text">
+              Account:{walletAddress}
+        </div>
           </div>
         </div>
+        
       </Container>
     </header>
   );
