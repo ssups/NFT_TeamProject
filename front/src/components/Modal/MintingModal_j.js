@@ -93,9 +93,7 @@ const MintingModal = ({ setModal }) => {
 
     // 민팅 함수
     async function mintFn() {
-
-        console.log(_mintingQuantity);
-
+        //
         const quantity = _mintingQuantity.current.value;
 
         if (quantity <= 0) {
@@ -113,8 +111,8 @@ const MintingModal = ({ setModal }) => {
             return;
         }
 
-        // wei 단위
-        const payment = mintingPrice * quantity;
+        const price = web3.utils.toWei(mintingPrice, "ether");
+        const payment = price * quantity;
         if (balance < payment) {
             alert("잔액이 부족합니다.");
             return;
@@ -189,8 +187,11 @@ const MintingModal = ({ setModal }) => {
         //
         if (!isMintOn) return;
 
-        (async () => setMintingPrice(await getMintingPriceFn()))();
-        
+        (async () => {
+            const price = await getMintingPriceFn();
+            setMintingPrice(web3.utils.fromWei(price, "ether"));
+        })();
+
     }, [isMintOn]);
 
     //

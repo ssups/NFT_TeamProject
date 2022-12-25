@@ -28,14 +28,14 @@ const MyPage = () => {
   async function getIsApprovedForAllFn() {
     //
     const ca = await tradeContract.methods.getCA().call();
-
-    const isApprovedForAll = await tokenContract.methods.isApprovedForAll(account, ca).call();
-    return isApprovedForAll;
+    return await tokenContract.methods.isApprovedForAll(account, ca).call();
   }
+  console.log("DFDF", isApprovedForAll)
 
   // 토큰의 전송 권한 위임 설정에 대한 함수
   async function setApprovalForAllFn() {
     //
+    console.log("why false : true ===", isApprovedForAll)
     if (isApprovedForAll) return;
 
     const delegationMsg = "판매 및 경매 상품으로 등록하기 위해서는 토큰에 대한 전송 권한을 위임하는 것에 동의해야 합니다. 동의하시겠습니까?";
@@ -53,6 +53,7 @@ const MyPage = () => {
     alert("토큰에 대한 전송 권한 위임이 완료되었습니다.");
     setIsApprovedForAll(true);
   }
+  console.log("true ===", isApprovedForAll)
 
   // 나의 보유 토큰들을 보유하게 된 순서대로 컴포넌트화 하기 위한 JSON 파일 경로 조회 함수
   async function getMyTokenURIsFn() {
@@ -107,17 +108,19 @@ const MyPage = () => {
     //
     // 토큰에 대한 전송 권한 위임이 필요한 토큰에 위임 동의가 되어 있지 않은 경우
     const isMyOwnToken = classificationName === "myOwnToken";
-    if (!isApprovedForAll && !isMyOwnToken) {
+    const isNotClaimMatchedToken = classificationName === "myNotClaimedAuctionToken";
+    if (!isApprovedForAll && (isMyOwnToken || isNotClaimMatchedToken)) {
       //
+      console.log(isApprovedForAll)
       return (
-        <Col lg="3" md="4" sm="6" className="mb-4">
+        <Col key={tokenId} lg="3" md="4" sm="6" className="mb-4">
           <MyPageNftCard key={tokenId} tokenId={tokenId} tokenURI={tokenURI} classificationName={classificationName} setApprovalForAllFn={setApprovalForAllFn} />
         </Col>
       );
     }
 
     return (
-      <Col lg="3" md="4" sm="6" className="mb-4">
+      <Col key={tokenId} lg="3" md="4" sm="6" className="mb-4">
         <MyPageNftCard key={tokenId} tokenId={tokenId} tokenURI={tokenURI} classificationName={classificationName} />
       </Col>
     );
@@ -141,6 +144,7 @@ const MyPage = () => {
     (async () => {
       //
       const _isApprovedForAll = await getIsApprovedForAllFn();
+      console.log("_isApprovedForAll", _isApprovedForAll)
       if (_isApprovedForAll) {
         setIsApprovedForAll(true);
       }
