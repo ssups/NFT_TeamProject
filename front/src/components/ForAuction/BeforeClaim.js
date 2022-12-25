@@ -47,7 +47,20 @@ const BeforeClaim = () => {
       });
     })();
   }, [tradeContract, tokensNotClaimed]);
-
+  if (!tokensNotClaimed || tokensNotClaimed?.length === 0)
+    return (
+      <h1
+        style={{
+          width: "100wh",
+          height: "calc(100vh - 100px - 50px)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        낙찰된 상품이 없습니다.
+      </h1>
+    );
   return (
     <section>
       <Container>
