@@ -216,7 +216,7 @@ contract TestTrade is Ownable{
         _tokensOnAuction[tokenId].lastBidPrice = msg.value;
         _tokensOnAuction[tokenId].bider = msg.sender;
 
-        emit BidOnAuction(tokenId, msg.value , bider);
+        emit BidOnAuction(tokenId, msg.value , msg.sender);
     }
 
     // 입찰경쟁 밀린사람 환불해주기(테스트완료)
