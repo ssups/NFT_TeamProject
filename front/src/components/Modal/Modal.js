@@ -31,7 +31,8 @@ const Modal = ({ setModal, jsonData, currentBid, bider, timeCount, tokenId }) =>
       alert("입찰액은 최소입찰액 이상으로 해야합니다.");
       return;
     }
-    if (price % bidStep === 0) {
+    console.log(price % bidStep);
+    if (price % bidStep !== 0) {
       alert("입찰액 단위는 0.001Eth 단위여야 합니다.");
       return;
     }

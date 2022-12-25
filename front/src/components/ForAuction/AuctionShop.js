@@ -12,7 +12,6 @@ const AuctionShop = () => {
   const [onAuctionInfo, setOnAuctionInfo] = useState();
 
   // useEffect
-
   useEffect(() => {
     if (!tradeContract) return;
     // 경매등록했을때 자동으로 올라오도록 이벤트설정
