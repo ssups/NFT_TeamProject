@@ -230,7 +230,7 @@ const MintingModal = ({ setModal }) => {
                     totalSupply !== maxSupply &&
                     <>
                         <p className="text-center text-light">한 번에 '{maxMinting}개'까지 민팅 가능합니다.<br />1개를 민팅하는 데 발생하는 가스비만으로,<br />무려 {maxMinting}개를 민팅할 수 있다는 게 사실? 사실!</p>
-                        <p className="text-center text-light">민팅 1개당 가격 : {mintingPrice && web3.utils.fromWei(mintingPrice, "ether")} ether</p>
+                        <p className="text-center text-light">민팅 1개당 가격 : {mintingPrice} ether</p>
                         <p className="text-center text-light">현재 발행량 : {totalSupply}</p>
                         <p className="text-center text-light">최대 발행량 : {maxSupply}</p>
 

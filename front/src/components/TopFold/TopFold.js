@@ -28,7 +28,7 @@ const TopFold = () => {
       <Link to='/shop'> <button className='bbtn1'>Explore</button></Link>
        <button onClick={()=> setModal(true)} className='bbtn2'>민팅하기</button>
        
-        {moDal && <Modal setModal={setModal}/>} 
+        {moDal && <MintingModal setModal={setModal}/>} 
        
       </div>
     </div>
