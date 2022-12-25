@@ -1,6 +1,6 @@
 import useContract from "./useContract";
-import testTokenJson from "../contracts/TestToken.json";
-import testTradeJson from "../contracts/TestTrade.json";
+// import testTokenJson from "../contracts/TestToken.json";
+// import testTradeJson from "../contracts/TestTrade.json";
 import tokenAbi from "../contracts/goerli/token.json";
 import tradeAbi from "../contracts/goerli/trade.json";
 
