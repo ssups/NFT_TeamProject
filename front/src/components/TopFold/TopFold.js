@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
+import "../../styles/topfold.css"
+import Modal from '../Modal/Modal'
+import {Link} from "react-router-dom"
+
 
 import "../../styles/topfold.css"
 import MintingModal from '../Modal/MintingModal_j';
 
 const TopFold = () => {
   //
-  const [modal, setModal] = useState(false);
+  const [moDal, setModal] = useState(false);
 
   return (
     <div className='topfold'>
@@ -21,11 +25,11 @@ const TopFold = () => {
       </div>
 
       <div className='tf-btns'>
-        <button className='bbtn1'>둘러보기</button>
-        <button onClick={() => setModal(true)} className='bbtn2'>민팅하기</button>
-
-        {modal && <MintingModal setModal={setModal} />}
-
+      <Link to='/shop'> <button className='bbtn1'>Explore</button></Link>
+       <button onClick={()=> setModal(true)} className='bbtn2'>민팅하기</button>
+       
+        {moDal && <Modal setModal={setModal}/>} 
+       
       </div>
     </div>
   )

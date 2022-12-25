@@ -51,7 +51,6 @@ const Shop = () => {
     (async () => {
       // 경매중인 토큰 리스트
       const tokensOnAuction = await tradeContract.methods.onAuctionList().call();
-      setTokensOnAuction(tokensOnAuction);
 
       // 경매중이 토큰 uri, info 들고오기
       const tokensURI = {};
@@ -60,6 +59,14 @@ const Shop = () => {
         tokensURI[tokenId] = await tokenContract.methods.tokenURI(tokenId).call();
         tokensInfo[tokenId] = await tradeContract.methods.dataOfOnAuction(tokenId).call();
       }
+
+      // 경매시간지난거 프론트에서도 한번 필터해주기(블록생성시간 지연됐을경우 대비)
+      const now = Math.floor(Date.now() / 1000);
+      const filteredTokensOnAuction = tokensOnAuction.filter(
+        tokenId => tokensInfo[tokenId].endTime - now >= 0
+      );
+
+      setTokensOnAuction(filteredTokensOnAuction);
       setOnAuctionURI(tokensURI);
       setOnAuctionInfo(tokensInfo);
     })();
@@ -93,11 +100,25 @@ const Shop = () => {
     })();
   }, [web3]);
 
-  // functions
+  // returns
+  // =================================================================================================
+  // =================================================================================================
 
-  // 입찰하기
+  if (!tokensOnAuction || tokensOnAuction?.length === 0)
+    return (
+      <h1
+        style={{
+          width: "100wh",
+          height: "100vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        경매중인 상품이 없습니다.
+      </h1>
+    );
 
-  // return
   return (
     <section>
       <Container>
@@ -107,19 +128,15 @@ const Shop = () => {
               <div className="d-flex align-items-center gap-5"></div>
             </div>
           </Col>
-
           {onAuctionURI && onAuctionInfo && tokensOnAuction
-            ? tokensOnAuction.map(tokenId =>
-                // 새로고침때 시간지난거 먼저 걸러주기
-                onAuctionInfo[tokenId].endTime - Math.floor(Date.now() / 1000) > 0 ? (
-                  <NftCard
-                    key={tokenId}
-                    tokenId={tokenId}
-                    tokenURI={onAuctionURI[tokenId]}
-                    tokenInfo={onAuctionInfo[tokenId]}
-                  />
-                ) : null
-              )
+            ? tokensOnAuction.map(tokenId => (
+                <NftCard
+                  key={tokenId}
+                  tokenId={tokenId}
+                  tokenURI={onAuctionURI[tokenId]}
+                  tokenInfo={onAuctionInfo[tokenId]}
+                />
+              ))
             : null}
         </Row>
       </Container>

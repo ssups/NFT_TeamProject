@@ -16,16 +16,20 @@ import MyPage from "../pages/MyPage_j";
 import Minseop from "../components/minseop/minseop";
 import SeopMy from "../components/minseop/seopMy";
 
+// import Minseop from "../components/minseop/minseop";
+// import SeopMy from "../components/minseop/seopMy";
+
 const Routers = () => {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/home" />} />
+      <Route path="/" element={<Navigate to="/Create" />} />
       <Route path="/home" element={<Home />} />
       <Route path="/Shop" element={<Shop />} />
 
       <Route path="/Contact" element={<Contact />} />
 
       <Route path="/sell" element={<Sell />} />
+      <Route path="/mypage" element={<MyPage />} />
 
       <Route path="/Shop/:id" element={<NftDetail />} />
 
