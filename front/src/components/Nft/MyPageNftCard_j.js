@@ -26,18 +26,27 @@ const MyPageNftCard = ({ tokenId, tokenURI, classificationName, setApprovalForAl
   // 경매 낙찰 상품 정산 받기 버튼에 대한 함수
   async function claimMatchedToken() {
     //
-    let saleFee = await tradeContract.methods.getSaleFee(tokenId).call();
-    let incomeAfterFee = await tradeContract.methods.getIncomeAfterFee(tokenId).call();
+    const transactionFee = await getAuctionFeeFn();
+    const incomeAfterFee = await getIncomeAfterAuctionFeeFn();
 
-    saleFee = web3.utils.fromWei(saleFee, "ether");
-    incomeAfterFee = web3.utils.fromWei(incomeAfterFee, "ether");
-
-    const claimMessage = `경매 낙찰로 인해 발생한 수수료는 ${saleFee}이며 정산금은 ${incomeAfterFee}입니다. 정산 받으시겠습니까?`;
+    const claimMessage = `경매 낙찰로 인해 발생한 수수료는 ${transactionFee}이며 정산금은 ${incomeAfterFee}입니다. 정산 받으시겠습니까?`;
     if (!window.confirm(claimMessage)) return;
 
     await tradeContract.methods.claimMatchedAuction(tokenId).send({ from: account });
 
     alert("정산이 완료되었습니다.");
+  }
+
+  // 경매 낙찰 상품의 수수료 조회 함수
+  async function getAuctionFeeFn() {
+    const amount = await tradeContract.methods.feeOfMatchedAuctionToken(tokenId).call();
+    return web3.utils.fromWei(amount, "ether");
+  }
+
+  // 경매 낙찰 상품의 정산금 조회 함수
+  async function getIncomeAfterAuctionFeeFn() {
+    const amount = await tradeContract.methods.afterFeeOfNotClaimedToken(tokenId).call();
+    return web3.utils.fromWei(amount, "ether");
   }
 
   // 보유 토큰의 분류명에 따라 버튼에 대한 JSX를 반환하는 함수
@@ -49,7 +58,7 @@ const MyPageNftCard = ({ tokenId, tokenURI, classificationName, setApprovalForAl
           onClick={
             setApprovalForAllFn &&
               title !== "판매 등록 취소하기" ?
-              setApprovalForAllFn : modal ? () => setModal(true) : buttonFn}>
+              setApprovalForAllFn : modal === false ? () => setModal(true) : buttonFn}>
 
           💎 {title}
         </button>

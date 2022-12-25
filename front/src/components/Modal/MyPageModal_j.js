@@ -7,20 +7,30 @@ const MyPageModal = ({ title, setModal, tokenId }) => {
     //
     const { web3, account, tradeContract } = useContext(Context);
 
-    const _salePrice = useRef();
-    const _bidPrice = useRef();
+    // 발표를 위해 분 단위로 select option 설정
     const _endTime = useRef();
+    const _transactionPrice = useRef();
 
-    const [saleFee, setSaleFee] = useState();
+    const [transactionFee, setTransactionFee] = useState();
     const [incomeAfterFee, setIncomeAfterFee] = useState();
 
     // ==========================================functions==========================================
     // =============================================================================================
 
+    // 판매가 및 최소 입찰가의 입력에 따른 수수료 및 정산금 조회 함수
+    async function changeAmountFn() {
+        //
+        // 버튼 기능을 위해서 e.target.value 값이 아닌 ref 사용
+        const transactionPrice = _transactionPrice.current.value;
+
+        setTransactionFee(await getTransactionFeeFn(transactionPrice));
+        setIncomeAfterFee(await getIncomeAfterFeeFn(transactionPrice));
+    }
+
     // 판매 상품으로 등록하는 함수
     async function registerSaleToken() {
         //
-        let salePrice = _salePrice.current.value;
+        let salePrice = _transactionPrice.current.value;
         if (salePrice <= 0) {
             alert("0 이더 이하의 금액은 설정할 수 없습니다.");
             return;
@@ -35,38 +45,35 @@ const MyPageModal = ({ title, setModal, tokenId }) => {
     // 경매 상품으로 등록하는 함수
     async function registerAuctionToken() {
         //
-        // 타임스탬프 값..
-        let endTime = _endTime.current.value;
+        const endTime = _endTime.current.value;
         //
         // 소수점 단위..
-        let bidPrice = _bidPrice.current.value;
+        const decimals = 3;
+        let bidPrice = _transactionPrice.current.value;
+        bidPrice = Math.trunc(bidPrice * 10 ** decimals) / 10 ** decimals;
         bidPrice = web3.utils.toWei(bidPrice, "ether");
 
         await tradeContract.methods.registerForAuction(tokenId, bidPrice, endTime).send({ from: account });
         alert("경매 상품으로 등록이 완료되었습니다.");
     }
 
-    async function getSaleFeeFn() {
-        return await tradeContract.methods.getSaleFee(tokenId).call();
+    // 판매 및 경매 상품으로 등록할 경우의 수수료 조회 함수
+    async function getTransactionFeeFn(price) {
+        const amount = await tradeContract.methods.calculateFee(price).call();
+        return web3.utils.fromWei(amount, "ether");
     }
 
-    async function getIncomeAfterFeeFn() {
-        return await tradeContract.methods.getIncomeAfterFee(tokenId).call();
+    // 판매 및 경매 상품으로 등록할 경우의 정산금 조회 함수
+    async function getIncomeAfterFeeFn(price) {
+        const amount = await tradeContract.methods.afterFee(price).call();
+        return web3.utils.fromWei(amount, "ether");
     }
 
     // ==========================================useEffect==========================================
     // =============================================================================================
 
-    useEffect(() => {
-        //
-        if (!tradeContract || !account) return;
-
-        (async () => {
-            //
-            setSaleFee(await getSaleFeeFn());
-            setIncomeAfterFee(await getIncomeAfterFeeFn());
-        })();
-    }, [tradeContract, account])
+    // 메타마스크 계정이 변경되면
+    // 메인 페이지로 이동해야 함
 
     // ===========================================returns===========================================
     // =============================================================================================
@@ -84,11 +91,12 @@ const MyPageModal = ({ title, setModal, tokenId }) => {
                 {title === "판매 상품으로 등록하기" &&
                     <>
                         <div className="input_item mb-4">
-                            <input type="number" placeholder='판매가를 ether 단위로 입력해주세요.' ref={_salePrice} min={0} />
+                            <p className="text-center text-light">판매가를 ether 단위로 입력해주세요.</p>
+                            <input type="number" min={0} ref={_transactionPrice} onChange={changeAmountFn} />
                         </div>
 
-                        <p className="text-center text-light">판매 완료 시 정산금 : {incomeAfterFee}</p>
-                        <p className="text-center text-light">판매 완료 시 발생하는 수수료 : {saleFee}</p>
+                        <p className="text-center text-light">판매 완료 시 정산금 : {incomeAfterFee ? incomeAfterFee + " ether" : "0 ether"}</p>
+                        <p className="text-center text-light">판매 완료 시 발생하는 수수료 : {transactionFee ? transactionFee + " ether" : "0 ether"}</p>
 
                         <button className="place-minting-btn" onClick={registerSaleToken}>
                             판매 등록
@@ -99,16 +107,19 @@ const MyPageModal = ({ title, setModal, tokenId }) => {
                 {title === "경매 상품으로 등록하기" &&
                     <>
                         <div className="input_item mb-4">
-                            <input type="number" placeholder='최소 입찰가를 ether 단위로 입력해주세요.' ref={_bidPrice} min={0} />
-                            <select>dsf
-                                {Array.from({ length: 24 }, (index, value) => index + 1).map((hour) => <option value={hour}></option>)}
+
+                            <p className="text-center text-light">최소 입찰가를 ether 단위로 입력해주세요.</p>
+                            <input type="number" placeholder='최소 단위 0.001' min={0} ref={_transactionPrice} onChange={changeAmountFn} />
+                            
+                            <p className="text-center text-light">경매 진행 시간을 1 ~ 30 분 중에서 선택해주세요.</p>
+                            <select ref={_endTime}>
+                                {Array.from({ length: 30 }, (value, index) => index + 1).map((minute) => <option value={minute}>{minute}분</option>)}
                             </select>
-                            <select type="number" placeholder='경매 진행 시간을 1 ~ 24 시간으로 선택해주세요.' ref={_endTime} min={1} max={24} />
-                            {/* <input type="number" placeholder='경매 진행 시간을 1 ~ 24 시간으로 선택해주세요.' ref={_endTime} min={1} max={24} /> */}
+
                         </div>
 
-                        <p className="text-center text-light">경매 낙찰 시 정산금 : {incomeAfterFee}</p>
-                        <p className="text-center text-light">경매 낙찰 시 발생하는 수수료 : {saleFee}</p>
+                        <p className="text-center text-light">경매 낙찰 시 정산금 : {incomeAfterFee ? incomeAfterFee + " ether" : "0 ether"}</p>
+                        <p className="text-center text-light">경매 낙찰 시 발생하는 수수료 : {transactionFee ? transactionFee + " ether" : "0 ether"}</p>
 
                         <button className="place-minting-btn" onClick={registerAuctionToken}>
                             경매 등록
