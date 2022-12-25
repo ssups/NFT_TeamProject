@@ -18,7 +18,7 @@ import MyPageNftCard from "../components/Nft/MyPageNftCard_j";
 const MyPage = () => {
   //
   const [myTokens, setMyTokens] = useState();
-  const [isApprovedForAll, setIsApprovedForAll] = useState(false);
+  const [isApprovedForAll, setIsApprovedForAll] = useState();
   const { account, tokenContract, tradeContract } = useContext(Context);
 
   // ==========================================functions==========================================
@@ -30,7 +30,6 @@ const MyPage = () => {
     const ca = await tradeContract.methods.getCA().call();
     return await tokenContract.methods.isApprovedForAll(account, ca).call();
   }
-  console.log("DFDF", isApprovedForAll)
 
   // 토큰의 전송 권한 위임 설정에 대한 함수
   async function setApprovalForAllFn() {
@@ -111,7 +110,6 @@ const MyPage = () => {
     const isNotClaimMatchedToken = classificationName === "myNotClaimedAuctionToken";
     if (!isApprovedForAll && (isMyOwnToken || isNotClaimMatchedToken)) {
       //
-      console.log(isApprovedForAll)
       return (
         <Col key={tokenId} lg="3" md="4" sm="6" className="mb-4">
           <MyPageNftCard key={tokenId} tokenId={tokenId} tokenURI={tokenURI} classificationName={classificationName} setApprovalForAllFn={setApprovalForAllFn} />
@@ -144,11 +142,18 @@ const MyPage = () => {
     (async () => {
       //
       const _isApprovedForAll = await getIsApprovedForAllFn();
-      console.log("_isApprovedForAll", _isApprovedForAll)
-      if (_isApprovedForAll) {
-        setIsApprovedForAll(true);
-      }
+      setIsApprovedForAll(_isApprovedForAll);
 
+    })();
+  }, [tokenContract, account]);
+
+  // 토큰 전송 권한 위임 여부 확인 후 보유 토큰 조회
+  useEffect(() => {
+    //
+    if (isApprovedForAll === undefined) return;
+
+    (async () => {
+      //
       const myTokenURIs = await getMyTokenURIsFn();
       const myTokens = await getMyTokensFn(myTokenURIs);
       if (myTokens.length === 0) {
@@ -156,9 +161,9 @@ const MyPage = () => {
         return setMyTokens(getMessageJsxFn("보유한 토큰이 없습니다."));
       }
       setMyTokens(myTokens);
-
     })();
-  }, [tokenContract, account]);
+
+  }, [isApprovedForAll])
 
   // ===========================================returns===========================================
   // =============================================================================================

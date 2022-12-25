@@ -64,7 +64,7 @@ const MyPageModal = ({ title, setModal, tokenId }) => {
 
         bidPrice = web3.utils.toWei(bidPrice.toString(), "ether");
 
-        await tradeContract.methods.registerForAuction(tokenId, bidPrice * 1, endTime).send({ from: account });
+        await tradeContract.methods.registerForAuction(tokenId, bidPrice, endTime).send({ from: account });
         alert("경매 상품으로 등록이 완료되었습니다.");
     }
 
