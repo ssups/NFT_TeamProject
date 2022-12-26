@@ -91,7 +91,8 @@ const MyPageNftCard = ({ tokenId, tokenURI, classificationName, setApprovalForAl
     (async () => {
       //
       // name, image, attributes, dna, edition, date, compiler, description
-      const { name, image } = (await axios.get(tokenURI + ".json")).data;
+      const newURI = tokenURI.replace("localhost:4000","192.168.0.167:4000")
+      const { name, image } = (await axios.get(newURI + ".json")).data;
 
       setTokenName(name);
       setTokenImgUrl(image);

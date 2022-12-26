@@ -30,7 +30,7 @@ const NftInfo = ({ tokenId, nftURI }) => {
         <>
           <div>name : {jsonData.name}</div>
 
-          {/* "http://localhost:4000/images/2.png" */}
+          {/* "http://192.168.0.167:4000/images/2.png" */}
           <img style={{ width: "200px", height: "200px" }} src={jsonData.image} alt="" />
 
           {attributes.map((attribute) => {

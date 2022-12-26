@@ -2,14 +2,15 @@ const express = require("express");
 const app = express();
 const PORT = "4000";
 const cors = require("cors");
-const address = "http://localhost:3000";
+const address = "http://192.168.0.167:3000";
 const { sequelize } = require("../models");
 
 // 시퀄라이즈 테이블 생성 후에 DB 작업을 요청할 예정
 let isSequelizeDone = false;
 
 // axios 데이터 통신 시 필요 (상단부 위치 중요..)
-app.use(cors({ origin: address }));
+// app.use(cors({ origin: address }));
+app.use(cors({ origin: "*" }));
 app.use(express.json());
 
 // 해당 경로로 접근(통신)하면 파일 접근 가능 (static 미들웨어를 사용하여 정적 파일 제공)

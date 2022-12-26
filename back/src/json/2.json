@@ -1,7 +1,7 @@
 {
   "name": "ggugi #2",
   "description": "hello hello",
-  "image": "http://localhost:4000/images/2.png",
+  "image": "http://192.168.0.167:4000/images/2.png",
   "dna": "cfdf058c9e1b9c34eb083de64b8e55c061a62aca",
   "edition": 2,
   "date": 1671676196121,

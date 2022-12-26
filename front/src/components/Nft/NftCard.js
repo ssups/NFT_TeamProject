@@ -26,7 +26,8 @@ const NftCard = ({ tokenId, tokenURI, tokenInfo }) => {
   useEffect(() => {
     if (!tokenURI) return;
     (async () => {
-      const jsonData = await axios.get(`${tokenURI}.json`);
+      const newURI = tokenURI.replace("localhost:4000","192.168.0.167:4000")
+      const jsonData = await axios.get(`${newURI}.json`);
       setAttributes(jsonData.data.attributes);
       setJsonData(jsonData.data);
     })();
