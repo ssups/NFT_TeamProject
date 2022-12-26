@@ -53,18 +53,12 @@ const MyPageNftCard = ({ tokenId, tokenURI, classificationName, setApprovalForAl
   function getNftCardJsxFn(title, modal, setModal, tokenId, buttonFn) {
     return (
       <div className=" mt-3 d-flex align-items-center justify-content-between">
-        <button className="bid_btn d-flex align-items-center gap-1"
-
-          onClick={
-            setApprovalForAllFn &&
-              title !== "판매 등록 취소하기" ?
-              setApprovalForAllFn : modal === false ? () => setModal(true) : buttonFn}>
-
+        <button className="bid_btn d-flex align-items-center gap-1" onClick={setApprovalForAllFn && title !== "판매 등록 취소하기" ? setApprovalForAllFn : modal === false ? () => setModal(true) : buttonFn}>
           💎 {title}
         </button>
         {modal && <MyPageModal title={title} setModal={setModal} tokenId={tokenId} />}
       </div>
-    )
+    );
   }
 
   function getClassificationName() {
@@ -124,21 +118,16 @@ const MyPageNftCard = ({ tokenId, tokenURI, classificationName, setApprovalForAl
 4. 경매 종료 후 정산 하기 전 보유 토큰 : 정산 받기 버튼
 */}
 
-        {classificationName === "myOwnToken" &&
+        {classificationName === "myOwnToken" && (
           <>
             {getNftCardJsxFn("판매 상품으로 등록하기", registerSaleModal, setRegisterSaleModal, tokenId)}
             {getNftCardJsxFn("경매 상품으로 등록하기", registerAuctionModal, setRegisterAuctionModal, tokenId)}
           </>
-        }
+        )}
 
-        {classificationName === "mySaleToken" &&
-          getNftCardJsxFn("판매 등록 취소하기", "", "", "", deregisterSaleToken)
-        }
+        {classificationName === "mySaleToken" && getNftCardJsxFn("판매 등록 취소하기", "", "", "", deregisterSaleToken)}
 
-        {classificationName === "myNotClaimedAuctionToken" &&
-          getNftCardJsxFn("경매 낙찰 상품 정산 받기", "", "", "", claimMatchedToken)
-        }
-
+        {classificationName === "myNotClaimedAuctionToken" && getNftCardJsxFn("경매 낙찰 상품 정산 받기", "", "", "", claimMatchedToken)}
       </div>
     </div>
   );
