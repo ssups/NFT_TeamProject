@@ -77,8 +77,7 @@ const NftDetail = () => {
                 <i className="ri-shopping-bag-line"></i>
 
                  <Toaster/>     
-                  <Link >구매하기                 
-                  </Link>
+                  
 
                   
                   </button>

@@ -162,11 +162,11 @@ const Header2 = () => {
           {isConnected && (
             <>
               <div>
-                <div className="account_text" style={{ height: "30px" }}>
+                <div className="account_text" style={{ height: "25px" }}>
                   {/* Account: <Link to="/mypage">{userInfo.account}</Link> */}
                   Account: <Link to="/mypage">{account}</Link>
                 </div>
-                <div className="account_text" style={{ height: "30px" }}>
+                <div className="account_text" style={{ height: "60px" }}>
                   Balance: <span>{((balance * 1) / 10 ** 18).toFixed(3) + "Eth"}</span>
                   {/* Balance: <span>{(userInfo.balance * 1).toFixed(3) + "Eth"}</span> */}
                 </div>
