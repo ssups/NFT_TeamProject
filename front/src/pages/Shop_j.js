@@ -7,7 +7,7 @@ import ShopNftCard from "../components/Nft/ShopNftCard_j";
 const Shop = () => {
   //
   const [saleTokenURIs, setSaleTokenURIs] = useState();
-  const { tradeContract } = useContext(Context);
+  const { tokenContract, tradeContract } = useContext(Context);
 
   // ==========================================functions==========================================
   // =============================================================================================
@@ -17,12 +17,11 @@ const Shop = () => {
     //
     const _saleTokenURIs = {};
     const saleTokenIds = await tradeContract.methods.onSaleList().call();
-
     for (const tokenId of saleTokenIds) {
-      _saleTokenURIs[tokenId] = await tradeContract.methods.tokenURI(tokenId).call();
-    };
+      _saleTokenURIs[tokenId] = await tokenContract.methods.tokenURI(tokenId).call();
+    }
 
-    return saleTokenURIs;
+    return _saleTokenURIs;
   }
 
   // ==========================================useEffect==========================================
@@ -51,11 +50,10 @@ const Shop = () => {
           {/*  */}
           {saleTokenURIs &&
             Object.keys(saleTokenURIs).map((tokenId) => (
-              <Col lg="3" md="4" sm="6" className="mb-4">
+              <Col key={tokenId} lg="3" md="4" sm="6" className="mb-4">
                 <ShopNftCard key={tokenId} tokenId={tokenId} tokenURI={saleTokenURIs[tokenId]} />
               </Col>
-            ))
-          }
+            ))}
           {/*  */}
         </Row>
       </Container>

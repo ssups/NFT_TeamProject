@@ -6,6 +6,7 @@ import { Context } from "../../App";
 const ShopNftCard = ({ tokenId, tokenURI }) => {
   //
   const { web3, account, balance, tokenContract, tradeContract } = useContext(Context);
+  console.log(tokenId);
 
   const [seller, setSeller] = useState();
   const [salePrice, setSalePrice] = useState();
@@ -17,8 +18,10 @@ const ShopNftCard = ({ tokenId, tokenURI }) => {
 
   // 하위 컴포넌트에서 사용할 구매하기 버튼에 대한 함수
   async function purchaseTokenFn() {
+    //
 
-    if (salePrice && salePrice > balance) {
+    const price = web3.utils.toWei(salePrice, "ether");
+    if (price && price > balance) {
       alert("잔액이 부족합니다.");
       return;
     }
@@ -26,8 +29,8 @@ const ShopNftCard = ({ tokenId, tokenURI }) => {
     const purchaseMsg = "토큰을 구매하시겠습니까?";
     if (!window.confirm(purchaseMsg)) return;
 
-    await tradeContract.methods.purchase(tokenId).call();
-    alert("구매가 완료되었습니다.")
+    await tradeContract.methods.purchase(tokenId).send({ from: account, value: price });
+    alert("구매가 완료되었습니다.");
   }
 
   // ==========================================useEffect==========================================
@@ -46,7 +49,7 @@ const ShopNftCard = ({ tokenId, tokenURI }) => {
       setSeller(seller);
       setTokenName(name);
       setTokenImgUrl(image);
-      setSalePrice(_salePrice);
+      setSalePrice(web3.utils.fromWei(_salePrice, "ether"));
     })();
   }, []);
 
@@ -55,7 +58,6 @@ const ShopNftCard = ({ tokenId, tokenURI }) => {
 
   return (
     <div className="single_nft">
-
       <div className="nft_img">
         <img src={tokenImgUrl} className="w-100" alt="" />
       </div>
@@ -65,16 +67,15 @@ const ShopNftCard = ({ tokenId, tokenURI }) => {
           {/* <Link to={`상세 페이지 경로`}></Link> */}
           {tokenName}
         </h5>
-        <h5>판매가: {web3.utils.fromWei(salePrice, "ether")} ether</h5>
+        <h5>판매가: {salePrice} ether</h5>
 
         <div className=" mt-3 d-flex align-items-center justify-content-between">
-          <button
-            className="bid_btn d-flex align-items-center gap-1"
-            onClick={purchaseTokenFn}
-            disabled={account && seller && account.toLowerCase() === seller.toLowerCase()}
-          >
-            💎 구매하기
-          </button>
+          {account && seller && account.toLowerCase() !== seller.toLowerCase() && (
+            //
+            <button className="bid_btn d-flex align-items-center gap-1" onClick={purchaseTokenFn}>
+              💎 구매하기
+            </button>
+          )}
         </div>
       </div>
     </div>
