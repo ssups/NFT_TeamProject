@@ -19,6 +19,7 @@ const ShopNftCard = ({ tokenId, tokenURI }) => {
   // 하위 컴포넌트에서 사용할 구매하기 버튼에 대한 함수
   async function purchaseTokenFn() {
     //
+
     const price = web3.utils.toWei(salePrice, "ether");
     if (price && price > balance) {
       alert("잔액이 부족합니다.");
@@ -28,7 +29,7 @@ const ShopNftCard = ({ tokenId, tokenURI }) => {
     const purchaseMsg = "토큰을 구매하시겠습니까?";
     if (!window.confirm(purchaseMsg)) return;
 
-    await tradeContract.methods.purchase(tokenId).call();
+    await tradeContract.methods.purchase(tokenId).send({ from: account, value: price });
     alert("구매가 완료되었습니다.");
   }
 
