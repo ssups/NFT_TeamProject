@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import "../../styles/asd1.css"
+import "../../styles/asd1.css";
 
 import axios from "axios";
 import { Context } from "../../App";
@@ -42,7 +42,7 @@ const ShopNftCard = ({ tokenId, tokenURI }) => {
     (async () => {
       //
       // name, image, attributes, dna, edition, date, compiler, description
-      const newURI = tokenURI.replace("localhost:4000","192.168.0.167:4000")
+      const newURI = tokenURI.replace("localhost:4000", "192.168.0.167:4000");
       const { name, image } = (await axios.get(newURI + ".json")).data;
 
       const seller = await tokenContract.methods.ownerOf(tokenId).call();
@@ -70,7 +70,7 @@ const ShopNftCard = ({ tokenId, tokenURI }) => {
           {tokenName}
         </h5>
         <div className="asd1">
-        <h5>판매가: {salePrice} ether</h5>
+          <h5>판매가: {salePrice} ether</h5>
         </div>
 
         <div className=" mt-3 d-flex align-items-center justify-content-between">

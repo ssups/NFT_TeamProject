@@ -1,5 +1,6 @@
 import React, { useEffect, useState, createContext } from "react";
 import "./App.css";
+import "./styles/auction.css";
 
 import useWeb3 from "./hooks/useWeb3";
 import Layout from "./Layout/Layout";
