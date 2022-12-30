@@ -1,0 +1,21 @@
+.asd1 h5{
+    color: white;
+    background: black;
+       background-size: 100% 100%;
+       background-clip: text;
+       -webkit-text-stroke: 6px transparent;
+}
+
+.nft_title{
+    background: black;
+    background-size: 100% 100%;
+    background-clip: text;
+    -webkit-text-stroke: 6px transparent;
+}
+
+.nft_content{
+    background: black;
+    background-size: 100% 100%;
+    background-clip: text;
+    -webkit-text-stroke: 6px transparent;
+}

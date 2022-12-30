@@ -3,8 +3,8 @@ import { Routes, Route, Navigate } from "react-router-dom";
 
 import Home from "../pages/Home";
 import Shop from "../pages/Shop";
-import Contact from "../pages/Contanct";
-import Sell from "../pages/Sell";
+
+
 import NftDetail from "../pages/NftDetail";
 
 import Brand from "../components/Brand/Brand";
@@ -31,12 +31,10 @@ const Routers = () => {
      
 
       <Route path="/home" element={<Home />} />
-      <Route path="/Shop" element={<Shop />} />
+      <Route path="/auction" element={<Shop />} />
       
        
-      <Route path="/Contact" element={<Contact />} />
-
-      <Route path="/sell" element={<Sell />} />
+  
       <Route path="/mypage" element={<MyPage />} />
 
       <Route path="/Shop/:id" element={<NftDetail />} />
@@ -56,8 +54,8 @@ const Routers = () => {
       <Route path="/minseop" element={<Minseop />} />
       <Route path="/seopmy" element={<SeopMy />} />
 
-      <Route path="/4" element={<MyPage />} />
-      <Route path="/5" element={<ShopJ />} />
+      
+      <Route path="/shop" element={<ShopJ />} />
     </Routes>
   );
 };
