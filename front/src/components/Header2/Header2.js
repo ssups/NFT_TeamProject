@@ -23,7 +23,7 @@ const Nav_Link = [
   },
   {
     display: "Auction",
-    url: "/create",
+    url: "/auction",
   },
 ];
 
