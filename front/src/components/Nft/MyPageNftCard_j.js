@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 
 import axios from "axios";
 import { Context } from "../../App";
-import MyPageModal from "../Modal/MyPageModal_j";
+import MyPageModal from "../Modals/MyPageModal_j";
 
 const MyPageNftCard = ({ tokenId, tokenURI, classificationName, setApprovalForAllFn }) => {
   //
@@ -53,7 +53,16 @@ const MyPageNftCard = ({ tokenId, tokenURI, classificationName, setApprovalForAl
   function getNftCardJsxFn(title, modal, setModal, tokenId, buttonFn) {
     return (
       <div className=" mt-3 d-flex align-items-center justify-content-between">
-        <button className="bid_btn d-flex align-items-center gap-1" onClick={setApprovalForAllFn && title !== "판매 등록 취소하기" ? setApprovalForAllFn : modal === false ? () => setModal(true) : buttonFn}>
+        <button
+          className="bid_btn d-flex align-items-center gap-1"
+          onClick={
+            setApprovalForAllFn && title !== "판매 등록 취소하기"
+              ? setApprovalForAllFn
+              : modal === false
+              ? () => setModal(true)
+              : buttonFn
+          }
+        >
           💎 {title}
         </button>
         {modal && <MyPageModal title={title} setModal={setModal} tokenId={tokenId} />}
@@ -85,7 +94,7 @@ const MyPageNftCard = ({ tokenId, tokenURI, classificationName, setApprovalForAl
     (async () => {
       //
       // name, image, attributes, dna, edition, date, compiler, description
-      const newURI = tokenURI.replace("localhost:4000","192.168.0.167:4000")
+      const newURI = tokenURI.replace("localhost:4000", "192.168.0.167:4000");
       const { name, image } = (await axios.get(newURI + ".json")).data;
 
       setTokenName(name);
@@ -121,14 +130,26 @@ const MyPageNftCard = ({ tokenId, tokenURI, classificationName, setApprovalForAl
 
         {classificationName === "myOwnToken" && (
           <>
-            {getNftCardJsxFn("판매 상품으로 등록하기", registerSaleModal, setRegisterSaleModal, tokenId)}
-            {getNftCardJsxFn("경매 상품으로 등록하기", registerAuctionModal, setRegisterAuctionModal, tokenId)}
+            {getNftCardJsxFn(
+              "판매 상품으로 등록하기",
+              registerSaleModal,
+              setRegisterSaleModal,
+              tokenId
+            )}
+            {getNftCardJsxFn(
+              "경매 상품으로 등록하기",
+              registerAuctionModal,
+              setRegisterAuctionModal,
+              tokenId
+            )}
           </>
         )}
 
-        {classificationName === "mySaleToken" && getNftCardJsxFn("판매 등록 취소하기", "", "", "", deregisterSaleToken)}
+        {classificationName === "mySaleToken" &&
+          getNftCardJsxFn("판매 등록 취소하기", "", "", "", deregisterSaleToken)}
 
-        {classificationName === "myNotClaimedAuctionToken" && getNftCardJsxFn("경매 낙찰 상품 정산 받기", "", "", "", claimMatchedToken)}
+        {classificationName === "myNotClaimedAuctionToken" &&
+          getNftCardJsxFn("경매 낙찰 상품 정산 받기", "", "", "", claimMatchedToken)}
       </div>
     </div>
   );

@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Col, Container, Row } from "reactstrap";
 import { Context } from "../../App";
-// import NftCard from "../Nft/NftCard";
 import BeforeClaimNftCard from "../Nft/BeforeClaimNftCard";
 
 const BeforeClaim = () => {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Col, Container, Row } from "reactstrap";
 import { Context } from "../../App";
-import NftCard from "../Nft/NftCard";
+import AuctionNftCard from "../Nft/AuctionNftCard";
 import Loading from "../Loading/Loading";
 
 const AuctionShop = () => {
@@ -128,7 +128,7 @@ const AuctionShop = () => {
           </Col>
           {onAuctionURI && onAuctionInfo && tokensOnAuction
             ? tokensOnAuction.map(tokenId => (
-                <NftCard
+                <AuctionNftCard
                   key={tokenId}
                   tokenId={tokenId}
                   tokenURI={onAuctionURI[tokenId]}

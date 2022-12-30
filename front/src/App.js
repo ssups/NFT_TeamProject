@@ -2,7 +2,7 @@ import React, { useEffect, useState, createContext } from "react";
 import "./App.css";
 
 import useWeb3 from "./hooks/useWeb3";
-import Layout from "./components/Layout/Layout";
+import Layout from "./Layout/Layout";
 import useSsandeContracts from "./hooks/useSsandeContracts";
 
 const App = () => {
