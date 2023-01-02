@@ -18,9 +18,7 @@ import SeopMy from "../components/minseop/seopMy";
 const Routers = () => {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/Create" />} />
-
-      <Route path="/home" element={<Home />} />
+      <Route path="/" element={<Home />} />
       <Route path="/auction" element={<Auction />} />
 
       <Route path="/mypage" element={<MyPage />} />

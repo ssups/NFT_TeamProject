@@ -11,7 +11,7 @@ import { Context } from "../../App";
 const Nav_Link = [
   {
     display: "Home",
-    url: "/home",
+    url: "/",
   },
   {
     display: "Shop",

@@ -8,6 +8,8 @@ import { Context } from "../../App";
 const AuctionNftCard = ({ tokenId, tokenURI, tokenInfo }) => {
   // context
   const { account, web3, balance, tokenContract, tradeContract } = useContext(Context);
+  // console.log(Location);
+  // console.log(useLocation);
   // states
   const [jsonData, setJsonData] = useState();
   const [attributes, setAttributes] = useState();
@@ -25,7 +27,8 @@ const AuctionNftCard = ({ tokenId, tokenURI, tokenInfo }) => {
   useEffect(() => {
     if (!tokenURI) return;
     (async () => {
-      const newURI = tokenURI.replace("localhost:4000", "192.168.0.167:4000");
+      const newURI = tokenURI.replace("http://localhost:4000", window.location.origin);
+
       const jsonData = await axios.get(`${newURI}.json`);
       setAttributes(jsonData.data.attributes);
       setJsonData(jsonData.data);
@@ -69,7 +72,7 @@ const AuctionNftCard = ({ tokenId, tokenURI, tokenInfo }) => {
     <Col key={tokenId} lg="3" md="4" sm="6" className="mb-4">
       <div className="single_nft">
         <div className="nft_img">
-          <img src={jsonData.image} className="w-100" alt="" />
+          <img src={window.location.origin + `/images/${tokenId}.png`} className="w-100" alt="" />
         </div>
 
         {/* 카드 상태창 */}

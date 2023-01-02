@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { AuctionShop, BeforeClaim } from "../components/ForAuction";
+import { useLocation } from "react-router-dom";
 
 const Auction = () => {
   const [isShop, setIsShop] = useState(true);

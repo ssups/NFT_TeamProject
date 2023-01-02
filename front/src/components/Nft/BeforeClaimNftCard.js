@@ -44,7 +44,7 @@ const BeforeClaimNftCard = ({ tokenId, tokenURI, tokenInfo }) => {
     <Col key={tokenId} lg="3" md="4" sm="6" className="mb-4">
       <div className="single_nft">
         <div className="nft_img">
-          <img src={jsonData.image} className="w-100" alt="" />
+          <img src={window.location.origin + `/images/${tokenId}.png`} className="w-100" alt="" />
         </div>
 
         {/* 카드 상태창 */}
