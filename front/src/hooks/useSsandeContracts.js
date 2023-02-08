@@ -14,8 +14,9 @@ const useSsandeContracts = () => {
   // const tradeContractAbi = testTradeJson.abi;
   // const tradeContractCa = testTradeJson.networks[networkId].address;
 
-  const tokenContract = useContract(tokenAbi, "0xa8be286ec172021BcEE0F11aDFE91B0FFdcf6662");
-  const tradeContract = useContract(tradeAbi, "0xDCE5Cd38A2aec22DFe0Beb1e283aEBc6d9194242");
+  // 2023 02 08 컨트랙트 배포 및 업데이트
+  const tokenContract = useContract(tokenAbi, "0x64883B9b7375e1fA05D8a1661e915aFf0344dF51");
+  const tradeContract = useContract(tradeAbi, "0x71C8773B760E6D976743f5710EDC645bABf0c804");
 
   return [tokenContract, tradeContract];
 };

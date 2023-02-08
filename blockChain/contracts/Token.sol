@@ -8,9 +8,9 @@ pragma solidity ^0.8.17;
 
 // remix 전용 경로
 import "./standards/ERC721A.sol";
-import "openzeppelin-solidity/contracts/utils/Strings.sol";
-import "openzeppelin-solidity/contracts/access/Ownable.sol";
-import "openzeppelin-solidity/contracts/security/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 contract Token is  ERC721A, Ownable, ReentrancyGuard {
     using Strings for uint256; // Strings라이브러리 사용
