@@ -3,12 +3,11 @@ import '../../styles/asd1.css';
 
 import axios from 'axios';
 import { Context } from '../../App';
-import { BACK_URL } from '../../../constant/urlConstant';
+import { BACK_URL } from '../../constant/urlConstant';
 
 const ShopNftCard = ({ tokenId, tokenURI }) => {
   //
   const { web3, account, balance, tokenContract, tradeContract } = useContext(Context);
-  console.log(tokenId);
 
   const [seller, setSeller] = useState();
   const [salePrice, setSalePrice] = useState();
@@ -51,7 +50,7 @@ const ShopNftCard = ({ tokenId, tokenURI }) => {
 
       setSeller(seller);
       setTokenName(name);
-      setTokenImgUrl(window.location.origin + `/images/${tokenId}.png`);
+      setTokenImgUrl(BACK_URL + `/images/${tokenId}.png`);
       setSalePrice(web3.utils.fromWei(_salePrice, 'ether'));
     })();
   }, []);

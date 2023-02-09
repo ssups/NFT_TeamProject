@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import AuctionModal from '../Modals/AuctionModal';
 import axios from 'axios';
 import { Context } from '../../App';
-import { BACK_URL } from '../../../constant/urlConstant';
+import { BACK_URL } from '../../constant/urlConstant';
 
 const AuctionNftCard = ({ tokenId, tokenURI, tokenInfo }) => {
   // context
@@ -73,7 +73,7 @@ const AuctionNftCard = ({ tokenId, tokenURI, tokenInfo }) => {
     <Col key={tokenId} lg="3" md="4" sm="6" className="mb-4">
       <div className="single_nft">
         <div className="nft_img">
-          <img src={window.location.origin + `/images/${tokenId}.png`} className="w-100" alt="" />
+          <img src={BACK_URL + `/images/${tokenId}.png`} className="w-100" alt="" />
         </div>
 
         {/* 카드 상태창 */}

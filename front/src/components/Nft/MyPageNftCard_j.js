@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { Context } from '../../App';
 import MyPageModal from '../Modals/MyPageModal_j';
-import { BACK_URL } from '../../../constant/urlConstant';
+import { BACK_URL } from '../../constant/urlConstant';
 
 const MyPageNftCard = ({ tokenId, tokenURI, classificationName, setApprovalForAllFn }) => {
   //
@@ -99,7 +99,7 @@ const MyPageNftCard = ({ tokenId, tokenURI, classificationName, setApprovalForAl
       const { name, image } = (await axios.get(newURI + '.json')).data;
 
       setTokenName(name);
-      setTokenImgUrl(window.location.origin + `/images/${tokenId}.png`);
+      setTokenImgUrl(BACK_URL + `/images/${tokenId}.png`);
     })();
   }, []);
 
