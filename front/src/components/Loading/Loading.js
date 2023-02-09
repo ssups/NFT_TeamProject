@@ -1,9 +1,9 @@
-import React from "react";
-import "../../styles/loading.css";
+import React from 'react';
+import '../../styles/loading.css';
 
-const Loading = () => {
+const Loading = ({ LoadingStyle }) => {
   return (
-    <div class="asd">
+    <div class="asd" style={{ ...LoadingStyle, zIndex: 999 }}>
       <p>Loading ...!</p>
     </div>
   );

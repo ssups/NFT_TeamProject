@@ -1,8 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
-import "../../styles/asd1.css";
+import React, { useContext, useEffect, useState } from 'react';
+import '../../styles/asd1.css';
 
-import axios from "axios";
-import { Context } from "../../App";
+import axios from 'axios';
+import { Context } from '../../App';
+import { BACK_URL } from '../../../constant/urlConstant';
 
 const ShopNftCard = ({ tokenId, tokenURI }) => {
   //
@@ -21,17 +22,17 @@ const ShopNftCard = ({ tokenId, tokenURI }) => {
   async function purchaseTokenFn() {
     //
 
-    const price = web3.utils.toWei(salePrice, "ether");
+    const price = web3.utils.toWei(salePrice, 'ether');
     if (price && price > balance) {
-      alert("잔액이 부족합니다.");
+      alert('잔액이 부족합니다.');
       return;
     }
 
-    const purchaseMsg = "토큰을 구매하시겠습니까?";
+    const purchaseMsg = '토큰을 구매하시겠습니까?';
     if (!window.confirm(purchaseMsg)) return;
 
     await tradeContract.methods.purchase(tokenId).send({ from: account, value: price });
-    alert("구매가 완료되었습니다.");
+    alert('구매가 완료되었습니다.');
   }
 
   // ==========================================useEffect==========================================
@@ -42,8 +43,8 @@ const ShopNftCard = ({ tokenId, tokenURI }) => {
     (async () => {
       //
       // name, image, attributes, dna, edition, date, compiler, description
-      const newURI = tokenURI.replace("http://localhost:4000", window.location.origin);
-      const { name, image } = (await axios.get(newURI + ".json")).data;
+      const newURI = tokenURI.replace('http://localhost:4000', BACK_URL);
+      const { name, image } = (await axios.get(newURI + '.json')).data;
 
       const seller = await tokenContract.methods.ownerOf(tokenId).call();
       const _salePrice = await tradeContract.methods.priceOfOnSale(tokenId).call();
@@ -51,7 +52,7 @@ const ShopNftCard = ({ tokenId, tokenURI }) => {
       setSeller(seller);
       setTokenName(name);
       setTokenImgUrl(window.location.origin + `/images/${tokenId}.png`);
-      setSalePrice(web3.utils.fromWei(_salePrice, "ether"));
+      setSalePrice(web3.utils.fromWei(_salePrice, 'ether'));
     })();
   }, []);
 

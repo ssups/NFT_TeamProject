@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useContext } from "react";
-import { Col, Container, Row } from "reactstrap";
-import { Context } from "../../App";
-import AuctionNftCard from "../Nft/AuctionNftCard";
-import Loading from "../Loading/Loading";
+import React, { useEffect, useState, useContext } from 'react';
+import { Col, Container, Row } from 'reactstrap';
+import { Context } from '../../App';
+import AuctionNftCard from '../Nft/AuctionNftCard';
+import useLoading from '../../hooks/useLoading';
 
 const AuctionShop = () => {
   // context
@@ -11,6 +11,9 @@ const AuctionShop = () => {
   const [tokensOnAuction, setTokensOnAuction] = useState();
   const [onAuctionURI, setOnAuctionURI] = useState();
   const [onAuctionInfo, setOnAuctionInfo] = useState();
+
+  // hooks
+  const { isLoading, setIsLoading, returnLoadingComp } = useLoading();
 
   // useEffect
   useEffect(() => {
@@ -47,6 +50,9 @@ const AuctionShop = () => {
   useEffect(() => {
     if (!tokenContract || !tradeContract) return;
     (async () => {
+      // 로딩 시작
+      setIsLoading(true);
+
       // 경매중인 토큰 리스트
       const tokensOnAuction = await tradeContract.methods.onAuctionList().call();
 
@@ -57,6 +63,9 @@ const AuctionShop = () => {
         tokensURI[tokenId] = await tokenContract.methods.tokenURI(tokenId).call();
         tokensInfo[tokenId] = await tradeContract.methods.dataOfOnAuction(tokenId).call();
       }
+
+      // 로딩 끝
+      setIsLoading(false);
 
       // 경매시간지난거 프론트에서도 한번 필터해주기(블록생성시간 지연됐을경우 대비)
       const now = Math.floor(Date.now() / 1000);
@@ -85,7 +94,6 @@ const AuctionShop = () => {
     (async () => {
       if (!tradeContract) return;
       // console.log(tradeContract.methods);
-      console.log(tradeContract.events);
     })();
   }, [tradeContract]);
 
@@ -93,24 +101,25 @@ const AuctionShop = () => {
   useEffect(() => {
     if (!web3) return;
     (async () => {
-      const block = await web3.eth.getBlock();
-      console.log(block.timestamp);
+      // const block = await web3.eth.getBlock();
+      // console.log(block.timestamp);
     })();
   }, [web3]);
 
   // returns
   // =================================================================================================
   // =================================================================================================
-
+  // return returnLoadingComp(styles.loading)
+  if (isLoading) return returnLoadingComp(styles.loading);
   if (!tokensOnAuction || tokensOnAuction?.length === 0)
     return (
       <h1
         style={{
-          width: "100wh",
-          height: "calc(100vh - 100px - 50px)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
+          width: '100wh',
+          height: 'calc(100vh - 100px - 50px)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
         }}
       >
         경매중인 상품이 없습니다.
@@ -143,3 +152,9 @@ const AuctionShop = () => {
 };
 
 export default AuctionShop;
+
+const styles = {
+  loading: {
+    height: 'calc(100vh - 100px - 32px)',
+  },
+};

@@ -1,8 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from 'react';
 
-import axios from "axios";
-import { Context } from "../../App";
-import MyPageModal from "../Modals/MyPageModal_j";
+import axios from 'axios';
+import { Context } from '../../App';
+import MyPageModal from '../Modals/MyPageModal_j';
+import { BACK_URL } from '../../../constant/urlConstant';
 
 const MyPageNftCard = ({ tokenId, tokenURI, classificationName, setApprovalForAllFn }) => {
   //
@@ -20,7 +21,7 @@ const MyPageNftCard = ({ tokenId, tokenURI, classificationName, setApprovalForAl
   async function deregisterSaleToken() {
     //
     await tradeContract.methods.cancleSale(tokenId).send({ from: account });
-    alert("판매 등록이 취소되었습니다.");
+    alert('판매 등록이 취소되었습니다.');
   }
 
   // 경매 낙찰 상품 정산 받기 버튼에 대한 함수
@@ -34,19 +35,19 @@ const MyPageNftCard = ({ tokenId, tokenURI, classificationName, setApprovalForAl
 
     await tradeContract.methods.claimMatchedAuction(tokenId).send({ from: account });
 
-    alert("정산이 완료되었습니다.");
+    alert('정산이 완료되었습니다.');
   }
 
   // 경매 낙찰 상품의 수수료 조회 함수
   async function getAuctionFeeFn() {
     const amount = await tradeContract.methods.feeOfMatchedAuctionToken(tokenId).call();
-    return web3.utils.fromWei(amount, "ether");
+    return web3.utils.fromWei(amount, 'ether');
   }
 
   // 경매 낙찰 상품의 정산금 조회 함수
   async function getIncomeAfterAuctionFeeFn() {
     const amount = await tradeContract.methods.afterFeeOfNotClaimedToken(tokenId).call();
-    return web3.utils.fromWei(amount, "ether");
+    return web3.utils.fromWei(amount, 'ether');
   }
 
   // 보유 토큰의 분류명에 따라 버튼에 대한 JSX를 반환하는 함수
@@ -56,7 +57,7 @@ const MyPageNftCard = ({ tokenId, tokenURI, classificationName, setApprovalForAl
         <button
           className="bid_btn d-flex align-items-center gap-1"
           onClick={
-            setApprovalForAllFn && title !== "판매 등록 취소하기"
+            setApprovalForAllFn && title !== '판매 등록 취소하기'
               ? setApprovalForAllFn
               : modal === false
               ? () => setModal(true)
@@ -73,14 +74,14 @@ const MyPageNftCard = ({ tokenId, tokenURI, classificationName, setApprovalForAl
   function getClassificationName() {
     //
     switch (classificationName) {
-      case "myOwnToken":
-        return "순수 보유 토큰";
-      case "mySaleToken":
-        return "판매 중인 토큰";
-      case "myAuctionToken":
-        return "경매 중인 토큰";
-      case "myNotClaimedAuctionToken":
-        return "경매 낙찰 토큰";
+      case 'myOwnToken':
+        return '순수 보유 토큰';
+      case 'mySaleToken':
+        return '판매 중인 토큰';
+      case 'myAuctionToken':
+        return '경매 중인 토큰';
+      case 'myNotClaimedAuctionToken':
+        return '경매 낙찰 토큰';
       default:
         return;
     }
@@ -94,8 +95,8 @@ const MyPageNftCard = ({ tokenId, tokenURI, classificationName, setApprovalForAl
     (async () => {
       //
       // name, image, attributes, dna, edition, date, compiler, description
-      const newURI = tokenURI.replace("http://localhost:4000", window.location.origin);
-      const { name, image } = (await axios.get(newURI + ".json")).data;
+      const newURI = tokenURI.replace('http://localhost:4000', BACK_URL);
+      const { name, image } = (await axios.get(newURI + '.json')).data;
 
       setTokenName(name);
       setTokenImgUrl(window.location.origin + `/images/${tokenId}.png`);
@@ -128,16 +129,16 @@ const MyPageNftCard = ({ tokenId, tokenURI, classificationName, setApprovalForAl
 4. 경매 종료 후 정산 하기 전 보유 토큰 : 정산 받기 버튼
 */}
 
-        {classificationName === "myOwnToken" && (
+        {classificationName === 'myOwnToken' && (
           <>
             {getNftCardJsxFn(
-              "판매 상품으로 등록하기",
+              '판매 상품으로 등록하기',
               registerSaleModal,
               setRegisterSaleModal,
               tokenId
             )}
             {getNftCardJsxFn(
-              "경매 상품으로 등록하기",
+              '경매 상품으로 등록하기',
               registerAuctionModal,
               setRegisterAuctionModal,
               tokenId
@@ -145,11 +146,11 @@ const MyPageNftCard = ({ tokenId, tokenURI, classificationName, setApprovalForAl
           </>
         )}
 
-        {classificationName === "mySaleToken" &&
-          getNftCardJsxFn("판매 등록 취소하기", "", "", "", deregisterSaleToken)}
+        {classificationName === 'mySaleToken' &&
+          getNftCardJsxFn('판매 등록 취소하기', '', '', '', deregisterSaleToken)}
 
-        {classificationName === "myNotClaimedAuctionToken" &&
-          getNftCardJsxFn("경매 낙찰 상품 정산 받기", "", "", "", claimMatchedToken)}
+        {classificationName === 'myNotClaimedAuctionToken' &&
+          getNftCardJsxFn('경매 낙찰 상품 정산 받기', '', '', '', claimMatchedToken)}
       </div>
     </div>
   );

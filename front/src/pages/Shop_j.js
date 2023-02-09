@@ -1,8 +1,8 @@
-import React, { useEffect, useContext, useState } from "react";
+import React, { useEffect, useContext, useState } from 'react';
 
-import { Context } from "../App";
-import { Col, Container, Row } from "reactstrap";
-import ShopNftCard from "../components/Nft/ShopNftCard_j";
+import { Context } from '../App';
+import { Col, Container, Row } from 'reactstrap';
+import ShopNftCard from '../components/Nft/ShopNftCard_j';
 
 const Shop = () => {
   //
@@ -20,7 +20,7 @@ const Shop = () => {
     for (const tokenId of saleTokenIds) {
       _saleTokenURIs[tokenId] = await tokenContract.methods.tokenURI(tokenId).call();
     }
-
+    console.log(_saleTokenURIs);
     return _saleTokenURIs;
   }
 
@@ -49,7 +49,7 @@ const Shop = () => {
           </Col>
           {/*  */}
           {saleTokenURIs &&
-            Object.keys(saleTokenURIs).map((tokenId) => (
+            Object.keys(saleTokenURIs).map(tokenId => (
               <Col key={tokenId} lg="3" md="4" sm="6" className="mb-4">
                 <ShopNftCard key={tokenId} tokenId={tokenId} tokenURI={saleTokenURIs[tokenId]} />
               </Col>

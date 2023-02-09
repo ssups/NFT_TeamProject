@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useContext, useRef } from "react";
-import { Col } from "reactstrap";
-import { Link } from "react-router-dom";
-import AuctionModal from "../Modals/AuctionModal";
-import axios from "axios";
-import { Context } from "../../App";
+import React, { useState, useEffect, useContext, useRef } from 'react';
+import { Col } from 'reactstrap';
+import { Link } from 'react-router-dom';
+import AuctionModal from '../Modals/AuctionModal';
+import axios from 'axios';
+import { Context } from '../../App';
+import { BACK_URL } from '../../../constant/urlConstant';
 
 const AuctionNftCard = ({ tokenId, tokenURI, tokenInfo }) => {
   // context
@@ -27,7 +28,7 @@ const AuctionNftCard = ({ tokenId, tokenURI, tokenInfo }) => {
   useEffect(() => {
     if (!tokenURI) return;
     (async () => {
-      const newURI = tokenURI.replace("http://localhost:4000", window.location.origin);
+      const newURI = tokenURI.replace('http://localhost:4000', BACK_URL);
 
       const jsonData = await axios.get(`${newURI}.json`);
       setAttributes(jsonData.data.attributes);
@@ -42,7 +43,7 @@ const AuctionNftCard = ({ tokenId, tokenURI, tokenInfo }) => {
     setEndTime(endTime);
     setBider(bider);
     if (!web3) return;
-    setCurrentBid(web3.utils.fromWei(lastBidPrice + "", "ether"));
+    setCurrentBid(web3.utils.fromWei(lastBidPrice + '', 'ether'));
   }, [tokenInfo, web3]);
 
   // 경매남은시간
@@ -76,16 +77,16 @@ const AuctionNftCard = ({ tokenId, tokenURI, tokenInfo }) => {
         </div>
 
         {/* 카드 상태창 */}
-        <div className="nft_content" style={{ color: "white" }}>
+        <div className="nft_content" style={{ color: 'white' }}>
           <h5 className="nft_title">
             {/* 이거 링크걸린거 경국이한테 물어보기 */}
             <Link to={`/shop/${tokenId}`}>{jsonData.name}</Link>
           </h5>
-          <h5>최고입찰가: {parseInt(bider, 16) === 0 ? "입찰자없음" : currentBid + " Eth"}</h5>
+          <h5>최고입찰가: {parseInt(bider, 16) === 0 ? '입찰자없음' : currentBid + ' Eth'}</h5>
           <h5>
-            남은시간: {timeCount ? (Math.floor(timeCount / 60 / 60) + "").padStart(2, "0") : "00"} :
-            {timeCount ? " " + (Math.floor((timeCount / 60) % 60) + "").padStart(2, "0") : " 00"} :
-            {timeCount ? " " + ((timeCount % 60) + "").padStart(2, "0") : " 00"}
+            남은시간: {timeCount ? (Math.floor(timeCount / 60 / 60) + '').padStart(2, '0') : '00'} :
+            {timeCount ? ' ' + (Math.floor((timeCount / 60) % 60) + '').padStart(2, '0') : ' 00'} :
+            {timeCount ? ' ' + ((timeCount % 60) + '').padStart(2, '0') : ' 00'}
           </h5>
           <div className="creator_info d-flex align-items-center justify-content-between">
             <div className="w-50">

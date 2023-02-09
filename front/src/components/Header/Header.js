@@ -1,29 +1,29 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
-import { NavLink, Link } from "react-router-dom";
-import Web3 from "web3";
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import { NavLink, Link } from 'react-router-dom';
+import Web3 from 'web3';
 
-import "../../styles/header2.css";
+import '../../styles/header2.css';
 
-import { Container } from "reactstrap";
-import { Context } from "../../App";
+import { Container } from 'reactstrap';
+import { Context } from '../../App';
 
 //헤더 링크
 const Nav_Link = [
   {
-    display: "Home",
-    url: "/",
+    display: 'Home',
+    url: '/',
   },
   {
-    display: "Shop",
-    url: "/shop",
+    display: 'Shop',
+    url: '/shop',
   },
   {
-    display: "Minting",
-    url: "/minting",
+    display: 'Minting',
+    url: '/minting',
   },
   {
-    display: "Auction",
-    url: "/auction",
+    display: 'Auction',
+    url: '/auction',
   },
 ];
 
@@ -44,7 +44,7 @@ const Header = () => {
 
   useEffect(() => {
     function checkConnectedWallet() {
-      const userData = JSON.parse(localStorage.getItem("userAccount"));
+      const userData = JSON.parse(localStorage.getItem('userAccount'));
       if (userData != null) {
         setUserInfo(userData);
         setIsConnected(true);
@@ -52,6 +52,14 @@ const Header = () => {
     }
     checkConnectedWallet();
   }, []);
+
+  useEffect(() => {
+    if (!account) {
+      setIsConnected(false);
+      return;
+    }
+    setIsConnected(true);
+  }, [account]);
 
   const detectCurrentProvider = () => {
     let provider;
@@ -70,13 +78,13 @@ const Header = () => {
       if (currentProvider) {
         if (currentProvider !== window.ethereum) {
         }
-        await currentProvider.request({ method: "eth_requestAccounts" });
+        await currentProvider.request({ method: 'eth_requestAccounts' });
         const web3 = new Web3(currentProvider);
         const userAccount = await web3.eth.getAccounts();
         const chainId = await web3.eth.getChainId();
         const account = userAccount[0];
         let ethBalance = await web3.eth.getBalance(account);
-        ethBalance = web3.utils.fromWei(ethBalance, "ether");
+        ethBalance = web3.utils.fromWei(ethBalance, 'ether');
         saveUserInfo(ethBalance, account, chainId);
         if (userAccount.length === 0) {
         }
@@ -85,7 +93,7 @@ const Header = () => {
   };
 
   const onDisconnect = () => {
-    window.localStorage.removeItem("userAccount");
+    window.localStorage.removeItem('userAccount');
     setUserInfo({});
     setIsConnected(false);
   };
@@ -96,8 +104,8 @@ const Header = () => {
       balance: ethBalance,
       connectionid: chainId,
     };
-    window.localStorage.setItem("userAccount", JSON.stringify(userAccount));
-    const userData = JSON.parse(localStorage.getItem("userAccount"));
+    window.localStorage.setItem('userAccount', JSON.stringify(userAccount));
+    const userData = JSON.parse(localStorage.getItem('userAccount'));
     setUserInfo(userData);
     setIsConnected(true);
   };
@@ -106,16 +114,16 @@ const Header = () => {
   const headerRef = useRef(null);
 
   useEffect(() => {
-    window.addEventListener("scroll", () => {
+    window.addEventListener('scroll', () => {
       if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
-        headerRef.current.classList.add("header_stick");
+        headerRef.current.classList.add('header_stick');
       } else {
-        headerRef.current.classList.remove("header2_stick");
+        headerRef.current.classList.remove('header2_stick');
       }
     });
 
     return () => {
-      window.removeEventListener("scroll", () => {});
+      window.removeEventListener('scroll', () => {});
     };
   }, []);
 
@@ -140,7 +148,7 @@ const Header = () => {
                 <li className="nav_item" key={index}>
                   <NavLink
                     to={item.url}
-                    className={navClass => (navClass.isActive ? "active" : "")}
+                    className={navClass => (navClass.isActive ? 'active' : '')}
                   >
                     {item.display}
                   </NavLink>
@@ -162,12 +170,12 @@ const Header = () => {
           {isConnected && (
             <>
               <div>
-                <div className="account_text" style={{ height: "25px" }}>
+                <div className="account_text" style={{ height: '25px' }}>
                   {/* Account: <Link to="/mypage">{userInfo.account}</Link> */}
                   Account: <Link to="/mypage">{account}</Link>
                 </div>
-                <div className="account_text" style={{ height: "60px" }}>
-                  Balance: <span>{((balance * 1) / 10 ** 18).toFixed(3) + "Eth"}</span>
+                <div className="account_text" style={{ height: '60px' }}>
+                  Balance: <span>{((balance * 1) / 10 ** 18).toFixed(3) + 'Eth'}</span>
                   {/* Balance: <span>{(userInfo.balance * 1).toFixed(3) + "Eth"}</span> */}
                 </div>
               </div>
