@@ -28,4 +28,14 @@ const Auction = () => {
   );
 };
 
+const styles = {
+  buttons: {
+    border: 'none',
+    color: 'white',
+    backgroundColor: 'transparent',
+    fontFamily: "'Jua', sans-serif",
+    fontSize: '20px',
+  },
+};
+
 export default Auction;
