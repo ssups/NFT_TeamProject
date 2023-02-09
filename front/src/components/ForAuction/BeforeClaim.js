@@ -21,7 +21,7 @@ const BeforeClaim = () => {
   useEffect(() => {
     if (!tradeContract || !account || !tokenContract) return;
     (async () => {
-      setIsLoading(false);
+      setIsLoading(true);
       // 내가입찰한거중에 정산안된 토큰들 리스트
       const tokenList = await tradeContract.methods.notClaimedTokensOfBiderList(account).call();
       setTokensNotClaimed(tokenList);
