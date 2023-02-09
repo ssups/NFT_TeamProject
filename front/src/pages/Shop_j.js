@@ -3,11 +3,13 @@ import React, { useEffect, useContext, useState } from 'react';
 import { Context } from '../App';
 import { Col, Container, Row } from 'reactstrap';
 import ShopNftCard from '../components/Nft/ShopNftCard_j';
+import { LoadingContext } from '../Layout/Layout';
 
 const Shop = () => {
   //
   const [saleTokenURIs, setSaleTokenURIs] = useState();
   const { tokenContract, tradeContract } = useContext(Context);
+  const { setIsLoading } = useContext(LoadingContext);
 
   // ==========================================functions==========================================
   // =============================================================================================
@@ -31,7 +33,9 @@ const Shop = () => {
     //
     (async () => {
       //
+      setIsLoading(true);
       setSaleTokenURIs(await getSaleTokenURIsFn());
+      setIsLoading(false);
     })();
   }, [tradeContract]);
 

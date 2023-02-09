@@ -1,22 +1,24 @@
-import React, { useEffect, useState, memo, useContext, useRef } from "react";
-import useSsandeContracts from "../../hooks/useSsandeContracts";
-import "../../styles/modal.css";
-import { Context } from "../../App";
+import React, { useEffect, useState, memo, useContext, useRef } from 'react';
+import useSsandeContracts from '../../hooks/useSsandeContracts';
+import '../../styles/modal.css';
+import { Context } from '../../App';
+import { LoadingContext } from '../../Layout/Layout';
 
 //NftCard.js에 전달
 const AuctionModal = ({ setModal, jsonData, currentBid, bider, timeCount, tokenId }) => {
   const bidStep = 0.001;
   const minBid = (currentBid * 1 + bidStep).toFixed(3);
 
-  //   console.log(minBid);
   // context
   const { account, web3, balance, tokenContract, tradeContract } = useContext(Context);
+  const { setIsLoading } = useContext(LoadingContext);
+
   // states
   const [data, setData] = useState();
   const [attributes, setAttributes] = useState();
+
   // refs
   const priceRef = useRef();
-  //   console.log(timeCount);
 
   // useEffect
   useEffect(() => {
@@ -28,26 +30,32 @@ const AuctionModal = ({ setModal, jsonData, currentBid, bider, timeCount, tokenI
   async function bidOnAuction() {
     let price = priceRef.current.value;
     if (price < minBid) {
-      alert("입찰액은 최소입찰액 이상으로 해야합니다.");
+      alert('입찰액은 최소입찰액 이상으로 해야합니다.');
       return;
     }
     price = price * 1;
-    if ((price + "").split(".")[1].length > 3) {
-      alert("입찰액 단위는 0.001Eth 단위여야 합니다.");
+    if ((price + '').split('.')[1].length > 3) {
+      alert('입찰액 단위는 0.001Eth 단위여야 합니다.');
       return;
     }
     if (timeCount <= 0) {
-      alert("경매가 마감되었습니다");
+      alert('경매가 마감되었습니다');
       return;
     }
 
-    const priceToWei = web3.utils.toWei(price + "", "ether");
+    const priceToWei = web3.utils.toWei(price + '', 'ether');
+
+    setIsLoading(true);
     await tradeContract.methods
       .bidOnAcution(tokenId)
       .send({ from: account, value: priceToWei })
       .then(success => {
-        alert("입찰에 성공하셨습니다");
+        alert('입찰에 성공하셨습니다');
+        setIsLoading(false);
         setModal(false);
+      })
+      .catch(err => {
+        setIsLoading(false);
       });
   }
 
@@ -59,19 +67,19 @@ const AuctionModal = ({ setModal, jsonData, currentBid, bider, timeCount, tokenI
           {/* x버튼 눌러야 모달창 꺼지게 하기 */}
           <i className="ri-close-circle-line" onClick={() => setModal(false)}></i>
         </span>
-        <h3 className="text-center text-light" style={{ marginBottom: "25px" }}>
+        <h3 className="text-center text-light" style={{ marginBottom: '25px' }}>
           경매 입찰
         </h3>
         {/* <p className="text-center text-light">
           최소 Bid는 <span className="money">5.5 ETH</span> 입니다
         </p> */}
-        <fieldset id="attributes" style={{ marginBottom: "30px" }}>
-          <legend style={{ color: "white", marginBottom: "15px" }}>attributes</legend>
+        <fieldset id="attributes" style={{ marginBottom: '30px' }}>
+          <legend style={{ color: 'white', marginBottom: '15px' }}>attributes</legend>
           {jsonData.attributes.map(attribute => {
             return (
               <div
                 className="d-flex align-items-center justify-content-between"
-                style={{ fontSize: "5px", height: "20px" }}
+                style={{ fontSize: '5px', height: '20px' }}
                 key={attribute.trait_type}
               >
                 <p>{attribute.trait_type}</p>
@@ -85,10 +93,10 @@ const AuctionModal = ({ setModal, jsonData, currentBid, bider, timeCount, tokenI
         <div className="d-flex align-items-center justify-content-between">
           <p>최고입찰자</p>
           <span className="money">
-            {" "}
+            {' '}
             {parseInt(bider, 16) === 0
-              ? "입찰자없음"
-              : bider.slice(0, 6) + "......" + bider.slice(bider.length - 6, bider.length)}
+              ? '입찰자없음'
+              : bider.slice(0, 6) + '......' + bider.slice(bider.length - 6, bider.length)}
           </span>
         </div>
         <div className="d-flex align-items-center justify-content-between">
@@ -101,10 +109,10 @@ const AuctionModal = ({ setModal, jsonData, currentBid, bider, timeCount, tokenI
         </div>
         <div
           style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            marginTop: "20px",
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            marginTop: '20px',
           }}
         >
           <div className="input_item" style={{}}>

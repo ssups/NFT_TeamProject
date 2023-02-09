@@ -3,11 +3,13 @@ import '../../styles/asd1.css';
 
 import axios from 'axios';
 import { Context } from '../../App';
+import { LoadingContext } from '../../Layout/Layout';
 import { BACK_URL } from '../../constant/urlConstant';
 
 const ShopNftCard = ({ tokenId, tokenURI }) => {
   //
   const { web3, account, balance, tokenContract, tradeContract } = useContext(Context);
+  const { setIsLoading } = useContext(LoadingContext);
 
   const [seller, setSeller] = useState();
   const [salePrice, setSalePrice] = useState();
@@ -30,8 +32,13 @@ const ShopNftCard = ({ tokenId, tokenURI }) => {
     const purchaseMsg = '토큰을 구매하시겠습니까?';
     if (!window.confirm(purchaseMsg)) return;
 
-    await tradeContract.methods.purchase(tokenId).send({ from: account, value: price });
-    alert('구매가 완료되었습니다.');
+    setIsLoading(true);
+    // try catch 처리 안해주면 메타마스크 트렌젝션 취소했을때 다음코드 실행안되고 그냥 넘어감
+    try {
+      await tradeContract.methods.purchase(tokenId).send({ from: account, value: price });
+      alert('구매가 완료되었습니다.');
+    } catch (err) {}
+    setIsLoading(false);
   }
 
   // ==========================================useEffect==========================================

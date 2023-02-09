@@ -3,17 +3,16 @@ import { Col, Container, Row } from 'reactstrap';
 import { Context } from '../../App';
 import AuctionNftCard from '../Nft/AuctionNftCard';
 import useLoading from '../../hooks/useLoading';
+import { LoadingContext } from '../../Layout/Layout';
 
 const AuctionShop = () => {
   // context
   const { account, web3, balance, tokenContract, tradeContract } = useContext(Context);
+  const { setIsLoading } = useContext(LoadingContext);
   // state
   const [tokensOnAuction, setTokensOnAuction] = useState();
   const [onAuctionURI, setOnAuctionURI] = useState();
   const [onAuctionInfo, setOnAuctionInfo] = useState();
-
-  // hooks
-  const { isLoading, setIsLoading, returnLoadingComp } = useLoading();
 
   // useEffect
   useEffect(() => {
@@ -109,8 +108,7 @@ const AuctionShop = () => {
   // returns
   // =================================================================================================
   // =================================================================================================
-  // return returnLoadingComp(styles.loading)
-  if (isLoading) return returnLoadingComp(styles.loading);
+
   if (!tokensOnAuction || tokensOnAuction?.length === 0)
     return (
       <h1
@@ -152,9 +150,3 @@ const AuctionShop = () => {
 };
 
 export default AuctionShop;
-
-const styles = {
-  loading: {
-    height: 'calc(100vh - 100px - 32px)',
-  },
-};
