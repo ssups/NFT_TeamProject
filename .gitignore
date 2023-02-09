@@ -1,5 +1,6 @@
 node_modules/
-.env
-.DS_Store
+*.env.production
+*.env
+*.DS_Store
 
 # contracts_seop/
