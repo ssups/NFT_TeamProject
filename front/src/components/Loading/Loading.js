@@ -1,9 +1,19 @@
 import React from 'react';
 import '../../styles/loading.css';
 
-const Loading = ({ LoadingStyle }) => {
+const Loading = ({ loadingStyle }) => {
   return (
-    <div class="asd" style={{ ...LoadingStyle, zIndex: 999 }}>
+    <div
+      className="asd"
+      style={{
+        ...loadingStyle,
+        zIndex: 999999999,
+        height: '100%',
+        width: '100%',
+        marginTop: '100px',
+        position: 'fixed',
+      }}
+    >
       <p>Loading ...!</p>
     </div>
   );

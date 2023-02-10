@@ -1,27 +1,24 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Col, Container, Row } from 'reactstrap';
 import { Context } from '../../App';
-import useLoading from '../../hooks/useLoading';
-import Loading from '../Loading/Loading';
+import { LoadingContext } from '../../Layout/Layout';
 import BeforeClaimNftCard from '../Nft/BeforeClaimNftCard';
 
 const BeforeClaim = () => {
   // context
-  const { account, web3, balance, tokenContract, tradeContract } = useContext(Context);
+  const { account, tokenContract, tradeContract } = useContext(Context);
+  const { setIsLoading } = useContext(LoadingContext);
 
   // state
   const [tokensNotClaimed, setTokensNotClaimed] = useState();
   const [onAuctionURI, setOnAuctionURI] = useState();
   const [onAuctionInfo, setOnAuctionInfo] = useState();
 
-  // hooks
-  const { isLoading, setIsLoading, returnLoadingComp } = useLoading();
-
   // useEffect
   useEffect(() => {
     if (!tradeContract || !account || !tokenContract) return;
     (async () => {
-      setIsLoading(false);
+      setIsLoading(true);
       // 내가입찰한거중에 정산안된 토큰들 리스트
       const tokenList = await tradeContract.methods.notClaimedTokensOfBiderList(account).call();
       setTokensNotClaimed(tokenList);
@@ -60,7 +57,6 @@ const BeforeClaim = () => {
   // returns
   // =================================================================================================
   // =================================================================================================
-  if (isLoading) return returnLoadingComp(styles.loading);
   if (!tokensNotClaimed || tokensNotClaimed.length === 0)
     return (
       <h1
@@ -101,9 +97,3 @@ const BeforeClaim = () => {
 };
 
 export default BeforeClaim;
-
-const styles = {
-  loading: {
-    height: 'calc(100vh - 100px - 32px)',
-  },
-};

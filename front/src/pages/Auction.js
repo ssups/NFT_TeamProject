@@ -1,22 +1,22 @@
-import React, { useState } from "react";
-import { AuctionShop, BeforeClaim } from "../components/ForAuction";
-import { useLocation } from "react-router-dom";
+import React, { useState } from 'react';
+import { AuctionShop, BeforeClaim } from '../components/ForAuction';
+import { useLocation } from 'react-router-dom';
 
 const Auction = () => {
   const [isShop, setIsShop] = useState(true);
 
   return (
     <div>
-      <div style={{ marginTop: "100px", width: "100%", display: "flex", justifyContent: "center" }}>
+      <div style={{ marginTop: '100px', width: '100%', display: 'flex', justifyContent: 'center' }}>
         <button
-          style={{ ...styles.buttons, marginRight: "20px", color: !isShop ? "GrayText" : "white" }}
+          style={{ ...styles.buttons, marginRight: '20px', color: !isShop ? 'GrayText' : 'white' }}
           disabled={isShop}
           onClick={() => setIsShop(!isShop)}
         >
           경매중인 상품 보기
         </button>
         <button
-          style={{ ...styles.buttons, color: isShop ? "GrayText" : "white" }}
+          style={{ ...styles.buttons, color: isShop ? 'GrayText' : 'white' }}
           disabled={!isShop}
           onClick={() => setIsShop(!isShop)}
         >
@@ -30,11 +30,11 @@ const Auction = () => {
 
 const styles = {
   buttons: {
-    border: "none",
-    color: "white",
-    backgroundColor: "transparent",
+    border: 'none',
+    color: 'white',
+    backgroundColor: 'transparent',
     fontFamily: "'Jua', sans-serif",
-    fontSize: "20px",
+    fontSize: '20px',
   },
 };
 
