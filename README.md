@@ -11,6 +11,12 @@
  <li><a href = "https://frost-wok-c3f.notion.site/85f791cb7345498ebb80c87bd0f1e3aa?v=f409f934557b4683bc10a71f2e3e8e6d">📑 Meeting Materials</a></li>
  <br><br>
 
+## 📒 Project Structure
+
+![image](https://user-images.githubusercontent.com/107898015/218940897-f58aa2bb-ecc2-4065-a0c4-49ee75d37e8e.png)
+
+<br><br>
+
 ## 🛠 Tech Stack
 
 <img src="https://img.shields.io/badge/Solidity-purple?style=flat-square&logo=Solidity&logoColor=white"> <img src="https://img.shields.io/badge/OpenZeppelin-purple?style=flat-square&logo=OpenZeppelin&logoColor=white"> <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white"/> <img src="https://img.shields.io/badge/React Router-61DAFB?style=flat-square&logo=ReactRouter&logoColor=white"/> <img src="https://img.shields.io/badge/React Router-61DAFB?style=flat-square&logo=ReactContext&logoColor=white"/> <img src="https://img.shields.io/badge/Axios-61DAFB?style=flat-square&logo=Axios&logoColor=white"/> <img src="https://img.shields.io/badge/Node.js-yellow?style=flat-square&logo=Node.js&logoColor=white"/> <img src="https://img.shields.io/badge/.env-yellow?style=flat-square&logo=.env&logoColor=white"/>
@@ -22,24 +28,25 @@
 <img width="1496" alt="image" src="https://user-images.githubusercontent.com/107898015/218907176-4eb5ef0d-3228-4b68-a6e2-53c75e58cf28.png">
 <img width="1499" alt="image" src="https://user-images.githubusercontent.com/107898015/218937998-7a3f64c9-da9c-4300-a330-8a5b08425cc8.png">
 <img width="1481" alt="image" src="https://user-images.githubusercontent.com/107898015/218936915-973fa1d4-e5a6-428a-b466-d0321ee572e6.png">
+
 <br><br>
 
 ## 목차
 
-1. [TokenContract](#TokenContract)
+1. [Token Contract](#Token-Contract)
 
-2. [Trade Contract](#TradeContract)
+2. [Trade Contract](#Trade-Contract)
 
-3. [Metamask API](#MetaMask-API)
+3. [Metamask API](#Metamask-API)
 
 ---
 
-### TokenContract
+### Token Contract
 
 <br><br><br><br><br><br><br><br><br><br><br><br>
 
-### TradeContract
+### Trade Contract
 
-<br><br><br><br><br><br><br><br><br><br><br><br>v
+<br><br><br><br><br><br><br><br><br><br><br><br>
 
-### MetaMask API
+### Metamask API
