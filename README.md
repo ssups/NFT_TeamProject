@@ -22,7 +22,7 @@ Goerli(Test-Network)에 <br>
 두가지의 컨트렉트를 배포하고 해당 컨트렉트들과 상호작용 할 수 있는 웹페이지를 구현하는 것을 목표로 진행.<br><br>
 
 민팅방식은 한번에 2개이상의 민팅이 가능한 BatchMinting.<br>
-BatchMinting시의 사용자 가스비 지출을 줄이기위해서 Azuki팀에서 만든 ERC721A-standard를 사용.<br><br>
+BatchMinting시 사용자의 가스비 지출을 줄이기위해서 Azuki팀에서 만든 ERC721A-standard를 사용.<br><br>
 일반적인 토큰거래 컨트렉트들과의 차별성을 두기 위해서, 경매를 통한 거래기능을 추가적으로 구현함.
 
 <br><br>
