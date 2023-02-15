@@ -12,6 +12,7 @@ const Loading = ({ loadingStyle }) => {
         width: '100%',
         marginTop: '100px',
         position: 'fixed',
+        top: 0,
       }}
     >
       <p>Loading ...!</p>
