@@ -1,6 +1,6 @@
 # Ssande - NFT Minting, Trade, Auction Project
 
-## 🖥️ <a href = "http://15.164.231.206">Project Page</a>
+## 🖥️ Project Page
 
 <li><a href = "http://15.164.231.206">http://15.164.231.206</a></li>
 <br><br>
@@ -11,16 +11,18 @@
  <li><a href = "https://frost-wok-c3f.notion.site/85f791cb7345498ebb80c87bd0f1e3aa?v=f409f934557b4683bc10a71f2e3e8e6d">📑 Meeting Materials</a></li>
  <br><br>
 
-## 📒 Project Structure
+## 🏗️ Project Structure
+
+<br><br>
+
+## 🏗️ Project Structure
 
 ![image](https://user-images.githubusercontent.com/107898015/218940897-f58aa2bb-ecc2-4065-a0c4-49ee75d37e8e.png)
-
 <br><br>
 
 ## 🛠 Tech Stack
 
 <img src="https://img.shields.io/badge/Solidity-purple?style=flat-square&logo=Solidity&logoColor=white"> <img src="https://img.shields.io/badge/OpenZeppelin-purple?style=flat-square&logo=OpenZeppelin&logoColor=white"> <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white"/> <img src="https://img.shields.io/badge/React Router-61DAFB?style=flat-square&logo=ReactRouter&logoColor=white"/> <img src="https://img.shields.io/badge/React Router-61DAFB?style=flat-square&logo=ReactContext&logoColor=white"/> <img src="https://img.shields.io/badge/Axios-61DAFB?style=flat-square&logo=Axios&logoColor=white"/> <img src="https://img.shields.io/badge/Node.js-yellow?style=flat-square&logo=Node.js&logoColor=white"/> <img src="https://img.shields.io/badge/.env-yellow?style=flat-square&logo=.env&logoColor=white"/>
-
 <br><br>
 
 ## 🎨 Preview
@@ -28,7 +30,6 @@
 <img width="1496" alt="image" src="https://user-images.githubusercontent.com/107898015/218907176-4eb5ef0d-3228-4b68-a6e2-53c75e58cf28.png">
 <img width="1499" alt="image" src="https://user-images.githubusercontent.com/107898015/218937998-7a3f64c9-da9c-4300-a330-8a5b08425cc8.png">
 <img width="1481" alt="image" src="https://user-images.githubusercontent.com/107898015/218936915-973fa1d4-e5a6-428a-b466-d0321ee572e6.png">
-
 <br><br>
 
 ## 목차
