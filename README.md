@@ -20,14 +20,18 @@
 ## 🎨 Preview
 
 <img width="1496" alt="image" src="https://user-images.githubusercontent.com/107898015/218907176-4eb5ef0d-3228-4b68-a6e2-53c75e58cf28.png">
+<br><br>
 
-1. [처음](#처음)
-2. [다음](#다음)
+## 목차
 
----
+<br>
 
-## 1. 처음
+1. [1번목차](#1번-목차)
+
+2. [2번목차](#2번-목차)
+
+### 1번 목차
 
 ## <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
-## 2. 다음
+### 2번 목차
