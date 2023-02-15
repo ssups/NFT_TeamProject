@@ -11,7 +11,10 @@
  <li><a href = "https://frost-wok-c3f.notion.site/85f791cb7345498ebb80c87bd0f1e3aa?v=f409f934557b4683bc10a71f2e3e8e6d">📑 Meeting Materials</a></li>
  <br><br>
 
-## 🏗️ Project Structure
+## 🧾 Project Description
+
+3인으로 구성된 팀으로 일주일간 진행한 프로젝트.<br>
+ERC721 Token(NFT)민팅 구현 및
 
 <br><br>
 
