@@ -51,10 +51,15 @@ const MyPage = () => {
     // 거래 컨트랙트의 CA 값 전송
     const ca = await tradeContract.methods.getCA().call();
 
-    await tokenContract.methods.setApprovalForAll(ca, true).send({ from: account });
-
-    alert('토큰에 대한 전송 권한 위임이 완료되었습니다.');
-    setIsApprovedForAll(true);
+    setIsLoading(true);
+    try {
+      await tokenContract.methods.setApprovalForAll(ca, true).send({ from: account });
+      alert('토큰에 대한 전송 권한 위임이 완료되었습니다.');
+      setIsLoading(false);
+      setIsApprovedForAll(true);
+    } catch (err) {
+      setIsLoading(false);
+    }
   }
   console.log('true ===', isApprovedForAll);
 

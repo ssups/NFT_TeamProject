@@ -4,10 +4,12 @@ import axios from 'axios';
 import { Context } from '../../App';
 import MyPageModal from '../Modals/MyPageModal_j';
 import { BACK_URL } from '../../constant/urlConstant';
+import { LoadingContext } from '../../Layout/Layout';
 
 const MyPageNftCard = ({ tokenId, tokenURI, classificationName, setApprovalForAllFn }) => {
   //
   const { web3, account, tradeContract } = useContext(Context);
+  const { setIsLoading } = useContext(LoadingContext);
 
   const [tokenName, setTokenName] = useState();
   const [tokenImgUrl, setTokenImgUrl] = useState();
@@ -33,9 +35,15 @@ const MyPageNftCard = ({ tokenId, tokenURI, classificationName, setApprovalForAl
     const claimMessage = `경매 낙찰로 인해 발생한 수수료는 ${transactionFee} ether 이며 정산금은 ${incomeAfterFee} ether 입니다. 정산 받으시겠습니까?`;
     if (!window.confirm(claimMessage)) return;
 
-    await tradeContract.methods.claimMatchedAuction(tokenId).send({ from: account });
-
-    alert('정산이 완료되었습니다.');
+    setIsLoading(true);
+    try {
+      await tradeContract.methods.claimMatchedAuction(tokenId).send({ from: account });
+      alert('정산이 완료되었습니다.');
+      setIsLoading(false);
+    } catch (err) {
+      console.log(err);
+      setIsLoading(false);
+    }
   }
 
   // 경매 낙찰 상품의 수수료 조회 함수
