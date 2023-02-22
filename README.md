@@ -49,7 +49,9 @@ BatchMinting시 사용자의 가스비 지출을 줄이기위해서 Azuki팀에�
 
 2. [Connect Wallet](#Connect-Wallet)
 
-3. [Modal && Minting](#Modal-&&-Minting)
+3. [Loading...!](#Loading...!)
+
+4. [Modal && Minting](#Modal- && -Minting)
 
 ---
 
