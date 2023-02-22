@@ -122,6 +122,19 @@ BatchMinting시 사용자의 가스비 지출을 줄이기위해서 Azuki팀에�
 
 <br>
 
+### Loading...
+
+<br>
+![ezgif com-video-to-gif (1)](https://user-images.githubusercontent.com/97073355/220531477-d27e9c19-2c34-41ea-b01c-575b11f3fc36.gif)
+
+<br>
+
+트랜잭션 처리하는 동안 유저가 다른 행동을 못하도록
+만들었던 Loading.css를 이용해 오류방지와 시각적인 효과를  
+
+<br>
+
+
 ### Modal && Minting
 
 <br>
