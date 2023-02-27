@@ -59,9 +59,9 @@ BatchMinting시 사용자의 가스비 지출을 줄이기위해서 Azuki팀에�
 
    1. [Token Contract](#Token-Contract)
 
-   2. [Trade Contract(일반거래)](<#Trade-Contract-(일반거래)>)
+   2. [Trade Contract(일반거래)](#Trade-Contract일반거래)
 
-   3. [Trade Contract(경매거래)](<#Trade-Contract(경매거래)>)
+   3. [Trade Contract(경매거래)](#Trade-Contract경매거래)
 
 <br>
 
@@ -234,7 +234,7 @@ Batch 민팅시 발생하는 가스비를 획기적으로 줄인 ERC721A-Standar
 <br>
 <br>
 
-### Trade Contract (일반거래)
+### Trade Contract(일반거래)
 
 일반판매를 위한 storage 변수값은 딱 매핑 하나만 사용하였다. (가스비 최적화를 위하여)
 
