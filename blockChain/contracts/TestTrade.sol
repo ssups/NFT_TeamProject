@@ -136,6 +136,11 @@ contract TestTrade is Ownable{
         cancleSale(tokenId);
     }
 
+    // 해당토큰 경매중인지 확인
+    function isOnAuction(uint256 tokenId) public view returns(bool) {
+        return (_tokensOnAuction[tokenId].endTime > block.timestamp);
+        // 경매마감시간이 현재시간보다 크면 경매진행중 true
+    }
 
     // 경매중인 토큰 갯수 (테스트 완료)
     function _countOnAuction() private view returns(uint256) {
@@ -145,7 +150,6 @@ contract TestTrade is Ownable{
             if(isOnAuction(tokenId)) {
                 count ++;
             }
-            // endTime 이 block.timestamp 보다 작으면은 경매가 만료된거다.
         }
 
         return count;
@@ -161,7 +165,6 @@ contract TestTrade is Ownable{
                 tokensOnAuction[index] = tokenId;
                 index ++;
             } 
-            // endTime 이 block.timestamp 보다 작으면은 경매가 만료된거다.
         }
 
         return tokensOnAuction;
@@ -171,12 +174,6 @@ contract TestTrade is Ownable{
     function dataOfOnAuction(uint256 tokenId) public view returns(AuctionInfo memory){
         // require(_tokensOnAuction[tokenId].endTime > block.timestamp, "this token is not on Auction");
         return _tokensOnAuction[tokenId];
-    }
-
-    // 해당토큰 경매중인지 확인
-    function isOnAuction(uint256 tokenId) public view returns(bool) {
-        return (_tokensOnAuction[tokenId].endTime > block.timestamp);
-        // 경매마감시간이 현재시간보다 크면 경매진행중 true
     }
 
     // 경매판매등록(테스트완료)
@@ -202,7 +199,7 @@ contract TestTrade is Ownable{
         uint256 endTime = _tokensOnAuction[tokenId].endTime;
         address bider = _tokensOnAuction[tokenId].bider;
         // {uint256 lastBidPrice, uint256 endTime, address bider} = _tokensOnAuction[tokenId];
-
+        
         require(block.timestamp < endTime, "this acution ended"); // 시간지난 경매 입찰불가
         require(Token.ownerOf(tokenId) != msg.sender, "owner cannot bid on owns"); // 자기 경매에 입찰불가
         require(lastBidPrice > 0 , "this token is not on auction"); // 옥션등록안된 토큰
