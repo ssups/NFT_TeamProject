@@ -20,6 +20,8 @@ const App = () => {
 
   // useEffect
   useEffect(() => {
+    if (!window.ethereum) return;
+
     (async () => {
       // 블록체인 네트워크 우리가 컨트렉트 배포한 네트워크인지 확인
       const chainId = parseInt(await window.ethereum.request({ method: 'eth_chainId' }), 16);
@@ -64,6 +66,7 @@ const App = () => {
 
   // 네트워크 다른게 설정되어있으면 우리네트워크 쓰도록 메타마스크 팝업창 띄우기
   useEffect(() => {
+    if (!window.ethereum) return;
     if (isNetWorkCorrect) return;
     if (isNetWorkCorrect === undefined) return;
     (async () => {
@@ -89,12 +92,7 @@ const App = () => {
     })();
   }, [web3, account]);
 
-  // useEffect(() => {
-  //   if (!tradeContract || !tokenContract) return;
-  //   console.log('트레이드 컨트렉트', tradeContract);
-  //   console.log('토큰 컨트렉트', tokenContract);
-  // }, [tradeContract, tokenContract]);
-
+  if (!window.ethereum) return <h1>메타마스크를 설치해 주세요</h1>;
   if (!isNetWorkCorrect) return <h1>네트워크를 맞게 설정하세요</h1>;
 
   return (
