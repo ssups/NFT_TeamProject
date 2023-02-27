@@ -236,6 +236,8 @@ Batch 민팅시 발생하는 가스비를 획기적으로 줄인 ERC721A-Standar
 
 ### Trade Contract(일반거래)
 
+<br>
+
 일반판매를 위한 storage 변수값은 딱 매핑 하나만 사용하였다. (가스비 최적화를 위하여)
 
 ```js
