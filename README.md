@@ -2,7 +2,7 @@
 
 ## 🖥️ Project Page
 
-<li><a href = "http://15.164.231.206">http://15.164.231.206</a></li>
+<li><a href = "http://13.209.197.27">http://13.209.197.27</a></li>
 <br><br>
 
 ## 📒 Documents
@@ -58,6 +58,7 @@ BatchMinting시 사용자의 가스비 지출을 줄이기위해서 Azuki팀에�
 ### 3D Slide
 
 <!-- <br><br><br><br><br><br><br><br><br><br><br><br> -->
+
 ```
 
 유명한 NFT사진들로  3D 느낌이 나게 구현해봤습니다
@@ -68,7 +69,7 @@ BatchMinting시 사용자의 가스비 지출을 줄이기위해서 Azuki팀에�
 	float: right;
 	animation: rotar 15s infinite linear;
 	transform-style: preserve-3d;
-    
+
 }
 
 각각 이미지에 nth-child로 지정해준다음 위치를 정해놓고
@@ -77,10 +78,10 @@ BatchMinting시 사용자의 가스비 지출을 줄이기위해서 Azuki팀에�
 ```
 
 ### Connect Wallet
+
 <br>
 
 ![asdasd](https://user-images.githubusercontent.com/97073355/218951174-69cf3424-08f9-4479-be10-170e9a5c84c0.png)
-
 
 ```JS
 메타마스크에 연결할 수 있는 버튼입니다
@@ -112,21 +113,18 @@ BatchMinting시 사용자의 가스비 지출을 줄이기위해서 Azuki팀에�
     setIsConnected(false);
   };
 
-지갑에 연동하게해주는 onConnenct 함수와 
+지갑에 연동하게해주는 onConnenct 함수와
 지갑이랑 연동시  "지갑연동" 글자가 -> "해제하기"로 바뀌게 되면서
 지갑을 연동을 해제 할 수 있는 onDisconnect함수를 만들었습니다
 
 ```
-![ezgif com-video-to-gif](https://user-images.githubusercontent.com/97073355/218985250-592e8d44-4008-41b1-b0bf-47ec54a6a88d.gif)
 
+![ezgif com-video-to-gif](https://user-images.githubusercontent.com/97073355/218985250-592e8d44-4008-41b1-b0bf-47ec54a6a88d.gif)
 
 지갑연결을 하면 보유한 이더와 계정주소를 확인할 수 있습니다.
 
+### Loading
 
-
-
-
-###  Loading
 <br>
 
 ![ezgif com-video-to-gif (1)](https://user-images.githubusercontent.com/97073355/220532292-d5c030fb-9105-4109-b4ea-073fd93e98fd.gif)
@@ -138,7 +136,6 @@ BatchMinting시 사용자의 가스비 지출을 줄이기위해서 Azuki팀에�
 <br>
 <br>
 
-
 ### Modal && Minting
 
 <br>
@@ -149,8 +146,6 @@ BatchMinting시 사용자의 가스비 지출을 줄이기위해서 Azuki팀에�
 민팅 버튼을 누르면 모달창이 나오고 민팅할 NFT 갯수를 정할 수 있습니다
 
 민팅 갯수에 따라 설정한 Goerli이 빠져나갑니다.
-
-
 
 <br>
 
@@ -164,16 +159,17 @@ BatchMinting시 사용자의 가스비 지출을 줄이기위해서 Azuki팀에�
  { saleTokenURIs &&
             Object.keys(saleTokenURIs).map(tokenId => (
 
-              <Col key={tokenId} lg="3" md="4" sm="6" 
+              <Col key={tokenId} lg="3" md="4" sm="6"
 
               className="mb-4">
                 <ShopNftCard key={tokenId} tokenId={tokenId} tokenURI={saleTokenURIs[tokenId]} />
               </Col>
             ))}
 ```
+
 <br>
  saleTokenURIs 객체의 모든 항목에 대해 ShopNftCard 컴포넌트를 렌더링하여 NFT 토큰을 표시합니다.
 
 <br>
 
- NFT 사진은 배경화면, 몸 , 눈 , 입모양으로 나뉘어서 직접 만들었고 Hashlips 에서 만든 코드를 이용해서 수백가지의 이미지를 추출했습니다
+NFT 사진은 배경화면, 몸 , 눈 , 입모양으로 나뉘어서 직접 만들었고 Hashlips 에서 만든 코드를 이용해서 수백가지의 이미지를 추출했습니다
