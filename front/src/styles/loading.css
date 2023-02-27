@@ -1,10 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Jua&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
 
 .asd {
   position: relative;
   display: grid;
   overflow: hidden;
-  grid-template: "body";
+  grid-template: 'body';
   place-content: center;
   place-items: center;
   margin: 0;
@@ -12,7 +12,7 @@
 }
 
 .asd p {
-  font-family: "Jua", sans-serif;
+  font-family: 'Jua', sans-serif;
   --duration: 1200ms;
   --text-shadow-color: hsl(0 0% 100%);
 
@@ -39,7 +39,7 @@
   --transform-alt: scaleY(-1) translateY(-30%) rotateX(-55deg) scaleY(1.4)
     translateY(calc(-30% + 2px));
 
-  content: "Loading ...!" / "";
+  content: 'Loading ...!' / '';
   display: block;
   position: absolute;
   top: 0;

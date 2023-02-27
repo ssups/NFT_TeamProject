@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useContext, useRef } from "react";
-import { Col } from "reactstrap";
-import { Link } from "react-router-dom";
-import axios from "axios";
-import { Context } from "../../App";
+import React, { useState, useEffect, useContext, useRef } from 'react';
+import { Col } from 'reactstrap';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { Context } from '../../App';
+import { BACK_URL } from '../../constant/urlConstant';
 
 const BeforeClaimNftCard = ({ tokenId, tokenURI, tokenInfo }) => {
   // context
@@ -16,7 +17,9 @@ const BeforeClaimNftCard = ({ tokenId, tokenURI, tokenInfo }) => {
   useEffect(() => {
     if (!tokenURI) return;
     (async () => {
-      const jsonData = await axios.get(`${tokenURI}.json`);
+      const newURI = tokenURI.replace('http://localhost:4000', BACK_URL);
+
+      const jsonData = await axios.get(`${newURI}.json`);
       setJsonData(jsonData.data);
     })();
   }, [tokenURI]);
@@ -26,7 +29,7 @@ const BeforeClaimNftCard = ({ tokenId, tokenURI, tokenInfo }) => {
     if (!tokenInfo) return;
     const { endTime, lastBidPrice, bider } = tokenInfo;
     if (!web3) return;
-    setMatchedPrice(web3.utils.fromWei(lastBidPrice + "", "ether"));
+    setMatchedPrice(web3.utils.fromWei(lastBidPrice + '', 'ether'));
   }, [tokenInfo, web3]);
 
   // functions
@@ -34,8 +37,8 @@ const BeforeClaimNftCard = ({ tokenId, tokenURI, tokenInfo }) => {
     await tradeContract.methods
       .claimMatchedAuction(tokenId)
       .send({ from: account })
-      .then(success => alert("정산 성공"))
-      .catch(err => alert("정산실패", err));
+      .then(success => alert('정산 성공'))
+      .catch(err => alert('정산실패', err));
   }
 
   // returns
@@ -44,16 +47,16 @@ const BeforeClaimNftCard = ({ tokenId, tokenURI, tokenInfo }) => {
     <Col key={tokenId} lg="3" md="4" sm="6" className="mb-4">
       <div className="single_nft">
         <div className="nft_img">
-          <img src={jsonData.image} className="w-100" alt="" />
+          <img src={BACK_URL + `/images/${tokenId}.png`} className="w-100" alt="" />
         </div>
 
         {/* 카드 상태창 */}
-        <div className="nft_content" style={{ color: "white" }}>
+        <div className="nft_content" style={{ color: 'white' }}>
           <h5 className="nft_title">
             {/* 이거 링크걸린거 경국이한테 물어보기 */}
             <Link to={`/shop/${tokenId}`}>{jsonData.name}</Link>
           </h5>
-          <h5>낙찰받은 입찰가: {matchedPrice && matchedPrice + " Eth"}</h5>
+          <h5>낙찰받은 입찰가: {matchedPrice && matchedPrice + ' Eth'}</h5>
 
           <div className="creator_info d-flex align-items-center justify-content-between">
             <div className="w-50"></div>

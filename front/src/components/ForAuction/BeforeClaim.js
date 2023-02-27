@@ -1,20 +1,24 @@
-import React, { useEffect, useState, useContext } from "react";
-import { Col, Container, Row } from "reactstrap";
-import { Context } from "../../App";
-// import NftCard from "../Nft/NftCard";
-import BeforeClaimNftCard from "../Nft/BeforeClaimNftCard";
+import React, { useEffect, useState, useContext } from 'react';
+import { Col, Container, Row } from 'reactstrap';
+import { Context } from '../../App';
+import { LoadingContext } from '../../Layout/Layout';
+import BeforeClaimNftCard from '../Nft/BeforeClaimNftCard';
 
 const BeforeClaim = () => {
   // context
-  const { account, web3, balance, tokenContract, tradeContract } = useContext(Context);
+  const { account, tokenContract, tradeContract } = useContext(Context);
+  const { setIsLoading } = useContext(LoadingContext);
+
   // state
   const [tokensNotClaimed, setTokensNotClaimed] = useState();
   const [onAuctionURI, setOnAuctionURI] = useState();
   const [onAuctionInfo, setOnAuctionInfo] = useState();
+
   // useEffect
   useEffect(() => {
     if (!tradeContract || !account || !tokenContract) return;
     (async () => {
+      setIsLoading(true);
       // 내가입찰한거중에 정산안된 토큰들 리스트
       const tokenList = await tradeContract.methods.notClaimedTokensOfBiderList(account).call();
       setTokensNotClaimed(tokenList);
@@ -26,6 +30,8 @@ const BeforeClaim = () => {
         tokensURI[tokenId] = await tokenContract.methods.tokenURI(tokenId).call();
         tokensInfo[tokenId] = await tradeContract.methods.dataOfOnAuction(tokenId).call();
       }
+
+      setIsLoading(false);
       setOnAuctionURI(tokensURI);
       setOnAuctionInfo(tokensInfo);
     })();
@@ -47,15 +53,19 @@ const BeforeClaim = () => {
       });
     })();
   }, [tradeContract, tokensNotClaimed]);
-  if (!tokensNotClaimed || tokensNotClaimed?.length === 0)
+
+  // returns
+  // =================================================================================================
+  // =================================================================================================
+  if (!tokensNotClaimed || tokensNotClaimed.length === 0)
     return (
       <h1
         style={{
-          width: "100wh",
-          height: "calc(100vh - 100px - 50px)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
+          width: '100wh',
+          height: 'calc(100vh - 100px - 50px)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
         }}
       >
         낙찰된 상품이 없습니다.

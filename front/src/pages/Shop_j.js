@@ -1,13 +1,15 @@
-import React, { useEffect, useContext, useState } from "react";
+import React, { useEffect, useContext, useState } from 'react';
 
-import { Context } from "../App";
-import { Col, Container, Row } from "reactstrap";
-import ShopNftCard from "../components/Nft/ShopNftCard_j";
+import { Context } from '../App';
+import { Col, Container, Row } from 'reactstrap';
+import ShopNftCard from '../components/Nft/ShopNftCard_j';
+import { LoadingContext } from '../Layout/Layout';
 
 const Shop = () => {
   //
   const [saleTokenURIs, setSaleTokenURIs] = useState();
   const { tokenContract, tradeContract } = useContext(Context);
+  const { setIsLoading } = useContext(LoadingContext);
 
   // ==========================================functions==========================================
   // =============================================================================================
@@ -20,7 +22,7 @@ const Shop = () => {
     for (const tokenId of saleTokenIds) {
       _saleTokenURIs[tokenId] = await tokenContract.methods.tokenURI(tokenId).call();
     }
-
+    console.log(_saleTokenURIs);
     return _saleTokenURIs;
   }
 
@@ -31,7 +33,9 @@ const Shop = () => {
     //
     (async () => {
       //
+      setIsLoading(true);
       setSaleTokenURIs(await getSaleTokenURIsFn());
+      setIsLoading(false);
     })();
   }, [tradeContract]);
 
@@ -49,7 +53,7 @@ const Shop = () => {
           </Col>
           {/*  */}
           {saleTokenURIs &&
-            Object.keys(saleTokenURIs).map((tokenId) => (
+            Object.keys(saleTokenURIs).map(tokenId => (
               <Col key={tokenId} lg="3" md="4" sm="6" className="mb-4">
                 <ShopNftCard key={tokenId} tokenId={tokenId} tokenURI={saleTokenURIs[tokenId]} />
               </Col>
