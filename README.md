@@ -329,12 +329,16 @@ mapping(uint => AuctionInfo) private _tokensOnAuction;
 
 1. 경매 진행중인 상품 :
    <br>
+
    경매가 진행중인 상품을 구별하는 기준은 endTime(경매 마감시간) 한가지.<br>
    endTime > block.timestamp<br>
    위 조건에 부합하는 모든 상품은 경매가 진행중인 상품으로 분류된다.
+
    <image src="https://user-images.githubusercontent.com/107898015/221679237-aee22fde-33c2-4feb-ae2b-cf7b2c20d2e9.png" width="150">
+
 2. 경매는 마감 됐지만, 정산되지않은 상품:
    <br>
+
    결론부터 말하자면 endTIme(경매 마감시간) < block.timestamp(현재시간) <br>
    bider ! = address(0)<br> 두 조건을 만족시키면 경매는 마감됐지만 정산되지 않은 상품이다.<br><br>
    추가적으로 경매 정산을 시키는 로직을 설명하자면<br>
@@ -342,14 +346,15 @@ mapping(uint => AuctionInfo) private _tokensOnAuction;
    경매마감시간(endTIme) 값은 이미 block.timestamp(마지막 블록생성시간 == 현재시간) 값보다 작아졌기때문에 리셋해줄필요가없고,<br>
    최종입찰가(lastBidPrice)는 상품간의 분류를 위해서 전혀 필요한 값이 아니기때문에 리셋해줄 필요가 없다.<br>
    결국 입찰자(bider)값 하나만을 리셋시켜서 효율적으로 정산유무 변결시킬 수 있었다.
+
    <image src="https://user-images.githubusercontent.com/107898015/221679635-7fce7533-4bed-4cac-a9a1-f83a1540f9c4.png" width="150">
 
 3. 경매마감 & 정산완료 상품( + 경매가 유찰된 상품):
    <br>
+
    경매마감 & 정산완료 상품과, 경매가 유찰된 상품은 둘다 따로 후처리가 필요없기 때문에 구분지을 필요가 없었다.<br>
-   <br>
-   endTime(경매 마감시간) < block.timestamp (현재시간)<br>
-   ⇒ 경매 마감됨<br>
-   <br>
-   bider == address(0) ⇒ 정산이 됐거나 혹은 유찰됐음<br>
+
+   - endTime(경매 마감시간) < block.timestamp (현재시간) ⇒ 경매 마감됨
+   - bider == address(0) ⇒ 정산이 됐거나 혹은 유찰됐음
+
    <image src="https://user-images.githubusercontent.com/107898015/221682255-38f33aef-5606-4936-981c-8ea7a6550a64.png" width="150">
