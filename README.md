@@ -2,7 +2,7 @@
 
 ## 🖥️ Project Page
 
-<li><a href = "http://13.209.197.27">http://13.209.197.27</a></li>
+<li><a href = "http://ec2-13-209-197-27.ap-northeast-2.compute.amazonaws.com">http://ec2-13-209-197-27.ap-northeast-2.compute.amazonaws.com</a></li>
 <br><br>
 
 ## 📒 Documents
