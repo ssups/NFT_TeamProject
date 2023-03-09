@@ -2,7 +2,7 @@
 
 ## 🖥️ Project Page
 
-<li><a href = "https://ipfs.io/ipfs/QmQqcHcsUg5MRT1XY8ExViULCTaeGwCcdBqibZeicEcXp7">https://ipfs.io/ipfs/QmQqcHcsUg5MRT1XY8ExViULCTaeGwCcdBqibZeicEcXp7</a></li>
+<li><a href = "https://ipfs.io/ipfs/QmeU5qkmDpJJRhmVa82tGRwsQZufNRPXFQrKMCpjeBZcyA">https://ipfs.io/ipfs/QmeU5qkmDpJJRhmVa82tGRwsQZufNRPXFQrKMCpjeBZcyA</a></li>
 <br><br>
 
 ## 📒 Documents
