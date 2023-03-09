@@ -2,7 +2,7 @@
 
 ## 🖥️ Project Page
 
-<li><a href = "https://ipfs.io/ipfs/QmTMuU6owVWLHbaBmHGZVSNSf3DqVK3TFDCaUGbrYYbnye">[http://ec2-13-209-197-27.ap-northeast-2.compute.amazonaws.com](https://ipfs.io/ipfs/QmTMuU6owVWLHbaBmHGZVSNSf3DqVK3TFDCaUGbrYYbnye)</a></li>
+<li><a href = "https://ipfs.io/ipfs/QmTMuU6owVWLHbaBmHGZVSNSf3DqVK3TFDCaUGbrYYbnye">https://ipfs.io/ipfs/QmTMuU6owVWLHbaBmHGZVSNSf3DqVK3TFDCaUGbrYYbnye</a></li>
 <br><br>
 
 ## 📒 Documents
