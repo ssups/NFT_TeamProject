@@ -17,6 +17,7 @@ const Shop = () => {
   // 현재 판매 중인 토큰 정보가 담긴 JSON 파일 경로 조회 함수
   async function getSaleTokenURIsFn() {
     //
+    if (!tradeContract) return;
     const _saleTokenURIs = {};
     const saleTokenIds = await tradeContract.methods.onSaleList().call();
     for (const tokenId of saleTokenIds) {

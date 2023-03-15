@@ -92,8 +92,8 @@ const App = () => {
     })();
   }, [web3, account]);
 
-  if (!window.ethereum) return <h1>메타마스크를 설치해 주세요</h1>;
-  if (!isNetWorkCorrect) return <h1>네트워크를 맞게 설정하세요</h1>;
+  // if (!window.ethereum) return <h1>메타마스크를 설치해 주세요</h1>;
+  // if (!isNetWorkCorrect) return <h1>네트워크를 맞게 설정하세요</h1>;
 
   return (
     <Context.Provider value={{ web3, account, balance, tokenContract, tradeContract }}>
