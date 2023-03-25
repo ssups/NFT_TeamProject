@@ -51,7 +51,6 @@ const ShopNftCard = ({ tokenId, tokenURI }) => {
       // name, image, attributes, dna, edition, date, compiler, description
       const newURI = tokenURI.replace('http://localhost:4000', BACK_URL);
       const { name, image } = (await axios.get(newURI + '.json')).data;
-      console.log(newURI);
 
       const seller = await tokenContract.methods.ownerOf(tokenId).call();
       const _salePrice = await tradeContract.methods.priceOfOnSale(tokenId).call();

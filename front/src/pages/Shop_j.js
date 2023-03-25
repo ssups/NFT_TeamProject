@@ -23,7 +23,6 @@ const Shop = () => {
     for (const tokenId of saleTokenIds) {
       _saleTokenURIs[tokenId] = await tokenContract.methods.tokenURI(tokenId).call();
     }
-    console.log(_saleTokenURIs);
     return _saleTokenURIs;
   }
 
