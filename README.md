@@ -2,7 +2,7 @@
 
 ## 🖥️ Project Page
 
-<li><a href = "http://nft.ssups.shop">http://nft.ssups.shop</a></li>
+<li><a href = "https://nft.ssups.shop">https://nft.ssups.shop</a></li>
 <br><br>
 
 ## 📒 Documents
