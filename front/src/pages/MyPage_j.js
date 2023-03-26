@@ -169,8 +169,6 @@ const MyPage = () => {
   useEffect(() => {
     //
     // 초기값 / undefined
-    // console.log(tokenContract, account);
-
     if (!tokenContract || !account) return;
 
     (async () => {

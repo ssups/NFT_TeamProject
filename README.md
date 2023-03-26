@@ -2,7 +2,7 @@
 
 ## 🖥️ Project Page
 
-<li><a href = "https://ipfs.io/ipfs/QmeU5qkmDpJJRhmVa82tGRwsQZufNRPXFQrKMCpjeBZcyA">https://ipfs.io/ipfs/QmeU5qkmDpJJRhmVa82tGRwsQZufNRPXFQrKMCpjeBZcyA</a></li>
+<li><a href = "https://nft.ssups.shop">https://nft.ssups.shop</a></li>
 <br><br>
 
 ## 📒 Documents
