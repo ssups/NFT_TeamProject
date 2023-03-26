@@ -20,12 +20,6 @@ const AuctionModal = ({ setModal, jsonData, currentBid, bider, timeCount, tokenI
   // refs
   const priceRef = useRef();
 
-  // useEffect
-  useEffect(() => {
-    // console.log(tradeContract.methods);
-    // console.log(tokenId);
-  }, []);
-
   // function
   async function bidOnAuction() {
     let price = priceRef.current.value;

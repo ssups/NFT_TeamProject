@@ -6,7 +6,6 @@ const useWeb3 = () => {
     (async () => {
       if (!window.ethereum) {
         // 메타마스크 설치여부 확인
-        // alert('메타마스크를 설치하세요');
         return;
       }
 

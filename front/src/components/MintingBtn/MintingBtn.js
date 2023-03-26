@@ -1,13 +1,27 @@
-import React, { useState } from "react";
-import "../../styles/topfold.css";
-import { Link } from "react-router-dom";
+import React, { useState, useContext } from 'react';
+import '../../styles/topfold.css';
+import { Link } from 'react-router-dom';
 
-import "../../styles/topfold.css";
-import MintingModal from "../Modals/MintingModal_j";
+import '../../styles/topfold.css';
+import MintingModal from '../Modals/MintingModal_j';
+import { Context } from '../../App';
 
 const MintingBtn = () => {
   //
   const [moDal, setModal] = useState(false);
+  const { account } = useContext(Context);
+
+  function handleMintBtn() {
+    if (!window.ethereum) {
+      alert('메타마스크를 설치해주세요');
+      return;
+    }
+    if (!account) {
+      alert('지갑을 연결해주세요');
+      return;
+    }
+    setModal(true);
+  }
 
   return (
     <div className="topfold">
@@ -23,10 +37,10 @@ const MintingBtn = () => {
 
       <div className="tf-btns">
         <Link to="/shop">
-          {" "}
+          {' '}
           <button className="bbtn1">Explore</button>
         </Link>
-        <button onClick={() => setModal(true)} className="bbtn2">
+        <button onClick={handleMintBtn} className="bbtn2">
           민팅하기
         </button>
 

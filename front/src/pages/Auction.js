@@ -23,7 +23,13 @@ const Auction = () => {
           나의 낙찰 상품 수령
         </button>
       </div>
-      {isShop ? <AuctionShop /> : <BeforeClaim />}
+      {!window.ethereum ? (
+        <h1 style={styles.guideMent}>메타마스크를 설치해주세요</h1>
+      ) : isShop ? (
+        <AuctionShop />
+      ) : (
+        <BeforeClaim />
+      )}
     </div>
   );
 };
@@ -35,6 +41,13 @@ const styles = {
     backgroundColor: 'transparent',
     fontFamily: "'Jua', sans-serif",
     fontSize: '20px',
+  },
+  guideMent: {
+    width: '100wh',
+    height: 'calc(100vh - 100px - 50px)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 };
 

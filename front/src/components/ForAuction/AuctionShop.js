@@ -2,12 +2,11 @@ import React, { useEffect, useState, useContext } from 'react';
 import { Col, Container, Row } from 'reactstrap';
 import { Context } from '../../App';
 import AuctionNftCard from '../Nft/AuctionNftCard';
-import useLoading from '../../hooks/useLoading';
 import { LoadingContext } from '../../Layout/Layout';
 
 const AuctionShop = () => {
   // context
-  const { account, web3, balance, tokenContract, tradeContract } = useContext(Context);
+  const { web3, tokenContract, tradeContract } = useContext(Context);
   const { setIsLoading } = useContext(LoadingContext);
   // state
   const [tokensOnAuction, setTokensOnAuction] = useState();
@@ -89,13 +88,6 @@ const AuctionShop = () => {
     setTokensOnAuction(sortedList);
   }, [onAuctionInfo]); //onAuctionInfo값이 업데이트되고나서 sort작업을해줘야해서 tokensOnAuction이 바꼈을때는 랜더링 안되게
 
-  useEffect(() => {
-    (async () => {
-      if (!tradeContract) return;
-      // console.log(tradeContract.methods);
-    })();
-  }, [tradeContract]);
-
   // 블록타임스탬프확인
   useEffect(() => {
     if (!web3) return;
@@ -110,19 +102,7 @@ const AuctionShop = () => {
   // =================================================================================================
 
   if (!tokensOnAuction || tokensOnAuction?.length === 0)
-    return (
-      <h1
-        style={{
-          width: '100wh',
-          height: 'calc(100vh - 100px - 50px)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        경매중인 상품이 없습니다.
-      </h1>
-    );
+    return <h1 style={styles.guideMent}>경매중인 상품이 없습니다.</h1>;
 
   return (
     <section>
@@ -150,3 +130,13 @@ const AuctionShop = () => {
 };
 
 export default AuctionShop;
+
+const styles = {
+  guideMent: {
+    width: '100wh',
+    height: 'calc(100vh - 100px - 50px)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+};

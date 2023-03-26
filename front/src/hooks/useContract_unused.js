@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import useWeb3 from "./useWeb3_unused";
+import React, { useEffect, useState } from 'react';
+import useWeb3 from './useWeb3_unused';
 
-const useContract = (contractJson) => {
+const useContract = contractJson => {
   //
   const [web3, ,] = useWeb3();
   const [deployed, setDeployed] = useState();
@@ -19,7 +19,7 @@ const useContract = (contractJson) => {
 
       const deployed = await new web3.eth.Contract(abi, ca);
 
-      console.log("컨트랙트 인스턴스 반환");
+      // console.log("컨트랙트 인스턴스 반환");
       setDeployed(deployed);
     })();
     //

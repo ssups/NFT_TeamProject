@@ -136,8 +136,6 @@ const MintingModal = ({ setModal }) => {
   useEffect(() => {
     //
     // 초기값
-    console.log(account);
-
     if (!account) return;
 
     (async () => {
@@ -149,7 +147,7 @@ const MintingModal = ({ setModal }) => {
   useEffect(() => {
     //
     // 초기값
-    console.log(tokenContract);
+    // console.log(tokenContract);
 
     if (!tokenContract) return;
 
@@ -161,7 +159,7 @@ const MintingModal = ({ setModal }) => {
       setTotalSupply(await getTotalSupplyFn());
     })();
 
-    console.log(window.ethereum._events);
+    // console.log(window.ethereum._events);
     //
     if (!window.ethereum._events['']) {
       //

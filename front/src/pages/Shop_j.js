@@ -23,7 +23,7 @@ const Shop = () => {
     for (const tokenId of saleTokenIds) {
       _saleTokenURIs[tokenId] = await tokenContract.methods.tokenURI(tokenId).call();
     }
-    console.log(_saleTokenURIs);
+    // console.log(_saleTokenURIs);
     return _saleTokenURIs;
   }
 
@@ -42,7 +42,7 @@ const Shop = () => {
 
   // ===========================================returns===========================================
   // =============================================================================================
-
+  if (!window.ethereum) return <h1 style={styles.guideMent}>메타마스크를 설치해주세요</h1>;
   return (
     <section>
       <Container>
@@ -67,3 +67,13 @@ const Shop = () => {
 };
 
 export default Shop;
+
+const styles = {
+  guideMent: {
+    width: '100wh',
+    height: 'calc(100vh - 100px - 50px)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+};

@@ -36,7 +36,7 @@ const MyPage = () => {
   // 토큰의 전송 권한 위임 설정에 대한 함수
   async function setApprovalForAllFn() {
     //
-    console.log('why false : true ===', isApprovedForAll);
+    // console.log('why false : true ===', isApprovedForAll);
     if (isApprovedForAll) return;
 
     const delegationMsg =
@@ -46,7 +46,7 @@ const MyPage = () => {
       alert('토큰에 대한 전송 권한을 위임하지 않았습니다.');
       return;
     }
-    console.log(isApprovedForAll);
+    // console.log(isApprovedForAll);
 
     // 거래 컨트랙트의 CA 값 전송
     const ca = await tradeContract.methods.getCA().call();
@@ -61,7 +61,7 @@ const MyPage = () => {
       setIsLoading(false);
     }
   }
-  console.log('true ===', isApprovedForAll);
+  // console.log('true ===', isApprovedForAll);
 
   // 나의 보유 토큰들을 보유하게 된 순서대로 컴포넌트화 하기 위한 JSON 파일 경로 조회 함수
   async function getMyTokenURIsFn() {
@@ -169,7 +169,7 @@ const MyPage = () => {
   useEffect(() => {
     //
     // 초기값 / undefined
-    console.log(tokenContract, account);
+    // console.log(tokenContract, account);
 
     if (!tokenContract || !account) return;
 

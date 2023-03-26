@@ -21,7 +21,6 @@ const App = () => {
   // useEffect
   useEffect(() => {
     if (!window.ethereum) return;
-
     (async () => {
       // 블록체인 네트워크 우리가 컨트렉트 배포한 네트워크인지 확인
       const chainId = parseInt(await window.ethereum.request({ method: 'eth_chainId' }), 16);
@@ -54,28 +53,24 @@ const App = () => {
     if (!window.ethereum._events['chainChanged'])
       window.ethereum.on('chainChanged', async switchedChain => {
         switchedChain = parseInt(switchedChain, 16);
-        setIsNetWorkCorrect(netWorkId === switchedChain);
-        // console.log(switchedChain);
+        window.location.reload();
       });
 
     return () => {
       delete window.ethereum._events['chainChanged'];
-      // delete window.ethereum._events["accountsChanged"];
+      delete window.ethereum._events['accountsChanged'];
     };
   }, []);
 
   // 네트워크 다른게 설정되어있으면 우리네트워크 쓰도록 메타마스크 팝업창 띄우기
   useEffect(() => {
-    if (!window.ethereum) return;
-    if (isNetWorkCorrect) return;
-    if (isNetWorkCorrect === undefined) return;
+    if (!window.ethereum || isNetWorkCorrect || isNetWorkCorrect === undefined) return;
     (async () => {
       try {
         await window.ethereum.request({
           method: 'wallet_switchEthereumChain',
           params: [{ chainId: '0x' + netWorkId.toString(16) }],
         });
-        console.log('성공');
       } catch (err) {
         console.log(err);
       }

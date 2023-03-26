@@ -73,6 +73,10 @@ const Header = () => {
   };
 
   const onConnect = async () => {
+    if (!window.ethereum) {
+      alert('메타마스크를 설치해주세요');
+      return;
+    }
     try {
       const currentProvider = detectCurrentProvider();
       if (currentProvider) {
