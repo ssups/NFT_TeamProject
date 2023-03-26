@@ -37,6 +37,7 @@ const ShopNftCard = ({ tokenId, tokenURI }) => {
     try {
       await tradeContract.methods.purchase(tokenId).send({ from: account, value: price });
       alert('구매가 완료되었습니다.');
+      window.location.reload();
     } catch (err) {}
     setIsLoading(false);
   }

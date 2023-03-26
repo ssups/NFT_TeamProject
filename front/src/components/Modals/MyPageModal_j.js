@@ -47,8 +47,7 @@ const MyPageModal = ({ title, setModal, tokenId }) => {
     try {
       await tradeContract.methods.registerForSale(tokenId, salePrice).send({ from: account });
       alert('판매 상품으로 등록이 완료되었습니다.');
-      setModal(false);
-      setIsLoading(false);
+      window.location.reload();
     } catch (err) {
       setIsLoading(false);
     }
@@ -79,8 +78,7 @@ const MyPageModal = ({ title, setModal, tokenId }) => {
         .registerForAuction(tokenId, bidPrice, endTime)
         .send({ from: account });
       alert('경매 상품으로 등록이 완료되었습니다.');
-      setModal(false);
-      setIsLoading(false);
+      window.location.reload();
     } catch (err) {
       setIsLoading(false);
     }

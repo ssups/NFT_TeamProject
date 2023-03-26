@@ -22,8 +22,13 @@ const MyPageNftCard = ({ tokenId, tokenURI, classificationName, setApprovalForAl
   // 판매 등록 취소하기 버튼에 대한 함수
   async function deregisterSaleToken() {
     //
-    await tradeContract.methods.cancleSale(tokenId).send({ from: account });
-    alert('판매 등록이 취소되었습니다.');
+    setIsLoading(true);
+    try {
+      await tradeContract.methods.cancleSale(tokenId).send({ from: account });
+      alert('판매 등록이 취소되었습니다.');
+      window.location.reload();
+    } catch (err) {}
+    setIsLoading(false);
   }
 
   // 경매 낙찰 상품 정산 받기 버튼에 대한 함수
@@ -39,7 +44,7 @@ const MyPageNftCard = ({ tokenId, tokenURI, classificationName, setApprovalForAl
     try {
       await tradeContract.methods.claimMatchedAuction(tokenId).send({ from: account });
       alert('정산이 완료되었습니다.');
-      setIsLoading(false);
+      window.location.reload();
     } catch (err) {
       console.log(err);
       setIsLoading(false);

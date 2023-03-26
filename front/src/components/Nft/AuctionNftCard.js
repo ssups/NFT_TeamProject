@@ -84,7 +84,9 @@ const AuctionNftCard = ({ tokenId, tokenURI, tokenInfo }) => {
           </h5>
           <h5>최고입찰가: {parseInt(bider, 16) === 0 ? '입찰자없음' : currentBid + ' Eth'}</h5>
           <h5>
-            남은시간: {timeCount ? (Math.floor(timeCount / 60 / 60) + '').padStart(2, '0') : '00'} :
+            남은시간:{' '}
+            {timeCount > 24 * 60 * 60 ? Math.floor(timeCount / 24 / 60 / 60) + 'days ' : null}
+            {timeCount ? (Math.floor((timeCount / 60 / 60) % 24) + '').padStart(2, '0') : '00'} :
             {timeCount ? ' ' + (Math.floor((timeCount / 60) % 60) + '').padStart(2, '0') : ' 00'} :
             {timeCount ? ' ' + ((timeCount % 60) + '').padStart(2, '0') : ' 00'}
           </h5>
