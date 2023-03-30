@@ -24,7 +24,7 @@ const ShopNftCard = ({ tokenId, tokenURI }) => {
     //
 
     const price = web3.utils.toWei(salePrice, 'ether');
-    if (price && price > balance) {
+    if (price && price * 1 > balance) {
       alert('잔액이 부족합니다.');
       return;
     }

@@ -82,7 +82,7 @@ const App = () => {
     (async () => {
       if (!web3 || !account) return;
       const balance = await web3.eth.getBalance(account);
-      setBalance(balance);
+      setBalance(balance * 1);
       localStorage.setItem('userAccout', JSON.stringify({ account }));
     })();
   }, [web3, account]);
